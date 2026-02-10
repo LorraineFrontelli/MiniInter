@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,30 +8,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import conexao.Conexao;
-import model.Professor;
+import model.Telefone;
 
-public class ProfessorDAO {
+public class TelefoneDAO {
 
-    // CREATE - INSERIR PROFESSOR
-    public int inserir(Professor professor) {
+    // CREATE - INSERIR TELEFONE
+    public int inserir(Telefone telefone) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         int idGerado = -1;
-        String sql = "INSERT INTO professor (nome, dt_contratacao, email, senha, materia, usuario) VALUES (?, ?, ?, ?, ?, ?) RETURNING id";
+        String sql = "INSERT INTO telefone (id_aluno, numero, tipo) VALUES (?, ?, ?) RETURNING id";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, professor.getNome());
-            pst.setDate(2, Date.valueOf(professor.getDataContratacao()));
-            pst.setString(3, professor.getEmail());
-            pst.setString(4, professor.getSenha());
-            pst.setString(5, professor.getMateria());
-            pst.setString(6, professor.getUsuario());
+            pst.setInt(1, telefone.getIdAluno());
+            pst.setInt(2, telefone.getNumero());
+            pst.setString(3, telefone.getTipo());
 
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 idGerado = rs.getInt("id");
-                professor.setId(idGerado);
+                telefone.setId(idGerado);
             }
         } catch (SQLException sqle) {
             sqle.printStackTrace();
@@ -43,27 +39,54 @@ public class ProfessorDAO {
         return idGerado; // Retorna o ID gerado ou -1 se falhar
     }
 
-    // READ - BUSCAR PROFESSOR POR NOME
-        public List<Professor> listarProfessorPorNome(String nome) {
+    // READ - BUSCAR TELEFONE PELO ID 
+    public Telefone buscarPorId(int id) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
-        List<Professor> professores = new ArrayList<>();
-        String sql = "SELECT * FROM professor where nome ILIKE ? ";
+        Telefone telefone = null;
+        String sql = "SELECT * FROM telefone WHERE id = ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, "%" + nome + "%");
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                telefone = new Telefone(
+                        rs.getInt("id"),
+                        rs.getInt("id_aluno"),
+                        rs.getInt("numero"),
+                        rs.getString("tipo")
+                );
+            }
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        } finally {
+            conexao.desconectar(con);
+        }
+
+        return telefone; // retorna null se não encontrar
+    }
+
+    // READ - LISTAR TODOS OS TELEFONES DO ALUNO
+    public List<Telefone> listarIdAluno(int idAluno) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        List<Telefone> telefones = new ArrayList<>();
+        String sql = "SELECT * FROM telefone where id_aluno = ?";
+        
+        try {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, idAluno);
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                professores.add(new Professor(
+                telefones.add(new Telefone(
                         rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getTimestamp("dt_contratacao").toLocalDateTime().toLocalDate(),
-                        rs.getString("email"),
-                        rs.getString("senha"),
-                        rs.getString("materia"),
-                        rs.getString("usuario")
+                        rs.getInt("id_aluno"),
+                        rs.getInt("numero"),
+                        rs.getString("tipo")
+
                 ));
             }
         } catch (SQLException sqle) {
@@ -72,29 +95,27 @@ public class ProfessorDAO {
             conexao.desconectar(con);
         }
 
-        return professores;
+        return telefones;
     }
 
-    // READ - LISTAR TODOS OS PROFESSORES
-    public List<Professor> listar() {
+    // READ - LISTAR TODOS OS TELEFONES
+    public List<Telefone> listar() {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
-        List<Professor> professores = new ArrayList<>();
-        String sql = "SELECT * FROM professor";
+        List<Telefone> telefones = new ArrayList<>();
+        String sql = "SELECT * FROM telefone";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                professores.add(new Professor(
+                telefones.add(new Telefone(
                         rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getTimestamp("dt_contratacao").toLocalDateTime().toLocalDate(),
-                        rs.getString("email"),
-                        rs.getString("senha"),
-                        rs.getString("materia"),
-                        rs.getString("usuario")
+                        rs.getInt("id_aluno"),
+                        rs.getInt("numero"),
+                        rs.getString("tipo")
+
                 ));
             }
         } catch (SQLException sqle) {
@@ -103,25 +124,21 @@ public class ProfessorDAO {
             conexao.desconectar(con);
         }
 
-        return professores;
+        return telefones;
     }
 
-    // UPDATE - ATUALIZAR PROFESSOR
-    public int atualizar(Professor professor) {
+    // UPDATE - ATUALIZAR TELEFONE
+    public int atualizar(Telefone telefone) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         int retorno;
-        String sql = "UPDATE professor SET nome = ?, dt_contratacao = ?, email =?, senha = ?, materia =?, usuario=? WHERE id = ?";
+        String sql = "UPDATE telefone SET numero = ?, tipo = ? WHERE id = ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, professor.getNome());
-            pst.setDate(2, Date.valueOf(professor.getDataContratacao()));
-            pst.setString(3, professor.getEmail());
-            pst.setString(4, professor.getSenha());
-            pst.setString(5, professor.getMateria());
-            pst.setString(6, professor.getUsuario());
-            pst.setInt(7, professor.getId());
+            pst.setInt(1, telefone.getNumero());
+            pst.setString(2, telefone.getTipo());
+            pst.setInt(3, telefone.getId());
 
             retorno = pst.executeUpdate();
         } catch (SQLException sqle) {
@@ -134,12 +151,12 @@ public class ProfessorDAO {
         return retorno; // retorna número de linhas alteradas ou -1 em caso de erro
     }
 
-    // DELETE - DELETAR PROFESSOR
+    // DELETE - DELETAR TELEFONE
     public int deletar(int id) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         int retorno;
-        String sql = "DELETE FROM professor WHERE id = ?";
+        String sql = "DELETE FROM telefone WHERE id = ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
