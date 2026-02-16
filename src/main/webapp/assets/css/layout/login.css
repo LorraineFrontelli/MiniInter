@@ -1,0 +1,77 @@
+body {
+    background-image: 
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E"),
+    url("../../img/fundo-login.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+header {
+    height: 10vh;
+    background: var(--vintage-cream);
+    box-shadow: 1px var(black) 1px;
+}
+
+h1 {
+    font-weight: normal;
+    margin-bottom: 5vh;
+    font-size: 5vh;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 90vh;
+}
+
+.formLogin {
+    background-image: url("../../img/quadro-login.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom center;
+    height: 75vh;
+    width: 90vw;
+    z-index: 999;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding-bottom: 10vh;
+}
+
+.inputLogin {
+    position: fixed;
+    border: 1px solid ;
+    border-radius: 4px;
+}
+
+.login {
+    display: flex;
+    font-size: 3.5vh;
+    margin-top: 2.5vh;
+    width: 30vw;
+}
+
+.senha {
+    display: flex;
+    margin-top: 7.5vh;
+    font-size: 3.5vh;
+    width: 30vw;
+}
+
+input {
+    margin-top: 4.5vh;
+    width: 30vw;
+    height: 4vh;
+    padding-left: 0.6vw;
+    font-size: 2vh;
+}
+
+button {
+    margin-top: 15vh;
+}

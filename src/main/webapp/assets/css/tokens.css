@@ -1,0 +1,27 @@
+/* Fontes */
+
+:root {
+    --typewritter: 'Special Elite', cursive;
+}
+
+/* Cores */
+
+:root {
+  /* Paleta Vintage */
+  --vintage-brown: #906A1E;
+  --vintage-gold: #FFCB64;
+  --vintage-cream: #FFEA9D;
+  --vintage-mustache: #242021;
+
+  /* Paleta Pastéis */
+  --pastel-purple: #726DFF;
+  --pastel-pink: #FFA1FD;
+  --pastel-green: #75FF9C;
+  --pastel-cyan: #87FFEF;
+  --pastel-coral: #FF7B7B;
+
+  /* Branco e Preto */
+  --white: #FFFFFF;
+  --black: #000000;
+}
+
