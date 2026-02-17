@@ -23,7 +23,7 @@ main {
     height: 88vh;
 }
 
-.formLogin {
+.formAutenticacao {
     background-image: url("../../img/quadro-login.svg");
     background-repeat: no-repeat;
     background-size: contain;
@@ -40,12 +40,12 @@ main {
     padding-bottom: 10vh;
 }
 
-.inputLogin {
+.inputAutenticacao {
     border-radius: 4px;
     outline: none;
 }
 
-.login, .senha {
+.login, .senha, .cpf, .email {
     display: flex;
     font-size: 3.5vh;
     width: 30vw;
@@ -57,6 +57,7 @@ input {
     margin-top: 1vh;
     padding-left: 0.6vw;
     padding-right: 0.6vw;
+    padding-top: 0.2vw;
     height: 6.5vh;
     width: 30vw;
     font-size: 2.5vh;
@@ -77,7 +78,7 @@ input {
 button {
     margin-top: 5vh;
     height: 6.5vh;
-    width: 8vw;
+    width: 8.5vw;
     font-size: 3vh;
     border-radius: 5px;
     border: none;
@@ -100,4 +101,8 @@ button {
 button:hover {
     transition: 0.2s ease-in-out;
     background: var(--vintage-brown-hover);
+}
+
+.formCpf {
+    display: none;
 }
