@@ -37,7 +37,6 @@ body {
     width: 20%;
     height: 100vh;
     background-color: var(--white);
-    color: #370963;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -81,17 +80,54 @@ body {
     width: 15vw;
     height: 4vw; 
     padding-left: 3vw;
-}
-
-.headerLateral li a {
     background: linear-gradient(to right, var(--vintage-orange), var(--vintage-gold));
 }
 
-.headerLateral li a.ativo {
-    background-color: #EBD2FA;
+.headerLateral li a:hover {
+    filter: hue-rotate(-13.5deg) saturate(5.25);
 }
 
-/* Background do Main
-background: linear-gradient(to right, var(--vintage-gold) 20%, var(--vintage-cream) 100%);
-background-attachment: fixed; 
+/* Posicionamento de Tela
+body {
+    display: flex;
+}
+
+main {
+    background: linear-gradient(to right, var(--vintage-gold) 20%, var(--vintage-cream) 100%);
+    background-attachment: fixed;
+    width: 80%;
+    top: 0;
+    display: block;
+}
 */
+
+/* Header das Telas de Autenticação */
+
+.headerAutenticacao {
+    height: 12vh;
+    background: var(--vintage-cream);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 0.75px 25px rgba(0, 0, 0, 0.3);
+}
+
+.headerAutenticacao .logoMonart {
+    height: 11vh;
+    object-fit: contain;
+    margin-left: 1vw;
+}
+
+.headerAutenticacao .pincelVoltar {
+    height: 4.3vh;
+    object-fit: contain;
+    margin-right: 1.45vw;
+    margin-top: 1vh;
+    transition: 0.3s ease;
+}
+
+.headerAutenticacao .pincelVoltar:hover {
+    transform: scale(1.25);
+}
+
+/*  */

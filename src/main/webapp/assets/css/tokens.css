@@ -14,16 +14,20 @@
   --vintage-gold: #FFCE6A;
   --vintage-cream: #FFEA9D;
   --vintage-mustache: #242021;
-
+  
   /* Paleta Pastéis */
   --pastel-purple: #726DFF;
   --pastel-pink: #FFA1FD;
   --pastel-green: #75FF9C;
   --pastel-cyan: #87FFEF;
   --pastel-coral: #FF7B7B;
-
+  
   /* Branco e Preto */
   --white: #FFFFFF;
   --black: #000000;
+  
+  /* Hoverizações */
+  --vintage-brown-hover: #614610;
+  --vintage-orange-hover: #C07D0A;
 }
 
