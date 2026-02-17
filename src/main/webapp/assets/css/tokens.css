@@ -1,7 +1,8 @@
 /* Fontes */
 
 :root {
-    --typewritter: 'Special Elite', cursive;
+    --special-elite: 'Special Elite', cursive;
+    --urbanist: 'Urbanist', cursive;
 }
 
 /* Cores */
@@ -9,7 +10,8 @@
 :root {
   /* Paleta Vintage */
   --vintage-brown: #906A1E;
-  --vintage-gold: #FFCB64;
+  --vintage-orange: #FFBA30;
+  --vintage-gold: #FFCE6A;
   --vintage-cream: #FFEA9D;
   --vintage-mustache: #242021;
 

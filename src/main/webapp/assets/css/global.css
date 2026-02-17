@@ -5,10 +5,15 @@
   src: url('../fonts/SpecialElite-Regular.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: 'Urbanist';
+  src: url('../fonts/Urbanist-VariableFont_wght.woff2') format('woff2');
+}
+
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
-    font-family: var(--typewritter);
+    font-family: var(--urbanist);
 }
 
 body {
@@ -18,3 +23,75 @@ body {
     padding: 0;
 }
 
+/*/ Header Lateral /*/
+
+.meuPlaceholder {
+    width: 20%;
+    height: 100vh;
+}
+
+.headerLateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100vh;
+    background-color: var(--white);
+    color: #370963;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headerLateral .logoMonart {
+    height: 20vh;
+    margin-top: 1vw;
+    box-sizing: content-box;
+    align-self: center;
+    margin-bottom: 2vw;
+}
+
+.headerLateral nav img {
+    object-fit: contain;
+    height: 4vh;
+}
+
+.headerLateral ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.headerLateral li {
+    display: flex;
+    font-size: 1.5vw;
+    font-weight: 500;
+}
+
+.headerLateral li a {
+    display: flex;
+    align-items: center;
+    margin: 1vw 0vw 0.5vw 2.2vw;
+    padding: 0.2vw 0vw;
+    gap: 1vw;
+    text-decoration: none;
+    color: var(--white);
+    transition: 0.25s ease-in-out;
+    border-radius: 20px 0 0 20px;
+    width: 15vw;
+    height: 4vw; 
+    padding-left: 3vw;
+}
+
+.headerLateral li a {
+    background: linear-gradient(to right, var(--vintage-orange), var(--vintage-gold));
+}
+
+.headerLateral li a.ativo {
+    background-color: #EBD2FA;
+}
+
+/* Background do Main
+background: linear-gradient(to right, var(--vintage-gold) 20%, var(--vintage-cream) 100%);
+background-attachment: fixed; 
+*/

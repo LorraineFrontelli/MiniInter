@@ -11,7 +11,7 @@ body {
 header {
     height: 10vh;
     background: var(--vintage-cream);
-    box-shadow: 1px var(black) 1px;
+    box-shadow: 1px var(--black) 1px;
 }
 
 h1 {
