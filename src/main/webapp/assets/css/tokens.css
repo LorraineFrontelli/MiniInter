@@ -9,11 +9,13 @@
 
 :root {
   /* Paleta Vintage */
+  --vintage-mustache: #242021;
   --vintage-brown: #906A1E;
   --vintage-orange: #FFBA30;
   --vintage-gold: #FFCE6A;
+  --vintage-sand: #D4B76F;
   --vintage-cream: #FFEA9D;
-  --vintage-mustache: #242021;
+  --vintage-chantilly: #FFECC1;
   
   /* Paleta Pastéis */
   --pastel-purple: #726DFF;
@@ -22,19 +24,18 @@
   --pastel-cyan: #87FFEF;
   --pastel-coral: #FF7B7B;
   
+  /* Paleta média*/
+  --medium-blue: #5956A3;
+  --medium-pink: #E599E4;
+  --medium-green: #6AE58D;
+  --medium-cyan: #63DCCC;
+  
   /* Branco e Preto */
   --white: #FFFFFF;
   --black: #000000;
   
   /* Hoverizações */
   --vintage-brown-hover: #614610;
-  --vintage-orange-hover: #C07D0A;
-
-  /* Paleta média*/
-  --medium-green: #6AE58D;
-  --medium-cyan: #63DCCC;
-  --medium-yellow: #EECC5C;
-  --medium-pink: #E599E4;
-  --medium-blue: #5956A3;
+  --vintage-orange-hover: #FFA700;
 }
 

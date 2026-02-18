@@ -8,39 +8,28 @@ main {
     width: 80%;
     top: 0;
     display: block;
-    padding-top: 4vh;
+    padding-top: 3vh;
 }
 
-.tituloSemana{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--vintage-brown);
-    width: 24vw;
-    height: 6vh;
-    border-radius: 5vw;
-    margin: 0 auto;
-}
-h1{
-    font-weight: normal;
-    color: var(--white);
-}
-h2{
+h2 {
     padding-top: 1vh;
 }
-.sectionSemana{
+
+.sectionSemana {
     display: flex;
     margin-top: 4vh;
     justify-content: center;
 }
-.semana{
+
+.semana {
     width: 22vw;
     height: 24vh;
     border-radius: 1vw;
     text-align: center;
     color: var(--white);
 }
-.tarefas{
+
+.tarefas {
     width: 22vw;
     height: 77vh;
     color: var(--black);
@@ -49,25 +38,32 @@ h2{
     border-radius: 1vw;
     text-align: center;
 }
-.dias{
+
+.dias {
     display: flex;
     gap: 2vw;
 }
-.segunda{
+
+.segunda {
     background-color: var(--pastel-coral);
 }
-.terca{
+
+.terca {
     background-color: var(--medium-green);
 }
-.quarta{
+
+.quarta {
     background-color: var(--medium-cyan);
 }
-.quinta{
-    background-color: var(--medium-yellow);
+
+.quinta {
+    background-color: var(--vintage-gold);
 }
-.sexta{
+
+.sexta {
     background-color: var(--medium-pink);
 }
-.fimDeSemana{
+
+.fimDeSemana {
     background-color: var(--medium-blue);
 }

@@ -1,11 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Preloads -->
+    <link rel="preload" as="image" href="../../assets/img/profile-icon.svg">
+    <link rel="preload" as="image" href="../../assets/img/schedule-icon.svg">
+    <link rel="preload" as="image" href="../../assets/img/grades-icon.svg">
+    <link rel="preload" as="image" href="../../assets/img/statistics-icon.svg">
+
+    <!-- Links -->
+    <link rel="stylesheet" href="../../assets/css/layout/agenda.css">
     <link rel="stylesheet" href="../../assets/css/global.css">
     <link rel="stylesheet" href="../../assets/css/tokens.css">
     <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.ico">
+    <script src="../../assets/js/script.js" defer></script>
+
     <title>Agenda - Monart</title>
 </head>
 
@@ -14,54 +26,60 @@
     <div class="meuPlaceholder"></div>
 
     <header class="headerLateral">
-        <img src="../../assets/img/monart-logo.svg" alt="" class="logoMonart">
+        <img src="../../assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
         <nav>
             <ul>
-                <li><a href="login.html" class="ativo"><img src="../../assets/img/profile-icon.svg" alt="">Perfil</a></li>
-                <li><a href="login.html"><img src="../../assets/img/schedule-icon.svg" alt="">Agenda</a></li>
-                <li><a href="login.html"><img src="../../assets/img/grades-icon.svg" alt="">Notas</a></li>
-                <link rel="stylesheet" href="../../assets/css/layout/agenda.css">
-                <li><a href="login.html"><img src="../../assets/img/statistics-icon.svg" alt="">Estatísticas</a></li>
+                <li><a href="perfil.html" class="pagina"><img src="../../assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
+                <li><a href="agenda.html" class="pagina ativo"><img src="../../assets/img/schedule-icon.svg" decoding="async" alt="">Agenda</a></li>
+                <li><a href="boletim.html" class="pagina"><img src="../../assets/img/grades-icon.svg" decoding="async" alt="">Notas</a></li>
+                <li><a href="observacoes.html" class="pagina"><img src="../../assets/img/statistics-icon.svg" decoding="async" alt="">Observações</a></li>
             </ul>
         </nav>
     </header>
 
-<main>
-    <div class="tituloSemana">
-        <h1>Semana</h1>
-    </div>
-    <section class="sectionSemana">
-        <div>
-            <div class="tarefas">
-                <h2>Tarefas</h2>
-            </div>
+    <main>
+        <div class="tituloPaginas">
+            <h1>Semana</h1>
         </div>
-        <div class="dias">
+        
+        <section class="sectionSemana">
             <div>
-                <div class="semana segunda">
-                    <h2>Segunda</h2>
-                </div>
-                <div class="semana quarta">
-                    <h2>Quarta</h2>
-                </div>
-                <div class="semana sexta">
-                    <h2>Sexta</h2>
+                <div class="tarefas">
+                    <h2>Tarefas</h2>
                 </div>
             </div>
-            <div>
-                <div class="semana terca">
-                    <h2>Terça</h2>
+            
+            <div class="dias">
+                <div>
+                    <div class="semana segunda">
+                        <h2>Segunda</h2>
+                    </div>
+                    
+                    <div class="semana quarta">
+                        <h2>Quarta</h2>
+                    </div>
+                    
+                    <div class="semana sexta">
+                        <h2>Sexta</h2>
+                    </div>
                 </div>
-                <div class="semana quinta">
-                    <h2>Quinta</h2>
-                </div>
-                <div class="semana fimDeSemana">
-                    <h2>Fim de semana</h2>
+
+                <div>
+                    <div class="semana terca">
+                        <h2>Terça</h2>
+                    </div>
+                    
+                    <div class="semana quinta">
+                        <h2>Quinta</h2>
+                    </div>
+
+                    <div class="semana fimDeSemana">
+                        <h2>Fim de semana</h2>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-</main>
+        </section>
+    </main>
 
 </body>
 </html>

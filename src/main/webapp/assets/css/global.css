@@ -1,13 +1,13 @@
-@import url(tokens.css);
-
 @font-face {
-  font-family: 'Special Elite';
-  src: url('../fonts/SpecialElite-Regular.woff2') format('woff2');
+    font-family: 'Urbanist';
+    src: url('../fonts/Urbanist-VariableFont_wght.woff2') format('woff2');
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'Urbanist';
-  src: url('../fonts/Urbanist-VariableFont_wght.woff2') format('woff2');
+    font-family: 'Special Elite';
+    src: url('../fonts/SpecialElite-Regular.woff2') format('woff2');
+    font-display: swap;
 }
 
 html {
@@ -50,11 +50,6 @@ body {
     margin-bottom: 2vw;
 }
 
-.headerLateral nav img {
-    object-fit: contain;
-    height: 4vh;
-}
-
 .headerLateral ul {
     padding: 0;
     margin: 0;
@@ -75,17 +70,35 @@ body {
     gap: 1vw;
     text-decoration: none;
     color: var(--white);
-    transition: 0.25s ease-in-out;
-    border-radius: 20px 0 0 20px;
+    border-radius: 100px 0 0 100px;
     width: 15vw;
     height: 4vw; 
     padding-left: 3vw;
     background: linear-gradient(to right, var(--vintage-orange), var(--vintage-gold));
+    clip-path: inset(0 0 0 0 round 100px 0 0 100px);
+    transition: 0.15s ease;
+    white-space: nowrap;
 }
 
-.headerLateral li a:hover {
+.headerLateral li a:hover,
+.headerLateral li .pagina.hoverizado {
+    position: relative;
     filter: hue-rotate(-13.5deg) saturate(5.25);
+    clip-path: inset(0 0 0 20% round 100px 0 0 100px);
+    justify-content: center;
+    transition: 0.285s ease;
 }
+
+.headerLateral li a.ativo {
+    clip-path: inset(0 0 0 20% round 100px 0 0 100px);
+    justify-content: center;
+    background: var(--vintage-orange-hover);
+}
+
+.headerLateral li a.ativo:hover {
+    filter: hue-rotate(0) saturate(1);
+}
+
 
 /* Posicionamento de Tela
 body {
@@ -134,4 +147,20 @@ main {
     transform: scale(1.25);
 }
 
-/*  */
+/* Estilos gerais de página */
+
+.tituloPaginas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--vintage-brown);
+    width: 24vw;
+    height: 7vh;
+    border-radius: 5vw;
+    margin: 0 auto;
+}
+
+.tituloPaginas h1 {
+    font-weight: normal;
+    color: var(--white);
+}
