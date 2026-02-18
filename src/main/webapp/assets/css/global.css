@@ -50,6 +50,15 @@ body {
     margin-bottom: 2vw;
 }
 
+.headerLateral nav img {
+    object-fit: contain;
+    width: 2vw;
+}
+
+.headerLateral nav img.observacoesIcone {
+    height: 3vw;
+}
+
 .headerLateral ul {
     padding: 0;
     margin: 0;
@@ -138,12 +147,12 @@ main {
     margin-top: 1vh;
 }
 
-.iconeVoltar {
+.pincelVoltar {
     display: block;
     transition: 0.3s ease;
 }
 
-.headerAutenticacao .iconeVoltar:hover {
+.headerAutenticacao .pincelVoltar:hover {
     transform: scale(1.25);
 }
 

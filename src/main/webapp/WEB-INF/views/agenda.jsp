@@ -33,7 +33,7 @@
                 <li><a href="${pageContext.request.contextPath}/perfil.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
                 <li><a href="${pageContext.request.contextPath}/agenda.jsp" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Agenda</a></li>
                 <li><a href="${pageContext.request.contextPath}/notas.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/grades-icon.svg" decoding="async" alt="">Notas</a></li>
-                <li><a href="${pageContext.request.contextPath}/observacoes.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/statistics-icon.svg" decoding="async" alt="">Observações</a></li>
+                <li><a href="${pageContext.request.contextPath}/observacoes.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/observations-icon.svg" decoding="async" alt="">Observações</a></li>
             </ul>
         </nav>
     </header>
