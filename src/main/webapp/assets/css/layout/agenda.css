@@ -57,17 +57,17 @@ h2{
     background-color: var(--pastel-coral);
 }
 .terca{
-    background-color: var(--pastel-green);
+    background-color: var(--medium-green);
 }
 .quarta{
-    background-color: var(--pastel-cyan);
+    background-color: var(--medium-cyan);
 }
 .quinta{
-    background-color: var(--vintage-orange);
+    background-color: var(--medium-yellow);
 }
 .sexta{
-    background-color: var(--pastel-pink);
+    background-color: var(--medium-pink);
 }
 .fimDeSemana{
-    background-color: var(--pastel-purple);
+    background-color: var(--medium-blue);
 }
