@@ -10,3 +10,24 @@ main {
     display: block;
     padding-top: 3vh;
 }
+
+.observacao {
+    display: flex;
+    background-color: var(--white);
+    width: 64vw;
+    height: 30vh;
+    margin: 0 auto;
+    border-radius: 1.5vw;
+    margin-top: 6vh;
+    align-items: center;
+    gap: 2vw;
+}
+
+.observacao .barrinhaTema {
+    height: 100%;
+    width: 2.5vw;
+    border-top-left-radius: 1.5vw;
+    border-bottom-left-radius: 1.5vw;
+    flex-shrink: 0;
+}
+

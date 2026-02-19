@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Aplicando tema salvo -->
+    <script>document.documentElement.style.setProperty("--tema",localStorage.getItem("corTema")||"#FF7E7E");</script>
 
     <!-- Preloads -->
     <link rel="preload" as="image" href="../../assets/img/profile-icon.svg">
@@ -33,9 +37,14 @@
             </ul>
         </nav>
     </header>
+    
     <main>
-        <div class="tituloPaginas">
-            <h1>Seja bem vindo, fulano!</h1>
+        <div class="cabecalhoPaginas">
+            <img src="../../assets/img/grades-icon.svg" alt="">
+            <div class="tituloPaginas">
+                <h1>Seja bem-vindo, Fulano!</h1>
+            </div>
+            <img src="../../assets/img/grades-icon.svg" alt="">
         </div>
 
         <div class="perfil">
@@ -49,9 +58,12 @@
         </div>
         <section class="notificacoes">
             <div class="nova observacao">
+                <div class="barrinhaTema"></div>
 
             </div>
+            
             <div class="nova atividade">
+                <div class="barrinhaTema"></div>
                 
             </div>
         </section>

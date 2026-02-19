@@ -93,13 +93,13 @@ body {
 .headerLateral li .pagina.hoverizado {
     position: relative;
     filter: hue-rotate(-13.5deg) saturate(5.25);
-    clip-path: inset(0 0 0 20% round 100px 0 0 100px);
+    clip-path: inset(0 0 0 17.5% round 100px 0 0 100px);
     justify-content: center;
     transition: 0.285s ease;
 }
 
 .headerLateral li a.ativo {
-    clip-path: inset(0 0 0 20% round 100px 0 0 100px);
+    clip-path: inset(0 0 0 17.5% round 100px 0 0 100px);
     justify-content: center;
     background: var(--vintage-orange-hover);
 }
@@ -158,6 +158,11 @@ main {
 
 /* Estilos gerais de página */
 
+.cabecalhoPaginas {
+    display: flex;
+    align-items: center;
+}
+
 .tituloPaginas {
     display: flex;
     align-items: center;
@@ -172,4 +177,73 @@ main {
 .tituloPaginas h1 {
     font-weight: normal;
     color: var(--white);
+}
+
+/* Barrinha que muda de acordo com o tema */
+
+.barrinhaTema {
+    transition: background 0.5s ease;
+    background: var(--tema);
+}
+
+/* Botões para mudar tema */
+
+.paletaTemas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    height: 5vh;
+    width: 5vw;
+    gap: 10px;
+}
+
+.opcaoTema {
+    cursor: crosshair;
+    height: 5vh;
+    width: 5vw;
+    border: none;
+}
+
+.opcaoTema:last-child {
+    grid-column: 2;
+}
+
+.pastelBlue {
+    background: var(--pastel-blue);
+}
+
+.pastelPink {
+    background: var(--pastel-pink);
+}
+
+.pastelGreen {
+    background: var(--pastel-green);
+}
+
+.pastelCoral {
+    background: var(--pastel-coral);
+}
+
+.pastelCyan {
+    background: var(--pastel-cyan);
+}
+
+.mediumBlue {
+    background: var(--medium-blue);
+}
+
+.vintageBrown {
+    background: var(--vintage-brown);
+}
+
+.vintageOrange {
+    background: var(--vintage-orange);
+}
+
+.vintageSand {
+    background: var(--vintage-sand);
+}
+
+.vintageMustache {
+    background: var(--vintage-mustache);
 }
