@@ -13,6 +13,7 @@ main {
 
 .perfil{
     display: flex;
+    justify-content: space-between;
     background-color: var(--white);
     width: 64vw;
     height: 30vh;
@@ -21,6 +22,9 @@ main {
     margin-top: 6vh;
     align-items: center;
     padding-left: 2vw;
+}
+.pessoa{
+    display: flex;
     gap: 2vw;
 }
 
@@ -52,4 +56,29 @@ main {
     overflow: hidden;
     border-top-left-radius: 1.5vw;
     border-top-right-radius: 1.5vw;
+}
+h2{
+    color: var(--white);
+    text-align: center;
+}
+.editar{
+    background-color: var(--pastel-blue);
+    color: var(--white);
+    border: none;
+    border-radius: 0.7vw;
+    gap: 1vw;
+    align-items: center;
+    display: flex;
+    padding: 0.3vw  0.8vw;
+    margin-right: 2vw;
+    margin-bottom: 9vw;
+    cursor: pointer;
+    transition: 0.285s ease;
+}
+.editar:hover {
+    background-color: var(--medium-blue-hover);
+    transition: 0.285s ease;
+}
+.iconeEditar{
+    height: 3vh;
 }
