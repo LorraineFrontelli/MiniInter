@@ -1,0 +1,39 @@
+body {
+    display: flex;
+}
+
+main {
+    background: linear-gradient(to right, var(--vintage-gold) 20%, var(--vintage-cream) 100%);
+    background-attachment: fixed;
+    width: 80%;
+    top: 0;
+    display: block;
+    padding-top: 3vh;
+}
+.perfil{
+    display: flex;
+    background-color: var(--white);
+    width: 64vw;
+    height: 30vh;
+    margin: 0 auto;
+    border-radius: 1.5vw;
+    margin-top: 6vh;
+    align-items: center;
+    padding-left: 2vw;
+    gap: 2vw;
+}
+.arte{
+    height: 24vh;
+}
+.notificacoes{
+    display: flex;
+    gap: 4vw;
+    justify-content: center;
+    margin-top: 8vh;
+}
+.nova{
+    background-color: var(--white);
+    width: 31vw;
+    height: 36vh;
+    border-radius: 1.5vw;
+}
