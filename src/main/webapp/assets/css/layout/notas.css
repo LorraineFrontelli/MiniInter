@@ -1,0 +1,68 @@
+body {
+    display: flex;
+}
+
+main {
+    background: linear-gradient(to right, var(--vintage-gold) 20%, var(--vintage-cream) 100%);
+    background-attachment: fixed;
+    width: 80%;
+    top: 0;
+    display: block;
+    padding-top: 3vh;
+}
+.pessoa {
+    display: flex;
+    background-color: var(--white);
+    width: 64vw;
+    height: 30vh;
+    margin: 0 auto;
+    border-radius: 1.5vw;
+    margin-top: 6vh;
+    align-items: center;
+    padding-left: 2vw;
+    gap: 2vw;
+}
+.titulos{
+    display: flex;
+    gap: 3.5vw;
+    justify-content: center;
+}
+.situacaoAluno{
+    display: flex;
+    gap: 2vw;
+    justify-content: center;
+
+}
+.notas{
+    background-color: var(--vintage-chantilly);
+    width: 5vw;
+    height: 8vh;
+    border-radius: 1vw;
+    border: none;
+    text-align: center;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.situacao{
+    width: 8vw;
+}
+.tituloSituacao{
+    margin-left: 0.8vw;
+    margin-right: 0.9vw;
+}
+.quadroObservacoes{
+    background-color: var(--vintage-chantilly);
+    width: 48vw;
+    height: 24vh;
+    border-radius: 1vw;
+    border: none;
+}
+.tituloObservacoes{
+    text-align: center;
+}
+.observacoes{
+    text-align: center;
+}
