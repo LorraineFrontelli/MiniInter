@@ -7,12 +7,12 @@
 
     <!-- Aplicando tema salvo -->
     <script>document.documentElement.style.setProperty("--tema",localStorage.getItem("corTema")||"#242021");</script>
-
+    
     <!-- Preloads -->
     <link rel="preload" as="image" href="../../assets/img/profile-icon.svg">
     <link rel="preload" as="image" href="../../assets/img/schedule-icon.svg">
     <link rel="preload" as="image" href="../../assets/img/grades-icon.svg">
-    <link rel="preload" as="image" href="../../assets/img/statistics-icon.svg">
+    <link rel="preload" as="image" href="../../assets/img/observations-icon.svg">
 
     <!-- Links -->
     <link rel="stylesheet" href="../../assets/css/layout/observacoes.css">
@@ -21,7 +21,7 @@
     <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.ico">
     <script src="../../assets/js/script.js" defer></script>
 
-    <title>Agenda - Monart</title>
+    <title>Observações - Monart</title>
 </head>
 
 <body>
@@ -41,14 +41,13 @@
 
     <main>
         <div class="cabecalhoPaginas">
-            <img src="../../assets/img/grades-icon.svg" alt="">
+            <img src="../../assets/img/grades-icon.svg" alt="" class="abrirTemas">
             <div class="tituloPaginas">
                 <h1>Observações</h1>
             </div>
-            <img src="../../assets/img/grades-icon.svg" alt="">
+            <img src="../../assets/img/grades-icon.svg" alt="" class="abrirChat">
         </div>
 
-        
         <section class="observacoes">
             <div class="observacao">
                 <div class="barrinhaTema"></div>
@@ -57,7 +56,19 @@
                         <h2>Língua Portuguesa</h2>
                         <p>Prof: <b>João Jonas</b></p>
                     </div>
-                    <p>--------------------------------------------------</p>
+                    <hr>
+                    <p>Precisa prestar mais atenção durante as aulas.</p>
+                </div>
+            </div>
+            
+            <div class="observacao">
+                <div class="barrinhaTema"></div>
+                <div class="mensagemObservacao">
+                    <div class="tituloObservacao">
+                        <h2>Língua Portuguesa</h2>
+                    </div>
+                    <p>Prof: <b>João Jonas</b></p>
+                    <hr>
                     <p>Precisa prestar mais atenção durante as aulas.</p>
                 </div>
             </div>
@@ -74,23 +85,8 @@
                 </div>
             </div>
         </section>
-        
-        <div class="paletaTemas">
-            <button data-cor="#5956A3" class="mediumBlue opcaoTema"></button>
-            <button data-cor="#FF7B7B" class="pastelCoral opcaoTema"></button>
-            <button data-cor="#75FF9C" class="pastelGreen opcaoTema"></button>
-            <button data-cor="#726DFF" class="pastelBlue opcaoTema"></button>
-            <button data-cor="#FFA1FD" class="pastelPink opcaoTema"></button>
-            <button data-cor="#87FFEF" class="pastelCyan opcaoTema"></button>
-            <button data-cor="#906A1E" class="vintageBrown opcaoTema"></button>
-            <button data-cor="#D4B76F" class="vintageSand opcaoTema"></button>
-            <button data-cor="#FFBA30" class="vintageOrange opcaoTema"></button>
-            <button data-cor="#242021" class="vintageMustache opcaoTema"></button>
-        </div>
-    
 
     </main>
-    
 </body>
 
 </html>

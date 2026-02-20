@@ -163,20 +163,42 @@ main {
     align-items: center;
 }
 
+.abrirTemas {
+    cursor: pointer;
+    margin-left: 2vw;
+    object-fit: contain;
+    height: 5vh;
+    transition: 0.3s ease;
+}
+
+.abrirChat {
+    cursor: pointer;
+    margin-right: 2vw;
+    object-fit: contain;
+    height: 5vh;
+    transition: 0.3s ease;
+}
+
+.abrirTemas:hover, .abrirChat:hover {
+    transform: scale(1.2);
+}
+
 .tituloPaginas {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--vintage-brown);
-    width: 24vw;
+    width: 26vw;
     height: 7vh;
     border-radius: 5vw;
     margin: 0 auto;
+    transition: background 0.5s ease;
+    background-color: var(--tema);
+    color: var(--cor-contraste);
 }
 
-.tituloPaginas h1 {
+
+.tituloPaginas h1, .notificacoes h2 {
     font-weight: normal;
-    color: var(--white);
 }
 
 /* Barrinha que muda de acordo com o tema */
@@ -184,17 +206,28 @@ main {
 .barrinhaTema {
     transition: background 0.5s ease;
     background: var(--tema);
+    color: var(--cor-contraste);
 }
 
 /* Botões para mudar tema */
 
 .paletaTemas {
+    align-self: center;
+    padding-bottom: 2vw;
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.opcoesTema {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
-    height: 5vh;
-    width: 5vw;
-    gap: 10px;
+    height: 25vh;
+    width: 20vw;
+    gap: 5px;
 }
 
 .opcaoTema {
@@ -246,4 +279,33 @@ main {
 
 .vintageMustache {
     background: var(--vintage-mustache);
+}
+
+/* Botão editar perfil */
+
+.editar {
+    font-family: "Urbanist", cursive;
+    background-color: var(--tema);
+    color: var(--cor-contraste);
+    font-size: 1.15vw;
+    border: none;
+    border-radius: 0.7vw;
+    gap: 1vw;
+    align-items: center;
+    display: flex;
+    padding: 0.3vw  0.8vw;
+    margin-right: 2vw;
+    margin-bottom: 9vw;
+    cursor: pointer;
+    transition: 0.285s ease;
+}
+
+.editar:hover {
+    filter: saturate(2.5) contrast(1.5);
+    transition: 0.285s ease;
+}
+
+.iconeEditar {
+    transition: 0.285s ease;
+    height: 2.75vh;
 }
