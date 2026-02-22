@@ -55,6 +55,7 @@ input:focus, textarea:focus, button:focus {
 }
 
 .pincelVoltar {
+    cursor: pointer;
     height: 4.3vh;
     object-fit: contain;
     margin-right: 1.45vw;

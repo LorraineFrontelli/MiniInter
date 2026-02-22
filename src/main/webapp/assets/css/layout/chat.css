@@ -1,0 +1,25 @@
+body {
+    min-height: 100vh;
+    display: flex;
+}
+
+main {
+    position: relative;
+    flex: 1;
+    background: linear-gradient(to right, var(--vintage-gold) 20%, var(--vintage-cream) 100%);
+    background-attachment: fixed;
+    top: 0;
+    display: block;
+    padding-top: 3vh;
+    overflow: hidden;
+}
+
+.cabecalhoPaginas:first-child {
+    position: absolute;
+    left: 2vw;
+}
+
+.cabecalhoPaginas:last-child {
+    position: absolute;
+    right: 2vw;
+}
