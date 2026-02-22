@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, serif;
+    background: #ffffff;
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 120px;
+    z-index: 30;
+
+    background: linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.65) 0%,
+            rgba(0,0,0,0.45) 50%,
+            rgba(0,0,0,0.15) 85%,
+            rgba(0,0,0,0) 100%
+    );
+}
+
+.logo img {
+    height: 55px;
+}
+
+/* ================= MENU ================= */
+
+.menu ul {
+    display: flex;
+    gap: 90px;
+    list-style: none;
+}
+
+.menu a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid transparent;
+    transition: 0.3s ease;
+}
+
+.menu a:hover {
+    border-bottom: 2px solid #f3d27a;
+    color: #f3d27a;
+}
+
+/* ================= BOTÕES ================= */
+
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-outline,
+.btn-primary {
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 15px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.btn-outline {
+    background: rgba(255,255,255,0.9);
+    color: #000;
+}
+
+.btn-primary {
+    background: #f3d27a;
+    color: #000;
+}
+
+.btn-primary.large {
+    padding: 14px 36px;
+    border-radius: 8px;
+}
+
+/* ================= BANNER ================= */
+
+.banner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ================= SOMBRA NAS BORDAS ================= */
+
+.banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background:
+            linear-gradient(to bottom, rgba(0,0,0,0.35), transparent 35%),
+            linear-gradient(to right, rgba(0,0,0,0.2), transparent 25%),
+            linear-gradient(to left, rgba(0,0,0,0.2), transparent 25%);
+}
+
+/* ================= CONTEÚDO ================= */
+
+.banner-content {
+    position: absolute;
+    text-align: center;
+    color: #ffffff;
+}
+
+.banner h1 {
+    font-size: 58px;
+    margin-bottom: 40px;
+}
