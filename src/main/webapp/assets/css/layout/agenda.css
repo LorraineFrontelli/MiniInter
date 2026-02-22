@@ -1,0 +1,69 @@
+body {
+    display: flex;
+}
+
+main {
+    background: linear-gradient(to right, var(--vintage-gold) 20%, var(--vintage-cream) 100%);
+    background-attachment: fixed;
+    width: 80%;
+    top: 0;
+    display: block;
+    padding-top: 3vh;
+}
+
+h2 {
+    padding-top: 1vh;
+}
+
+.sectionSemana {
+    display: flex;
+    margin-top: 4vh;
+    justify-content: center;
+}
+
+.semana {
+    width: 22vw;
+    height: 24vh;
+    border-radius: 1vw;
+    text-align: center;
+    color: var(--white);
+}
+
+.tarefas {
+    width: 22vw;
+    height: 77vh;
+    color: var(--black);
+    background-color: var(--white);
+    margin-right: 2vw;
+    border-radius: 1vw;
+    text-align: center;
+}
+
+.dias {
+    display: flex;
+    gap: 2vw;
+}
+
+.segunda {
+    background-color: var(--pastel-coral);
+}
+
+.terca {
+    background-color: var(--medium-green);
+}
+
+.quarta {
+    background-color: var(--medium-cyan);
+}
+
+.quinta {
+    background-color: var(--vintage-gold);
+}
+
+.sexta {
+    background-color: var(--medium-pink);
+}
+
+.fimDeSemana {
+    background-color: var(--medium-blue);
+}

@@ -1,14 +1,19 @@
-@import url(tokens.css);
+@font-face {
+    font-family: 'Urbanist';
+    src: url('../fonts/Urbanist-VariableFont_wght.woff2') format('woff2');
+    font-display: swap;
+}
 
 @font-face {
-  font-family: 'Special Elite';
-  src: url('../fonts/SpecialElite-Regular.woff2') format('woff2');
+    font-family: 'Special Elite';
+    src: url('../fonts/SpecialElite-Regular.woff2') format('woff2');
+    font-display: swap;
 }
 
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
-    font-family: var(--typewritter);
+    font-family: var(--urbanist);
 }
 
 body {
@@ -18,3 +23,289 @@ body {
     padding: 0;
 }
 
+/*/ Header Lateral /*/
+
+.meuPlaceholder {
+    width: 20%;
+    height: 100vh;
+}
+
+.headerLateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100vh;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headerLateral .logoMonart {
+    height: 20vh;
+    margin-top: 1vw;
+    box-sizing: content-box;
+    align-self: center;
+    margin-bottom: 2vw;
+}
+
+.headerLateral nav img {
+    object-fit: contain;
+    width: 2vw;
+}
+
+.headerLateral nav img.observacoesIcone {
+    height: 3vw;
+}
+
+.headerLateral ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.headerLateral li {
+    display: flex;
+    font-size: 1.3vw;
+    font-weight: 500;
+}
+
+.headerLateral li a {
+    display: flex;
+    align-items: center;
+    margin: 1vw 0vw 0.5vw 2.1vw;
+    padding: 0.2vw 0vw;
+    gap: 1vw;
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 100px 0 0 100px;
+    width: 15vw;
+    height: 4vw; 
+    padding-left: 3vw;
+    background: linear-gradient(to right, var(--vintage-orange), var(--vintage-gold));
+    clip-path: inset(0 0 0 0 round 100px 0 0 100px);
+    transition: 0.15s ease;
+    white-space: nowrap;
+}
+
+.headerLateral li a:hover,
+.headerLateral li .pagina.hoverizado {
+    position: relative;
+    filter: hue-rotate(-13.5deg) saturate(5.25);
+    clip-path: inset(0 0 0 17.5% round 100px 0 0 100px);
+    justify-content: center;
+    transition: 0.285s ease;
+}
+
+.headerLateral li a.ativo {
+    clip-path: inset(0 0 0 17.5% round 100px 0 0 100px);
+    justify-content: center;
+    background: var(--vintage-orange-hover);
+}
+
+.headerLateral li a.ativo:hover {
+    filter: hue-rotate(0) saturate(1);
+}
+
+
+/* Posicionamento de Tela
+body {
+    display: flex;
+}
+
+main {
+    background: linear-gradient(to right, var(--vintage-gold) 20%, var(--vintage-cream) 100%);
+    background-attachment: fixed;
+    width: 80%;
+    top: 0;
+    display: block;
+}
+*/
+
+/* Header das Telas de Autenticação */
+
+.headerAutenticacao {
+    height: 10vh;
+    background: var(--vintage-cream);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 0.75px 25px rgba(0, 0, 0, 0.3);
+}
+
+.headerAutenticacao .logoMonart {
+    height: 9vh;
+    object-fit: contain;
+    margin-left: 1vw;
+}
+
+.headerAutenticacao .pincelVoltar {
+    height: 4.3vh;
+    object-fit: contain;
+    margin-right: 1.45vw;
+    margin-top: 1vh;
+}
+
+.pincelVoltar {
+    display: block;
+    transition: 0.3s ease;
+}
+
+.headerAutenticacao .pincelVoltar:hover {
+    transform: scale(1.25);
+}
+
+/* Estilos gerais de página */
+
+.cabecalhoPaginas {
+    display: flex;
+    align-items: center;
+}
+
+.abrirTemas {
+    cursor: pointer;
+    margin-left: 2vw;
+    object-fit: contain;
+    height: 5vh;
+    transition: 0.3s ease;
+}
+
+.abrirChat {
+    cursor: pointer;
+    margin-right: 2vw;
+    object-fit: contain;
+    height: 5vh;
+    transition: 0.3s ease;
+}
+
+.abrirTemas:hover, .abrirChat:hover {
+    transform: scale(1.2);
+}
+
+.tituloPaginas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26vw;
+    height: 7vh;
+    border-radius: 5vw;
+    margin: 0 auto;
+    transition: background 0.5s ease;
+    background-color: var(--tema);
+    color: var(--cor-contraste);
+}
+
+
+.tituloPaginas h1, .notificacoes h2 {
+    font-weight: normal;
+}
+
+/* Barrinha que muda de acordo com o tema */
+
+.barrinhaTema {
+    transition: background 0.5s ease;
+    background: var(--tema);
+    color: var(--cor-contraste);
+}
+
+/* Botões para mudar tema */
+
+.paletaTemas {
+    align-self: center;
+    padding-bottom: 2vw;
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.opcoesTema {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    height: 25vh;
+    width: 20vw;
+    gap: 5px;
+}
+
+.opcaoTema {
+    cursor: crosshair;
+    height: 5vh;
+    width: 5vw;
+    border: none;
+}
+
+.opcaoTema:last-child {
+    grid-column: 2;
+}
+
+.pastelBlue {
+    background: var(--pastel-blue);
+}
+
+.pastelPink {
+    background: var(--pastel-pink);
+}
+
+.pastelGreen {
+    background: var(--pastel-green);
+}
+
+.pastelCoral {
+    background: var(--pastel-coral);
+}
+
+.pastelCyan {
+    background: var(--pastel-cyan);
+}
+
+.mediumBlue {
+    background: var(--medium-blue);
+}
+
+.vintageBrown {
+    background: var(--vintage-brown);
+}
+
+.vintageOrange {
+    background: var(--vintage-orange);
+}
+
+.vintageSand {
+    background: var(--vintage-sand);
+}
+
+.vintageMustache {
+    background: var(--vintage-mustache);
+}
+
+/* Botão editar perfil */
+
+.editar {
+    font-family: "Urbanist", cursive;
+    background-color: var(--tema);
+    color: var(--cor-contraste);
+    font-size: 1.15vw;
+    border: none;
+    border-radius: 0.7vw;
+    gap: 1vw;
+    align-items: center;
+    display: flex;
+    padding: 0.3vw  0.8vw;
+    margin-right: 2vw;
+    margin-bottom: 9vw;
+    cursor: pointer;
+    transition: 0.285s ease;
+}
+
+.editar:hover {
+    filter: saturate(2.5) contrast(1.5);
+    transition: 0.285s ease;
+}
+
+.iconeEditar {
+    transition: 0.285s ease;
+    height: 2.75vh;
+}

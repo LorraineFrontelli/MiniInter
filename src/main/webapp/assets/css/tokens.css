@@ -1,27 +1,46 @@
 /* Fontes */
 
 :root {
-    --typewritter: 'Special Elite', cursive;
+    --special-elite: 'Special Elite', cursive;
+    --urbanist: 'Urbanist', cursive;
 }
 
 /* Cores */
 
 :root {
-  /* Paleta Vintage */
-  --vintage-brown: #906A1E;
-  --vintage-gold: #FFCB64;
-  --vintage-cream: #FFEA9D;
-  --vintage-mustache: #242021;
+  
+    /* Paleta Vintage */
+    --vintage-mustache: #242021;
+    --vintage-brown: #906A1E;
+    --vintage-orange: #FFBA30;
+    --vintage-gold: #FFCE6A;
+    --vintage-sand: #D4B76F;
+    --vintage-cream: #FFEA9D;
+    --vintage-chantilly: #FFECC1;
+    
+    /* Paleta Pastéis */
+    --pastel-coral: #FF7B7B;
+    --pastel-green: #75FF9C;
+    --pastel-blue: #726DFF;
+    --pastel-pink: #FFA1FD;
+    --pastel-cyan: #87FFEF;
+    
+    /* Paleta média*/
+    --medium-blue: #5956A3;
+    --medium-pink: #E599E4;
+    --medium-green: #6AE58D;
+    --medium-cyan: #63DCCC;
+    
+    /* Branco e Preto */
+    --white: #FFFFFF;
+    --black: #000000;
+    
+    /* Hoverizações */
+    --vintage-brown-hover: #614610;
+    --vintage-orange-hover: #FFA700;
 
-  /* Paleta Pastéis */
-  --pastel-purple: #726DFF;
-  --pastel-pink: #FFA1FD;
-  --pastel-green: #75FF9C;
-  --pastel-cyan: #87FFEF;
-  --pastel-coral: #FF7B7B;
-
-  /* Branco e Preto */
-  --white: #FFFFFF;
-  --black: #000000;
+    /* Tema */
+    --tema: #FFFFFF;
+    --cor-contraste: #FFFFFF;
 }
 

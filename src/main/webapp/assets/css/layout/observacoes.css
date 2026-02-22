@@ -1,0 +1,42 @@
+body {
+    display: flex;
+}
+
+main {
+    background: linear-gradient(to right, var(--vintage-gold) 20%, var(--vintage-cream) 100%);
+    background-attachment: fixed;
+    width: 80%;
+    top: 0;
+    display: block;
+    padding-top: 3vh;
+}
+
+.observacao {
+    display: flex;
+    background-color: var(--white);
+    width: 64vw;
+    height: 23vh;
+    margin: 0 auto;
+    border-radius: 1.5vw;
+    margin-top: 5vh;
+    align-items: center;
+    gap: 2vw;
+}
+
+.observacao .barrinhaTema {
+    height: 100%;
+    width: 2.5vw;
+    border-top-left-radius: 1.5vw;
+    border-bottom-left-radius: 1.5vw;
+    flex-shrink: 0;
+}
+
+.observacao .tituloObservacao h2 {
+    margin: 0;
+    margin-top: 1.5vh;
+}
+
+.observacao hr {
+    border: 1px dashed var(--black);
+    width: 57.5vw;
+}

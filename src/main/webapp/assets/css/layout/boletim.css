@@ -1,0 +1,92 @@
+body {
+    display: flex;
+}
+
+main {
+    background: linear-gradient(to right, var(--vintage-gold) 20%, var(--vintage-cream) 100%);
+    background-attachment: fixed;
+    width: 80%;
+    top: 0;
+    display: block;
+    padding-top: 3vh;
+    overflow: hidden;
+}
+
+table {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 1.1vw;
+    text-align: center;
+    font-weight: 600;
+    margin-top: 3.4vh;
+    margin-left: 8vw;
+}
+  
+.tabelaNotas {
+    table-layout: fixed;
+    width: 80%;
+}
+  
+.tabelaNotas th {
+    padding-bottom: 2vh;
+    font-size: 1.75vw;
+    font-family: 'Special Elite', cursive;
+}
+
+.tabelaNotas td {
+    height: 3.8vh;
+}
+    
+.tabelaNotas .materia {
+    border-top: 2px dashed var(--black);
+    border-left: 2.5px dashed var(--vintage-sand);
+    border-right: 2.5px dashed var(--vintage-sand);
+    background: var(--vintage-chantilly);
+}
+  
+.tabelaNotas .notasCentro {
+    padding: 1.2vh;
+    border-top: 2px dashed var(--black);
+    border-left: 2px dashed var(--black);
+    background: var(--vintage-chantilly);
+}
+  
+.tabelaNotas .situacao {
+    border-top: 2px dashed var(--black);
+    border-left: 2.5px dashed var(--vintage-sand);
+    border-right: 2.5px dashed var(--vintage-sand);
+    background: var(--vintage-chantilly);
+}
+
+.tabelaNotas tbody tr:first-child :not(.espaco) {
+    border-top: 2.5px dashed var(--vintage-sand);
+}
+
+.tabelaNotas tbody tr:last-child :not(:nth-child(2)):not(:nth-child(6)) {
+    border-bottom: 2.5px dashed var(--vintage-sand);
+}
+
+.tabelaNotas .notasCentro.nota1 {
+    border-left: 2.5px dashed var(--vintage-sand);
+}
+
+.tabelaNotas .notasCentro.media {
+    border-right: 2.5px dashed var(--vintage-sand);
+}
+
+.tabelaNotas tbody tr:first-child .nota1, .tabelaNotas tbody tr:first-child .materia, .tabelaNotas tbody tr:first-child .situacao {
+    border-top-left-radius: 1.25vw;
+}
+
+.tabelaNotas tbody tr:first-child .media, .tabelaNotas tbody tr:first-child .materia, .tabelaNotas tbody tr:first-child .situacao {
+    border-top-right-radius: 1.25vw;
+}
+
+.tabelaNotas tbody tr:last-child .nota1, .tabelaNotas tbody tr:last-child .materia, .tabelaNotas tbody tr:last-child .situacao {
+    border-bottom-left-radius: 1.25vw;
+}
+
+.tabelaNotas tbody tr:last-child .media, .tabelaNotas tbody tr:last-child .materia, .tabelaNotas tbody tr:last-child .situacao {
+    border-bottom-right-radius: 1.25vw;
+}
