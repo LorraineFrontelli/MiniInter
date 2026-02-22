@@ -31,7 +31,7 @@ table {
 .tabelaNotas th {
     padding-bottom: 2vh;
     font-size: 1.75vw;
-    font-family: 'Special Elite', cursive;
+    font-family: var(--special-elite);
 }
 
 .tabelaNotas td {

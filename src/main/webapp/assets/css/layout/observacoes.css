@@ -36,6 +36,12 @@ main {
     margin-top: 1.5vh;
 }
 
+.observacao .dadosObservacao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .observacao hr {
     border: 1px dashed var(--black);
     width: 57.5vw;

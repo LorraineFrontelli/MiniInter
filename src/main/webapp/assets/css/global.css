@@ -1,3 +1,5 @@
+/* Configurações gerais */
+
 @font-face {
     font-family: 'Urbanist';
     src: url('../fonts/Urbanist-VariableFont_wght.woff2') format('woff2');
@@ -21,6 +23,48 @@ body {
     top: 0;
     bottom: 0;
     padding: 0;
+}
+
+input, textarea {
+    font-family: var(--urbanist);
+}
+
+input:focus, textarea:focus, button:focus {
+    outline: none;
+}
+
+[onclick]:hover, .fecharTemas:hover {
+    transform: scale(1.1);
+}
+
+/* Header das Telas de Autenticação */
+
+.headerAutenticacao {
+    height: 10vh;
+    background: var(--vintage-cream);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 0.75px 25px rgba(0, 0, 0, 0.3);
+}
+
+.headerAutenticacao .logoMonart {
+    height: 9vh;
+    object-fit: contain;
+    margin-left: 1vw;
+}
+
+.pincelVoltar {
+    height: 4.3vh;
+    object-fit: contain;
+    margin-right: 1.45vw;
+    margin-top: 1vh;
+    display: block;
+    transition: 0.3s ease;
+}
+
+.pincelVoltar:hover {
+    transform: scale(1.25);
 }
 
 /*/ Header Lateral /*/
@@ -108,52 +152,10 @@ body {
     filter: hue-rotate(0) saturate(1);
 }
 
-
-/* Posicionamento de Tela
-body {
-    display: flex;
-}
-
-main {
-    background: linear-gradient(to right, var(--vintage-gold) 20%, var(--vintage-cream) 100%);
-    background-attachment: fixed;
-    width: 80%;
-    top: 0;
-    display: block;
-}
-*/
-
-/* Header das Telas de Autenticação */
-
-.headerAutenticacao {
-    height: 10vh;
-    background: var(--vintage-cream);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0px 0.75px 25px rgba(0, 0, 0, 0.3);
-}
-
-.headerAutenticacao .logoMonart {
-    height: 9vh;
+.headerLateral .pincelVoltar {
+    margin-top: 8vh;
     object-fit: contain;
-    margin-left: 1vw;
-}
-
-.headerAutenticacao .pincelVoltar {
-    height: 4.3vh;
-    object-fit: contain;
-    margin-right: 1.45vw;
-    margin-top: 1vh;
-}
-
-.pincelVoltar {
-    display: block;
-    transition: 0.3s ease;
-}
-
-.headerAutenticacao .pincelVoltar:hover {
-    transform: scale(1.25);
+    height: 6vh;
 }
 
 /* Estilos gerais de página */
@@ -196,7 +198,6 @@ main {
     color: var(--cor-contraste);
 }
 
-
 .tituloPaginas h1, .notificacoes h2 {
     font-weight: normal;
 }
@@ -212,8 +213,22 @@ main {
 /* Botões para mudar tema */
 
 .paletaTemas {
-    align-self: center;
     padding-bottom: 2vw;
+    position: relative;
+    overflow: visible;
+    background-color: var(--vintage-chantilly);
+    border: 1.75px dashed var(--black);
+    font-size: 1.1vw;
+}
+
+.paletaTemas h2 {
+    margin: 0.8vw;   
+}
+
+.botoesTemas {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 dialog::backdrop {
@@ -224,10 +239,11 @@ dialog::backdrop {
 .opcoesTema {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    margin-top: 2vh;
     justify-items: center;
     height: 25vh;
     width: 20vw;
-    gap: 5px;
+    gap: 3px;
 }
 
 .opcaoTema {
@@ -239,6 +255,27 @@ dialog::backdrop {
 
 .opcaoTema:last-child {
     grid-column: 2;
+}
+
+.paletaTemas .fecharTemas {
+    position: absolute;
+    font-family: var(--urbanist);
+    font-size: 1.2vw;
+    cursor: pointer;
+    background: var(--medium-coral);
+    color: var(--black);
+    border: 1.5px solid var(--black);
+    border-radius: 0.7vw;
+    height: 4vh;
+    width: 2vw;
+    transition: 0.3s ease;
+    top: -2.5vh;
+    right: -1vw;
+    z-index: 999;
+}
+
+.paletaTemas .fecharTemas:hover {
+    filter: grayscale(0.6) saturate(1.8) contrast(0.9);
 }
 
 .pastelBlue {
@@ -284,7 +321,7 @@ dialog::backdrop {
 /* Botão editar perfil */
 
 .editar {
-    font-family: "Urbanist", cursive;
+    font-family: var(--urbanist);
     background-color: var(--tema);
     color: var(--cor-contraste);
     font-size: 1.15vw;
@@ -301,11 +338,8 @@ dialog::backdrop {
 }
 
 .editar:hover {
-    filter: saturate(2.5) contrast(1.5);
+    filter: grayscale(0.6) saturate(1.8) contrast(0.9);
+    transform: scale(1.1);
     transition: 0.285s ease;
 }
 
-.iconeEditar {
-    transition: 0.285s ease;
-    height: 2.75vh;
-}
