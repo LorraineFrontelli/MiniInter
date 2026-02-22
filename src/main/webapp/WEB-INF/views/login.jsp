@@ -15,7 +15,7 @@
 <body>
     <header class="headerAutenticacao">
         <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" alt="Logo Monart" class="logoMonart">
-        <a href="${pageContext.request.contextPath}/index.jsp">
+        <a href="${pageContext.request.contextPath}/index.html">
             <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
         </a>
     </header>
