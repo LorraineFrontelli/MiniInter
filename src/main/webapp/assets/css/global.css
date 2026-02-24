@@ -154,9 +154,9 @@ input:focus, textarea:focus, button:focus {
 }
 
 .headerLateral .pincelVoltar {
-    margin-top: 8vh;
+    margin-top: 12vh;
     object-fit: contain;
-    height: 6vh;
+    height: 4.25vh;
 }
 
 /* Estilos gerais de página */

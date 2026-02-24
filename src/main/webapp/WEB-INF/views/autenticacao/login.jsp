@@ -5,34 +5,41 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/autenticacao.css">
+   
+   <!-- Preloads -->
+   <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/quadro-login.svg">
+
+   <!-- Links -->
    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/global.css">
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/autenticacao.css">
    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
    <script src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
+
    <title>Login - Monart</title>
 </head>
 
 <body>
     <header class="headerAutenticacao">
         <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" alt="Logo Monart" class="logoMonart">
-        <a href="${pageContext.request.contextPath}/index.html">
+        <a href="${pageContext.request.contextPath}/autenticacao/login.html">
             <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
         </a>
     </header>
     
     <main>
-        <form action="" method="POST" class="formAutenticacao formLogin">
+        <form action="" class="formAutenticacao formLogin">
             <h1>Acessar conta</h1>
 
             <label for="login" class="login">Login
-                <input type="text" name="login" id="login" class="inputAutenticacao" placeholder="Insira seu login" required>
+                <input type="text" name="login" id="login" class="inputAutenticacao" placeholder="Insira seu login">
             </label>
             
             <label for="senha" class="senha">Senha
-                <input type="password" name="senha" id="senha" class="inputAutenticacao" placeholder="Insira sua senha" required>
+                <input type="password" name="senha" id="senha" class="inputAutenticacao" placeholder="Insira sua senha">
             </label>
 
-            <button type="submit">Entrar</button>
+            <button>Entrar</button>
         </form>
     </main>
 </body>

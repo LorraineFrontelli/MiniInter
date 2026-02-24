@@ -1,0 +1,116 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Aplicando tema salvo -->
+    <script>document.documentElement.style.setProperty("--tema",localStorage.getItem("corTema")||"#242021");</script>
+ 
+    <!-- Preloads -->
+    <link rel="preload" as="image" href="../../../assets/img/painting-back-icon.svg">
+    <link rel="preload" as="image" href="../../../assets/img/profile-icon.svg">
+    <link rel="preload" as="image" href="../../../assets/img/schedule-icon.svg">
+    <link rel="preload" as="image" href="../../../assets/img/grades-icon.svg">
+    <link rel="preload" as="image" href="../../../assets/img/observations-icon.svg">
+
+    <!-- Links -->
+    <link rel="stylesheet" href="../../../assets/css/global.css">
+    <link rel="stylesheet" href="../../../assets/css/tokens.css">
+    <link rel="stylesheet" href="../../../assets/css/layout/boletim.css">
+    <link rel="icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+    <script src="../../../assets/js/script.js" defer></script>
+
+    <title>Suas notas - Monart</title>
+</head>
+
+<body>
+    <div class="meuPlaceholder"></div>
+
+    <header class="headerLateral">
+        <img src="../../../assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
+        <nav>
+            <ul>
+                <li><a href="perfil-aluno.html" class="pagina"><img src="../../../assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
+                <li><a href="agenda.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Agenda</a></li>
+                <li><a href="boletim.html" class="pagina ativo"><img src="../../../assets/img/grades-icon.svg" decoding="async" alt="">Notas</a></li>
+                <li><a href="observacoes.html" class="pagina"><img src="../../../assets/img/observations-icon.svg" decoding="async" alt="">Observações</a></li>
+            </ul>
+        </nav>
+        <a href="../autenticacao/login.html">
+            <img src="../../../assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
+        </a>
+    </header>
+    
+    <main>
+        <div class="cabecalhoPaginas">
+            <img src="../../../assets/img/themes-icon.svg" alt="" class="abrirTemas">
+            <div class="tituloPaginas">
+                <h1>Notas</h1>
+            </div>
+            <a href="../chat/conversas.html"><img src="../../../assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
+        </div>
+
+        <div class="tabelaContainer">
+            <table class="tabelaNotas">
+                <colgroup>
+                    <col style="width: 27%">
+                    <col style="width: 5%;">
+                    <col style="width: 12%">
+                    <col style="width: 12%">
+                    <col style="width: 12%">
+                    <col style="width: 5%;">
+                    <col style="width: 27%">
+                </colgroup>
+
+                <thead>
+                    <tr>
+                        <th>Matéria</th>
+                        <th></th>
+                        <th>Nota 1</th>
+                        <th>Nota 2</th>
+                        <th>Média</th>
+                        <th></th>
+                        <th>Situação</th>
+                    </tr>
+                </thead>
+            
+                <tbody>
+                    <tr>
+                        <td class="materia">Teoria das Cores</td>
+                        <td class="espaco"></td>
+                        <td class="notasCentro nota1">9.45</td>
+                        <td class="notasCentro nota2">7.50</td>
+                        <td class="notasCentro media">8.48</td>
+                        <td class="espaco"></td>
+                        <td class="situacao">Em processo</td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="materia">Teoria das Cores</td>
+                        <td class="espaco"></td>
+                        <td class="notasCentro nota1">9.45</td>
+                        <td class="notasCentro nota2">7.50</td>
+                        <td class="notasCentro media">8.48</td>
+                        <td class="espaco"></td>
+                        <td class="situacao">Em processo</td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="materia">Teoria das Cores</td>
+                        <td class="espaco"></td>
+                        <td class="notasCentro nota1">9.45</td>
+                        <td class="notasCentro nota2">7.50</td>
+                        <td class="notasCentro media">8.48</td>
+                        <td class="espaco"></td>
+                        <td class="situacao">Reprovado pelo conselho</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>

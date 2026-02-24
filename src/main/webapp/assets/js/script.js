@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const botaoLembrete = document.querySelector(".botaoLembrete")
     const iconeLembrete = document.querySelector(".botaoLembrete img")
     const botoesMenu = document.querySelectorAll(".menuAluno button")
+    const mensagensAluno = document.querySelectorAll(".mensagem.aluno")
 
     document.querySelectorAll(".opcaoTema").forEach(botao => {
         botao.addEventListener("click", () => {
@@ -64,26 +65,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
             aplicarTemaElemento(botaoEditar, botaoEditar, iconeEditar, cor, corContraste)
 
+            aplicarTemaElementos(mensagensAluno, mensagensAluno, null, cor, corContraste)
+            
             aplicarTemaElementos(barrinhaTema, barrinhaTemaTexto, null, cor, corContraste)
             
             aplicarTemaElementos(botoesMenu, botoesMenu, null, cor, corContraste)
-
+            
             localStorage.setItem("corTema", cor);
-
+            
             paleta.close();
         });
     });
-
+    
     const corSalva = localStorage.getItem("corTema");
-
+    
     if (corSalva) {
         const corContraste = getContraste(corSalva);
         
         aplicarTemaElemento(tituloPagina, tituloPaginaTexto, null, corSalva, corContraste)
-
+        
         aplicarTemaElemento(botaoLembrete, botaoLembrete, iconeLembrete, corSalva, corContraste)
-
+        
         aplicarTemaElemento(botaoEditar, botaoEditar, iconeEditar, corSalva, corContraste)
+        
+        aplicarTemaElementos(mensagensAluno, mensagensAluno, null, corSalva, corContraste)
 
         aplicarTemaElementos(barrinhaTema, barrinhaTemaTexto, null, corSalva, corContraste)
 

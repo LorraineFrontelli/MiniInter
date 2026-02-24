@@ -86,10 +86,15 @@ main {
     background: var(--vintage-chantilly);
     line-height: 1.75;
     font-size: 1.2vw;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.resultadoBusca:hover {
+    transform: scale(0.95);
 }
 
 .resultadoBusca img {
-    cursor: pointer;
     margin-right: 1vh;
     object-fit: contain;
     height: 3vh;
