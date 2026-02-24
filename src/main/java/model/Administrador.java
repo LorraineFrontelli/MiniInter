@@ -1,23 +1,47 @@
 package model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Administrador {
 
+    // ATRIBUTOS
     private int id;
     private String login;
     private String senha;
-    private String aluno;
+    private Set<String> alunoCpf = new HashSet<>();
 
-    // Métodos construtores
-    public Administrador() {}
+    // CONSTRUTOR VAZIO
+    public Administrador() {
+    }
 
-    public Administrador(int id, String login, String senha, String aluno) {
+    // CONSTRUTOR SEM ID (para novos registros)
+    public Administrador(String login, String senha) {
+        this.login = login;
+        this.senha = senha;
+    }
+
+    // CONSTRUTOR COMPLETO (quando for carregar do BD)
+    public Administrador(int id, String login, String senha) {
         this.id = id;
         this.login = login;
         this.senha = senha;
-        this.aluno = aluno;
     }
 
-    // Métodos getters
+    // MÉTODOS CPF
+    public void adicionarCpf(String cpf) {
+        alunoCpf.add(cpf);
+    }
+
+    public boolean existeCpf(String cpf) {
+        return alunoCpf.contains(cpf);
+    }
+
+    public Set<String> getAlunoCpf() {
+        return alunoCpf;
+    }
+
+    // GETTERS
     public int getId() {
         return id;
     }
@@ -30,11 +54,11 @@ public class Administrador {
         return senha;
     }
 
-    public String getAluno() {
-        return aluno;
+    // SETTERS
+    public void setId(int id) {
+        this.id = id;
     }
 
-    // Métodos setters
     public void setLogin(String login) {
         this.login = login;
     }
@@ -43,15 +67,12 @@ public class Administrador {
         this.senha = senha;
     }
 
-    public void setAluno(String aluno) {
-        this.aluno = aluno;
-    }
-
-    // Método toString
+    // TO STRING
     @Override
     public String toString() {
-        return "ID: " + id +
-                "\tLogin: " + login +
-                "\tAluno: " + aluno;
+        return "Administrador: " +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", quantidadeCpfs=" + alunoCpf.size();
     }
 }

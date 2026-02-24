@@ -1,6 +1,5 @@
 package dao;
 
-// imports da classe
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +11,7 @@ import model.AlunoProfessor;
 
 public class AlunoProfessorDAO {
 
-    // CREATE - inserir relacao aluno professor
+    // CREATE - inserir AlunoProfessor
     public int inserir(AlunoProfessor ap) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
@@ -28,8 +27,8 @@ public class AlunoProfessorDAO {
 
             retorno = pst.executeUpdate();
 
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
             retorno = -1;
         } finally {
             conexao.desconectar(con);
@@ -38,7 +37,7 @@ public class AlunoProfessorDAO {
         return retorno;
     }
 
-    // READ - listar relacoes
+    // READ - Listar todos
     public List<AlunoProfessor> listar() {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
@@ -59,8 +58,8 @@ public class AlunoProfessorDAO {
                 ));
             }
 
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             conexao.desconectar(con);
         }
@@ -68,12 +67,41 @@ public class AlunoProfessorDAO {
         return lista;
     }
 
-    // DELETE - deletar relacao
+    // UPDATE - atualizar AlunoProfessor
+    public int atualizar(AlunoProfessor ap) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        int retorno;
+
+        String sql = "UPDATE aluno_professor SET id_professor=?, id_aluno=?, serie=?, turma=? WHERE id=?";
+
+        try {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, ap.getIdProfessor());
+            pst.setInt(2, ap.getIdAluno());
+            pst.setInt(3, ap.getSerie());
+            pst.setString(4, ap.getTurma());
+            pst.setInt(5, ap.getId());
+
+            retorno = pst.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            retorno = -1;
+        } finally {
+            conexao.desconectar(con);
+        }
+
+        return retorno;
+    }
+
+    // DELETE - deletar AlunoProfessor
     public int deletar(int id) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         int retorno;
-        String sql = "DELETE FROM aluno_professor WHERE id = ?";
+
+        String sql = "DELETE FROM aluno_professor WHERE id=?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
@@ -81,8 +109,8 @@ public class AlunoProfessorDAO {
 
             retorno = pst.executeUpdate();
 
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
             retorno = -1;
         } finally {
             conexao.desconectar(con);

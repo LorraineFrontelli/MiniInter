@@ -16,7 +16,7 @@ public class BoletimDAO {
     public int inserir(Boletim boletim) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
-        String sql = "INSERT INTO boletim (id_professor, id_aluno, nota_1, descricao_1, nota_2, descricao_2, media, aprovado, observacao, dt_lancamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO boletim (id_professor, id_aluno, nota_1, descricao_1, nota_2, descricao_2, aprovado, observacao, dt_lancamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         int retorno;
 
         try {
@@ -27,10 +27,9 @@ public class BoletimDAO {
             pst.setString(4, boletim.getDescricao1());
             pst.setDouble(5, boletim.getNota2());
             pst.setString(6, boletim.getDescricao2());
-            pst.setDouble(7, boletim.getMedia());
-            pst.setBoolean(8, boletim.isAprovado());
-            pst.setString(9, boletim.getObservacao());
-            pst.setDate(10, new java.sql.Date(boletim.getDataLancamento().getTime()));
+            pst.setBoolean(7, boletim.isAprovado());
+            pst.setString(8, boletim.getObservacao());
+            pst.setDate(9, new java.sql.Date(boletim.getDataLancamento().getTime()));
 
             retorno = pst.executeUpdate();
 
@@ -44,8 +43,8 @@ public class BoletimDAO {
         return retorno;
     }
 
-    // READ - listar boletins por aluno
-    public List<Boletim> listarPorAluno(int idAluno) {
+    // READ - Buscar boletins por aluno
+    public List<Boletim> buscarPorAluno(int idAluno) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         List<Boletim> boletins = new ArrayList<>();
@@ -66,7 +65,6 @@ public class BoletimDAO {
                         rs.getString("descricao_1"),
                         rs.getDouble("nota_2"),
                         rs.getString("descricao_2"),
-                        rs.getDouble("media"),
                         rs.getBoolean("aprovado"),
                         rs.getString("observacao"),
                         rs.getDate("dt_lancamento")
@@ -81,4 +79,63 @@ public class BoletimDAO {
 
         return boletins;
     }
+
+    // UPDATE - atualizar boletim
+    public int atualizar(Boletim boletim) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        int retorno;
+
+        String sql = "UPDATE boletim SET id_professor=?, id_aluno=?, nota_1=?, descricao_1=?, nota_2=?, descricao_2=?, aprovado=?, observacao=?, dt_lancamento=? WHERE id=?";
+
+        try {
+            PreparedStatement pst = con.prepareStatement(sql);
+
+            pst.setInt(1, boletim.getIdProfessor());
+            pst.setInt(2, boletim.getIdAluno());
+            pst.setDouble(3, boletim.getNota1());
+            pst.setString(4, boletim.getDescricao1());
+            pst.setDouble(5, boletim.getNota2());
+            pst.setString(6, boletim.getDescricao2());
+            pst.setBoolean(7, boletim.isAprovado());
+            pst.setString(8, boletim.getObservacao());
+            pst.setDate(9, new java.sql.Date(boletim.getDataLancamento().getTime()));
+            pst.setInt(10, boletim.getId());
+
+            retorno = pst.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            retorno = -1;
+        } finally {
+            conexao.desconectar(con);
+        }
+
+        return retorno;
+    }
+
+    // DELETE - deletar boletim
+    public int deletar(int id) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        int retorno;
+
+        String sql = "DELETE FROM boletim WHERE id=?";
+
+        try {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, id);
+
+            retorno = pst.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            retorno = -1;
+        } finally {
+            conexao.desconectar(con);
+        }
+
+        return retorno;
+    }
+
 }

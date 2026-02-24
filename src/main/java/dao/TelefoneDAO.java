@@ -17,13 +17,14 @@ public class TelefoneDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         int idGerado = -1;
-        String sql = "INSERT INTO telefone (id_aluno, numero, tipo) VALUES (?, ?, ?) RETURNING id";
+        String sql = "INSERT INTO telefone (id_aluno, nome, numero, tipo) VALUES (?, ?, ?, ?) RETURNING id";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, telefone.getIdAluno());
-            pst.setInt(2, telefone.getNumero());
-            pst.setString(3, telefone.getTipo());
+            pst.setString(2,telefone.getNome());
+            pst.setInt(3, telefone.getNumero());
+            pst.setString(4, telefone.getTipo());
 
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
@@ -55,6 +56,7 @@ public class TelefoneDAO {
                 telefone = new Telefone(
                         rs.getInt("id"),
                         rs.getInt("id_aluno"),
+                        rs.getString("nome"),
                         rs.getInt("numero"),
                         rs.getString("tipo")
                 );
@@ -84,6 +86,7 @@ public class TelefoneDAO {
                 telefones.add(new Telefone(
                         rs.getInt("id"),
                         rs.getInt("id_aluno"),
+                        rs.getString("nome"),
                         rs.getInt("numero"),
                         rs.getString("tipo")
 
@@ -113,6 +116,7 @@ public class TelefoneDAO {
                 telefones.add(new Telefone(
                         rs.getInt("id"),
                         rs.getInt("id_aluno"),
+                        rs.getString("nome"),
                         rs.getInt("numero"),
                         rs.getString("tipo")
 
@@ -132,13 +136,14 @@ public class TelefoneDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         int retorno;
-        String sql = "UPDATE telefone SET numero = ?, tipo = ? WHERE id = ?";
+        String sql = "UPDATE telefone SET nome = ?, numero = ?, tipo = ? WHERE id = ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, telefone.getNumero());
-            pst.setString(2, telefone.getTipo());
-            pst.setInt(3, telefone.getId());
+            pst.setString(1, telefone.getNome());
+            pst.setInt(2, telefone.getNumero());
+            pst.setString(3, telefone.getTipo());
+            pst.setInt(4, telefone.getId());
 
             retorno = pst.executeUpdate();
         } catch (SQLException sqle) {
