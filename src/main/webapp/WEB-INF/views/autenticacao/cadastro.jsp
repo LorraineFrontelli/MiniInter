@@ -7,23 +7,23 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
    <!-- Preloads -->
-   <link rel="preload" as="image" href="../../../assets/img/quadro-login.svg">
+   <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/quadro-login.svg">
 
    <!-- Links -->
-   <link rel="stylesheet" href="../../../assets/css/global.css">
-   <link rel="stylesheet" href="../../../assets/css/tokens.css">
-   <link rel="stylesheet" href="../../../assets/css/layout/autenticacao.css">
-   <link rel="icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
-   <script src="../../../assets/js/script.js" defer></script>
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/global.css">
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/autenticacao.css">
+   <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
+   <script src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
 
    <title>Cadastro - Monart</title>
 </head>
 
 <body>
     <header class="headerAutenticacao">
-        <img src="../../../assets/img/monart-logo.svg" alt="Logo Monart" class="logoMonart">
-        <a href="../../../index.html" class="iconeVoltar">
-            <img src="../../../assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
+        <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" alt="Logo Monart" class="logoMonart">
+        <a href="${pageContext.request.contextPath}/index.html" class="iconeVoltar">
+            <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
         </a>
     </header>
     

@@ -10,18 +10,18 @@
     <script>document.documentElement.style.setProperty("--tema",localStorage.getItem("corTema")||"#242021");</script>
  
     <!-- Preloads -->
-    <link rel="preload" as="image" href="../../../assets/img/painting-back-icon.svg">
-    <link rel="preload" as="image" href="../../../assets/img/profile-icon.svg">
-    <link rel="preload" as="image" href="../../../assets/img/schedule-icon.svg">
-    <link rel="preload" as="image" href="../../../assets/img/grades-icon.svg">
-    <link rel="preload" as="image" href="../../../assets/img/observations-icon.svg">
+    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg">
+    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/profile-icon.svg">
+    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
+    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/grades-icon.svg">
+    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/observations-icon.svg">
 
     <!-- Links -->
-    <link rel="stylesheet" href="../../../assets/css/global.css">
-    <link rel="stylesheet" href="../../../assets/css/tokens.css">
-    <link rel="stylesheet" href="../../../assets/css/layout/boletim.css">
-    <link rel="icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
-    <script src="../../../assets/js/script.js" defer></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/global.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/boletim.css">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
+    <script src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
 
     <title>Suas notas - Monart</title>
 </head>
@@ -30,27 +30,27 @@
     <div class="meuPlaceholder"></div>
 
     <header class="headerLateral">
-        <img src="../../../assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
+        <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
         <nav>
             <ul>
-                <li><a href="perfil-aluno.html" class="pagina"><img src="../../../assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
-                <li><a href="agenda.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Agenda</a></li>
-                <li><a href="boletim.html" class="pagina ativo"><img src="../../../assets/img/grades-icon.svg" decoding="async" alt="">Notas</a></li>
-                <li><a href="observacoes.html" class="pagina"><img src="../../../assets/img/observations-icon.svg" decoding="async" alt="">Observações</a></li>
+                <li><a href="perfil-aluno.html" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
+                <li><a href="agenda.html" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Agenda</a></li>
+                <li><a href="boletim.html" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/grades-icon.svg" decoding="async" alt="">Notas</a></li>
+                <li><a href="observacoes.html" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/observations-icon.svg" decoding="async" alt="">Observações</a></li>
             </ul>
         </nav>
         <a href="../autenticacao/login.html">
-            <img src="../../../assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
+            <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
         </a>
     </header>
     
     <main>
         <div class="cabecalhoPaginas">
-            <img src="../../../assets/img/themes-icon.svg" alt="" class="abrirTemas">
+            <img src="${pageContext.request.contextPath}/assets/img/themes-icon.svg" alt="" class="abrirTemas">
             <div class="tituloPaginas">
                 <h1>Notas</h1>
             </div>
-            <a href="../chat/conversas.html"><img src="../../../assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
+            <a href="../chat/conversas.html"><img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
         </div>
 
         <div class="tabelaContainer">
