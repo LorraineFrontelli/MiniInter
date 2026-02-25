@@ -33,13 +33,13 @@
         <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
         <nav>
             <ul>
-                <li><a href="perfil-professor.html" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
-                <li><a href="buscar.html" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/search-icon.svg" decoding="async" alt="">Buscar</a></li></li>
-                <li><a href="lembretes.html" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/reminder-icon.svg" decoding="async" alt="">Lembretes</a></li></li>
-                <li><a href="estatisticas.html" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/statistics-icon.svg" decoding="async" alt="">Estatísticas</a></li>
+                <li><a href="perfil-professor.jsp" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
+                <li><a href="buscar.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/search-icon.svg" decoding="async" alt="">Buscar</a></li></li>
+                <li><a href="lembretes.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/reminder-icon.svg" decoding="async" alt="">Lembretes</a></li></li>
+                <li><a href="estatisticas.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/statistics-icon.svg" decoding="async" alt="">Estatísticas</a></li>
             </ul>
         </nav>
-        <a href="../autenticacao/login.html">
+        <a href="${pageContext.request.contextPath}/autenticacao/login.jsp">
             <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
         </a>
     </header>
@@ -50,7 +50,7 @@
             <div class="tituloPaginas">
                 <h1>Seja bem-vindo, Fulano!</h1>
             </div>
-            <a href="../chat/conversas.html"><img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
+            <a href="${pageContext.request.contextPath}/chat/conversas.jsp"><img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
         </div>
 
         <div class="perfil">

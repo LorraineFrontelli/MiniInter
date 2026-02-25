@@ -41,25 +41,25 @@
         </div>
 
         <div class="buscaContainer">
-            <div class="resultadoBusca" onclick="window.location.href='chat.html'">
+            <div class="resultadoBusca" onclick="window.location.href='chat.jsp'">
                 <div>
                     <strong>Tainá Dias Martinelli</strong>
                 </div>
-                <a href="chat.html"><img src="${pageContext.request.contextPath}/assets/img/arrow-icon.svg" alt=""></a>
+                <a href="chat.jsp"><img src="${pageContext.request.contextPath}/assets/img/arrow-icon.svg" alt=""></a>
             </div>
             
-            <div class="resultadoBusca" onclick="window.location.href='chat.html'">
+            <div class="resultadoBusca" onclick="window.location.href='chat.jsp'">
                 <div>
                     <strong>Tainá Dias Martinelli</strong>
                 </div>
-                <a href="chat.html"><img src="${pageContext.request.contextPath}/assets/img/arrow-icon.svg" alt=""></a>
+                <a href="chat.jsp"><img src="${pageContext.request.contextPath}/assets/img/arrow-icon.svg" alt=""></a>
             </div>
             
-            <div class="resultadoBusca" onclick="window.location.href='chat.html'">
+            <div class="resultadoBusca" onclick="window.location.href='chat.jsp'">
                 <div>
                     <strong>Tainá Dias Martinelli</strong>
                 </div>
-                <a href="chat.html"><img src="${pageContext.request.contextPath}/assets/img/arrow-icon.svg" alt=""></a>
+                <a href="chat.jsp"><img src="${pageContext.request.contextPath}/assets/img/arrow-icon.svg" alt=""></a>
             </div>
         </div>
     </main>
