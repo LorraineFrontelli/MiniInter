@@ -10,6 +10,7 @@ main {
     display: block;
     padding-top: 3vh;
 }
+
 .pessoa {
     display: flex;
     background-color: var(--white);
@@ -22,47 +23,101 @@ main {
     padding-left: 2vw;
     gap: 2vw;
 }
-.titulos{
+
+.titulos {
     display: flex;
     gap: 3.5vw;
     justify-content: center;
 }
-.situacaoAluno{
+
+.situacaoAluno {
     display: flex;
     gap: 2vw;
     justify-content: center;
 
 }
-.notas{
+
+.notas {
     background-color: var(--vintage-chantilly);
     width: 5vw;
     height: 8vh;
     border-radius: 1vw;
+    font-size: 1.4vw;
     border: none;
     text-align: center;
 }
+
 input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
+input[type="number"]::-webkit-inner-spin-button  {
     -webkit-appearance: none;
     margin: 0;
 }
-.situacao{
+
+
+.situacao {
     width: 8vw;
 }
-.tituloSituacao{
+
+.tituloSituacao {
     margin-left: 0.8vw;
     margin-right: 0.9vw;
 }
-.quadroObservacoes{
+
+.quadroObservacao {
     background-color: var(--vintage-chantilly);
     width: 48vw;
-    height: 24vh;
+    height: 22vh;
     border-radius: 1vw;
     border: none;
+    padding: 0.75vw;
+    font-size: 2.5vh;
+    max-width: 55vw;
 }
-.tituloObservacoes{
+
+.tituloObservacoes {
     text-align: center;
 }
-.observacoes{
+
+.observacoes {
     text-align: center;
+}
+
+.menuAluno {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menuAluno button {
+    cursor: pointer;
+    font-size: 1.2vw;
+    margin-top: 1vh;
+    height: 5.5vh;
+    width: 6.5vw;
+    align-self: center;
+    
+    -webkit-mask-image: url('../../img/stamp-button.svg');
+    mask-image: url('../../img/stamp-button.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-position: center;
+    mask-position: center;
+    
+    background: var(--tema);
+    color: var(--cor-contraste);
+    font-family: var(--special-elite);
+    border: none;
+    transition: 0.3s ease;
+}
+
+.menuAluno button:first-child {
+    position: relative;
+    left: 4.5vw;
+}
+
+.menuAluno button:last-child {
+    position: relative;
+    right: 4.5vw;
 }

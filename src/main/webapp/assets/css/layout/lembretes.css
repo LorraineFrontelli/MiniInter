@@ -1,0 +1,188 @@
+body {
+    display: flex;
+}
+
+main {
+    background: linear-gradient(to right, var(--vintage-gold) 20%, var(--vintage-cream) 100%);
+    background-attachment: fixed;
+    width: 80%;
+    top: 0;
+    display: block;
+    padding-top: 3vh;
+}
+
+.botaoLembrete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: 10vw;
+    
+    margin-top: 4.5vh;
+    height: 6.5vh;
+    width: 12vw;
+    font-size: 2.8vh;
+    border-radius: 10px;
+    border: none;
+    
+    background: var(--tema);
+    color: var(--cor-contraste);
+    font-family: var(--urbanist);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.botaoLembrete:hover {
+    filter: grayscale(0.6) saturate(1.8) contrast(0.9);
+}
+
+.botaoLembrete img {
+    object-fit: contain;
+    height: 3vh;
+    margin-left: 0.5vw;
+}
+
+.muralLembretes {
+    position: relative;
+    background: var(--vintage-);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    padding: 0;
+    margin: 0;
+    place-items: center;
+}
+
+.muralLembretes .semLembretes {
+    margin-top: 20vh;
+    grid-column: 1 / -1;
+    font-family: var(--special-elite);
+}
+
+.muralLembretes div {
+    display: grid;
+    background: var(--white);
+    font-size: 1.25rem;
+    padding: 0.75vw;
+    padding-top: 1vw;
+    margin-top: 7.5vh;
+    width: 80%;
+    height: 10vh;
+    position: relative;
+    box-shadow: 0.5vw 0.8vh 1.5vw rgba(0,0,0,0.15);
+    transition: 0.3s ease;    
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    display: block;
+    margin-bottom: 1.3vh;
+}
+
+.muralLembretes div:hover {
+    transform: scale(1.05) rotate(-1deg);
+    box-shadow: 0.7vw 1vh 1.7vw rgba(0,0,0,0.25);
+    z-index: 10;
+}
+
+.muralLembretes div::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1.6vh;
+    transition: 0.3s ease;
+    background: var(--tema);
+}
+
+.muralLembretes button {
+    position: absolute;
+    top: -7.5px;
+    right: -7.5px;
+    transition: 0.3s ease;
+    background-color: var(--medium-coral);
+    border: 1px solid var(--medium-coral);
+}
+
+.muralLembretes button:hover {
+    filter: grayscale(0.6) saturate(1.8) contrast(0.9);
+    transform: scale(1.1);
+}
+
+.criarLembrete {
+    font-size: 1.2vw;
+    padding-bottom: 2vw;
+    position: relative;
+    overflow: visible;
+    min-height: 25vh;
+    min-width: 20vw;
+    background-color: var(--vintage-chantilly);
+    border: 1.75px dashed var(--black);
+}
+
+.criarLembrete form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5vh;
+}
+
+.criarLembrete form textarea {
+    font-size: 1.2vw;
+    padding: 1vh;
+    min-height: 15vh;
+    min-width: 20vw;
+    background-color: var(--white);
+    border-radius: 0.8vw;
+    border: 2px solid var(--black);
+    padding: 0.75vw;
+}
+
+.criarLembrete .salvarLembrete {
+    cursor: pointer;
+    font-size: 1.2vw;
+    margin-top: 1vh;
+    height: 5vh;
+    width: 6vw;
+    align-self: center;
+    
+    -webkit-mask-image: url('../../img/stamp-button.svg');
+    mask-image: url('../../img/stamp-button.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-position: center;
+    mask-position: center;
+    
+    background: var(--vintage-brown);
+    color: var(--white);
+    font-family: var(--special-elite);
+    border: none;
+    transition: 0.3s ease;
+}
+
+.criarLembrete .salvarLembrete:hover {
+    transition: 0.2s ease-in-out;
+    transform: scale(1.1);
+    background: var(--vintage-brown-hover);
+}
+
+.fecharPopUpLembrete {
+    position: absolute;
+    font-family: var(--urbanist);
+    font-size: 1.2vw;
+    cursor: pointer;
+    background: var(--medium-coral);
+    color: var(--black);
+    border: 1.5px solid var(--black);
+    border-radius: 0.7vw;
+    height: 4vh;
+    width: 2vw;
+    transition: 0.3s ease;
+    top: -2.5vh;
+    right: -1vw;
+    z-index: 999;
+}
+
+.fecharPopUpLembrete:hover {
+    filter: grayscale(0.6) saturate(1.8) contrast(0.9);
+}
