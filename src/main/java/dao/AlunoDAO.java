@@ -73,6 +73,39 @@ public class AlunoDAO {
         return aluno;
     }
 
+    // READ - buscar aluno pelo nome
+    public List<Aluno> buscarPorNome(String nome) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        List<Aluno> alunos = new ArrayList<>();
+        String sql = "SELECT * FROM aluno WHERE nome LIKE ?";
+
+        try {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, "%" + nome + "%");
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                alunos.add(new Aluno(
+                        rs.getInt("matricula"),
+                        rs.getString("nome"),
+                        rs.getString("cpf"),
+                        rs.getDate("dt_inicio"),
+                        rs.getString("email"),
+                        rs.getString("senha")
+                ));
+            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        } finally {
+            conexao.desconectar(con);
+        }
+
+        return alunos;
+    }
+
     // READ - listar todos os alunos
     public List<Aluno> listar() {
         Conexao conexao = new Conexao();

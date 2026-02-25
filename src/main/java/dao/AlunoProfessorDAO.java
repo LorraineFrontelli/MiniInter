@@ -19,6 +19,7 @@ public class AlunoProfessorDAO {
         int retorno;
 
         try {
+
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, ap.getIdProfessor());
             pst.setInt(2, ap.getIdAluno());
@@ -28,10 +29,14 @@ public class AlunoProfessorDAO {
             retorno = pst.executeUpdate();
 
         } catch (SQLException e) {
+
             e.printStackTrace();
             retorno = -1;
+
         } finally {
+
             conexao.desconectar(con);
+
         }
 
         return retorno;
@@ -45,10 +50,12 @@ public class AlunoProfessorDAO {
         String sql = "SELECT * FROM aluno_professor";
 
         try {
+
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
+
                 lista.add(new AlunoProfessor(
                         rs.getInt("id"),
                         rs.getInt("id_professor"),
@@ -56,15 +63,60 @@ public class AlunoProfessorDAO {
                         rs.getInt("serie"),
                         rs.getString("turma")
                 ));
+
             }
 
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         } finally {
+
             conexao.desconectar(con);
+
         }
 
         return lista;
+    }
+
+    // READ - Buscar por ID
+    public AlunoProfessor buscarPorId(int id) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        AlunoProfessor ap = null;
+
+        String sql = "SELECT * FROM aluno_professor WHERE id = ?";
+
+        try {
+
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, id);
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+
+                ap = new AlunoProfessor(
+                        rs.getInt("id"),
+                        rs.getInt("id_professor"),
+                        rs.getInt("id_aluno"),
+                        rs.getInt("serie"),
+                        rs.getString("turma")
+                );
+
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            conexao.desconectar(con);
+
+        }
+
+        return ap;
     }
 
     // UPDATE - atualizar AlunoProfessor
@@ -76,6 +128,7 @@ public class AlunoProfessorDAO {
         String sql = "UPDATE aluno_professor SET id_professor=?, id_aluno=?, serie=?, turma=? WHERE id=?";
 
         try {
+
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, ap.getIdProfessor());
             pst.setInt(2, ap.getIdAluno());
@@ -86,10 +139,14 @@ public class AlunoProfessorDAO {
             retorno = pst.executeUpdate();
 
         } catch (SQLException e) {
+
             e.printStackTrace();
             retorno = -1;
+
         } finally {
+
             conexao.desconectar(con);
+
         }
 
         return retorno;
@@ -104,16 +161,21 @@ public class AlunoProfessorDAO {
         String sql = "DELETE FROM aluno_professor WHERE id=?";
 
         try {
+
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
 
             retorno = pst.executeUpdate();
 
         } catch (SQLException e) {
+
             e.printStackTrace();
             retorno = -1;
+
         } finally {
+
             conexao.desconectar(con);
+
         }
 
         return retorno;

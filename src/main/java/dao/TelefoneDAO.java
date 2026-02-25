@@ -70,6 +70,37 @@ public class TelefoneDAO {
         return telefone; // retorna null se não encontrar
     }
 
+    // READ - BUSCAR TELEFONE PELO NUMERO
+    public List<Telefone> buscarPorNumero(int numero) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        List<Telefone> telefones = new ArrayList<>();
+        String sql = "SELECT * FROM telefone WHERE numero = ?";
+
+        try {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, numero);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                telefones.add(new Telefone(
+                        rs.getInt("id"),
+                        rs.getInt("id_aluno"),
+                        rs.getString("nome"),
+                        rs.getInt("numero"),
+                        rs.getString("tipo")
+                ));
+            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        } finally {
+            conexao.desconectar(con);
+        }
+
+        return telefones;
+    }
+
     // READ - LISTAR TODOS OS TELEFONES DO ALUNO
     public List<Telefone> listarIdAluno(int idAluno) {
         Conexao conexao = new Conexao();

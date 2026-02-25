@@ -80,6 +80,46 @@ public class BoletimDAO {
         return boletins;
     }
 
+    // READ - Buscar boletins pelo nome do aluno
+    public List<Boletim> buscarPorNomeAluno(String nomeAluno) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        List<Boletim> boletins = new ArrayList<>();
+
+        String sql = "SELECT b.* FROM boletim b " +
+                "JOIN aluno a ON b.id_aluno = a.id " +
+                "WHERE a.nome LIKE ?";
+
+        try {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, "%" + nomeAluno + "%");
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                boletins.add(new Boletim(
+                        rs.getInt("id"),
+                        rs.getInt("id_professor"),
+                        rs.getInt("id_aluno"),
+                        rs.getDouble("nota_1"),
+                        rs.getString("descricao_1"),
+                        rs.getDouble("nota_2"),
+                        rs.getString("descricao_2"),
+                        rs.getBoolean("aprovado"),
+                        rs.getString("observacao"),
+                        rs.getDate("dt_lancamento")
+                ));
+            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        } finally {
+            conexao.desconectar(con);
+        }
+
+        return boletins;
+    }
+
     // UPDATE - atualizar boletim
     public int atualizar(Boletim boletim) {
         Conexao conexao = new Conexao();
