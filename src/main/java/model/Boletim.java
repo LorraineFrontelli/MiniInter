@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Boletim {
 
+    // ATRIBUTOS
     private int id;
     private int idProfessor;
     private int idAluno;
@@ -11,16 +12,32 @@ public class Boletim {
     private String descricao1;
     private double nota2;
     private String descricao2;
-    private double media;
     private boolean aprovado;
     private String observacao;
     private Date dataLancamento;
 
-    // Métodos construtores
-    public Boletim() {}
+    // CONSTRUTOR VAZIO
+    public Boletim() {
+    }
 
+    // CONSTRUTOR SEM ID (para novos registros)
+    public Boletim(int idProfessor, int idAluno, double nota1, String descricao1,
+                   double nota2, String descricao2, boolean aprovado,
+                   String observacao, Date dataLancamento) {
+        this.idProfessor = idProfessor;
+        this.idAluno = idAluno;
+        this.nota1 = nota1;
+        this.descricao1 = descricao1;
+        this.nota2 = nota2;
+        this.descricao2 = descricao2;
+        this.aprovado = aprovado;
+        this.observacao = observacao;
+        this.dataLancamento = dataLancamento;
+    }
+
+    // CONSTRUTOR COMPLETO (quando for carregar do BD)
     public Boletim(int id, int idProfessor, int idAluno, double nota1, String descricao1,
-                   double nota2, String descricao2, double media, boolean aprovado,
+                   double nota2, String descricao2, boolean aprovado,
                    String observacao, Date dataLancamento) {
         this.id = id;
         this.idProfessor = idProfessor;
@@ -29,13 +46,12 @@ public class Boletim {
         this.descricao1 = descricao1;
         this.nota2 = nota2;
         this.descricao2 = descricao2;
-        this.media = media;
         this.aprovado = aprovado;
         this.observacao = observacao;
         this.dataLancamento = dataLancamento;
     }
 
-    // Métodos getters
+    // GETTERS
     public int getId() {
         return id;
     }
@@ -64,10 +80,6 @@ public class Boletim {
         return descricao2;
     }
 
-    public double getMedia() {
-        return media;
-    }
-
     public boolean isAprovado() {
         return aprovado;
     }
@@ -80,7 +92,19 @@ public class Boletim {
         return dataLancamento;
     }
 
-    // Métodos setters
+    // SETTERS
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setIdProfessor(int idProfessor) {
+        this.idProfessor = idProfessor;
+    }
+
+    public void setIdAluno(int idAluno) {
+        this.idAluno = idAluno;
+    }
+
     public void setNota1(double nota1) {
         this.nota1 = nota1;
     }
@@ -97,10 +121,6 @@ public class Boletim {
         this.descricao2 = descricao2;
     }
 
-    public void setMedia(double media) {
-        this.media = media;
-    }
-
     public void setAprovado(boolean aprovado) {
         this.aprovado = aprovado;
     }
@@ -113,13 +133,13 @@ public class Boletim {
         this.dataLancamento = dataLancamento;
     }
 
-    // Método toString
+    // TO STRING
     @Override
     public String toString() {
-        return "Boletim ID: " + id +
-                "\tAluno: " + idAluno +
-                "\tProfessor: " + idProfessor +
-                "\tMédia: " + media +
-                "\tAprovado: " + aprovado;
+        return "Boletim: " +
+                "id=" + id +
+                ", idAluno=" + idAluno +
+                ", idProfessor=" + idProfessor +
+                ", aprovado=" + aprovado;
     }
 }

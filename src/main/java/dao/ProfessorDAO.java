@@ -17,11 +17,14 @@ public class ProfessorDAO {
     public int inserir(Professor professor) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
-        int idGerado = -1;
-        String sql = "INSERT INTO professor (nome, dt_contratacao, email, senha, materia, usuario) VALUES (?, ?, ?, ?, ?, ?) RETURNING id";
+        int retorno;
+
+        String sql = "INSERT INTO professor (nome, dt_contratacao, email, senha, materia, usuario) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
+
             PreparedStatement pst = con.prepareStatement(sql);
+
             pst.setString(1, professor.getNome());
             pst.setDate(2, Date.valueOf(professor.getDataContratacao()));
             pst.setString(3, professor.getEmail());
@@ -29,33 +32,38 @@ public class ProfessorDAO {
             pst.setString(5, professor.getMateria());
             pst.setString(6, professor.getUsuario());
 
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                idGerado = rs.getInt("id");
-                professor.setId(idGerado);
-            }
+            retorno = pst.executeUpdate();
+
         } catch (SQLException sqle) {
+
             sqle.printStackTrace();
+            retorno = -1;
+
         } finally {
+
             conexao.desconectar(con);
+
         }
 
-        return idGerado; // Retorna o ID gerado ou -1 se falhar
+        return retorno;
     }
 
     // READ - BUSCAR PROFESSOR POR NOME
-        public List<Professor> listarProfessorPorNome(String nome) {
+    public List<Professor> listarProfessorPorNome(String nome) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         List<Professor> professores = new ArrayList<>();
         String sql = "SELECT * FROM professor where nome ILIKE ? ";
 
         try {
+
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, "%" + nome + "%");
+
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
+
                 professores.add(new Professor(
                         rs.getInt("id"),
                         rs.getString("nome"),
@@ -65,14 +73,62 @@ public class ProfessorDAO {
                         rs.getString("materia"),
                         rs.getString("usuario")
                 ));
+
             }
+
         } catch (SQLException sqle) {
+
             sqle.printStackTrace();
+
         } finally {
+
             conexao.desconectar(con);
+
         }
 
         return professores;
+    }
+
+    // READ - BUSCAR PROFESSOR POR ID
+    public Professor buscarPorId(int id) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        Professor professor = null;
+
+        String sql = "SELECT * FROM professor WHERE id = ?";
+
+        try {
+
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, id);
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+
+                professor = new Professor(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getTimestamp("dt_contratacao").toLocalDateTime().toLocalDate(),
+                        rs.getString("email"),
+                        rs.getString("senha"),
+                        rs.getString("materia"),
+                        rs.getString("usuario")
+                );
+
+            }
+
+        } catch (SQLException sqle) {
+
+            sqle.printStackTrace();
+
+        } finally {
+
+            conexao.desconectar(con);
+
+        }
+
+        return professor;
     }
 
     // READ - LISTAR TODOS OS PROFESSORES
@@ -83,10 +139,12 @@ public class ProfessorDAO {
         String sql = "SELECT * FROM professor";
 
         try {
+
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
+
                 professores.add(new Professor(
                         rs.getInt("id"),
                         rs.getString("nome"),
@@ -96,11 +154,17 @@ public class ProfessorDAO {
                         rs.getString("materia"),
                         rs.getString("usuario")
                 ));
+
             }
+
         } catch (SQLException sqle) {
+
             sqle.printStackTrace();
+
         } finally {
+
             conexao.desconectar(con);
+
         }
 
         return professores;
@@ -111,10 +175,13 @@ public class ProfessorDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         int retorno;
+
         String sql = "UPDATE professor SET nome = ?, dt_contratacao = ?, email =?, senha = ?, materia =?, usuario=? WHERE id = ?";
 
         try {
+
             PreparedStatement pst = con.prepareStatement(sql);
+
             pst.setString(1, professor.getNome());
             pst.setDate(2, Date.valueOf(professor.getDataContratacao()));
             pst.setString(3, professor.getEmail());
@@ -124,14 +191,19 @@ public class ProfessorDAO {
             pst.setInt(7, professor.getId());
 
             retorno = pst.executeUpdate();
+
         } catch (SQLException sqle) {
+
             sqle.printStackTrace();
             retorno = -1;
+
         } finally {
+
             conexao.desconectar(con);
+
         }
 
-        return retorno; // retorna número de linhas alteradas ou -1 em caso de erro
+        return retorno;
     }
 
     // DELETE - DELETAR PROFESSOR
@@ -139,19 +211,27 @@ public class ProfessorDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         int retorno;
+
         String sql = "DELETE FROM professor WHERE id = ?";
 
         try {
+
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
+
             retorno = pst.executeUpdate();
+
         } catch (SQLException sqle) {
+
             sqle.printStackTrace();
             retorno = -1;
+
         } finally {
+
             conexao.desconectar(con);
+
         }
 
-        return retorno; // retorna número de linhas deletadas ou -1 se falhar
+        return retorno;
     }
 }
