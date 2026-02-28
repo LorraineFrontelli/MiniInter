@@ -52,6 +52,11 @@ input:focus, textarea:focus, button:focus {
     height: 9vh;
     object-fit: contain;
     margin-left: 1vw;
+    transition: 0.3s ease;
+}
+
+.headerAutenticacao .logoMonart:hover {
+    transform: scale(1.05);
 }
 
 .pincelVoltar {

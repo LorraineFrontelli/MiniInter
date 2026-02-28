@@ -39,7 +39,7 @@
                 <li><a href="${pageContext.request.contextPath}/alunos?page=observacoes" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/observations-icon.svg" decoding="async" alt="">Observações</a></li>
             </ul>
         </nav>
-        <a href="../autenticacao/login.html">
+        <a href="${pageContext.request.contextPath}/autenticacao/login.html">
             <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
         </a>
     </header>
@@ -50,7 +50,7 @@
             <div class="tituloPaginas">
                 <h1>Notas</h1>
             </div>
-            <a href="../chat/conversas.html"><img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
+            <a href="${pageContext.request.contextPath}/chat/conversas.html"><img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
         </div>
 
         <div class="tabelaContainer">
