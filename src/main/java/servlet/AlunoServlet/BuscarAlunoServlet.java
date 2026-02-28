@@ -3,10 +3,12 @@ package servlet.AlunoServlet;
 import dao.AlunoDAO;
 import model.Aluno;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -77,9 +79,32 @@ public class BuscarAlunoServlet extends HttpServlet {
 
         request.setAttribute("alunos", alunos);
 
-        RequestDispatcher dispatcher =
-                request.getRequestDispatcher("/WEB-INF/view/Aluno/crudAluno.jsp");
-        dispatcher.forward(request, response);
+        String page = request.getParameter("page");
+
+        if (page != null) {
+            switch (page) {
+                case "agenda":
+                    request.getRequestDispatcher("/WEB-INF/views/aluno/agenda.jsp")
+                            .forward(request, response);
+                    break;
+                case "boletim":
+                    request.getRequestDispatcher("/WEB-INF/views/aluno/boletim.jsp")
+                            .forward(request, response);
+                    break;
+                case "observacoes":
+                    request.getRequestDispatcher("/WEB-INF/views/aluno/observacoes.jsp")
+                            .forward(request, response);
+                    break;
+                case "perfil":
+                    request.getRequestDispatcher("/WEB-INF/views/aluno/perfil-aluno.jsp")
+                            .forward(request, response);
+                    break;
+                default:
+                    request.getRequestDispatcher("/WEB-INF/views/autenticacao/login")
+                            .forward(request, response);
+                    break;
+            }
+        }
     }
 
     @Override

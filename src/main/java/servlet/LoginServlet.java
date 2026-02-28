@@ -7,10 +7,13 @@ import model.Administrador;
 import model.Aluno;
 import model.Professor;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,7 +26,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher =
-                request.getRequestDispatcher("/WEB-INF/view/Login/login.jsp");
+                request.getRequestDispatcher("/WEB-INF/views/autenticacao/login.jsp");
 
         dispatcher.forward(request, response);
     }
@@ -32,7 +35,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String email = request.getParameter("email");
+        String email = request.getParameter("login");
         String senha = request.getParameter("senha");
 
         AdministradorDAO admDAO = new AdministradorDAO();
@@ -45,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 
             for (Administrador admin : admins) {
                 if (admin.getLogin().equals(email) &&
-                        admin.getSenha().equals(senha)) {
+                        BCrypt.checkpw(senha, admin.getSenha())) {
 
                     request.getSession().setAttribute("usuario", admin);
                     response.sendRedirect(request.getContextPath() + "/administradores");
@@ -57,10 +60,10 @@ public class LoginServlet extends HttpServlet {
 
             for (Aluno aluno : alunos) {
                 if (aluno.getEmail().equals(email) &&
-                        aluno.getSenha().equals(senha)) {
+                        BCrypt.checkpw(senha, aluno.getSenha())) {
 
                     request.getSession().setAttribute("usuario", aluno);
-                    response.sendRedirect(request.getContextPath() + "/alunos");
+                    response.sendRedirect(request.getContextPath() + "/alunos?page=agenda");
                     return;
                 }
             }
@@ -69,7 +72,7 @@ public class LoginServlet extends HttpServlet {
 
             for (Professor professor : professores) {
                 if (professor.getEmail().equals(email) &&
-                        professor.getSenha().equals(senha)) {
+                        BCrypt.checkpw(senha, professor.getSenha())) {
 
                     request.getSession().setAttribute("usuario", professor);
                     response.sendRedirect(request.getContextPath() + "/professores");
@@ -78,7 +81,7 @@ public class LoginServlet extends HttpServlet {
             }
 
             request.setAttribute("mensagem", "Email ou senha inválidos.");
-            request.getRequestDispatcher("/WEB-INF/view/Login/login.jsp")
+            request.getRequestDispatcher("/WEB-INF/views/autenticacao/login.jsp")
                     .forward(request, response);
 
         } catch (Exception e) {
@@ -86,7 +89,7 @@ public class LoginServlet extends HttpServlet {
             e.printStackTrace();
 
             request.setAttribute("mensagem", "Erro ao realizar login.");
-            request.getRequestDispatcher("/WEB-INF/view/Login/login.jsp")
+            request.getRequestDispatcher("/WEB-INF/views/autenticacao/login.jsp")
                     .forward(request, response);
         }
     }

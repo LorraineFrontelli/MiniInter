@@ -19,7 +19,7 @@ public class ProfessorDAO {
         Connection con = conexao.conectar();
         int retorno;
 
-        String sql = "INSERT INTO professor (nome, dt_contratacao, email, senha, materia, usuario) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Professor (nome, dt_contratacao, email, senha, materia, usuario) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
 
@@ -53,7 +53,7 @@ public class ProfessorDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         List<Professor> professores = new ArrayList<>();
-        String sql = "SELECT * FROM professor where nome ILIKE ? ";
+        String sql = "SELECT * FROM Professor where nome ILIKE ? ";
 
         try {
 
@@ -95,7 +95,7 @@ public class ProfessorDAO {
         Connection con = conexao.conectar();
         Professor professor = null;
 
-        String sql = "SELECT * FROM professor WHERE id = ?";
+        String sql = "SELECT * FROM Professor WHERE id = ?";
 
         try {
 
@@ -136,7 +136,7 @@ public class ProfessorDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         List<Professor> professores = new ArrayList<>();
-        String sql = "SELECT * FROM professor";
+        String sql = "SELECT * FROM Professor";
 
         try {
 
@@ -176,7 +176,7 @@ public class ProfessorDAO {
         Connection con = conexao.conectar();
         int retorno;
 
-        String sql = "UPDATE professor SET nome = ?, dt_contratacao = ?, email =?, senha = ?, materia =?, usuario=? WHERE id = ?";
+        String sql = "UPDATE Professor SET nome = ?, dt_contratacao = ?, email =?, senha = ?, materia =?, usuario=? WHERE id = ?";
 
         try {
 
@@ -212,7 +212,7 @@ public class ProfessorDAO {
         Connection con = conexao.conectar();
         int retorno;
 
-        String sql = "DELETE FROM professor WHERE id = ?";
+        String sql = "DELETE FROM Professor WHERE id = ?";
 
         try {
 
