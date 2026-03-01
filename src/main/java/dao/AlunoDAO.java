@@ -16,7 +16,7 @@ public class AlunoDAO {
     public int inserir(Aluno aluno) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
-        String sql = "INSERT INTO aluno (matricula, nome, cpf, dt_inicio, email, senha) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Aluno (matricula, nome, cpf, dt_inicio, email, senha) VALUES (?, ?, ?, ?, ?, ?)";
         int retorno;
 
         try {
@@ -45,7 +45,7 @@ public class AlunoDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         Aluno aluno = null;
-        String sql = "SELECT * FROM aluno WHERE matricula = ?";
+        String sql = "SELECT * FROM Aluno WHERE matricula = ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
@@ -78,7 +78,7 @@ public class AlunoDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         List<Aluno> alunos = new ArrayList<>();
-        String sql = "SELECT * FROM aluno WHERE nome LIKE ?";
+        String sql = "SELECT * FROM Aluno WHERE nome LIKE ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
@@ -111,7 +111,7 @@ public class AlunoDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         List<Aluno> alunos = new ArrayList<>();
-        String sql = "SELECT * FROM aluno";
+        String sql = "SELECT * FROM Aluno";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
@@ -142,7 +142,7 @@ public class AlunoDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         int retorno;
-        String sql = "UPDATE aluno SET nome=?, cpf=?, dt_inicio=?, email=?, senha=? WHERE matricula=?";
+        String sql = "UPDATE Aluno SET nome=?, cpf=?, dt_inicio=?, email=?, senha=? WHERE matricula=?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
@@ -170,7 +170,7 @@ public class AlunoDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         int retorno;
-        String sql = "DELETE FROM aluno WHERE matricula = ?";
+        String sql = "DELETE FROM Aluno WHERE matricula = ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);

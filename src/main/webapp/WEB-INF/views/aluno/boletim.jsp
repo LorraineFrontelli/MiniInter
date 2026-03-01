@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -33,10 +35,10 @@
         <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
         <nav>
             <ul>
-                <li><a href="perfil-aluno.html" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
-                <li><a href="agenda.html" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Agenda</a></li>
-                <li><a href="boletim.html" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/grades-icon.svg" decoding="async" alt="">Notas</a></li>
-                <li><a href="observacoes.html" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/observations-icon.svg" decoding="async" alt="">Observações</a></li>
+                <li><a href="${pageContext.request.contextPath}/alunos?page=perfil-aluno" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
+                <li><a href="${pageContext.request.contextPath}/alunos?page=agenda" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Agenda</a></li>
+                <li><a href="${pageContext.request.contextPath}/alunos?page=boletim" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/grades-icon.svg" decoding="async" alt="">Notas</a></li>
+                <li><a href="${pageContext.request.contextPath}/alunos?page=observacoes" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/observations-icon.svg" decoding="async" alt="">Observações</a></li>
             </ul>
         </nav>
         <a href="${pageContext.request.contextPath}/autenticacao/login.html">
@@ -50,11 +52,12 @@
             <div class="tituloPaginas">
                 <h1>Notas</h1>
             </div>
-            <a href="${pageContext.request.contextPath}/chat/conversas.html"><img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
+            <a href="${pageContext.request.contextPath}/mensagens?page=conversas"><img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
         </div>
 
         <div class="tabelaContainer">
             <table class="tabelaNotas">
+
                 <colgroup>
                     <col style="width: 27%">
                     <col style="width: 5%;">
@@ -66,48 +69,56 @@
                 </colgroup>
 
                 <thead>
-                    <tr>
-                        <th>Matéria</th>
-                        <th></th>
-                        <th>Nota 1</th>
-                        <th>Nota 2</th>
-                        <th>Média</th>
-                        <th></th>
-                        <th>Situação</th>
-                    </tr>
+                <tr>
+                    <th>Matéria</th>
+                    <th></th>
+                    <th>Nota 1</th>
+                    <th>Nota 2</th>
+                    <th>Média</th>
+                    <th></th>
+                    <th>Situação</th>
+                </tr>
                 </thead>
-            
+
                 <tbody>
+                <c:forEach items="${sessionScope.boletim}" var="b">
                     <tr>
-                        <td class="materia">Teoria das Cores</td>
+                        <td class="materia">
+                                ${b.materia}
+                        </td>
+
                         <td class="espaco"></td>
-                        <td class="notasCentro nota1">9.45</td>
-                        <td class="notasCentro nota2">7.50</td>
-                        <td class="notasCentro media">8.48</td>
+
+                        <td class="notasCentro nota1">
+                            <fmt:formatNumber value="${b.nota1}" minFractionDigits="2" />
+                        </td>
+
+                        <td class="notasCentro nota2">
+                            <fmt:formatNumber value="${b.nota2}" minFractionDigits="2" />
+                        </td>
+
+                        <td class="notasCentro media">
+                            <fmt:formatNumber
+                                    value="${(b.nota1 + b.nota2) / 2}"
+                                    minFractionDigits="2" />
+                        </td>
+
                         <td class="espaco"></td>
-                        <td class="situacao">Em processo</td>
+
+                        <td class="situacao">
+                            <c:choose>
+                                <c:when test="${b.aprovado}">
+                                    Aprovado
+                                </c:when>
+                                <c:otherwise>
+                                    Reprovado
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
                     </tr>
-                    
-                    <tr>
-                        <td class="materia">Teoria das Cores</td>
-                        <td class="espaco"></td>
-                        <td class="notasCentro nota1">9.45</td>
-                        <td class="notasCentro nota2">7.50</td>
-                        <td class="notasCentro media">8.48</td>
-                        <td class="espaco"></td>
-                        <td class="situacao">Em processo</td>
-                    </tr>
-                    
-                    <tr>
-                        <td class="materia">Teoria das Cores</td>
-                        <td class="espaco"></td>
-                        <td class="notasCentro nota1">9.45</td>
-                        <td class="notasCentro nota2">7.50</td>
-                        <td class="notasCentro media">8.48</td>
-                        <td class="espaco"></td>
-                        <td class="situacao">Reprovado pelo conselho</td>
-                    </tr>
+                </c:forEach>
                 </tbody>
+
             </table>
         </div>
     </main>

@@ -3,9 +3,14 @@ package servlet.TelefoneServlet;
 import dao.TelefoneDAO;
 import model.Telefone;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+
 import java.io.IOException;
 
 @WebServlet("/telefone-update")
@@ -16,19 +21,18 @@ public class AtualizarTelefoneServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String idParametro = request.getParameter("id");
-        String numeroParametro = request.getParameter("numero");
+        String numero = request.getParameter("numero");
         String tipo = request.getParameter("tipo");
 
         TelefoneDAO dao = new TelefoneDAO();
 
         try {
 
-            if (idParametro == null || numeroParametro == null || tipo == null || tipo.isBlank()) {
+            if (idParametro == null || numero == null || tipo == null || tipo.isBlank()) {
                 request.getSession().setAttribute("mensagem", "Campos inválidos.");
             } else {
 
                 int id = Integer.parseInt(idParametro);
-                int numero = Integer.parseInt(numeroParametro);
 
                 Telefone telefone = new Telefone();
                 telefone.setId(id);

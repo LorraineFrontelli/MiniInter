@@ -3,9 +3,13 @@ package servlet.BoletimServlet;
 import dao.BoletimDAO;
 import model.Boletim;
 
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -47,7 +51,7 @@ public class InserirBoletimServlet extends HttpServlet {
             boletim.setDescricao2(request.getParameter("descricao2"));
             boletim.setAprovado(Boolean.parseBoolean(request.getParameter("aprovado")));
             boletim.setObservacao(request.getParameter("observacao"));
-            boletim.setDataLancamento(data);
+            boletim.setDataCriacao(data);
 
             int retorno = dao.inserir(boletim);
 

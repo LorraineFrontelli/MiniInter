@@ -16,7 +16,7 @@ public class BoletimDAO {
     public int inserir(Boletim boletim) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
-        String sql = "INSERT INTO boletim (id_professor, id_aluno, nota_1, descricao_1, nota_2, descricao_2, aprovado, observacao, dt_lancamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO boletim (id_professor, id_aluno, nota_1, descricao_1, nota_2, descricao_2, aprovado, observacao, dt_criacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         int retorno;
 
         try {
@@ -29,7 +29,7 @@ public class BoletimDAO {
             pst.setString(6, boletim.getDescricao2());
             pst.setBoolean(7, boletim.isAprovado());
             pst.setString(8, boletim.getObservacao());
-            pst.setDate(9, new java.sql.Date(boletim.getDataLancamento().getTime()));
+            pst.setDate(9, new java.sql.Date(boletim.getDataCriacao().getTime()));
 
             retorno = pst.executeUpdate();
 
@@ -48,7 +48,7 @@ public class BoletimDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         List<Boletim> boletins = new ArrayList<>();
-        String sql = "SELECT * FROM boletim WHERE id_aluno = ?";
+        String sql = "SELECT b.id, b.id_professor, b.id_aluno, b.nota_1, b.descricao_1, b.nota_2, b.descricao_2, b.aprovado, b.observacao, b.dt_criacao, p.materia, p.nome FROM boletim b JOIN professor p ON p.id = b.id_professor WHERE b.id_aluno = ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
@@ -67,7 +67,9 @@ public class BoletimDAO {
                         rs.getString("descricao_2"),
                         rs.getBoolean("aprovado"),
                         rs.getString("observacao"),
-                        rs.getDate("dt_lancamento")
+                        rs.getDate("dt_criacao"),
+                        rs.getString("materia"),
+                        rs.getString("nome")
                 ));
             }
 
@@ -86,9 +88,8 @@ public class BoletimDAO {
         Connection con = conexao.conectar();
         List<Boletim> boletins = new ArrayList<>();
 
-        String sql = "SELECT b.* FROM boletim b " +
-                "JOIN aluno a ON b.id_aluno = a.id " +
-                "WHERE a.nome LIKE ?";
+        String sql = "SELECT b.id, b.id_professor, b.id_aluno, b.nota_1, b.descricao_1, b.nota_2, b.descricao_2, b.aprovado, b.observacao, b.dt_criacao, p.materia, p.nome FROM boletim b JOIN professor p ON p.id = b.id_professor WHERE b.id_aluno = ?";
+
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
@@ -107,7 +108,9 @@ public class BoletimDAO {
                         rs.getString("descricao_2"),
                         rs.getBoolean("aprovado"),
                         rs.getString("observacao"),
-                        rs.getDate("dt_lancamento")
+                        rs.getDate("dt_criacao"),
+                        rs.getString("materia"),
+                        rs.getString("nome")
                 ));
             }
 
@@ -139,7 +142,7 @@ public class BoletimDAO {
             pst.setString(6, boletim.getDescricao2());
             pst.setBoolean(7, boletim.isAprovado());
             pst.setString(8, boletim.getObservacao());
-            pst.setDate(9, new java.sql.Date(boletim.getDataLancamento().getTime()));
+            pst.setDate(9, new java.sql.Date(boletim.getDataCriacao().getTime()));
             pst.setInt(10, boletim.getId());
 
             retorno = pst.executeUpdate();

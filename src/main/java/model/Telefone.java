@@ -7,7 +7,7 @@ public class Telefone{
     private int id;
     private int idAluno;
     private String nome;
-    private int numero;
+    private String numero;
     private String tipo;
 
     // CONSTRUTOR VAZIO
@@ -17,7 +17,7 @@ public class Telefone{
 
     // CONSTRUTOR SEM ID (para novos registros)
 
-    public Telefone(int idAluno, String nome, int numero, String tipo) {
+    public Telefone(int idAluno, String nome, String numero, String tipo) {
         this.idAluno = idAluno;
         this.nome = nome;
         this.numero = numero;
@@ -26,7 +26,7 @@ public class Telefone{
 
     // CONSTRUTOR COMPLETO (quando for carregar do BD)
 
-    public Telefone(int id, int idAluno, String nome, int numero, String tipo) {
+    public Telefone(int id, int idAluno, String nome, String numero, String tipo) {
         this.id = id;
         this.idAluno = idAluno;
         this.nome = nome;
@@ -48,7 +48,7 @@ public class Telefone{
         return nome;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
@@ -70,7 +70,7 @@ public class Telefone{
         this.nome = nome;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 

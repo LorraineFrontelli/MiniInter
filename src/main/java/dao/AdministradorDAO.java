@@ -16,7 +16,7 @@ public class AdministradorDAO {
     public int inserir(Administrador admin) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
-        String sql = "INSERT INTO admin (login, senha, alunoCpf) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO admin (login, senha, aluno_cpf) VALUES (?, ?, ?)";
         int retorno;
 
         try {
@@ -59,7 +59,7 @@ public class AdministradorDAO {
                         rs.getString("senha")
                 );
 
-                String cpfs = rs.getString("alunoCpf");
+                String cpfs = rs.getString("aluno_cpf");
 
                 if (cpfs != null && !cpfs.isEmpty()) {
 
@@ -86,7 +86,7 @@ public class AdministradorDAO {
         Connection con = conexao.conectar();
         boolean existe = false;
 
-        String sql = "SELECT 1 FROM admin WHERE CONCAT(',', alunoCpf, ',') LIKE ?";
+        String sql = "SELECT 1 FROM admin WHERE CONCAT(',', aluno_cpf, ',') LIKE ?";
 
         try {
 
@@ -127,7 +127,7 @@ public class AdministradorDAO {
                         rs.getString("senha")
                 );
 
-                String cpfs = rs.getString("alunoCpf");
+                String cpfs = rs.getString("aluno_cpf");
 
                 if (cpfs != null && !cpfs.isEmpty()) {
 
@@ -155,7 +155,7 @@ public class AdministradorDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         int retorno;
-        String sql = "UPDATE admin SET login=?, senha=?, alunoCpf=? WHERE id=?";
+        String sql = "UPDATE admin SET login=?, senha=?, aluno_cpf=? WHERE id=?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
