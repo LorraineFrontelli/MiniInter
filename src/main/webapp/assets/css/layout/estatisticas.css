@@ -16,7 +16,7 @@ main {
 }
 
 .dashboardProfessor {
-    display: flex;
+    display: block;
     margin: 0 auto;
     margin-top: 3vh;
     width: 95%;
@@ -29,6 +29,6 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 30vh;
+    margin-top: 31vh;
     font-family: var(--special-elite);
 }

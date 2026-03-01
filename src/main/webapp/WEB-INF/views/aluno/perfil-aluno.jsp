@@ -64,7 +64,7 @@
                 </div>
             </div>
 
-            <button class="editar">Editar
+            <button class="editar" onclick="editarPerfil.showModal()">Editar
                 <img class="iconeEditar" src="${pageContext.request.contextPath}/assets/img/editar.svg" alt="ícone de editar">
             </button>
         </div>
@@ -74,17 +74,28 @@
                 <div class="barrinhaTema">
                     <h2>Nova observação</h2>
                 </div>
-
             </div>
             
             <div class="nova atividade">
                 <div class="barrinhaTema">
                     <h2>Nova atividade</h2>
                 </div>
-                
             </div>
         </section>
     </main>
+
+    <dialog class="editarPerfil" id="editarPerfil">
+        <button class="fecharPopUpEditar" onclick="editarPerfil.close()">X</button>
+        <form action="">
+            <label for="alterarTelefone">Telefone</label>
+            <input type="tel" name="alterarTelefone" id="alterarTelefone">
+            
+            <label for="alterarEmail">E-mail</label>
+            <input type="email" name="alterarEmail" id="alterarEmail">
+
+            <button class="salvarAlteracoes">Salvar</button>
+        </form>
+    </dialog>
 </body>
 
 </html>

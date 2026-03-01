@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const botoesMenu = document.querySelectorAll(".menuAluno button")
     const mensagensAluno = document.querySelectorAll(".mensagem.aluno")
 
+
     document.querySelectorAll(".opcaoTema").forEach(botao => {
         botao.addEventListener("click", () => {
             const cor = botao.dataset.cor;
@@ -96,6 +97,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// Configuração pro Iframe aparecer quando 100% carregado
+
+const dashboardProfessor = document.querySelector(".dashboardProfessor");
+const carregandoDashboard = document.querySelector('.carregandoDashboard');
+
+if (dashboardProfessor && carregandoDashboard) {
+    dashboardProfessor.style.display = "none";
+    
+    dashboardProfessor.onload = () => {
+        carregandoDashboard.style.display = "none";
+        dashboardProfessor.style.display = "block";
+    };
+}
+
 // Configuração de criação e salvamento de lembretes
 
 const popUplembrete = document.querySelector(".criarLembrete");
@@ -108,27 +123,28 @@ const mural = document.querySelector(".muralLembretes");
 
 const mensagemSemLembretes = document.getElementById("semLembretes");
 
-mostrarLembretes();
-mostrarSemLembretes(lembretes, mensagemSemLembretes);
-
-formLembrete.addEventListener("submit", novoLembrete => {
-    novoLembrete.preventDefault();
-    
-    const lembrete = pegarLembrete.value.trim();
-    if (!lembrete) return;
-
-    lembretes.push(lembrete);
-    
-    localStorage.setItem("lembretes", JSON.stringify(lembretes));
-    
+if (popUplembrete && formLembrete && pegarLembrete) {
     mostrarLembretes();
     mostrarSemLembretes(lembretes, mensagemSemLembretes);
-
-    pegarLembrete.value = "";
-
-    popUplembrete.close();
-});
-
+    
+    formLembrete.addEventListener("submit", novoLembrete => {
+        novoLembrete.preventDefault();
+        
+        const lembrete = pegarLembrete.value.trim();
+        if (!lembrete) return;
+    
+        lembretes.push(lembrete);
+        
+        localStorage.setItem("lembretes", JSON.stringify(lembretes));
+        
+        mostrarLembretes();
+        mostrarSemLembretes(lembretes, mensagemSemLembretes);
+    
+        pegarLembrete.value = "";
+    
+        popUplembrete.close();
+    });
+};
 
 // Funções utilizadas
 
