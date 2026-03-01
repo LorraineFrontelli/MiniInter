@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -33,7 +35,7 @@
         <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
         <nav>
             <ul>
-                <li><a href="${pageContext.request.contextPath}/alunos?page=perfil" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
+                <li><a href="${pageContext.request.contextPath}/alunos?page=perfil-aluno" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
                 <li><a href="${pageContext.request.contextPath}/alunos?page=agenda" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Agenda</a></li>
                 <li><a href="${pageContext.request.contextPath}/alunos?page=boletim" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/grades-icon.svg" decoding="async" alt="">Notas</a></li>
                 <li><a href="${pageContext.request.contextPath}/alunos?page=observacoes" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/observations-icon.svg" decoding="async" alt="">Observações</a></li>
@@ -48,19 +50,22 @@
         <div class="cabecalhoPaginas">
             <img src="${pageContext.request.contextPath}/assets/img/themes-icon.svg" alt="" class="abrirTemas">
             <div class="tituloPaginas">
-                <h1>Seja bem-vindo, Fulano!</h1>
+                <h1>Seja bem-vindo, ${fn:split(sessionScope.usuarioLogado.nome, ' ')[0]}!</h1>
             </div>
-            <a href="${pageContext.request.contextPath}/chat/conversas.html"><img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
+            <a href="${pageContext.request.contextPath}/mensagens?page=conversas"><img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
         </div>
 
         <div class="perfil">
             <div class="pessoa">
                 <img src="${pageContext.request.contextPath}/assets/img/art.png" alt="arte impressionista" class="arte">
                 <div class="informacoes">
-                    <h3>Fulano da Silva</h3>
-                    <h3>Turma: 1° série A</h3>
-                    <h3>Telefone: (11)xxxxx-xxxx</h3>
-                    <h3>Email: fulano.silva@monart.com</h3>
+                    <h3>${sessionScope.usuario.nome}</h3>
+                    <h3>Turma: ${sessionScope.alunoProfessor.serie}° série ${sessionScope.alunoProfessor.turma}</h3>
+                    <h3>Telefone:
+                        <c:forEach var="tel" items="${sessionScope.telefoneAluno}" varStatus="status">
+                            ${tel.numero}<c:if test="${!status.last}"> / </c:if>
+                        </c:forEach></h3>
+                    <h3>Email: ${sessionScope.usuario.email}</h3>
                 </div>
             </div>
 
@@ -75,13 +80,25 @@
                     <h2>Nova observação</h2>
                 </div>
 
+                <c:forEach items="${sessionScope.boletim}" var="bol" varStatus="status">
+                    <c:if test="${status.last}">
+                        <p>${bol.observacao}</p>
+                        <h3>
+                            Prof: ${bol.professor}
+                        </h3>
+                    </c:if>
+                </c:forEach>
+
             </div>
-            
+
             <div class="nova atividade">
                 <div class="barrinhaTema">
                     <h2>Nova atividade</h2>
+                    <h3><c:forEach var="tar" items="${sessionScope.tarefas}" varStatus="status">
+                        ${tar.tarefas}<c:if test="${!status.last}"> / </c:if>
+                    </c:forEach></h3>
                 </div>
-                
+
             </div>
         </section>
     </main>

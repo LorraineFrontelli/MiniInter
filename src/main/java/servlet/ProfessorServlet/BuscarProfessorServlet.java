@@ -3,7 +3,6 @@ package servlet.ProfessorServlet;
 import dao.ProfessorDAO;
 import model.Professor;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -74,9 +73,35 @@ public class BuscarProfessorServlet extends HttpServlet {
 
         request.setAttribute("professores", professores);
 
-        RequestDispatcher dispatcher =
-                request.getRequestDispatcher("/WEB-INF/view/Professor/crudProfessor.jsp");
-        dispatcher.forward(request, response);
+        String page = request.getParameter("page");
+
+        if (page != null) {
+            switch (page) {
+                case "notas":
+                    request.getRequestDispatcher("/WEB-INF/views/professor/notas.jsp")
+                            .forward(request, response);
+                    break;
+                case "lembretes":
+                    request.getRequestDispatcher("/WEB-INF/views/professor/lembretes.jsp")
+                            .forward(request, response);
+                    break;
+                case "estatisticas":
+                    request.getRequestDispatcher("/WEB-INF/views/professor/estatisticas.jsp")
+                            .forward(request, response);
+                    break;
+                case "perfil-professor":
+                    request.getRequestDispatcher("/WEB-INF/views/professor/perfil-professor.jsp")
+                            .forward(request, response);
+                    break;
+                case "buscar":
+                    request.getRequestDispatcher("/WEB-INF/views/professor/buscar.jsp")
+                            .forward(request, response);
+                default:
+                    request.getRequestDispatcher("/WEB-INF/views/autenticacao/login")
+                            .forward(request, response);
+                    break;
+            }
+        }
     }
 
     @Override

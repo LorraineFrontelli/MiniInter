@@ -95,7 +95,7 @@ public class BuscarAlunoServlet extends HttpServlet {
                     request.getRequestDispatcher("/WEB-INF/views/aluno/observacoes.jsp")
                             .forward(request, response);
                     break;
-                case "perfil":
+                case "perfil-aluno":
                     request.getRequestDispatcher("/WEB-INF/views/aluno/perfil-aluno.jsp")
                             .forward(request, response);
                     break;

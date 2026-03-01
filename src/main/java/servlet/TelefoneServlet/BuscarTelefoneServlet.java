@@ -62,7 +62,7 @@ public class BuscarTelefoneServlet extends HttpServlet {
 
             } else if (numero != null && !numero.trim().isEmpty()) {
 
-                telefones = telefoneDAO.buscarPorNumero(Integer.parseInt(numero));
+                telefones = telefoneDAO.buscarPorNumero(numero);
 
                 if (telefones == null || telefones.isEmpty()) {
                     request.setAttribute("mensagem", "Nenhum telefone encontrado com esse número.");

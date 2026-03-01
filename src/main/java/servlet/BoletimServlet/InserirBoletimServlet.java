@@ -51,7 +51,7 @@ public class InserirBoletimServlet extends HttpServlet {
             boletim.setDescricao2(request.getParameter("descricao2"));
             boletim.setAprovado(Boolean.parseBoolean(request.getParameter("aprovado")));
             boletim.setObservacao(request.getParameter("observacao"));
-            boletim.setDataLancamento(data);
+            boletim.setDataCriacao(data);
 
             int retorno = dao.inserir(boletim);
 

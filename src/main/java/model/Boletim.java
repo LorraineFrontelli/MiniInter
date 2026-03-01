@@ -14,7 +14,9 @@ public class Boletim {
     private String descricao2;
     private boolean aprovado;
     private String observacao;
-    private Date dataLancamento;
+    private Date dataCriacao;
+    private String materia;
+    private String professor;
 
     // CONSTRUTOR VAZIO
     public Boletim() {
@@ -23,7 +25,7 @@ public class Boletim {
     // CONSTRUTOR SEM ID (para novos registros)
     public Boletim(int idProfessor, int idAluno, double nota1, String descricao1,
                    double nota2, String descricao2, boolean aprovado,
-                   String observacao, Date dataLancamento) {
+                   String observacao, Date dataCriacao,  String materia) {
         this.idProfessor = idProfessor;
         this.idAluno = idAluno;
         this.nota1 = nota1;
@@ -32,13 +34,14 @@ public class Boletim {
         this.descricao2 = descricao2;
         this.aprovado = aprovado;
         this.observacao = observacao;
-        this.dataLancamento = dataLancamento;
+        this.dataCriacao = dataCriacao;
+        this.materia = materia;
     }
 
     // CONSTRUTOR COMPLETO (quando for carregar do BD)
     public Boletim(int id, int idProfessor, int idAluno, double nota1, String descricao1,
                    double nota2, String descricao2, boolean aprovado,
-                   String observacao, Date dataLancamento) {
+                   String observacao, Date dataCriacao,   String materia,  String professor) {
         this.id = id;
         this.idProfessor = idProfessor;
         this.idAluno = idAluno;
@@ -48,7 +51,24 @@ public class Boletim {
         this.descricao2 = descricao2;
         this.aprovado = aprovado;
         this.observacao = observacao;
-        this.dataLancamento = dataLancamento;
+        this.dataCriacao = dataCriacao;
+        this.materia = materia;
+        this.professor = professor;
+    }
+
+    // CONSTRUTOR SEM MATERIA E PROFESSOR (PADRÃO)
+
+    public Boletim(int id, int idProfessor, int idAluno,   double nota1, String descricao1, double nota2, String descricao2, boolean aprovado,  String observacao, Date dataCriacao) {
+        this.id = id;
+        this.idProfessor = idProfessor;
+        this.descricao1 = descricao1;
+        this.idAluno = idAluno;
+        this.nota1 = nota1;
+        this.nota2 = nota2;
+        this.aprovado = aprovado;
+        this.descricao2 = descricao2;
+        this.observacao = observacao;
+        this.dataCriacao = dataCriacao;
     }
 
     // GETTERS
@@ -88,8 +108,16 @@ public class Boletim {
         return observacao;
     }
 
-    public Date getDataLancamento() {
-        return dataLancamento;
+    public Date getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public String getMateria() {
+        return materia;
+    }
+
+    public String getProfessor() {
+        return professor;
     }
 
     // SETTERS
@@ -129,17 +157,27 @@ public class Boletim {
         this.observacao = observacao;
     }
 
-    public void setDataLancamento(Date dataLancamento) {
-        this.dataLancamento = dataLancamento;
+    public void setDataCriacao(Date dataCriacao) {
+        this.dataCriacao = dataCriacao;
     }
 
     // TO STRING
+
     @Override
     public String toString() {
-        return "Boletim: " +
+        return "Boletim{" +
                 "id=" + id +
-                ", idAluno=" + idAluno +
                 ", idProfessor=" + idProfessor +
-                ", aprovado=" + aprovado;
+                ", idAluno=" + idAluno +
+                ", nota1=" + nota1 +
+                ", descricao1='" + descricao1 + '\'' +
+                ", nota2=" + nota2 +
+                ", descricao2='" + descricao2 + '\'' +
+                ", aprovado=" + aprovado +
+                ", observacao='" + observacao + '\'' +
+                ", dataCriacao=" + dataCriacao +
+                ", materia='" + materia + '\'' +
+                ", professor='" + professor + '\'' +
+                '}';
     }
 }

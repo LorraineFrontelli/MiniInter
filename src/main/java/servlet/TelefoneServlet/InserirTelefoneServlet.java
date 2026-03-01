@@ -25,10 +25,10 @@ public class InserirTelefoneServlet extends HttpServlet {
 
         try {
 
-            String numeroStr = request.getParameter("numero");
+            String numero = request.getParameter("numero");
             String tipo = request.getParameter("tipo");
 
-            if (numeroStr == null || numeroStr.isBlank() || tipo == null) {
+            if (numero == null || numero.isBlank() || tipo == null) {
 
                 request.getSession().setAttribute("mensagem", "Campos inválidos!");
                 response.sendRedirect(request.getContextPath() + "/telefones");
@@ -38,7 +38,7 @@ public class InserirTelefoneServlet extends HttpServlet {
             Telefone telefone = new Telefone();
 
             telefone.setIdAluno(Integer.parseInt(request.getParameter("idAluno")));
-            telefone.setNumero(Integer.parseInt(numeroStr));
+            telefone.setNumero(numero);
             telefone.setTipo(tipo);
 
             int id = dao.inserir(telefone);

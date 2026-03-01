@@ -1,8 +1,6 @@
 package servlet;
 
-import dao.AdministradorDAO;
-import dao.AlunoDAO;
-import dao.ProfessorDAO;
+import dao.*;
 import model.Administrador;
 import model.Aluno;
 import model.Professor;
@@ -41,6 +39,10 @@ public class LoginServlet extends HttpServlet {
         AdministradorDAO admDAO = new AdministradorDAO();
         AlunoDAO alunoDAO = new AlunoDAO();
         ProfessorDAO professorDAO = new ProfessorDAO();
+        AlunoProfessorDAO alunoProfessorDAO = new AlunoProfessorDAO();
+        TelefoneDAO  telefoneDAO = new TelefoneDAO();
+        BoletimDAO boletimDAO = new BoletimDAO();
+        TarefasDAO tarefasDAO = new TarefasDAO();
 
         try {
 
@@ -61,9 +63,12 @@ public class LoginServlet extends HttpServlet {
             for (Aluno aluno : alunos) {
                 if (aluno.getEmail().equals(email) &&
                         BCrypt.checkpw(senha, aluno.getSenha())) {
-
                     request.getSession().setAttribute("usuario", aluno);
-                    response.sendRedirect(request.getContextPath() + "/alunos?page=agenda");
+                    request.getSession().setAttribute("alunoProfessor", alunoProfessorDAO.buscarPorIdAluno(aluno.getMatricula()));
+                    request.getSession().setAttribute("telefoneAluno", telefoneDAO.listarIdAluno(aluno.getMatricula()));
+                    request.getSession().setAttribute("boletim", boletimDAO.buscarPorAluno(aluno.getMatricula()));
+                    request.getSession().setAttribute("tarefas", tarefasDAO.listarIdAluno(aluno.getMatricula()));
+                    response.sendRedirect(request.getContextPath() + "/alunos?page=perfil-aluno");
                     return;
                 }
             }
@@ -73,9 +78,8 @@ public class LoginServlet extends HttpServlet {
             for (Professor professor : professores) {
                 if (professor.getEmail().equals(email) &&
                         BCrypt.checkpw(senha, professor.getSenha())) {
-
                     request.getSession().setAttribute("usuario", professor);
-                    response.sendRedirect(request.getContextPath() + "/professores");
+                    response.sendRedirect(request.getContextPath() + "/professores?page=perfil-professor");
                     return;
                 }
             }

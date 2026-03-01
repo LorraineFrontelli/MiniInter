@@ -3,7 +3,7 @@ package servlet.MensagemServlet;
 import dao.MensagemDAO;
 import model.Mensagem;
 
-import jakarta.servlet.RequestDispatcher;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -74,9 +74,24 @@ public class BuscarMensagemServlet extends HttpServlet {
 
         request.setAttribute("mensagens", mensagens);
 
-        RequestDispatcher dispatcher =
-                request.getRequestDispatcher("/WEB-INF/view/Mensagem/crudMensagem.jsp");
-        dispatcher.forward(request, response);
+        String page = request.getParameter("page");
+
+        if (page != null) {
+            switch (page) {
+                case "chat":
+                    request.getRequestDispatcher("/WEB-INF/views/chat/chat.jsp")
+                            .forward(request, response);
+                    break;
+                case "conversas":
+                    request.getRequestDispatcher("/WEB-INF/views/chat/conversas.jsp")
+                            .forward(request, response);
+                    break;
+                default:
+                    request.getRequestDispatcher("/WEB-INF/views/autenticacao/login")
+                            .forward(request, response);
+                    break;
+            }
+        }
     }
 
     @Override

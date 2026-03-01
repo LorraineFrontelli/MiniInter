@@ -119,6 +119,46 @@ public class AlunoProfessorDAO {
         return ap;
     }
 
+    // READ - Buscar por ID do Aluno
+    public AlunoProfessor buscarPorIdAluno(int idAluno) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        AlunoProfessor ap = null;
+
+        String sql = "SELECT * FROM aluno_professor WHERE id_aluno = ?";
+
+        try {
+
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, idAluno);
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+
+                ap = new AlunoProfessor(
+                        rs.getInt("id"),
+                        rs.getInt("id_professor"),
+                        rs.getInt("id_aluno"),
+                        rs.getInt("serie"),
+                        rs.getString("turma")
+                );
+
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            conexao.desconectar(con);
+
+        }
+
+        return ap;
+    }
+
     // UPDATE - atualizar AlunoProfessor
     public int atualizar(AlunoProfessor ap) {
         Conexao conexao = new Conexao();

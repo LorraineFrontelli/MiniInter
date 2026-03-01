@@ -1,35 +1,34 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import conexao.Conexao;
-import model.Telefone;
+import model.Tarefas;
 
-public class TelefoneDAO {
 
-    // CREATE - INSERIR TELEFONE
-    public int inserir(Telefone telefone) {
+public class TarefasDAO {
+
+    // CREATE - INSERIR TAREFA
+    public int inserir(Tarefas tarefas) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         int idGerado = -1;
-        String sql = "INSERT INTO telefone (id_aluno, nome, numero, tipo) VALUES (?, ?, ?, ?) RETURNING id";
+        String sql = "INSERT INTO tarefas (id_aluno, tarefa, dt_criacao, dt_entrega) VALUES (?, ?, ?, ?) RETURNING id";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, telefone.getIdAluno());
-            pst.setString(2,telefone.getNome());
-            pst.setString(3, telefone.getNumero());
-            pst.setString(4, telefone.getTipo());
+            pst.setInt(1, tarefas.getIdAluno());
+            pst.setString(2,tarefas.getTarefa());
+            pst.setDate(3, Date.valueOf(tarefas.getDtCriacao()));
+            pst.setDate(4, Date.valueOf(tarefas.getDtEntrega()));
+
 
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 idGerado = rs.getInt("id");
-                telefone.setId(idGerado);
+                tarefas.setId(idGerado);
             }
         } catch (SQLException sqle) {
             sqle.printStackTrace();
@@ -40,12 +39,12 @@ public class TelefoneDAO {
         return idGerado; // Retorna o ID gerado ou -1 se falhar
     }
 
-    // READ - BUSCAR TELEFONE PELO ID 
-    public Telefone buscarPorId(int id) {
+    // READ - BUSCAR TAREFA PELO ID
+    public Tarefas buscarPorId(int id) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
-        Telefone telefone = null;
-        String sql = "SELECT * FROM telefone WHERE id = ?";
+        Tarefas tarefas  = null;
+        String sql = "SELECT * FROM tarefas WHERE id = ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
@@ -53,12 +52,12 @@ public class TelefoneDAO {
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
-                telefone = new Telefone(
+                tarefas = new Tarefas(
                         rs.getInt("id"),
                         rs.getInt("id_aluno"),
-                        rs.getString("nome"),
-                        rs.getString("numero"),
-                        rs.getString("tipo")
+                        rs.getString("tarefa"),
+                        rs.getDate("dt_criacao").toLocalDate(),
+                        rs.getDate("dt_entrega").toLocalDate()
                 );
             }
         } catch (SQLException sqle) {
@@ -67,59 +66,28 @@ public class TelefoneDAO {
             conexao.desconectar(con);
         }
 
-        return telefone; // retorna null se não encontrar
+        return tarefas; // retorna null se não encontrar
     }
 
-    // READ - BUSCAR TELEFONE PELO NUMERO
-    public List<Telefone> buscarPorNumero(String numero) {
+    // READ - LISTAR TODAS AS TAREFAS DO ALUNO
+    public List<Tarefas> listarIdAluno(int idAluno) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
-        List<Telefone> telefones = new ArrayList<>();
-        String sql = "SELECT * FROM telefone WHERE numero = ?";
+        List<Tarefas> tarefas = new ArrayList<>();
+        String sql = "SELECT * FROM tarefas where id_aluno = ?";
 
-        try {
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, numero);
-            ResultSet rs = pst.executeQuery();
-
-            while (rs.next()) {
-                telefones.add(new Telefone(
-                        rs.getInt("id"),
-                        rs.getInt("id_aluno"),
-                        rs.getString("nome"),
-                        rs.getString("numero"),
-                        rs.getString("tipo")
-                ));
-            }
-
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        } finally {
-            conexao.desconectar(con);
-        }
-
-        return telefones;
-    }
-
-    // READ - LISTAR TODOS OS TELEFONES DO ALUNO
-    public List<Telefone> listarIdAluno(int idAluno) {
-        Conexao conexao = new Conexao();
-        Connection con = conexao.conectar();
-        List<Telefone> telefones = new ArrayList<>();
-        String sql = "SELECT * FROM telefone where id_aluno = ?";
-        
         try {
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idAluno);
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                telefones.add(new Telefone(
+                tarefas.add(new Tarefas(
                         rs.getInt("id"),
                         rs.getInt("id_aluno"),
-                        rs.getString("nome"),
-                        rs.getString("numero"),
-                        rs.getString("tipo")
+                        rs.getString("tarefa"),
+                        rs.getDate("dt_criacao").toLocalDate(),
+                        rs.getDate("dt_entrega").toLocalDate()
 
                 ));
             }
@@ -129,27 +97,27 @@ public class TelefoneDAO {
             conexao.desconectar(con);
         }
 
-        return telefones;
+        return tarefas;
     }
 
-    // READ - LISTAR TODOS OS TELEFONES
-    public List<Telefone> listar() {
+    // READ - LISTAR TODOS AS TAREFAS
+    public List<Tarefas> listar() {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
-        List<Telefone> telefones = new ArrayList<>();
-        String sql = "SELECT * FROM telefone";
+        List<Tarefas> tarefas = new ArrayList<>();
+        String sql = "SELECT * FROM tarefas";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                telefones.add(new Telefone(
+                tarefas.add(new Tarefas(
                         rs.getInt("id"),
                         rs.getInt("id_aluno"),
-                        rs.getString("nome"),
-                        rs.getString("numero"),
-                        rs.getString("tipo")
+                        rs.getString("tarefa"),
+                        rs.getDate("dt_criacao").toLocalDate(),
+                        rs.getDate("dt_entrega").toLocalDate()
 
                 ));
             }
@@ -159,22 +127,21 @@ public class TelefoneDAO {
             conexao.desconectar(con);
         }
 
-        return telefones;
+        return tarefas;
     }
 
-    // UPDATE - ATUALIZAR TELEFONE
-    public int atualizar(Telefone telefone) {
+    // UPDATE - ATUALIZAR TAREFA
+    public int atualizar(Tarefas tarefas) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         int retorno;
-        String sql = "UPDATE telefone SET nome = ?, numero = ?, tipo = ? WHERE id = ?";
+        String sql = "UPDATE tarefas SET tarefa = ?, dt_entrega = ?WHERE id = ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, telefone.getNome());
-            pst.setString(2, telefone.getNumero());
-            pst.setString(3, telefone.getTipo());
-            pst.setInt(4, telefone.getId());
+            pst.setString(1, tarefas.getTarefa());
+            pst.setDate(2, Date.valueOf(tarefas.getDtEntrega()));
+            pst.setInt(3, tarefas.getId());
 
             retorno = pst.executeUpdate();
         } catch (SQLException sqle) {
@@ -187,12 +154,12 @@ public class TelefoneDAO {
         return retorno; // retorna número de linhas alteradas ou -1 em caso de erro
     }
 
-    // DELETE - DELETAR TELEFONE
+    // DELETE - DELETAR TAREFA
     public int deletar(int id) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         int retorno;
-        String sql = "DELETE FROM telefone WHERE id = ?";
+        String sql = "DELETE FROM tarefa WHERE id = ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);

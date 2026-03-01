@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -33,7 +35,7 @@
         <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
         <nav>
             <ul>
-                <li><a href="${pageContext.request.contextPath}/alunos?page=perfil" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
+                <li><a href="${pageContext.request.contextPath}/alunos?page=perfil-aluno" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
                 <li><a href="${pageContext.request.contextPath}/alunos?page=agenda" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Agenda</a></li>
                 <li><a href="${pageContext.request.contextPath}/alunos?page=boletim" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/grades-icon.svg" decoding="async" alt="">Notas</a></li>
                 <li><a href="${pageContext.request.contextPath}/alunos?page=observacoes" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/observations-icon.svg" decoding="async" alt="">Observações</a></li>
@@ -50,24 +52,36 @@
             <div class="tituloPaginas">
                 <h1>Observações</h1>
             </div>
-            <a href="${pageContext.request.contextPath}/chat/conversas.html"><img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
+            <a href="${pageContext.request.contextPath}/mensagens?page=conversas"><img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
         </div>
 
         <section class="observacoes">
-            <div class="observacao">
-                <div class="barrinhaTema"></div>
-                <div class="mensagemObservacao">
-                    <div class="tituloObservacao">
-                        <h2>Língua Portuguesa</h2>
-                        <p>Prof: <b>João Jonas</b></p>
-                    </div>
-                    <hr>
-                    <div class="dadosObservacao">
-                        <p>Precisa prestar mais atenção durante as aulas.</p>
-                        <time datetime="2026-02-17">17/02/2026</time>
+
+            <c:forEach items="${sessionScope.boletim}" var="b">
+                <div class="observacao">
+                    <div class="barrinhaTema"></div>
+
+                    <div class="mensagemObservacao">
+                        <div class="tituloObservacao">
+                            <h2>${b.materia}</h2>
+                            <p>
+                                Prof: <b>${b.professor}</b>
+                            </p>
+                        </div>
+
+                        <hr>
+
+                        <div class="dadosObservacao">
+                            <p>${b.observacao}</p>
+
+                            <time datetime="<fmt:formatDate value='${b.dataCriacao}' pattern='yyyy-MM-dd'/>">
+                                <fmt:formatDate value="${b.dataCriacao}" pattern="dd/MM/yyyy" />
+                            </time>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </c:forEach>
+
         </section>
     </main>
 </body>

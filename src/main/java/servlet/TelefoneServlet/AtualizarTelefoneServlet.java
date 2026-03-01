@@ -21,19 +21,18 @@ public class AtualizarTelefoneServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String idParametro = request.getParameter("id");
-        String numeroParametro = request.getParameter("numero");
+        String numero = request.getParameter("numero");
         String tipo = request.getParameter("tipo");
 
         TelefoneDAO dao = new TelefoneDAO();
 
         try {
 
-            if (idParametro == null || numeroParametro == null || tipo == null || tipo.isBlank()) {
+            if (idParametro == null || numero == null || tipo == null || tipo.isBlank()) {
                 request.getSession().setAttribute("mensagem", "Campos inválidos.");
             } else {
 
                 int id = Integer.parseInt(idParametro);
-                int numero = Integer.parseInt(numeroParametro);
 
                 Telefone telefone = new Telefone();
                 telefone.setId(id);
