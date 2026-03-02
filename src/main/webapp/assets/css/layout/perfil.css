@@ -69,3 +69,82 @@ main {
 h2 {
     text-align: center;
 }
+
+.editarPerfil {
+    font-size: 1.2vw;
+    padding-bottom: 2vw;
+    position: relative;
+    overflow: visible;
+    min-height: 25vh;
+    min-width: 20vw;
+    background-color: var(--vintage-chantilly);
+    border: 1.75px dashed var(--black);
+}
+
+.editarPerfil form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5vh;
+}
+
+.editarPerfil form input {
+    font-size: 1.2vw;
+    padding: 1vh;
+    height: 1vh;
+    min-width: 20vw;
+    background-color: var(--white);
+    border-radius: 0.8vw;
+    border: 2px solid var(--black);
+    padding: 0.75vw;
+}
+
+.editarPerfil .salvarAlteracoes {
+    cursor: pointer;
+    font-size: 1.2vw;
+    margin-top: 1vh;
+    height: 5vh;
+    width: 6vw;
+    align-self: center;
+    
+    -webkit-mask-image: url('../../img/stamp-button.svg');
+    mask-image: url('../../img/stamp-button.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-position: center;
+    mask-position: center;
+    
+    background: var(--vintage-brown);
+    color: var(--white);
+    font-family: var(--special-elite);
+    border: none;
+    transition: 0.3s ease;
+}
+
+.editarPerfil .salvarAlteracoes:hover {
+    transition: 0.2s ease-in-out;
+    transform: scale(1.1);
+    background: var(--vintage-brown-hover);
+}
+
+.fecharPopUpEditar {
+    position: absolute;
+    font-family: var(--urbanist);
+    font-size: 1.2vw;
+    cursor: pointer;
+    background: var(--medium-coral);
+    color: var(--black);
+    border: 1.5px solid var(--black);
+    border-radius: 0.7vw;
+    height: 4vh;
+    width: 2vw;
+    transition: 0.3s ease;
+    top: -2.5vh;
+    right: -1vw;
+    z-index: 999;
+}
+
+.fecharPopUpEditar:hover {
+    filter: grayscale(0.6) saturate(1.8) contrast(0.9);
+}
