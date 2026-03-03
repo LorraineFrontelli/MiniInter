@@ -98,7 +98,6 @@
                         ${tar.tarefas}<c:if test="${!status.last}"> / </c:if>
                     </c:forEach></h3>
                 </div>
-
             </div>
         </section>
     </main>

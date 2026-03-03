@@ -31,7 +31,7 @@
         <form action="${pageContext.request.contextPath}/login" method="post" class="formAutenticacao formLogin">
             <h1>Acessar conta</h1>
 
-            <p class="msgErro">${mensagem}</p>
+            <b class="msgErro" style="color: var(--medium-coral);">${mensagem}</b>
 
             <label for="login" class="login">Login
                 <input type="text" name="login" id="login" class="inputAutenticacao" placeholder="Insira seu login">
