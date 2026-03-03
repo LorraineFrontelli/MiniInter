@@ -1,6 +1,7 @@
 package servlet;
 
 import dao.*;
+import jakarta.servlet.http.HttpSession;
 import model.Administrador;
 import model.Aluno;
 import model.Professor;
@@ -35,6 +36,19 @@ public class LoginServlet extends HttpServlet {
 
         String email = request.getParameter("login");
         String senha = request.getParameter("senha");
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            String emailAuto = (String) session.getAttribute("login");
+            String senhaAuto = (String) session.getAttribute("senha");
+
+            if (emailAuto != null && senhaAuto != null) {
+                email = emailAuto;
+                senha = senhaAuto;
+                session.removeAttribute("login");
+                session.removeAttribute("senha");
+            }
+        }
 
         AdministradorDAO admDAO = new AdministradorDAO();
         AlunoDAO alunoDAO = new AlunoDAO();

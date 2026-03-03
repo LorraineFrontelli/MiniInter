@@ -28,16 +28,16 @@
     </header>
     
     <main>
-        <form action="" class="formAutenticacao formCpf">
+        <form action="${pageContext.request.contextPath}/aluno-create?acao=validarCpf"  method="post" class="formAutenticacao formCpf">
             <h1>Verificar CPF</h1>
-            
+
             <label for="cpf" class="cpf">CPF
                 <input type="text" name="cpf" id="cpf" class="inputAutenticacao" placeholder="Insira seu CPF">
             </label>
             <button>Verificar</button>
         </form>
-    
-        <form action="" class="formAutenticacao formMatricula">
+
+        <form action="${pageContext.request.contextPath}/aluno-create?acao=cadastrar" class="formAutenticacao formMatricula">
             <h1>Fazer matrícula</h1>
 
             <label for="email" class="email">E-mail
