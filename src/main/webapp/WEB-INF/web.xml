@@ -8,7 +8,7 @@
     <display-name>MiniInter</display-name>
 
     <welcome-file-list>
-        <welcome-file>/WEB-INF/views/aluno/perfil-aluno.jsp</welcome-file>
+        <welcome-file>/WEB-INF/views/autenticacao/login.jsp</welcome-file>
     </welcome-file-list>
 
 </web-app>

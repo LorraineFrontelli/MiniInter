@@ -11,8 +11,8 @@ body {
 
 h1 {
     font-weight: normal;
-    margin-bottom: 5vh;
-    margin-top: 7.5vh;
+    margin-bottom: 4vh;
+    margin-top: vh;
     font-size: 5vh;
 }
 
@@ -47,7 +47,7 @@ main {
 
 .login, .senha, .cpf, .email {
     display: flex;
-    font-size: 3.5vh;
+    font-size: 3vh;
     width: 30vw;
     flex-direction: column;
     align-items: flex-start;
@@ -76,7 +76,6 @@ input {
 }
 
 button {
-    margin-top: 5vh;
     height: 6.5vh;
     width: 8.5vw;
     font-size: 3vh;

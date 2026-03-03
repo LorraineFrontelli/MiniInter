@@ -156,7 +156,7 @@ main {
       linear-gradient(90deg, var(--vintage-chantilly) 1px, transparent 1px);
     background-size: 2vw 2vw; 
 
-    padding: 2vw 3vw;
+    padding: 2vw 2vw;
     border-radius: 1vw;
     box-shadow: 0.2vw 0.4vh 1.5vw rgba(0, 0, 0, 0.05);
     width: 65vw; 
@@ -172,6 +172,7 @@ main {
   
 .tabelaRead th {
     padding: 1.75vh 1.75vw;
+    font-size: 1.3vw;
     text-align: center;
     font-weight: 600;
     border-bottom: 0.2vh solid var(--gray); 
@@ -186,7 +187,7 @@ main {
 }
   
 .tabelaRead tr:nth-child(even) td {
-    background-color: #f3e6d2; 
+    background-color: var(--gray); 
 }
   
 .tabelaRead tr:nth-child(even) td:first-child {
