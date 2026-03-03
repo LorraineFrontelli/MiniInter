@@ -40,6 +40,7 @@ main {
     object-fit: contain;
     height: 3vh;
     margin-left: 0.5vw;
+    transition: 0.3s ease;
 }
 
 .muralLembretes {

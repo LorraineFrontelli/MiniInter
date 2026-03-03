@@ -37,7 +37,7 @@
                 <li><a href="tab-professor.html" class="pagina ativo"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Professor</a></li>
                 <li><a href="tab-aluno-professor.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Aluno Professor</a></li>
                 <li><a href="tab-boletim.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Boletim</a></li>
-                <li><a href="tab-telefone.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Agenda</a></li>
+                <li><a href="tab-telefone.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Telefone</a></li>
             </ul>
         </nav>
     </header>
@@ -53,34 +53,129 @@
             <img src="../../../assets/img/themes-icon.svg" alt="" class="abrirTemas">
         </div>
         
+        <div class="componentizacao">
+            <search>
+                <form action="" method="">
+                    <input type="search" id="buscarCrud" class="buscarCrud" name="buscarCrud" placeholder="Pesquisar">
+                </form>
+            </search>
+
+            <button class="botaoInsert" onclick="create.showModal()">
+                Fazer inserção
+                <img src="../../../assets/img/plus-icon.svg" alt="">
+            </button>
+        </div>
+
         <div class="tabelaContainer">
             <table class="tabelaRead">
                 <thead>
                     <tr>
+                        <th>Ações</th>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Senha</th>
                         <th>Matéria</th>
-                        <th></th>
-                        <th>Nota 1</th>
-                        <th>Nota 2</th>
-                        <th>Média</th>
-                        <th></th>
-                        <th>Situação</th>
+                        <th>Data de Contratação</th>
+                        <th>Usuário</th>
                     </tr>
-                </thead>
-            
-                <tbody>
+              </thead>
+              
+              <tbody>
                     <tr>
-                        <td class="botaoUpdate">Teoria das Cores</td>
-                        <td class="espaco"></td>
-                        <td class="colunasTabela">9.45</td>
-                        <td class="colunasTabela">7.50</td>
-                        <td class="colunasTabela">8.48</td>
-                        <td class="espaco"></td>
-                        <td class="botaoDelete">Em processo</td>
+                        <td class="opcoes">
+                            <div>
+                                <img src="../../../assets/img/update-icon.svg" alt="" class="botaoUpdate" onclick="update.showModal()">
+                                <img src="../../../assets/img/delete-icon.svg" alt="" class="botaoDelete" onclick="deletes.showModal()">
+                            </div>
+                        </td>
+                        <td>Teoria das Cores</td>
+                        <td>9.45</td>
+                        <td>7.50</td>
+                        <td>7.50</td>
+                        <td>7.50</td>
+                        <td>Em processo</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
     </main>
+
+    <!-- Create -->
+    <dialog class="create" id="create">
+        <button class="fecharPopUp" onclick="create.close()">X</button>
+        <form action="">
+            <div class="colunas">
+                <div class="coluna">
+                    <label for="createNome">Nome</label>
+                    <input type="text" name="createNome" id="createNome">
+                
+                    <label for="createEmail">E-mail</label>
+                    <input type="email" name="createEmail" id="createEmail">
+                
+                    <label for="createSenha">Senha</label>
+                    <input type="password" name="createSenha" id="createSenha">
+                </div>
+                
+                <div class="coluna">
+                    <label for="createMateria">Matéria</label>
+                    <input type="text" name="createMateria" id="createMateria">
+                    
+                    <label for="createDtContratacao">Data Contratação</label>
+                    <input type="date" name="createDtContratacao" id="createDtContratacao">
+                
+                    <label for="createUsuario">Usuário</label>
+                    <input type="text" name="createUsuario" id="createUsuario">
+                </div>
+            </div>
+            
+            <button class="salvarInsercao">Inserir</button>
+        </form>
+    </dialog>
+
+    <!-- Update -->
+    <dialog class="update" id="update">
+        <button class="fecharPopUp" onclick="update.close()">X</button>
+        <form action="">
+            <div class="colunas">
+                <div class="coluna">
+                    <label for="updateNome">Nome</label>
+                    <input type="text" name="updateNome" id="updateNome">
+
+                    <label for="updateEmail">E-mail</label>
+                    <input type="email" name="updateEmail" id="updateEmail">
+                    
+                    <label for="updateSenha">Senha</label>
+                    <input type="password" name="updateSenha" id="updateSenha">
+                </div>
+                
+                <div class="coluna">
+                    <label for="updateMateria">Matéria</label>
+                    <input type="text" name="updateMateria" id="updateMateria">
+
+                    <label for="updateDtContratacao">Data Contratação</label>
+                    <input type="date" name="updateDtContratacao" id="updateDtContratacao">
+
+                    <label for="updateUsuario">Usuário</label>
+                    <input type="text" name="updateUsuario" id="updateUsuario">
+                </div>
+            </div>
+
+            <button class="salvarAlteracoes">Atualizar</button>
+        </form>
+    </dialog>
+
+    <!-- Delete -->
+    <dialog class="deletes" id="deletes">
+        <button class="fecharPopUp" onclick="deletes.close()">X</button>
+        <form action="">
+            <h2>Deseja realmente excluir?</h2>
+
+            <div>
+                <button class="cancelarDeletar">Cancelar</button>
+                <button class="deletar">Excluir</button>
+            </div>
+        </form>
+    </dialog>
 </body>
 </html>

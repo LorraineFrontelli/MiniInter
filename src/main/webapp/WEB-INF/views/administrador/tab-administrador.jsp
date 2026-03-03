@@ -6,14 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Aplicando tema salvo -->
     <script>document.documentElement.style.setProperty("--tema", localStorage.getItem("corTema") || "#242021");</script>
  
-    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg">
-    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/profile-icon.svg">
-    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
-    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/grades-icon.svg">
-    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/observations-icon.svg">
+    <!-- Preloads -->
 
+    <!-- Links -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/global.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/crud.css">
@@ -84,16 +82,17 @@
                                 <img src="${pageContext.request.contextPath}/assets/img/delete-icon.svg" alt="" class="botaoDelete" onclick="deletes.showModal()">
                             </div>
                         </td>
-                        <td>Teoria das Cores</td>
-                        <td>9.45</td>
-                        <td>7.50</td>
-                        <td>Em processo</td>
+                        <td>1</td>
+                        <td>slaoq</td>
+                        <td>**************</td>
+                        <td>232.121.456-13</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </main>
 
+    <!-- Create -->
     <dialog class="create" id="create">
         <button class="fecharPopUp" onclick="create.close()">X</button>
         <form action="">
@@ -110,6 +109,7 @@
         </form>
     </dialog>
     
+    <!-- Update -->
     <dialog class="update" id="update">
         <button class="fecharPopUp" onclick="update.close()">X</button>
         <form action="">
@@ -126,6 +126,7 @@
         </form>
     </dialog>
     
+    <!-- Delete -->
     <dialog class="deletes" id="deletes">
         <button class="fecharPopUp" onclick="deletes.close()">X</button>
         <form action="">
