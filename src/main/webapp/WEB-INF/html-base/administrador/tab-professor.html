@@ -101,7 +101,7 @@
         </div>
     </main>
 
-    <!-- Create -->
+        <!-- Create -->
     <dialog class="create" id="create">
         <button class="fecharPopUp" onclick="create.close()">X</button>
         <form action="">
@@ -115,17 +115,49 @@
                 
                     <label for="createSenha">Senha</label>
                     <input type="password" name="createSenha" id="createSenha">
+                    
+                    <label for="createMateria">Matéria</label>
+                    <input type="text" name="createMateria" id="createMateria">
                 </div>
                 
                 <div class="coluna">
-                    <label for="createMateria">Matéria</label>
-                    <input type="text" name="createMateria" id="createMateria">
                     
                     <label for="createDtContratacao">Data Contratação</label>
                     <input type="date" name="createDtContratacao" id="createDtContratacao">
                 
                     <label for="createUsuario">Usuário</label>
                     <input type="text" name="createUsuario" id="createUsuario">
+
+                    <details class="turmas">
+                        <summary>Turmas do professor</summary>
+                      
+                        <div class="turmasSelecao">
+                            <label class="turmaItem" for="createTurmas">
+                                <input type="checkbox" name="createTurmas" id="createTurmas" value="1A">
+                                <span>1º A</span>
+                            </label>
+                        
+                            <label class="turmaItem" for="createTurmas">
+                                <input type="checkbox" name="createTurmas" id="createTurmas" value="1B">
+                                <span>1º B</span>
+                            </label>
+                        
+                            <label class="turmaItem" for="createTurmas">
+                                <input type="checkbox" name="createTurmas" id="createTurmas" value="2A">
+                                <span>2º A</span>
+                            </label>
+                      
+                            <label class="turmaItem" for="createTurmas">
+                                <input type="checkbox" name="createTurmas" id="createTurmas" value="2B">
+                                <span>2º B</span>
+                            </label>
+                      
+                            <label class="turmaItem" for="createTurmas">
+                                <input type="checkbox" name="createTurmas" id="createTurmas" value="3A">
+                                <span>3º A</span>
+                            </label>
+                        </div>
+                    </details>
                 </div>
             </div>
             
@@ -147,17 +179,48 @@
                     
                     <label for="updateSenha">Senha</label>
                     <input type="password" name="updateSenha" id="updateSenha">
+
+                    <label for="updateMateria">Matéria</label>
+                    <input type="text" name="updateMateria" id="updateMateria">
                 </div>
                 
                 <div class="coluna">
-                    <label for="updateMateria">Matéria</label>
-                    <input type="text" name="updateMateria" id="updateMateria">
-
                     <label for="updateDtContratacao">Data Contratação</label>
                     <input type="date" name="updateDtContratacao" id="updateDtContratacao">
 
                     <label for="updateUsuario">Usuário</label>
                     <input type="text" name="updateUsuario" id="updateUsuario">
+
+                    <details class="turmas">
+                        <summary>Turmas do professor</summary>
+                      
+                        <div class="turmasSelecao">
+                            <label class="turmaItem" for="updateTurmas">
+                                <input type="checkbox" name="updateTurmas" id="updateTurmas" value="1A">
+                                <span>1º A</span>
+                            </label>
+                        
+                            <label class="turmaItem" for="updateTurmas">
+                                <input type="checkbox" name="updateTurmas" id="updateTurmas" value="1B">
+                                <span>1º B</span>
+                            </label>
+                        
+                            <label class="turmaItem" for="updateTurmas">
+                                <input type="checkbox" name="updateTurmas" id="updateTurmas" value="2A">
+                                <span>2º A</span>
+                            </label>
+                      
+                            <label class="turmaItem" for="updateTurmas">
+                                <input type="checkbox" name="updateTurmas" id="updateTurmas" value="2B">
+                                <span>2º B</span>
+                            </label>
+                      
+                            <label class="turmaItem" for="updateTurmas">
+                                <input type="checkbox" name="updateTurmas" id="updateTurmas" value="3A">
+                                <span>3º A</span>
+                            </label>
+                        </div>
+                    </details>
                 </div>
             </div>
 
@@ -172,7 +235,7 @@
             <h2>Deseja realmente excluir?</h2>
 
             <div>
-                <button class="cancelarDeletar">Cancelar</button>
+                <button class="cancelarDeletar" type="button" onclick="deletes.close()">Cancelar</button>
                 <button class="deletar">Excluir</button>
             </div>
         </form>

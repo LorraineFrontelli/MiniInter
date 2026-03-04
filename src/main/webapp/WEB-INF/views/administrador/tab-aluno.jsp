@@ -32,7 +32,6 @@
                 <li><a href="tab-administrador.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Administrador</a></li>
                 <li><a href="tab-aluno.jsp" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Aluno</a></li>
                 <li><a href="tab-professor.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Professor</a></li>
-                <li><a href="tab-aluno-professor.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Aluno Professor</a></li>
                 <li><a href="tab-boletim.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Boletim</a></li>
                 <li><a href="tab-telefone.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Telefone</a></li>
             </ul>
@@ -73,6 +72,8 @@
                         <th>E-mail</th>
                         <th>Senha</th>
                         <th>CPF</th>
+                        <th>Série</th>
+                        <th>Turma</th>
                         <th>Data de início</th>
                     </tr>
               </thead>
@@ -90,6 +91,8 @@
                         <td>aluno@email.com</td>
                         <td>********</td>
                         <td>123.456.789-00</td>
+                        <td>1 ano</td>
+                        <td>A</td>
                         <td>01/02/2024</td>
                     </tr>
                 </tbody>
@@ -110,12 +113,18 @@
                 
                     <label for="createSenha">Senha</label>
                     <input type="password" name="createSenha" id="createSenha">
+                    
+                    <label for="createCpf">CPF</label>
+                    <input type="text" name="createCpf" id="createCpf">
                 </div>
                 
                 <div class="coluna">
-                    <label for="createCpf">CPF</label>
-                    <input type="text" name="createCpf" id="createCpf">
-                
+                    <label for="createSerie">Série</label>
+                    <input type="text" name="createSerie" id="createSerie">
+                    
+                    <label for="createTurma">Turma</label>
+                    <input type="text" name="createTurma" id="createTurma">
+                    
                     <label for="createDtInicio">Data de Início</label>
                     <input type="date" name="createDtInicio" id="createDtInicio">
                 </div>
@@ -138,11 +147,17 @@
                 
                     <label for="updateSenha">Senha</label>
                     <input type="password" name="updateSenha" id="updateSenha">
+
+                    <label for="updateCpf">CPF</label>
+                    <input type="text" name="updateCpf" id="updateCpf">
                 </div>
                 
                 <div class="coluna">
-                    <label for="updateCpf">CPF</label>
-                    <input type="text" name="updateCpf" id="updateCpf">
+                    <label for="updateSerie">Série</label>
+                    <input type="text" name="updateSerie" id="updateSerie">
+                    
+                    <label for="updateTurma">Turma</label>
+                    <input type="text" name="updateTurma" id="updateTurma">
 
                     <label for="updateDtInicio">Data de Início</label>
                     <input type="date" name="updateDtInicio" id="updateDtInicio">    

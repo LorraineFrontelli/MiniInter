@@ -32,7 +32,6 @@
                 <li><a href="tab-administrador.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Administrador</a></li>
                 <li><a href="tab-aluno.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Aluno</a></li>
                 <li><a href="tab-professor.jsp" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Professor</a></li>
-                <li><a href="tab-aluno-professor.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Aluno Professor</a></li>
                 <li><a href="tab-boletim.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Boletim</a></li>
                 <li><a href="tab-telefone.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Telefone</a></li>
             </ul>
@@ -73,6 +72,7 @@
                         <th>E-mail</th>
                         <th>Senha</th>
                         <th>Matéria</th>
+                        <th>Turmas</th>
                         <th>Data de Contratação</th>
                         <th>Usuário</th>
                     </tr>
@@ -91,6 +91,7 @@
                         <td>leo.vinci@monart.com</td>
                         <td>********</td>
                         <td>Pintura Renascentista</td>
+                        <td><img src="${pageContext.request.contextPath}/assets/img/see-more-icon.svg" alt="" class="botaoVerTurmas" onclick="verTurmas.showModal()"></td>
                         <td>15/04/2023</td>
                         <td>davinci_art</td>
                     </tr>
@@ -113,17 +114,49 @@
                 
                     <label for="createSenha">Senha</label>
                     <input type="password" name="createSenha" id="createSenha">
+                    
+                    <label for="createMateria">Matéria</label>
+                    <input type="text" name="createMateria" id="createMateria">
                 </div>
                 
                 <div class="coluna">
-                    <label for="createMateria">Matéria</label>
-                    <input type="text" name="createMateria" id="createMateria">
                     
                     <label for="createDtContratacao">Data Contratação</label>
                     <input type="date" name="createDtContratacao" id="createDtContratacao">
                 
                     <label for="createUsuario">Usuário</label>
                     <input type="text" name="createUsuario" id="createUsuario">
+
+                    <details class="turmas">
+                        <summary>Turmas do professor</summary>
+                      
+                        <div class="turmasSelecao">
+                            <label class="turmaItem" for="createTurmas">
+                                <input type="checkbox" name="createTurmas" id="createTurmas" value="1A">
+                                <span>1º A</span>
+                            </label>
+                        
+                            <label class="turmaItem" for="createTurmas">
+                                <input type="checkbox" name="createTurmas" id="createTurmas" value="1B">
+                                <span>1º B</span>
+                            </label>
+                        
+                            <label class="turmaItem" for="createTurmas">
+                                <input type="checkbox" name="createTurmas" id="createTurmas" value="2A">
+                                <span>2º A</span>
+                            </label>
+                      
+                            <label class="turmaItem" for="createTurmas">
+                                <input type="checkbox" name="createTurmas" id="createTurmas" value="2B">
+                                <span>2º B</span>
+                            </label>
+                      
+                            <label class="turmaItem" for="createTurmas">
+                                <input type="checkbox" name="createTurmas" id="createTurmas" value="3A">
+                                <span>3º A</span>
+                            </label>
+                        </div>
+                    </details>
                 </div>
             </div>
             
@@ -145,17 +178,48 @@
                     
                     <label for="updateSenha">Senha</label>
                     <input type="password" name="updateSenha" id="updateSenha">
+
+                    <label for="updateMateria">Matéria</label>
+                    <input type="text" name="updateMateria" id="updateMateria">
                 </div>
                 
                 <div class="coluna">
-                    <label for="updateMateria">Matéria</label>
-                    <input type="text" name="updateMateria" id="updateMateria">
-
                     <label for="updateDtContratacao">Data Contratação</label>
                     <input type="date" name="updateDtContratacao" id="updateDtContratacao">
 
                     <label for="updateUsuario">Usuário</label>
                     <input type="text" name="updateUsuario" id="updateUsuario">
+
+                    <details class="turmas">
+                        <summary>Turmas do professor</summary>
+                      
+                        <div class="turmasSelecao">
+                            <label class="turmaItem" for="updateTurmas">
+                                <input type="checkbox" name="updateTurmas" id="updateTurmas" value="1A">
+                                <span>1º A</span>
+                            </label>
+                        
+                            <label class="turmaItem" for="updateTurmas">
+                                <input type="checkbox" name="updateTurmas" id="updateTurmas" value="1B">
+                                <span>1º B</span>
+                            </label>
+                        
+                            <label class="turmaItem" for="updateTurmas">
+                                <input type="checkbox" name="updateTurmas" id="updateTurmas" value="2A">
+                                <span>2º A</span>
+                            </label>
+                      
+                            <label class="turmaItem" for="updateTurmas">
+                                <input type="checkbox" name="updateTurmas" id="updateTurmas" value="2B">
+                                <span>2º B</span>
+                            </label>
+                      
+                            <label class="turmaItem" for="updateTurmas">
+                                <input type="checkbox" name="updateTurmas" id="updateTurmas" value="3A">
+                                <span>3º A</span>
+                            </label>
+                        </div>
+                    </details>
                 </div>
             </div>
 
@@ -174,6 +238,14 @@
                 <button class="deletar">Excluir</button>
             </div>
         </form>
+    </dialog>
+
+    <!-- Modal Ver Turmas -->
+    <dialog class="verTurmas" id="verTurmas">
+        <button class="fecharPopUp" onclick="verTurmas.close()">X</button>
+
+
+
     </dialog>
 </body>
 </html>

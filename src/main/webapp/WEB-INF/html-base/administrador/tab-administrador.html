@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -6,19 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script>document.documentElement.style.setProperty("--tema", localStorage.getItem("corTema") || "#242021");</script>
+    <!-- Aplicando tema salvo -->
+    <script>document.documentElement.style.setProperty("--tema",localStorage.getItem("corTema")||"#242021");</script>
  
-    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg">
-    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/profile-icon.svg">
-    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
-    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/grades-icon.svg">
-    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/observations-icon.svg">
+    <!-- Preloads -->
+    <link rel="preload" as="image" href="../../../assets/img/painting-back-icon.svg">
+    <link rel="preload" as="image" href="../../../assets/img/profile-icon.svg">
+    <link rel="preload" as="image" href="../../../assets/img/schedule-icon.svg">
+    <link rel="preload" as="image" href="../../../assets/img/grades-icon.svg">
+    <link rel="preload" as="image" href="../../../assets/img/observations-icon.svg">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/global.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/crud.css">
-    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
-    <script src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
+    <!-- Links -->
+    <link rel="stylesheet" href="../../../assets/css/global.css">
+    <link rel="stylesheet" href="../../../assets/css/tokens.css">
+    <link rel="stylesheet" href="../../../assets/css/layout/crud.css">
+    <link rel="icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+    <script src="../../../assets/js/script.js" defer></script>
 
     <title>CRUD - Monart</title>
 </head>
@@ -27,28 +29,28 @@
     <div class="meuPlaceholder"></div>
 
     <header class="headerLateral">
-        <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
+        <img src="../../../assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
         <nav>
             <ul>
-                <li><a href="tab-administrador.jsp" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Administrador</a></li>
-                <li><a href="tab-aluno.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Aluno</a></li>
-                <li><a href="tab-professor.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Professor</a></li>
-                <li><a href="tab-aluno-professor.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Aluno Professor</a></li>
-                <li><a href="tab-boletim.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Boletim</a></li>
-                <li><a href="tab-telefone.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Telefone</a></li>
+                <li><a href="tab-administrador.html" class="pagina ativo"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Administrador</a></li>
+                <li><a href="tab-aluno.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Aluno</a></li>
+                <li><a href="tab-professor.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Professor</a></li>
+                <li><a href="tab-aluno-professor.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Aluno Professor</a></li>
+                <li><a href="tab-boletim.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Boletim</a></li>
+                <li><a href="tab-telefone.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Telefone</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <div class="cabecalhoPaginas">
-            <a href="${pageContext.request.contextPath}/autenticacao/login.jsp">
-                <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
+            <a href="../autenticacao/login.html">
+                <img src="../../../assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
             </a>
             <div class="tituloPaginas">
                 <h1>Administrador</h1>
             </div>
-            <img src="${pageContext.request.contextPath}/assets/img/themes-icon.svg" alt="" class="abrirTemas">
+            <img src="../../../assets/img/themes-icon.svg" alt="" class="abrirTemas">
         </div>
         
         <div class="componentizacao">
@@ -60,7 +62,7 @@
 
             <button class="botaoInsert" onclick="create.showModal()">
                 Fazer inserção
-                <img src="${pageContext.request.contextPath}/assets/img/plus-icon.svg" alt="">
+                <img src="../../../assets/img/plus-icon.svg" alt="">
             </button>
         </div>
 
@@ -80,8 +82,8 @@
                     <tr>
                         <td class="opcoes">
                             <div>
-                                <img src="${pageContext.request.contextPath}/assets/img/update-icon.svg" alt="" class="botaoUpdate" onclick="update.showModal()">
-                                <img src="${pageContext.request.contextPath}/assets/img/delete-icon.svg" alt="" class="botaoDelete" onclick="deletes.showModal()">
+                                <img src="../../../assets/img/update-icon.svg" alt="" class="botaoUpdate" onclick="update.showModal()">
+                                <img src="../../../assets/img/delete-icon.svg" alt="" class="botaoDelete" onclick="deletes.showModal()">
                             </div>
                         </td>
                         <td>Teoria das Cores</td>
@@ -94,6 +96,7 @@
         </div>
     </main>
 
+    <!-- Create -->
     <dialog class="create" id="create">
         <button class="fecharPopUp" onclick="create.close()">X</button>
         <form action="">
@@ -104,12 +107,13 @@
             <input type="password" name="createSenha" id="createSenha" min="8">
 
             <label for="createCpfAluno">CPF do Aluno</label>
-            <input type="text" name="createCpf" id="createCpf">
+            <input type="password" name="createSenha" id="createSenha">
 
             <button class="salvarInsercao">Inserir</button>
         </form>
     </dialog>
     
+    <!-- Update -->
     <dialog class="update" id="update">
         <button class="fecharPopUp" onclick="update.close()">X</button>
         <form action="">
@@ -120,19 +124,20 @@
             <input type="password" name="updateSenha" id="updateSenha" min="8">
 
             <label for="updateCpfAluno">CPF do Aluno</label>
-            <input type="text" name="updateCpf" id="updateCpf">
+            <input type="password" name="updateSenha" id="updateSenha">
 
             <button class="salvarAlteracoes">Atualizar</button>
         </form>
     </dialog>
     
+    <!-- Delete -->
     <dialog class="deletes" id="deletes">
         <button class="fecharPopUp" onclick="deletes.close()">X</button>
         <form action="">
             <h2>Deseja realmente excluir?</h2>
 
             <div>
-                <button class="cancelarDeletar" type="button" onclick="deletes.close()">Cancelar</button>
+                <button class="cancelarDeletar">Cancelar</button>
                 <button class="deletar">Excluir</button>
             </div>
         </form>

@@ -292,6 +292,13 @@ search form::before {
     transition: 0.3s ease;
 }
 
+img.botaoVerTurmas {
+    cursor: pointer;
+    object-fit: contain;
+    height: 2.75vh;
+    transition: 0.3s ease;
+}
+
 .opcoes img:hover {
     filter: saturate(4) contrast(1.5);
     transform: scale(1.2);
@@ -485,7 +492,7 @@ input[type="checkbox"] {
     width: 1.3vw; 
     height: 1.3vw; 
     
-    border: 0.2vh solid var(--gray);
+    border: 0.2vh solid var(--vintage-mustache);
     border-radius: 0.4vw;
     background-color: var(--white);
     cursor: pointer;
@@ -509,4 +516,29 @@ input[type="checkbox"]:checked::after {
     left: 50%;
     transform: translate(-50%, -50%);
     font-weight: bold;
+}
+
+details summary {
+    position: relative;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+}
+
+details .turmasSelecao {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 1vw; 
+    max-height: 15vh; 
+    overflow-y: auto;
+    background: var(--gray);
+    border: 2px solid var(--vintage-mustache);
+    border-radius: 5px;
+}
+
+details .turmaItem {
+    display: flex;
+    align-items: center;
+    padding-left: 0.7vw;
+    font-size: 1.2vw;
+    cursor: pointer;
 }
