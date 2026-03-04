@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -6,21 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Aplicando tema salvo -->
-    <script>document.documentElement.style.setProperty("--tema",localStorage.getItem("corTema")||"#242021");</script>
- 
+    <script>document.documentElement.style.setProperty("--tema", localStorage.getItem("corTema") || "#242021");</script>
+
     <!-- Preloads -->
-    <link rel="preload" as="image" href="../../../assets/img/painting-back-icon.svg">
-    <link rel="preload" as="image" href="../../../assets/img/profile-icon.svg">
-    <link rel="preload" as="image" href="../../../assets/img/schedule-icon.svg">
-    <link rel="preload" as="image" href="../../../assets/img/grades-icon.svg">
-    <link rel="preload" as="image" href="../../../assets/img/observations-icon.svg">
+
 
     <!-- Links -->
-    <link rel="stylesheet" href="../../../assets/css/global.css">
-    <link rel="stylesheet" href="../../../assets/css/tokens.css">
-    <link rel="stylesheet" href="../../../assets/css/layout/crud.css">
-    <link rel="icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
-    <script src="../../../assets/js/script.js" defer></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/global.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/crud.css">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
+    <script src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
 
     <title>CRUD - Monart</title>
 </head>
@@ -29,28 +26,27 @@
     <div class="meuPlaceholder"></div>
 
     <header class="headerLateral">
-        <img src="../../../assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
+        <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
         <nav>
             <ul>
-                <li><a href="tab-administrador.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Administrador</a></li>
-                <li><a href="tab-aluno.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Aluno</a></li>
-                <li><a href="tab-professor.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Professor</a></li>
-                <li><a href="tab-aluno-professor.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Aluno Professor</a></li>
-                <li><a href="tab-boletim.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Boletim</a></li>
-                <li><a href="tab-telefone.html" class="pagina ativo"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Telefone</a></li>
+                <li><a href="tab-administrador.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Administrador</a></li>
+                <li><a href="tab-aluno.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Aluno</a></li>
+                <li><a href="tab-professor.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Professor</a></li>
+                <li><a href="tab-boletim.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Boletim</a></li>
+                <li><a href="tab-telefone.jsp" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Telefone</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <div class="cabecalhoPaginas">
-            <a href="../autenticacao/login.html">
-                <img src="../../../assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
+            <a href="${pageContext.request.contextPath}/autenticacao/login.jsp">
+                <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
             </a>
             <div class="tituloPaginas">
                 <h1>Telefone</h1>
             </div>
-            <img src="../../../assets/img/themes-icon.svg" alt="" class="abrirTemas">
+            <img src="${pageContext.request.contextPath}/assets/img/themes-icon.svg" alt="" class="abrirTemas">
         </div>
         
         <div class="componentizacao">
@@ -62,7 +58,7 @@
 
             <button class="botaoInsert" onclick="create.showModal()">
                 Fazer inserção
-                <img src="../../../assets/img/plus-icon.svg" alt="">
+                <img src="${pageContext.request.contextPath}/assets/img/plus-icon.svg" alt="">
             </button>
         </div>
 
@@ -83,16 +79,15 @@
                     <tr>
                         <td class="opcoes">
                             <div>
-                                <img src="../../../assets/img/update-icon.svg" alt="" class="botaoUpdate" onclick="update.showModal()">
-                                <img src="../../../assets/img/delete-icon.svg" alt="" class="botaoDelete" onclick="deletes.showModal()">
+                                <img src="${pageContext.request.contextPath}/assets/img/update-icon.svg" alt="" class="botaoUpdate" onclick="update.showModal()">
+                                <img src="${pageContext.request.contextPath}/assets/img/delete-icon.svg" alt="" class="botaoDelete" onclick="deletes.showModal()">
                             </div>
                         </td>
-                        <td>Teoria das Cores</td>
-                        <td>9.45</td>
-                        <td>7.50</td>
-                        <td>7.50</td>
-                        <td>7.50</td>
-                        <td>Em processo</td>
+                        <td>1</td>
+                        <td>25</td>
+                        <td>Maria Souza</td>
+                        <td>(11) 98765-4321</td>
+                        <td>Celular/Pessoal</td>
                     </tr>
                 </tbody>
             </table>
@@ -146,7 +141,7 @@
             <h2>Deseja realmente excluir?</h2>
 
             <div>
-                <button class="cancelarDeletar">Cancelar</button>
+                <button class="cancelarDeletar" type="button" onclick="deletes.close()">Cancelar</button>
                 <button class="deletar">Excluir</button>
             </div>
         </form>

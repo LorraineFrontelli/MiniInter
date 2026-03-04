@@ -12,11 +12,11 @@
     <script>document.documentElement.style.setProperty("--tema",localStorage.getItem("corTema")||"#242021");</script>
  
     <!-- Preloads -->
-    <link rel="preload" as="image" href="../../../assets/img/painting-back-icon.svg">
-    <link rel="preload" as="image" href="../../../assets/img/profile-icon.svg">
-    <link rel="preload" as="image" href="../../../assets/img/schedule-icon.svg">
-    <link rel="preload" as="image" href="../../../assets/img/grades-icon.svg">
-    <link rel="preload" as="image" href="../../../assets/img/observations-icon.svg">
+    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg">
+    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/profile-icon.svg">
+    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
+    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/grades-icon.svg">
+    <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/observations-icon.svg">
 
     <!-- Links -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/global.css">

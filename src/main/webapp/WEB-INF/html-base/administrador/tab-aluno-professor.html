@@ -37,7 +37,7 @@
                 <li><a href="tab-professor.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Professor</a></li>
                 <li><a href="tab-aluno-professor.html" class="pagina ativo"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Aluno Professor</a></li>
                 <li><a href="tab-boletim.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Boletim</a></li>
-                <li><a href="tab-telefone.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Agenda</a></li>
+                <li><a href="tab-telefone.html" class="pagina"><img src="../../../assets/img/schedule-icon.svg" decoding="async" alt="">Telefone</a></li>
             </ul>
         </nav>
     </header>
@@ -53,34 +53,109 @@
             <img src="../../../assets/img/themes-icon.svg" alt="" class="abrirTemas">
         </div>
         
+        <div class="componentizacao">
+            <search>
+                <form action="" method="">
+                    <input type="search" id="buscarCrud" class="buscarCrud" name="buscarCrud" placeholder="Pesquisar">
+                </form>
+            </search>
+
+            <button class="botaoInsert" onclick="create.showModal()">
+                Fazer inserção
+                <img src="../../../assets/img/plus-icon.svg" alt="">
+            </button>
+        </div>
+
         <div class="tabelaContainer">
             <table class="tabelaRead">
                 <thead>
                     <tr>
-                        <th>Matéria</th>
-                        <th></th>
-                        <th>Nota 1</th>
-                        <th>Nota 2</th>
-                        <th>Média</th>
-                        <th></th>
-                        <th>Situação</th>
+                        <th>Ações</th>
+                        <th>ID</th>
+                        <th>ID do Professor</th>
+                        <th>ID do Aluno</th>
+                        <th>Série</th>
+                        <th>Turma</th>
                     </tr>
-                </thead>
-            
-                <tbody>
+              </thead>
+              
+              <tbody>
                     <tr>
-                        <td class="botaoUpdate">Teoria das Cores</td>
-                        <td class="espaco"></td>
-                        <td class="colunasTabela">9.45</td>
-                        <td class="colunasTabela">7.50</td>
-                        <td class="colunasTabela">8.48</td>
-                        <td class="espaco"></td>
-                        <td class="botaoDelete">Em processo</td>
+                        <td class="opcoes">
+                            <div>
+                                <img src="../../../assets/img/update-icon.svg" alt="" class="botaoUpdate" onclick="update.showModal()">
+                                <img src="../../../assets/img/delete-icon.svg" alt="" class="botaoDelete" onclick="deletes.showModal()">
+                            </div>
+                        </td>
+                        <td>Teoria das Cores</td>
+                        <td>7.50</td>
+                        <td>7.50</td>
+                        <td>Em processo</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
     </main>
+
+    <!-- Create -->
+    <dialog class="create" id="create">
+        <button class="fecharPopUp" onclick="create.close()">X</button>
+        <form action="">
+            <div class="colunas">
+                <div class="coluna">
+                    <label for="createIdProfessor">ID do Professor</label>
+                    <input type="number" name="createIdProfessor" id="createIdProfessor">
+                
+                    <label for="createIdAluno">ID do Aluno</label>
+                    <input type="number" name="createIdAluno" id="createIdAluno">
+                </div>
+                <div class="coluna">
+                    <label for="createSerie">Série</label>
+                    <input type="number" name="createSerie" id="createSerie">
+                    <label for="createTurma">Turma</label>
+                    <input type="text" name="createTurma" id="createTurma" maxlength="1">
+                </div>
+            </div>
+
+            <button class="salvarInsercao">Inserir</button>
+        </form>
+    </dialog>
+    
+    <!-- Update -->
+    <dialog class="update" id="update">
+        <button class="fecharPopUp" onclick="update.close()">X</button>
+        <form action="">
+            <div class="colunas">
+                <div class="coluna">
+                    <label for="updateIdProfessor">ID do Professor</label>
+                    <input type="number" name="updateIdProfessor" id="updateIdProfessor">
+                
+                    <label for="updateIdAluno">ID do Aluno</label>
+                    <input type="number" name="updateIdAluno" id="updateIdAluno">
+                </div>
+                <div class="coluna">
+                    <label for="updateSerie">Série</label>
+                    <input type="number" name="updateSerie" id="updateSerie">
+                    <label for="updateTurma">Turma</label>
+                    <input type="text" name="updateTurma" id="updateTurma" maxlength="1">
+                </div>
+            </div>
+
+            <button class="salvarAlteracoes">Atualizar</button>
+        </form>
+    </dialog>
+    
+    <!-- Delete -->
+    <dialog class="deletes" id="deletes">
+        <button class="fecharPopUp" onclick="deletes.close()">X</button>
+        <form action="">
+            <h2>Deseja realmente excluir?</h2>
+
+            <div>
+                <button class="cancelarDeletar">Cancelar</button>
+                <button class="deletar">Excluir</button>
+            </div>
+        </form>
+    </dialog>
 </body>
 </html>

@@ -35,7 +35,8 @@
     /* Branco e Preto */
     --white: #FFFFFF;
     --black: #000000;
-    --gray: #DCD3C1;
+    --gray: #DCD3C150;
+    --charcoal: #73706852;
     
     /* Hoverizações */
     --vintage-brown-hover: #614610;

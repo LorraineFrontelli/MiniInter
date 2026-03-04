@@ -51,6 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const iconeLembrete = document.querySelector(".botaoLembrete img")
     const botoesMenu = document.querySelectorAll(".menuAluno button")
     const mensagensAluno = document.querySelectorAll(".mensagem.aluno")
+    const botaoInsert = document.querySelector(".botaoInsert")
+    const iconeInsert = document.querySelector(".botaoInsert img")
 
 
     document.querySelectorAll(".opcaoTema").forEach(botao => {
@@ -64,8 +66,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             aplicarTemaElemento(botaoLembrete, botaoLembrete, iconeLembrete, cor, corContraste)
 
+            aplicarTemaElemento(botaoInsert, botaoInsert, iconeInsert, cor, corContraste)
+            
             aplicarTemaElemento(botaoEditar, botaoEditar, iconeEditar, cor, corContraste)
-
+            
             aplicarTemaElementos(mensagensAluno, mensagensAluno, null, cor, corContraste)
             
             aplicarTemaElementos(barrinhaTema, barrinhaTemaTexto, null, cor, corContraste)
@@ -86,6 +90,8 @@ document.addEventListener("DOMContentLoaded", () => {
         aplicarTemaElemento(tituloPagina, tituloPaginaTexto, null, corSalva, corContraste)
         
         aplicarTemaElemento(botaoLembrete, botaoLembrete, iconeLembrete, corSalva, corContraste)
+        
+        aplicarTemaElemento(botaoInsert, botaoInsert, iconeInsert, corSalva, corContraste)
         
         aplicarTemaElemento(botaoEditar, botaoEditar, iconeEditar, corSalva, corContraste)
         

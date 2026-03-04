@@ -1,3 +1,19 @@
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--white);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    border: 2px solid var(--white);
+    background: var(--tema);
+}
+
 body {
     display: flex;
 }
@@ -10,8 +26,6 @@ main {
     display: block;
     padding-top: 3vh;
 }
-
-/*/ Header Lateral /*/
 
 .meuPlaceholder {
     width: 20%;
@@ -122,10 +136,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: auto;
-    margin-right: 10vw;
+    margin: 0;
     
-    margin-top: 4.5vh;
     height: 6.5vh;
     width: 12vw;
     font-size: 2.8vh;
@@ -147,6 +159,67 @@ main {
     object-fit: contain;
     height: 3vh;
     margin-left: 0.5vw;
+    transition: 0.3s ease;
+}
+
+.componentizacao {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 70vw;
+    margin: 0 auto;
+    margin-top: 4.5vh;
+}
+
+search {
+    display: block;
+}
+
+search form {
+    display: flex;
+    align-items: center;
+    position: relative;
+    background: var(--white);
+    border-radius: 50px;
+    padding: 0.5vh 0.8vw;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+search form:focus-within {
+    transform: scale(1.025);
+}
+
+.buscarCrud {
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 1vh 1vw;
+    font-family: var(--urbanist);
+    font-size: 1.1vw;
+    color: var(--tema);
+    width: 40vw;
+    transition: width 0.4s ease;
+}
+
+.buscarCrud::placeholder {
+    color: var(--vintage-mustache);
+    opacity: 0.7;
+}
+
+search form::before {
+    content: "";
+    display: inline-block;
+    width: 1vw;
+    height: 1vw;
+    font-size: 1.2vw;
+    margin-left: 0.5vw;
+    background-image: url("../../img/search-icon.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(1);
+    opacity: 0.6;
 }
 
 .tabelaContainer {
@@ -156,10 +229,11 @@ main {
       linear-gradient(90deg, var(--vintage-chantilly) 1px, transparent 1px);
     background-size: 2vw 2vw; 
 
-    padding: 2vw 3vw;
+    padding: 1vw;
     border-radius: 1vw;
     box-shadow: 0.2vw 0.4vh 1.5vw rgba(0, 0, 0, 0.05);
-    width: 65vw; 
+    width: 70vw; 
+    max-height: 60vh; 
     margin: 5vh auto;
     overflow-x: auto; 
     overflow-y: auto; 
@@ -172,9 +246,10 @@ main {
   
 .tabelaRead th {
     padding: 1.75vh 1.75vw;
+    font-size: 1.3vw;
     text-align: center;
     font-weight: 600;
-    border-bottom: 0.2vh solid var(--gray); 
+    border-bottom: 0.2vh ridge var(--charcoal); 
     white-space: nowrap;
 }
   
@@ -186,7 +261,7 @@ main {
 }
   
 .tabelaRead tr:nth-child(even) td {
-    background-color: #f3e6d2; 
+    background-color: var(--gray); 
 }
   
 .tabelaRead tr:nth-child(even) td:first-child {
@@ -217,7 +292,253 @@ main {
     transition: 0.3s ease;
 }
 
+img.botaoVerTurmas {
+    cursor: pointer;
+    object-fit: contain;
+    height: 2.75vh;
+    transition: 0.3s ease;
+}
+
 .opcoes img:hover {
     filter: saturate(4) contrast(1.5);
     transform: scale(1.2);
+}
+
+dialog {
+    font-size: 1.2vw;
+    padding-bottom: 2vw;
+    position: relative;
+    overflow: visible;
+    min-height: 25vh;
+    min-width: 20vw;
+    background-color: var(--vintage-chantilly);
+    border: 1.75px dashed var(--black);
+}
+
+dialog form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5vh;
+}
+
+dialog form .colunas {
+    display: flex;
+    gap: 2vw;
+}
+
+dialog form .colunas .coluna {
+    display: flex;
+    flex-direction: column;
+}
+
+dialog form .colunas .coluna label {
+    margin-bottom: 1vh;
+    margin-top: 1.75vh;
+}
+
+dialog form .colunas .colunaNotas label:not(:nth-child(1)) {
+    padding-left: 1.5vw;
+}
+
+dialog form input {
+    font-size: 1.2vw;
+    padding: 1vh;
+    height: 1vh;
+    width: 20vw;
+    background-color: var(--white);
+    border-radius: 0.8vw;
+    border: 2px solid var(--black);
+    padding: 0.75vw;
+}
+
+dialog form textarea {
+    font-size: 1.2vw;
+    padding: 1vh;
+    min-height: 19vh;
+    min-width: 20vw;
+    background-color: var(--white);
+    border-radius: 0.8vw;
+    border: 2px solid var(--black);
+    padding: 0.75vw;
+}
+
+dialog form .colunas .colunaNotas input {
+    margin-top: 3vh;
+    width: 4.2vw;
+}
+
+dialog .salvarAlteracoes, dialog .salvarInsercao {
+    cursor: pointer;
+    font-size: 1.2vw;
+    margin-top: 1vh;
+    height: 5vh;
+    width: 7vw;
+    align-self: center;
+    
+    -webkit-mask-image: url('../../img/stamp-button.svg');
+    mask-image: url('../../img/stamp-button.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-position: center;
+    mask-position: center;
+    
+    background: var(--vintage-brown);
+    color: var(--white);
+    font-family: var(--special-elite);
+    border: none;
+    transition: 0.3s ease;
+}
+
+dialog .salvarAlteracoes:hover, dialog .salvarInsercao:hover {
+    transition: 0.2s ease-in-out;
+    transform: scale(1.1);
+    background: var(--vintage-brown-hover);
+}
+
+dialog.deletes div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2vw;
+}
+
+dialog button.cancelarDeletar {
+    cursor: pointer;
+    font-size: 1.2vw;
+    margin-top: 1vh;
+    height: 5vh;
+    width: 7vw;
+    align-self: center;
+    
+    -webkit-mask-image: url('../../img/stamp-button.svg');
+    mask-image: url('../../img/stamp-button.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-position: center;
+    mask-position: center;
+    
+    background: var(--vintage-brown);
+    color: var(--white);
+    font-family: var(--special-elite);
+    border: none;
+    transition: 0.3s ease;
+}
+
+dialog button.cancelarDeletar:hover {
+    transition: 0.2s ease-in-out;
+    transform: scale(1.1);
+    filter: grayscale(0.6) saturate(1.8) contrast(0.9);
+}
+
+dialog button.deletar {
+    cursor: pointer;
+    font-size: 1.2vw;
+    margin-top: 1vh;
+    height: 5vh;
+    width: 7vw;
+    align-self: center;
+    
+    -webkit-mask-image: url('../../img/stamp-button.svg');
+    mask-image: url('../../img/stamp-button.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-position: center;
+    mask-position: center;
+    
+    background: var(--medium-coral);
+    color: var(--white);
+    font-family: var(--special-elite);
+    border: none;
+    transition: 0.3s ease;
+}
+
+dialog button.deletar:hover {
+    transition: 0.2s ease-in-out;
+    transform: scale(1.1);
+    filter: grayscale(0.6) saturate(1.8) contrast(0.9);
+}
+
+.fecharPopUp {
+    position: absolute;
+    font-family: var(--urbanist);
+    font-size: 1.2vw;
+    cursor: pointer;
+    background: var(--medium-coral);
+    color: var(--black);
+    border: 1.5px solid var(--black);
+    border-radius: 0.7vw;
+    height: 4vh;
+    width: 2vw;
+    transition: 0.3s ease;
+    top: -2.5vh;
+    right: -1vw;
+    z-index: 999;
+}
+
+.fecharPopUp:hover {
+    filter: grayscale(0.6) saturate(1.8) contrast(0.9);
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    
+    width: 1.3vw; 
+    height: 1.3vw; 
+    
+    border: 0.2vh solid var(--vintage-mustache);
+    border-radius: 0.4vw;
+    background-color: var(--white);
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--pastel-blue);
+    border-color: var(--pastel-blue);
+}
+
+input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 1vw; 
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+}
+
+details summary {
+    position: relative;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+}
+
+details .turmasSelecao {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 1vw; 
+    max-height: 15vh; 
+    overflow-y: auto;
+    background: var(--gray);
+    border: 2px solid var(--vintage-mustache);
+    border-radius: 5px;
+}
+
+details .turmaItem {
+    display: flex;
+    align-items: center;
+    padding-left: 0.7vw;
+    font-size: 1.2vw;
+    cursor: pointer;
 }
