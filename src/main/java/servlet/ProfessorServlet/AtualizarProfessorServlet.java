@@ -1,18 +1,17 @@
 package servlet.ProfessorServlet;
 
-import dao.ProfessorDAO;
-import jakarta.servlet.http.HttpSession;
-import model.Professor;
-import utils.ValidacaoRegex;
+import java.io.IOException;
+import java.time.LocalDate;
 
+import dao.ProfessorDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
-import java.time.LocalDate;
+import jakarta.servlet.http.HttpSession;
+import model.Professor;
+import utils.ValidacaoRegex;
 
 @WebServlet("/professor-update")
 public class AtualizarProfessorServlet extends HttpServlet {

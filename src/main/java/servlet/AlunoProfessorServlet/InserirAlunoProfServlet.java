@@ -21,7 +21,7 @@ public class InserirAlunoProfServlet extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher =
-                request.getRequestDispatcher("/WEB-INF/view/AlunoProfessor/cadastrar.jsp");
+                request.getRequestDispatcher("/WEB-INF/views/AlunoProfessor/cadastrar.jsp");
 
         dispatcher.forward(request, response);
     }
@@ -49,7 +49,7 @@ public class InserirAlunoProfServlet extends HttpServlet {
                 request.setAttribute("mensagem", mensagem);
 
                 RequestDispatcher dispatcher =
-                        request.getRequestDispatcher("/WEB-INF/view/AlunoProfessor/cadastrar.jsp");
+                        request.getRequestDispatcher("/WEB-INF/views/AlunoProfessor/cadastrar.jsp");
 
                 dispatcher.forward(request, response);
                 return;

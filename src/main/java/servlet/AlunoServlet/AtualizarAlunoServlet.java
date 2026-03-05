@@ -46,7 +46,7 @@ public class AtualizarAlunoServlet extends HttpServlet {
             request.setAttribute("alunoParaEditar", aluno);
 
             RequestDispatcher dispatcher =
-                    request.getRequestDispatcher("/WEB-INF/view/Aluno/atualizarAluno.jsp");
+                    request.getRequestDispatcher("/WEB-INF/views/Aluno/atualizarAluno.jsp");
 
             dispatcher.forward(request, response);
 

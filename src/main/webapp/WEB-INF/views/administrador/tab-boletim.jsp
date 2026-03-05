@@ -1,206 +1,107 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD - Boletim</title>
 
-    <!-- Aplicando tema salvo -->
-    <script>document.documentElement.style.setProperty("--tema", localStorage.getItem("corTema") || "#242021");</script>
-
-    <!-- Preloads -->
-
-
-    <!-- Links -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/global.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/crud.css">
-    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
-    <script src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
-
-    <title>CRUD - Monart</title>
 </head>
 
 <body>
-    <div class="meuPlaceholder"></div>
 
-    <header class="headerLateral">
-        <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
-        <nav>
-            <ul>
-                <li><a href="tab-administrador.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Administrador</a></li>
-                <li><a href="tab-aluno.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Aluno</a></li>
-                <li><a href="tab-professor.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Professor</a></li>
-                <li><a href="tab-boletim.jsp" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Boletim</a></li>
-                <li><a href="tab-telefone.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Telefone</a></li>
-            </ul>
-        </nav>
-    </header>
+<h2>Boletim</h2>
 
-    <main>
-        <div class="cabecalhoPaginas">
-            <a href="${pageContext.request.contextPath}/autenticacao/login.jsp">
-                <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
-            </a>
-            <div class="tituloPaginas">
-                <h1>Boletim</h1>
-            </div>
-            <img src="${pageContext.request.contextPath}/assets/img/themes-icon.svg" alt="" class="abrirTemas">
-        </div>
-        
-        <div class="componentizacao">
-            <search>
-                <form action="" method="">
-                    <input type="search" id="buscarCrud" class="buscarCrud" name="buscarCrud" placeholder="Pesquisar">
+<!-- MENSAGEM -->
+<c:if test="${not empty mensagem}">
+    <p>${mensagem}</p>
+</c:if>
+
+<!-- BUSCA -->
+<form action="${pageContext.request.contextPath}/boletins" method="get">
+    <input type="text" name="filtroAluno" placeholder="ID ou nome do aluno">
+    <button type="submit">Pesquisar</button>
+</form>
+
+<br>
+
+<!-- TABELA -->
+<table border="1">
+    <thead>
+    <tr>
+        <th>Ações</th>
+        <th>ID</th>
+        <th>ID Professor</th>
+        <th>ID Aluno</th>
+        <th>Nota 1</th>
+        <th>Nota 2</th>
+        <th>Situação</th>
+        <th>Data</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <c:forEach var="b" items="${boletins}">
+        <tr>
+            <td>
+                <!-- DELETE -->
+                <form action="${pageContext.request.contextPath}/boletim-delete" method="post" style="display:inline;">
+                    <input type="hidden" name="id" value="${b.id}">
+                    <button type="submit">Excluir</button>
                 </form>
-            </search>
 
-            <button class="botaoInsert" onclick="create.showModal()">
-                Fazer inserção
-                <img src="${pageContext.request.contextPath}/assets/img/plus-icon.svg" alt="">
-            </button>
-        </div>
+                <!-- UPDATE -->
+                <form action="${pageContext.request.contextPath}/boletim-update" method="post" style="display:inline;">
+                    <input type="hidden" name="id" value="${b.id}">
+                    <input type="hidden" name="idProfessor" value="${b.idProfessor}">
+                    <input type="hidden" name="idAluno" value="${b.idAluno}">
+                    <input type="hidden" name="nota1" value="${b.nota1}">
+                    <input type="hidden" name="nota2" value="${b.nota2}">
+                    <input type="hidden" name="descricao1" value="${b.descricao1}">
+                    <input type="hidden" name="descricao2" value="${b.descricao2}">
+                    <input type="hidden" name="observacao" value="${b.observacao}">
+                    <input type="hidden" name="data" value="${b.dataCriacao}">
+                    <button type="submit">Atualizar</button>
+                </form>
+            </td>
 
-        <div class="tabelaContainer">
-            <table class="tabelaRead">
-                <thead>
-                    <tr>
-                        <th>Ações</th>
-                        <th>ID</th>
-                        <th>ID do Professor</th>
-                        <th>ID do Aluno</th>
-                        <th>Nota 1</th>
-                        <th>Descrição 1</th>
-                        <th>Nota 2</th>
-                        <th>Descrição 2</th>
-                        <th>Situação</th>
-                        <th>Observação</th>
-                        <th>Data de criação</th>
-                    </tr>
-              </thead>
-              
-              <tbody>
-                    <tr>
-                        <td class="opcoes">
-                            <div>
-                                <img src="${pageContext.request.contextPath}/assets/img/update-icon.svg" alt="" class="botaoUpdate" onclick="update.showModal()">
-                                <img src="${pageContext.request.contextPath}/assets/img/delete-icon.svg" alt="" class="botaoDelete" onclick="deletes.showModal()">
-                            </div>
-                        </td>
-                        <td>1</td>
-                        <td>10</td>
-                        <td>25</td>
-                        <td>8.50</td>
-                        <td>Atividade Prática</td>
-                        <td>9.00</td>
-                        <td>Prova Teórica</td>
-                        <td>Aprovado</td>
-                        <td>Ótimo desempenho</td>
-                        <td>03/03/2026</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
+            <td>${b.id}</td>
+            <td>${b.idProfessor}</td>
+            <td>${b.idAluno}</td>
+            <td>${b.nota1}</td>
+            <td>${b.nota2}</td>
+            <td>${b.aprovado ? "Aprovado" : "Reprovado"}</td>
+            <td>${b.dataCriacao}</td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
 
-    <!-- Create -->
-    <dialog class="create" id="create">
-        <button class="fecharPopUp" onclick="create.close()">X</button>
-        <form action="">
-            <div class="colunas">
-                <div class="coluna">
-                    <label for="createIdProfessor">ID do Professor</label>
-                    <input type="number" name="createIdProfessor" id="createIdProfessor">
-                
-                    <label for="createIdAluno">ID do Aluno</label>
-                    <input type="number" name="createIdAluno" id="createIdAluno">
-                
-                    <div class="colunaNotas">
-                        <label for="createNota1">Nota 1</label>
-                        <input type="number" step="0.01" name="createNota1" id="createNota1">
+<br>
 
-                        <label for="createNota2">Nota 2</label>
-                        <input type="number" step="0.01" name="createNota2" id="createNota2">
-                    </div>
+<!-- CREATE -->
+<h3>Novo Boletim</h3>
 
-                    <label for="createDescricao1">Descrição 1</label>
-                    <input type="text" name="createDescricao1" id="createDescricao1">
+<form action="${pageContext.request.contextPath}/boletim-create" method="post">
 
-                    <label for="createDescricao2">Descrição 2</label>
-                    <input type="text" name="createDescricao2" id="createDescricao2">
-                </div>
-                
-                <div class="coluna">
-                    <label for="createAprovado">Aprovado</label>
-                    <input type="checkbox" name="createAprovado" id="createAprovado">
+    <input type="number" name="idProfessor" placeholder="ID Professor" required>
+    <input type="number" name="idAluno" placeholder="ID Aluno" required>
 
-                    <label for="createDtCriacao">Data de Criação</label>
-                    <input type="date" name="createDtCriacao" id="createDtCriacao">
+    <input type="number" step="0.01" name="nota1" placeholder="Nota 1" required>
+    <input type="text" name="descricao1" placeholder="Descrição 1">
 
-                    <label for="createObservacao">Observação</label>
-                    <textarea name="createObservacao" id="createObservacao"></textarea>
-                </div>
-            </div>
-            
-            <button class="salvarInsercao">Inserir</button>
-        </form>
-    </dialog>
+    <input type="number" step="0.01" name="nota2" placeholder="Nota 2" required>
+    <input type="text" name="descricao2" placeholder="Descrição 2">
 
-    <!-- Update -->
-    <dialog class="update" id="update">
-        <button class="fecharPopUp" onclick="update.close()">X</button>
-        <form action="">
-            <div class="colunas">
-                <div class="coluna">
-                    <label for="updateIdProfessor">ID do Professor</label>
-                    <input type="number" name="updateIdProfessor" id="updateIdProfessor">
-                
-                    <label for="updateIdAluno">ID do Aluno</label>
-                    <input type="number" name="updateIdAluno" id="updateIdAluno">
-                
-                    <div class="colunaNotas">
-                        <label for="updateNota1">Nota 1</label>
-                        <input type="number" step="0.01" name="updateNota1" id="updateNota1">
+    <textarea name="observacao" placeholder="Observação"></textarea>
 
-                        <label for="updateNota2">Nota 2</label>
-                        <input type="number" step="0.01" name="updateNota2" id="updateNota2">
-                    </div>
+    <input type="date" name="data" required>
 
-                    <label for="updateDescricao1">Descrição 1</label>
-                    <input type="text" name="updateDescricao1" id="updateDescricao1">
+    <button type="submit">Cadastrar</button>
 
-                    <label for="updateDescricao2">Descrição 2</label>
-                    <input type="text" name="updateDescricao2" id="updateDescricao2">
-                </div>
-                
-                <div class="coluna">
-                    <label for="updateAprovado">Aprovado</label>
-                    <input type="checkbox" name="updateAprovado" id="updateAprovado">
+</form>
 
-                    <label for="updateDtCriacao">Data de Criação</label>
-                    <input type="date" name="updateDtCriacao" id="updateDtCriacao">
-
-                    <label for="updateObservacao">Observação</label>
-                    <textarea name="updateObservacao" id="updateObservacao"></textarea>
-                </div>
-            </div>
-
-            <button class="salvarAlteracoes">Atualizar</button>
-        </form>
-    </dialog>
-    
-    <!-- Delete -->
-    <dialog class="deletes" id="deletes">
-        <button class="fecharPopUp" onclick="deletes.close()">X</button>
-        <form action="">
-            <h2>Deseja realmente excluir?</h2>
-
-            <div>
-                <button class="cancelarDeletar" type="button" onclick="deletes.close()">Cancelar</button>
-                <button class="deletar">Excluir</button>
-            </div>
-        </form>
-    </dialog>
 </body>
 </html>

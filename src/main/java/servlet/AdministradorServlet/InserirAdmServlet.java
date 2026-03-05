@@ -88,7 +88,7 @@ public class InserirAdmServlet extends HttpServlet {
 
             e.printStackTrace();
             request.getSession().setAttribute("mensagem", "Erro ao inserir registro!");
-            response.sendRedirect(request.getContextPath() + "/admins");
+            response.sendRedirect(request.getContextPath() + "/administradores");
         }
     }
 }

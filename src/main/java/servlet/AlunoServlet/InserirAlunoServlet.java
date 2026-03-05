@@ -26,7 +26,11 @@ public class InserirAlunoServlet extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher =
+<<<<<<< HEAD
+                request.getRequestDispatcher("/WEB-INF/views/Aluno/verificarCpf.jsp");
+=======
                 request.getRequestDispatcher("/WEB-INF/views/autenticacao/cadastro.jsp");
+>>>>>>> 42425dd49d7f298b6d5886e2b1c040d77aad0fa0
 
         dispatcher.forward(request, response);
     }
@@ -49,7 +53,7 @@ public class InserirAlunoServlet extends HttpServlet {
                 if (cpf == null || cpf.isBlank()) {
 
                     request.setAttribute("mensagem", "Digite um CPF.");
-                    request.getRequestDispatcher("/WEB-INF/view/Aluno/verificarCpf.jsp")
+                    request.getRequestDispatcher("/WEB-INF/views/Aluno/verificarCpf.jsp")
                             .forward(request, response);
                     return;
                 }
@@ -61,7 +65,7 @@ public class InserirAlunoServlet extends HttpServlet {
                 if (!existe) {
 
                     request.setAttribute("mensagem", "CPF não autorizado.");
-                    request.getRequestDispatcher("/WEB-INF/view/Aluno/verificarCpf.jsp")
+                    request.getRequestDispatcher("/WEB-INF/views/Aluno/verificarCpf.jsp")
                             .forward(request, response);
                     return;
                 }
@@ -69,7 +73,7 @@ public class InserirAlunoServlet extends HttpServlet {
                 request.setAttribute("cpf", cpf);
 
                 RequestDispatcher dispatcher =
-                        request.getRequestDispatcher("/WEB-INF/view/Aluno/cadastrarAluno.jsp");
+                        request.getRequestDispatcher("/WEB-INF/views/Aluno/cadastrarAluno.jsp");
 
                 dispatcher.forward(request, response);
 
@@ -77,7 +81,7 @@ public class InserirAlunoServlet extends HttpServlet {
 
                 e.printStackTrace();
                 request.setAttribute("mensagem", "Erro ao verificar CPF.");
-                request.getRequestDispatcher("/WEB-INF/view/Aluno/verificarCpf.jsp")
+                request.getRequestDispatcher("/WEB-INF/views/Aluno/verificarCpf.jsp")
                         .forward(request, response);
             }
 
@@ -113,7 +117,7 @@ public class InserirAlunoServlet extends HttpServlet {
                 if (mensagem != null) {
 
                     request.setAttribute("mensagem", mensagem);
-                    request.getRequestDispatcher("/WEB-INF/view/Aluno/cadastrarAluno.jsp")
+                    request.getRequestDispatcher("/WEB-INF/views/Aluno/cadastrarAluno.jsp")
                             .forward(request, response);
                     return;
                 }

@@ -3,13 +3,11 @@ package servlet.TelefoneServlet;
 import dao.TelefoneDAO;
 import model.Telefone;
 
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 
 import java.io.IOException;
 
@@ -20,36 +18,48 @@ public class AtualizarTelefoneServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String idParametro = request.getParameter("id");
-        String numero = request.getParameter("numero");
-        String tipo = request.getParameter("tipo");
-
+        String mensagem;
         TelefoneDAO dao = new TelefoneDAO();
 
         try {
 
-            if (idParametro == null || numero == null || tipo == null || tipo.isBlank()) {
-                request.getSession().setAttribute("mensagem", "Campos inválidos.");
-            } else {
+            String idParam = request.getParameter("id");
+            String numero = request.getParameter("numero");
+            String tipo = request.getParameter("tipo");
 
-                int id = Integer.parseInt(idParametro);
+            if (idParam == null || idParam.isBlank()
+                    || numero == null || numero.isBlank()
+                    || tipo == null || tipo.isBlank()) {
 
-                Telefone telefone = new Telefone();
-                telefone.setId(id);
-                telefone.setNumero(numero);
-                telefone.setTipo(tipo);
-
-                if (dao.atualizar(telefone) > 0) {
-                    request.getSession().setAttribute("mensagem", "Telefone atualizado.");
-                } else {
-                    request.getSession().setAttribute("mensagem", "Erro ao atualizar telefone.");
-                }
+                mensagem = "Todos os campos são obrigatórios!";
+                request.getSession().setAttribute("mensagem", mensagem);
+                response.sendRedirect(request.getContextPath() + "/telefones");
+                return;
             }
 
+            int id = Integer.parseInt(idParam);
+
+            Telefone telefone = new Telefone();
+            telefone.setId(id);
+            telefone.setNumero(numero);
+            telefone.setTipo(tipo);
+
+            int linhasAfetadas = dao.atualizar(telefone);
+
+            if (linhasAfetadas > 0) {
+                mensagem = "Telefone atualizado com sucesso!";
+            } else {
+                mensagem = "Telefone não encontrado para atualização.";
+            }
+
+        } catch (NumberFormatException e) {
+            mensagem = "ID inválido!";
         } catch (Exception e) {
-            request.getSession().setAttribute("mensagem", "Erro ao atualizar telefone.");
+            e.printStackTrace();
+            mensagem = "Erro inesperado ao atualizar telefone.";
         }
 
+        request.getSession().setAttribute("mensagem", mensagem);
         response.sendRedirect(request.getContextPath() + "/telefones");
     }
 }

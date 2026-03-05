@@ -84,14 +84,24 @@ public class BoletimDAO {
 
     // READ - Buscar boletins pelo nome do aluno
     public List<Boletim> buscarPorNomeAluno(String nomeAluno) {
+
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         List<Boletim> boletins = new ArrayList<>();
 
-        String sql = "SELECT b.id, b.id_professor, b.id_aluno, b.nota_1, b.descricao_1, b.nota_2, b.descricao_2, b.aprovado, b.observacao, b.dt_criacao, p.materia, p.nome FROM boletim b JOIN professor p ON p.id = b.id_professor WHERE b.id_aluno = ?";
-
+        String sql = "SELECT b.id, b.id_professor, b.id_aluno, " +
+                "b.nota_1, b.descricao_1, " +
+                "b.nota_2, b.descricao_2, " +
+                "b.aprovado, b.observacao, " +
+                "b.dt_criacao, " +
+                "p.materia, p.nome " +
+                "FROM boletim b " +
+                "JOIN professor p ON p.id = b.id_professor " +
+                "JOIN aluno a ON a.id = b.id_aluno " +
+                "WHERE a.nome LIKE ?";
 
         try {
+
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, "%" + nomeAluno + "%");
 
@@ -122,6 +132,54 @@ public class BoletimDAO {
 
         return boletins;
     }
+
+    // READ - listar todos os boletins
+    public List<Boletim> listar() {
+
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        List<Boletim> boletins = new ArrayList<>();
+
+        String sql = "SELECT b.id, b.id_professor, b.id_aluno, " +
+                "b.nota_1, b.descricao_1, " +
+                "b.nota_2, b.descricao_2, " +
+                "b.aprovado, b.observacao, " +
+                "b.dt_criacao, " +
+                "p.materia, p.nome " +
+                "FROM boletim b " +
+                "JOIN professor p ON p.id = b.id_professor";
+
+        try {
+
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                boletins.add(new Boletim(
+                        rs.getInt("id"),
+                        rs.getInt("id_professor"),
+                        rs.getInt("id_aluno"),
+                        rs.getDouble("nota_1"),
+                        rs.getString("descricao_1"),
+                        rs.getDouble("nota_2"),
+                        rs.getString("descricao_2"),
+                        rs.getBoolean("aprovado"),
+                        rs.getString("observacao"),
+                        rs.getDate("dt_criacao"),
+                        rs.getString("materia"),
+                        rs.getString("nome")
+                ));
+            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        } finally {
+            conexao.desconectar(con);
+        }
+
+        return boletins;
+    }
+
 
     // UPDATE - atualizar boletim
     public int atualizar(Boletim boletim) {
