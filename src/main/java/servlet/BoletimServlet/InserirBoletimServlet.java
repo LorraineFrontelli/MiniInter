@@ -23,7 +23,7 @@ public class InserirBoletimServlet extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher =
-                request.getRequestDispatcher("/WEB-INF/view/Boletim/cadastrar.jsp");
+                request.getRequestDispatcher("/WEB-INF/views/Boletim/cadastrar.jsp");
 
         dispatcher.forward(request, response);
     }

@@ -90,7 +90,8 @@ public class AtualizarProfessorServlet extends HttpServlet {
                 int id = Integer.parseInt(idParametro);
                 LocalDate data = LocalDate.parse(dataParametro);
 
-                Professor professor = new Professor(id, nome, data, email, senha, materia, usuario);
+                Professor professor =
+                        new Professor(id, nome, data, email, senha, materia, usuario);
 
                 if (dao.atualizar(professor) > 0) {
                     request.getSession().setAttribute("mensagem", "Professor atualizado.");

@@ -22,12 +22,14 @@ public class BuscarBoletimServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
-        String mensagem = (String) session.getAttribute("mensagem");
+        HttpSession session = request.getSession(false);
 
-        if (mensagem != null) {
-            request.setAttribute("mensagem", mensagem);
-            session.removeAttribute("mensagem");
+        if (session != null) {
+            String mensagem = (String) session.getAttribute("mensagem");
+            if (mensagem != null) {
+                request.setAttribute("mensagem", mensagem);
+                session.removeAttribute("mensagem");
+            }
         }
 
         String filtro = request.getParameter("filtroAluno");
@@ -39,11 +41,15 @@ public class BuscarBoletimServlet extends HttpServlet {
 
             if (filtro != null && !filtro.trim().isEmpty()) {
 
+                filtro = filtro.trim();
+
                 try {
+                    // Se for número → busca por ID
                     int idAluno = Integer.parseInt(filtro);
                     boletins = dao.buscarPorAluno(idAluno);
 
                 } catch (NumberFormatException e) {
+                    // Se não for número → busca por nome
                     boletins = dao.buscarPorNomeAluno(filtro);
                 }
 
@@ -55,8 +61,15 @@ public class BuscarBoletimServlet extends HttpServlet {
                 }
 
             } else {
+                // Se não houver filtro → listar todos
+                boletins = dao.listar();
 
-                request.setAttribute("mensagem", "Informe o ID ou nome do aluno.");
+                if (boletins == null || boletins.isEmpty()) {
+                    request.setAttribute("mensagem", "Nenhum boletim cadastrado.");
+                } else {
+                    request.setAttribute("mensagem",
+                            "Foram encontrados " + boletins.size() + " boletins.");
+                }
             }
 
         } catch (Exception e) {
@@ -67,7 +80,8 @@ public class BuscarBoletimServlet extends HttpServlet {
         request.setAttribute("boletins", boletins);
 
         RequestDispatcher dispatcher =
-                request.getRequestDispatcher("/WEB-INF/view/Boletim/crudBoletim.jsp");
+                request.getRequestDispatcher("/WEB-INF/views/Boletim/crudBoletim.jsp");
+
         dispatcher.forward(request, response);
     }
 

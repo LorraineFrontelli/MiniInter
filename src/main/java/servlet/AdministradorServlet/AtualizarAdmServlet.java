@@ -92,6 +92,6 @@ public class AtualizarAdmServlet extends HttpServlet {
             request.getSession().setAttribute("mensagem", "Erro ao atualizar administrador.");
         }
 
-        response.sendRedirect(request.getContextPath() + "/admins");
+        response.sendRedirect(request.getContextPath() + "/administradores");
     }
 }

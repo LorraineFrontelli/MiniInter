@@ -3,13 +3,11 @@ package servlet.TelefoneServlet;
 import dao.TelefoneDAO;
 import model.Telefone;
 
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 
 import java.io.IOException;
 
@@ -25,44 +23,43 @@ public class InserirTelefoneServlet extends HttpServlet {
 
         try {
 
+            String idAlunoParam = request.getParameter("idAluno");
             String numero = request.getParameter("numero");
             String tipo = request.getParameter("tipo");
 
-            if (numero == null || numero.isBlank() || tipo == null) {
+            if (idAlunoParam == null || idAlunoParam.isBlank()
+                    || numero == null || numero.isBlank()
+                    || tipo == null || tipo.isBlank()) {
 
-                request.getSession().setAttribute("mensagem", "Campos inválidos!");
+                mensagem = "Todos os campos são obrigatórios!";
+                request.getSession().setAttribute("mensagem", mensagem);
                 response.sendRedirect(request.getContextPath() + "/telefones");
                 return;
             }
 
-            Telefone telefone = new Telefone();
+            int idAluno = Integer.parseInt(idAlunoParam);
 
-            telefone.setIdAluno(Integer.parseInt(request.getParameter("idAluno")));
+            Telefone telefone = new Telefone();
+            telefone.setIdAluno(idAluno);
             telefone.setNumero(numero);
             telefone.setTipo(tipo);
 
-            int id = dao.inserir(telefone);
+            int idGerado = dao.inserir(telefone);
 
-            if (id > 0) {
-                mensagem = "Telefone cadastrado!";
+            if (idGerado > 0) {
+                mensagem = "Telefone cadastrado com sucesso!";
             } else {
                 mensagem = "Erro ao cadastrar telefone.";
             }
 
-            request.getSession().setAttribute("mensagem", mensagem);
-            response.sendRedirect(request.getContextPath() + "/telefones");
-
         } catch (NumberFormatException e) {
-
-            e.printStackTrace();
-            request.getSession().setAttribute("mensagem", "Número inválido!");
-            response.sendRedirect(request.getContextPath() + "/telefones");
-
+            mensagem = "ID do aluno inválido!";
         } catch (Exception e) {
-
             e.printStackTrace();
-            request.getSession().setAttribute("mensagem", "Erro ao cadastrar telefone!");
-            response.sendRedirect(request.getContextPath() + "/telefones");
+            mensagem = "Erro inesperado ao cadastrar telefone.";
         }
+
+        request.getSession().setAttribute("mensagem", mensagem);
+        response.sendRedirect(request.getContextPath() + "/telefones");
     }
 }

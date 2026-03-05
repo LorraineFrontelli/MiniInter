@@ -1,6 +1,7 @@
 package servlet.ProfessorServlet;
 
 import dao.ProfessorDAO;
+import jakarta.servlet.RequestDispatcher;
 import model.Professor;
 
 import jakarta.servlet.ServletException;
@@ -75,33 +76,11 @@ public class BuscarProfessorServlet extends HttpServlet {
 
         String page = request.getParameter("page");
 
-        if (page != null) {
-            switch (page) {
-                case "notas":
-                    request.getRequestDispatcher("/WEB-INF/views/professor/notas.jsp")
-                            .forward(request, response);
-                    break;
-                case "lembretes":
-                    request.getRequestDispatcher("/WEB-INF/views/professor/lembretes.jsp")
-                            .forward(request, response);
-                    break;
-                case "estatisticas":
-                    request.getRequestDispatcher("/WEB-INF/views/professor/estatisticas.jsp")
-                            .forward(request, response);
-                    break;
-                case "perfil-professor":
-                    request.getRequestDispatcher("/WEB-INF/views/professor/perfil-professor.jsp")
-                            .forward(request, response);
-                    break;
-                case "buscar":
-                    request.getRequestDispatcher("/WEB-INF/views/professor/buscar.jsp")
-                            .forward(request, response);
-                default:
-                    request.getRequestDispatcher("/WEB-INF/views/autenticacao/login")
-                            .forward(request, response);
-                    break;
-            }
-        }
+        RequestDispatcher dispatcher =
+                request.getRequestDispatcher("/WEB-INF/views/Professor/crudProfessor.jsp");
+
+        dispatcher.forward(request, response);
+
     }
 
     @Override
