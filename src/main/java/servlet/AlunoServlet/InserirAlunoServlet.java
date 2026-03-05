@@ -26,11 +26,7 @@ public class InserirAlunoServlet extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher =
-<<<<<<< HEAD
-                request.getRequestDispatcher("/WEB-INF/views/Aluno/verificarCpf.jsp");
-=======
                 request.getRequestDispatcher("/WEB-INF/views/autenticacao/cadastro.jsp");
->>>>>>> 42425dd49d7f298b6d5886e2b1c040d77aad0fa0
 
         dispatcher.forward(request, response);
     }
