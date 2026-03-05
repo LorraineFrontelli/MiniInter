@@ -28,12 +28,26 @@
     </header>
     
     <main>
+<<<<<<< HEAD
         <form action="" class="formAutenticacao formMatricula">
             <h1>Fazer matrícula</h1>
             
             <label for="cpf" class="cpf">CPF
                 <input type="text" name="cpf" id="cpf" class="inputAutenticacao" placeholder="Insira seu CPF">
             </label>
+=======
+        <form action="${pageContext.request.contextPath}/aluno-create?acao=validarCpf"  method="post" class="formAutenticacao formCpf">
+            <h1>Verificar CPF</h1>
+
+            <label for="cpf" class="cpf">CPF
+                <input type="text" name="cpf" id="cpf" class="inputAutenticacao" placeholder="Insira seu CPF">
+            </label>
+            <button>Verificar</button>
+        </form>
+
+        <form action="${pageContext.request.contextPath}/aluno-create?acao=cadastrar" class="formAutenticacao formMatricula">
+            <h1>Fazer matrícula</h1>
+>>>>>>> 42425dd49d7f298b6d5886e2b1c040d77aad0fa0
 
             <label for="email" class="email">E-mail
                 <input type="email" name="email" id="email" class="inputAutenticacao" placeholder="Insira seu e-mail">
