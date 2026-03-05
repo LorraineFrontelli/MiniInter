@@ -90,7 +90,7 @@ public class LoginServlet extends HttpServlet {
             List<Professor> professores = professorDAO.listar();
 
             for (Professor professor : professores) {
-                if (professor.getEmail().equals(email) &&
+                if (professor.getUsuario().equals(email) &&
                         BCrypt.checkpw(senha, professor.getSenha())) {
                     request.getSession().setAttribute("usuario", professor);
                     response.sendRedirect(request.getContextPath() + "/professores?page=perfil-professor");

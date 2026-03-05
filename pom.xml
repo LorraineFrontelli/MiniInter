@@ -81,11 +81,6 @@
     <build>
         <finalName>MiniInter</finalName>
 
-        <resources>
-            <resource>
-                <directory>src/main/webapp</directory>
-            </resource>
-        </resources>
 
         <plugins>
             <plugin>

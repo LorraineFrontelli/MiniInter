@@ -15,7 +15,7 @@ public class TarefasDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         int idGerado = -1;
-        String sql = "INSERT INTO tarefas (id_aluno, tarefa, dt_criacao, dt_entrega) VALUES (?, ?, ?, ?) RETURNING id";
+        String sql = "INSERT INTO tarefa (id_aluno, tarefa, dt_criacao, dt_entrega) VALUES (?, ?, ?, ?) RETURNING id";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
@@ -44,7 +44,7 @@ public class TarefasDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         Tarefas tarefas  = null;
-        String sql = "SELECT * FROM tarefas WHERE id = ?";
+        String sql = "SELECT * FROM tarefa WHERE id = ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
@@ -74,7 +74,7 @@ public class TarefasDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         List<Tarefas> tarefas = new ArrayList<>();
-        String sql = "SELECT * FROM tarefas where id_aluno = ?";
+        String sql = "SELECT * FROM tarefa where id_aluno = ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
@@ -105,7 +105,7 @@ public class TarefasDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         List<Tarefas> tarefas = new ArrayList<>();
-        String sql = "SELECT * FROM tarefas";
+        String sql = "SELECT * FROM tarefa";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
@@ -135,7 +135,7 @@ public class TarefasDAO {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
         int retorno;
-        String sql = "UPDATE tarefas SET tarefa = ?, dt_entrega = ?WHERE id = ?";
+        String sql = "UPDATE tarefa SET tarefa = ?, dt_entrega = ?WHERE id = ?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);

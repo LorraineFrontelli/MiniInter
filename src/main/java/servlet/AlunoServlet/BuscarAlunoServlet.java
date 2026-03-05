@@ -9,10 +9,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Professor;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @WebServlet("/alunos")
 public class BuscarAlunoServlet extends HttpServlet {
@@ -29,6 +31,7 @@ public class BuscarAlunoServlet extends HttpServlet {
             session.removeAttribute("mensagem");
         }
 
+        Object usuario = session.getAttribute("usuario");
         String nome = request.getParameter("filtroNome");
         String matriculaParam = request.getParameter("filtroMatricula");
 
@@ -36,40 +39,62 @@ public class BuscarAlunoServlet extends HttpServlet {
         List<Aluno> alunos = new ArrayList<>();
 
         try {
+            if (usuario instanceof Professor) {
+                if (matriculaParam != null && !matriculaParam.trim().isEmpty()) {
 
-            if (matriculaParam != null && !matriculaParam.trim().isEmpty()) {
+                    int matricula = Integer.parseInt(matriculaParam);
+                    Aluno aluno = dao.buscarPorMatricula(matricula);
 
-                int matricula = Integer.parseInt(matriculaParam);
-                Aluno aluno = dao.buscarPorMatricula(matricula);
-
-                if (aluno == null) {
-                    request.setAttribute("mensagem", "Aluno não encontrado.");
+                    if (aluno == null) {
+                        request.setAttribute("mensagem", "Aluno não encontrado.");
+                    } else {
+                        alunos.add(aluno);
+                        request.setAttribute("mensagem", "Aluno encontrado.");
+                    }
                 } else {
-                    alunos.add(aluno);
-                    request.setAttribute("mensagem", "Aluno encontrado.");
+
+                    alunos = dao.buscarPorProf(((Professor) usuario).getId());
+
+                    if (alunos == null || alunos.isEmpty()) {
+                        request.setAttribute("mensagem", "Nenhum aluno cadastrado.");
+                    } else {
+                        request.setAttribute("mensagem", "Foram encontrados " + alunos.size() + " alunos.");
+                    }
                 }
-
-            } else if (nome != null && !nome.trim().isEmpty()) {
-
-                alunos = dao.buscarPorNome(nome);
-
-                if (alunos == null || alunos.isEmpty()) {
-                    request.setAttribute("mensagem", "Nenhum aluno encontrado.");
-                } else {
-                    request.setAttribute("mensagem", "Foram encontrados " + alunos.size() + " alunos.");
-                }
-
             } else {
+                if (matriculaParam != null && !matriculaParam.trim().isEmpty()) {
 
-                alunos = dao.listar();
+                    int matricula = Integer.parseInt(matriculaParam);
+                    Aluno aluno = dao.buscarPorMatricula(matricula);
 
-                if (alunos == null || alunos.isEmpty()) {
-                    request.setAttribute("mensagem", "Nenhum aluno cadastrado.");
+                    if (aluno == null) {
+                        request.setAttribute("mensagem", "Aluno não encontrado.");
+                    } else {
+                        alunos.add(aluno);
+                        request.setAttribute("mensagem", "Aluno encontrado.");
+                    }
+
+                } else if (nome != null && !nome.trim().isEmpty()) {
+
+                    alunos = dao.buscarPorNome(nome);
+
+                    if (alunos == null || alunos.isEmpty()) {
+                        request.setAttribute("mensagem", "Nenhum aluno encontrado.");
+                    } else {
+                        request.setAttribute("mensagem", "Foram encontrados " + alunos.size() + " alunos.");
+                    }
+
                 } else {
-                    request.setAttribute("mensagem", "Foram encontrados " + alunos.size() + " alunos.");
+
+                    alunos = dao.listar();
+
+                    if (alunos == null || alunos.isEmpty()) {
+                        request.setAttribute("mensagem", "Nenhum aluno cadastrado.");
+                    } else {
+                        request.setAttribute("mensagem", "Foram encontrados " + alunos.size() + " alunos.");
+                    }
                 }
             }
-
         } catch (NumberFormatException e) {
             request.setAttribute("mensagem", "Matrícula inválida.");
         } catch (Exception e) {

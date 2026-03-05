@@ -50,7 +50,7 @@
         <div class="cabecalhoPaginas">
             <img src="${pageContext.request.contextPath}/assets/img/themes-icon.svg" alt="" class="abrirTemas">
             <div class="tituloPaginas">
-                <h1>Seja bem-vindo, ${fn:split(sessionScope.usuarioLogado.nome, ' ')[0]}!</h1>
+                <h1>Seja bem-vindo, ${fn:split(sessionScope.usuario.nome, ' ')[0]}!</h1>
             </div>
             <a href="${pageContext.request.contextPath}/mensagens?page=conversas"><img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
         </div>

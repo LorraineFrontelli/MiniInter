@@ -106,6 +106,40 @@ public class AlunoDAO {
         return alunos;
     }
 
+
+    // READ - buscar aluno pelo professor
+    public List<Aluno> buscarPorProf(int id) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        List<Aluno> alunos = new ArrayList<>();
+        String sql = "SELECT a.* FROM Aluno a JOIN aluno_professor ap ON a.matricula = ap.id_aluno JOIN Professor p ON p.id = ap.id_professor WHERE p.id = ?";
+
+        try {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, id);
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                alunos.add(new Aluno(
+                        rs.getInt("matricula"),
+                        rs.getString("nome"),
+                        rs.getString("cpf"),
+                        rs.getDate("dt_inicio"),
+                        rs.getString("email"),
+                        rs.getString("senha")
+                ));
+            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        } finally {
+            conexao.desconectar(con);
+        }
+
+        return alunos;
+    }
+
     // READ - listar todos os alunos
     public List<Aluno> listar() {
         Conexao conexao = new Conexao();
