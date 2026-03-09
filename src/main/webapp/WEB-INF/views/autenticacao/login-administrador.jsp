@@ -26,7 +26,7 @@
     </header>
     
     <main>
-        <form action="${pageContext.request.contextPath}/login" method="POST" class="formAutenticacao formMatricula">
+        <form action="${pageContext.request.contextPath}/login-adm" method="POST" class="formAutenticacao formMatricula">
             <h1>Entrar como administrador</h1>
 
             <label for="login" class="login">Login

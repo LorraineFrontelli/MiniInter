@@ -7,10 +7,16 @@ public class Mensagem{
 
     // ATRIBUTOS
     private int id;
-    private int idProfessor;
-    private int idAluno;
+    private int idDestinatario;
+    private String tipoDestinatario;
+    private int idRemetente;
+    private String tipoRemetente;
     private String mensagem;
     private Timestamp dataMensagem;
+    private boolean lida;
+    private String nome;
+    private Timestamp dataUltimaMensagem;
+    private boolean temNaoLidas;
 
     // CONSTRUTOR VAZIO
 
@@ -19,60 +25,123 @@ public class Mensagem{
 
     // CONSTRUTOR SEM ID (para novos registros)
 
-    public Mensagem(int idProfessor, int idAluno, String mensagem,  Timestamp dataMensagem) {
-        this.idProfessor = idProfessor;
-        this.idAluno = idAluno;
+    public Mensagem(int idDestinatario, String tipoDestinatario, int idRemetente, String tipoRemetente, Timestamp dataMensagem, String mensagem, boolean lida) {
+        this.idDestinatario = idDestinatario;
+        this.tipoDestinatario = tipoDestinatario;
+        this.idRemetente = idRemetente;
+        this.tipoRemetente = tipoRemetente;
+        this.dataMensagem = dataMensagem;
         this.mensagem = mensagem;
-        this.dataMensagem =  dataMensagem;
+        this.lida = lida;
     }
 
-    // CONSTRUTOR COMPLETO (quando for carregar do BD)
+    // CONSTRUTOR COMPLETO
 
-    public Mensagem(int id, int idProfessor, int idAluno, String mensagem,  Timestamp dataMensagem) {
+    public Mensagem(int id, int idDestinatario, String tipoDestinatario, int idRemetente, String tipoRemetente, Timestamp dataMensagem, String mensagem, boolean lida) {
         this.id = id;
-        this.idProfessor = idProfessor;
-        this.idAluno = idAluno;
+        this.idDestinatario = idDestinatario;
+        this.tipoDestinatario = tipoDestinatario;
+        this.idRemetente = idRemetente;
+        this.tipoRemetente = tipoRemetente;
+        this.dataMensagem = dataMensagem;
+        this.mensagem = mensagem;
+        this.lida = lida;
+    }
+
+
+    // CONSTRUTOR COMPLETO COM NOME (quando for carregar do BD)
+
+    public Mensagem(int id, int idDestinatario, String tipoDestinatario, int idRemetente, String tipoRemetente, String mensagem, Timestamp dataMensagem, boolean lida, String nome) {
+        this.id = id;
+        this.idDestinatario = idDestinatario;
+        this.tipoDestinatario = tipoDestinatario;
+        this.idRemetente = idRemetente;
+        this.tipoRemetente = tipoRemetente;
         this.mensagem = mensagem;
         this.dataMensagem = dataMensagem;
+        this.lida = lida;
+        this.nome = nome;
     }
+
+    // CONSTRUTOR INCOMPLETO (para mostrar conversas que o usuario esta)
+
+    public Mensagem(int idDestinatario, String tipoDestinatario, int idRemetente, String tipoRemetente, String nome, Timestamp dataUltimaMensagem, boolean temNaoLidas) {
+        this.idDestinatario = idDestinatario;
+        this.tipoDestinatario = tipoDestinatario;
+        this.idRemetente = idRemetente;
+        this.tipoRemetente = tipoRemetente;
+        this.nome = nome;
+        this.dataUltimaMensagem = dataUltimaMensagem;
+        this.temNaoLidas = temNaoLidas;
+    }
+
 
     // GETTERS
 
     public int getId() {
-        return this.id;
+        return id;
     }
 
-
-    public int getIdProfessor() {
-        return this.idProfessor;
+    public int getIdDestinatario() {
+        return idDestinatario;
     }
 
- 
-    public int getIdAluno() {
-        return this.idAluno;
+    public String getTipoDestinatario() {
+        return tipoDestinatario;
     }
 
- 
+    public int getIdRemetente() {
+        return idRemetente;
+    }
+
+    public String getTipoRemetente() {
+        return tipoRemetente;
+    }
+
     public String getMensagem() {
-        return this.mensagem;
+        return mensagem;
     }
 
     public Timestamp getDataMensagem() {
-        return this.dataMensagem;
+        return dataMensagem;
     }
 
-    // SETTERS   
+    public boolean getLida() {
+        return lida;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public Timestamp getDataUltimaMensagem() {
+        return dataUltimaMensagem;
+    }
+
+    public boolean getTemNaoLidas() {
+        return temNaoLidas;
+    }
+
+    // SETTERS
 
     public void setId(int id) {
         this.id = id;
     }
 
-   public void setIdProfessor(int idProfessor) {
-        this.idProfessor = idProfessor;
-    }   
-    
-    public void setIdAluno(int idAluno) {
-        this.idAluno = idAluno;
+    public void setIdDestinatario(int idDestinatario) {
+        this.idDestinatario = idDestinatario;
+    }
+
+    public void setTipoDestinatario(String tipoDestinatario) {
+        this.tipoDestinatario = tipoDestinatario;
+    }
+
+    public void setIdRemetente(int idRemetente) {
+        this.idRemetente = idRemetente;
+    }
+
+    public void setTipoRemetente(String tipoRemetente) {
+        this.tipoRemetente = tipoRemetente;
     }
 
     public void setMensagem(String mensagem) {
@@ -83,16 +152,35 @@ public class Mensagem{
         this.dataMensagem = dataMensagem;
     }
 
+    public void setLida(boolean lida) {
+        this.lida = lida;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDataUltimaMensagem(Timestamp dataUltimaMensagem) {
+        this.dataUltimaMensagem = dataUltimaMensagem;
+    }
+
+    public void setTemNaoLidas(boolean temNaoLidas) {
+        this.temNaoLidas = temNaoLidas;
+    }
+
     // TO STRING
 
     @Override
     public String toString() {
         return "Mensagem{" +
                 "id=" + id +
-                ", idProfessor=" + idProfessor +
-                ", idAluno=" + idAluno +
+                ", idDestinatario=" + idDestinatario +
+                ", tipoDestinatario='" + tipoDestinatario + '\'' +
+                ", idRemetente=" + idRemetente +
+                ", tipoRemetente='" + tipoRemetente + '\'' +
                 ", mensagem='" + mensagem + '\'' +
                 ", dataMensagem=" + dataMensagem +
+                ", lida=" + lida +
                 '}';
     }
 }

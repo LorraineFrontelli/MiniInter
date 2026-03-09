@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -27,42 +29,71 @@
 </head>
 
 <body>
-    <main>
-        <div class="cabecalhoPaginas">
-            <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" onclick="history.back()" class="pincelVoltar">
-            <div class="buscarAlunos">
-                <search>
-                    <form action="">
-                        <input type="text" class="buscar" placeholder="Procurar conversas">
-                    </form>
-                </search>
-                <img src="${pageContext.request.contextPath}/assets/img/search-icon.svg" alt="">
-            </div>
-        </div>
+<main>
+    <div class="cabecalhoPaginas">
+        <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg"
+             alt="Ícone de voltar" onclick="history.back()" class="pincelVoltar">
 
-        <div class="buscaContainer">
-            <div class="resultadoBusca" onclick="window.location.href='chat.jsp'">
-                <div>
-                    <strong>Tainá Dias Martinelli</strong>
-                </div>
-                <a href="chat.jsp"><img src="${pageContext.request.contextPath}/assets/img/arrow-icon.svg" alt=""></a>
-            </div>
-            
-            <div class="resultadoBusca" onclick="window.location.href='chat.jsp'">
-                <div>
-                    <strong>Tainá Dias Martinelli</strong>
-                </div>
-                <a href="chat.jsp"><img src="${pageContext.request.contextPath}/assets/img/arrow-icon.svg" alt=""></a>
-            </div>
-            
-            <div class="resultadoBusca" onclick="window.location.href='chat.jsp'">
-                <div>
-                    <strong>Tainá Dias Martinelli</strong>
-                </div>
-                <a href="chat.jsp"><img src="${pageContext.request.contextPath}/assets/img/arrow-icon.svg" alt=""></a>
-            </div>
+        <div class="buscarAlunos">
+            <search>
+                <form action="${pageContext.request.contextPath}/mensagens" method="get">
+                    <input type="hidden" name="idRemetente"  value="${sessionScope.usuario.id}">
+                    <input type="hidden" name="tipoRemetente" value="${sessionScope.tipoUsuario}">
+                    <input type="text"   name="nomeFiltro" class="buscar" placeholder="Procurar conversas"
+                           value="${param.nomeFiltro}">
+                </form>
+            </search>
+            <img src="${pageContext.request.contextPath}/assets/img/search-icon.svg" alt="">
         </div>
-    </main>
+    </div>
+
+    <c:if test="${not empty mensagem}">
+        <p>${mensagem}</p>
+    </c:if>
+
+    <div class="buscaContainer">
+        <c:choose>
+            <c:when test="${not empty mensagens}">
+                <c:forEach items="${mensagens}" var="m">
+                    <div class="resultadoBusca"
+                         onclick="window.location.href='${pageContext.request.contextPath}/mensagens?idRemetente=${sessionScope.usuario.id}&tipoRemetente=${sessionScope.tipoUsuario}&idDestinatario=${m.idDestinatario}&tipoDestinatario=${m.tipoDestinatario}'">
+
+                        <div>
+                            <strong>${m.nome}</strong>
+
+                            <c:if test="${m.temNaoLidas}">
+                                <span class="badgeNaoLida">🔴</span>
+                            </c:if>
+
+                            <br>
+
+                            <time datetime="<fmt:formatDate value='${m.dataUltimaMensagem}' pattern='yyyy-MM-dd HH:mm'/>">
+                                <fmt:formatDate value="${m.dataUltimaMensagem}" pattern="dd/MM/yyyy HH:mm"/>
+                            </time>
+                        </div>
+
+                            <img src="${pageContext.request.contextPath}/assets/img/arrow-icon.svg" alt="Ver conversa">
+
+                    </div>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <p>Nenhuma conversa encontrada.</p>
+            </c:otherwise>
+        </c:choose>
+    </div>
+</main>
 </body>
-
+<script>
+    setInterval(function() {
+    fetch('${pageContext.request.contextPath}/mensagens?idRemetente=${sessionScope.usuario.id}&tipoRemetente=${sessionScope.tipoUsuario}')
+        .then(response => response.text())
+        .then(html => {
+            // atualiza só o container de conversas
+            let parser = new DOMParser();
+            let doc = parser.parseFromString(html, 'text/html');
+            document.querySelector('.buscaContainer').innerHTML =
+                doc.querySelector('.buscaContainer').innerHTML;
+        });
+}, 5000);</script>
 </html>

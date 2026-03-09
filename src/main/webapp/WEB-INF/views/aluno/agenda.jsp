@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -32,7 +33,7 @@
     <div class="meuPlaceholder"></div>
 
     <header class="headerLateral">
-        <img src="../../../assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
+        <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
         <nav>
             <ul>
                 <li><a href="${pageContext.request.contextPath}/alunos?page=perfil-aluno" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
@@ -52,7 +53,9 @@
             <div class="tituloPaginas">
                 <h1>Semana</h1>
             </div>
-            <a href="${pageContext.request.contextPath}/mensagens?page=conversas"><img src="../../../assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
+            <img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg"
+                 alt="" class="abrirChat"
+                 onclick="window.location.href='${pageContext.request.contextPath}/mensagens?idRemetente=${sessionScope.usuario.id}&tipoRemetente=${sessionScope.tipoUsuario}'">
         </div>
         
         <section class="sectionSemana">

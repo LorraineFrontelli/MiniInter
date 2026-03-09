@@ -1,108 +1,62 @@
 package servlet.ProfessorServlet;
 
-import dao.ProfessorDAO;
-import model.Professor;
-import utils.ValidacaoRegex;
-
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.time.LocalDate;
+
+import dao.ProfessorDAO;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
+import model.Professor;
 
 @WebServlet("/professor-update")
 public class AtualizarProfessorServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        String idParametro = request.getParameter("id");
-
-        if (idParametro == null || idParametro.isEmpty()) {
-            request.getSession().setAttribute("mensagem", "ID inválido.");
-            response.sendRedirect(request.getContextPath() + "/professores");
-            return;
-        }
-
-        try {
-
-            int id = Integer.parseInt(idParametro);
-
-            ProfessorDAO dao = new ProfessorDAO();
-            Professor professor = dao.buscarPorId(id);
-
-            if (professor == null) {
-                request.getSession().setAttribute("mensagem", "Professor não encontrado.");
-                response.sendRedirect(request.getContextPath() + "/professores");
-                return;
-            }
-
-            request.setAttribute("professorParaEditar", professor);
-
-            RequestDispatcher dispatcher =
-                    request.getRequestDispatcher("/WEB-INF/view/Professor/atualizarProfessor.jsp");
-
-            dispatcher.forward(request, response);
-
-        } catch (Exception e) {
-            request.getSession().setAttribute("mensagem", "Erro ao carregar professor.");
-            response.sendRedirect(request.getContextPath() + "/professores");
-        }
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String idParametro = request.getParameter("id");
-        String nome = request.getParameter("nome");
-        String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
-        String materia = request.getParameter("materia");
-        String usuario = request.getParameter("usuario");
-        String dataParametro = request.getParameter("dataContratacao");
-
-        ProfessorDAO dao = new ProfessorDAO();
+        HttpSession session = request.getSession();
 
         try {
 
-            if (idParametro == null || nome == null || email == null ||
-                    senha == null || materia == null || usuario == null ||
-                    dataParametro == null || nome.isBlank() || email.isBlank()) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            String nome = request.getParameter("nome");
+            String email = request.getParameter("email");
+            String senha = request.getParameter("senha");
+            String materia = request.getParameter("materia");
+            String usuario = request.getParameter("usuario");
+            String dataStr = request.getParameter("data");
 
-                request.getSession().setAttribute("mensagem", "Campos obrigatórios não preenchidos.");
+            LocalDate data = null;
 
-            } else if (!ValidacaoRegex.verificarEmail(email)) {
+            if (dataStr != null && !dataStr.isBlank()) {
+                data = LocalDate.parse(dataStr);
+            }
 
-                request.getSession().setAttribute("mensagem", "Email inválido.");
+            Professor professor =
+                    new Professor(id, nome, data, email, senha, materia, usuario);
 
-            } else if (!ValidacaoRegex.verificarSenha(senha)) {
+            ProfessorDAO dao = new ProfessorDAO();
 
-                request.getSession().setAttribute("mensagem", "Senha inválida.");
+            if (dao.atualizar(professor) > 0) {
+
+                session.setAttribute("mensagem", "Professor atualizado com sucesso!");
 
             } else {
 
-                int id = Integer.parseInt(idParametro);
-                LocalDate data = LocalDate.parse(dataParametro);
-
-                Professor professor = new Professor(id, nome, data, email, senha, materia, usuario);
-
-                if (dao.atualizar(professor) > 0) {
-                    request.getSession().setAttribute("mensagem", "Professor atualizado.");
-                } else {
-                    request.getSession().setAttribute("mensagem", "Erro ao atualizar professor.");
-                }
+                session.setAttribute("mensagem", "Erro ao atualizar professor.");
             }
 
         } catch (Exception e) {
-            request.getSession().setAttribute("mensagem", "Erro ao atualizar professor.");
+
+            e.printStackTrace();
+            session.setAttribute("mensagem", "Erro ao atualizar professor.");
+
         }
 
         response.sendRedirect(request.getContextPath() + "/professores");
+
     }
+
 }

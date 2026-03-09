@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/alunoProfessor")
+@WebServlet("/aluno-professor")
 public class BuscarAlunoProfServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,7 +41,7 @@ public class BuscarAlunoProfServlet extends HttpServlet {
         request.setAttribute("relacoes", lista);
 
         RequestDispatcher dispatcher =
-                request.getRequestDispatcher("/WEB-INF/view/AlunoProfessor/crudAlunoProfessor.jsp");
+                request.getRequestDispatcher("/WEB-INF/views/AlunoProfessor/crudAlunoProfessor.jsp");
         dispatcher.forward(request, response);
     }
 

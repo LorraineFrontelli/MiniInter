@@ -21,7 +21,7 @@ public class InserirAdmServlet extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher =
-                request.getRequestDispatcher("/WEB-INF/view/Admin/cadastrarAdmin.jsp");
+                request.getRequestDispatcher("/WEB-INF/views/administrador/tab-administrador.jsp");
 
         dispatcher.forward(request, response);
     }
@@ -54,7 +54,7 @@ public class InserirAdmServlet extends HttpServlet {
                 request.setAttribute("mensagem", mensagem);
 
                 RequestDispatcher dispatcher =
-                        request.getRequestDispatcher("/WEB-INF/view/Admin/cadastrarAdmin.jsp");
+                        request.getRequestDispatcher("/WEB-INF/views/administrador/tab-administrador.jsp");
 
                 dispatcher.forward(request, response);
                 return;
@@ -82,13 +82,13 @@ public class InserirAdmServlet extends HttpServlet {
             }
 
             request.getSession().setAttribute("mensagem", mensagem);
-            response.sendRedirect(request.getContextPath() + "/admins");
+            response.sendRedirect(request.getContextPath() + "/administradores");
 
         } catch (Exception e) {
 
             e.printStackTrace();
             request.getSession().setAttribute("mensagem", "Erro ao inserir registro!");
-            response.sendRedirect(request.getContextPath() + "/admins");
+            response.sendRedirect(request.getContextPath() + "/administradores");
         }
     }
 }

@@ -44,7 +44,7 @@ public class AtualizarAlunoProfServlet extends HttpServlet {
             request.setAttribute("apParaEditar", ap);
 
             RequestDispatcher dispatcher =
-                    request.getRequestDispatcher("/WEB-INF/view/AlunoProfessor/atualizar.jsp");
+                    request.getRequestDispatcher("/WEB-INF/views/AlunoProfessor/atualizar.jsp");
 
             dispatcher.forward(request, response);
 

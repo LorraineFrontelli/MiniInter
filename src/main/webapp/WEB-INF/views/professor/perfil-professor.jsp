@@ -1,4 +1,6 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -33,10 +35,10 @@
         <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
         <nav>
             <ul>
-                <li><a href="perfil-professor.jsp" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
-                <li><a href="buscar.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/search-icon.svg" decoding="async" alt="">Buscar</a></li></li>
-                <li><a href="lembretes.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/reminder-icon.svg" decoding="async" alt="">Lembretes</a></li></li>
-                <li><a href="estatisticas.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/statistics-icon.svg" decoding="async" alt="">Estatísticas</a></li>
+                <li><a href="${pageContext.request.contextPath}/professores?page=perfil-professor" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
+                <li><a href="${pageContext.request.contextPath}/professores?page=buscar" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/search-icon.svg" decoding="async" alt="">Buscar</a></li></li>
+                <li><a href="${pageContext.request.contextPath}/professores?page=lembretes" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/reminder-icon.svg" decoding="async" alt="">Lembretes</a></li></li>
+                <li><a href="${pageContext.request.contextPath}/professores?page=estatisticas" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/statistics-icon.svg" decoding="async" alt="">Estatísticas</a></li>
             </ul>
         </nav>
         <a href="${pageContext.request.contextPath}/autenticacao/login.jsp">
@@ -48,19 +50,20 @@
         <div class="cabecalhoPaginas">
             <img src="${pageContext.request.contextPath}/assets/img/themes-icon.svg" alt="" class="abrirTemas">
             <div class="tituloPaginas">
-                <h1>Seja bem-vindo, Fulano!</h1>
+                <h1>Seja bem-vindo, ${fn:split(sessionScope.usuario.nome, ' ')[0]}!</h1>
             </div>
-            <a href="${pageContext.request.contextPath}/chat/conversas.jsp"><img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
+            <img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg"
+                 alt="" class="abrirChat"
+                 onclick="window.location.href='${pageContext.request.contextPath}/mensagens?idRemetente=${sessionScope.usuario.id}&tipoRemetente=${sessionScope.tipoUsuario}'">
         </div>
 
         <div class="perfil">
             <div class="pessoa">
                 <img src="${pageContext.request.contextPath}/assets/img/art.png" alt="arte impressionista" class="arte">
                 <div class="informacoes">
-                    <h3>Fulano da Silva</h3>
-                    <h3>Disciplina: Matemática</h3>
-                    <h3>Telefone: (11)xxxxx-xxxx</h3>
-                    <h3>Email: fulano.silva@monart.com</h3>
+                    <h3>${sessionScope.usuario.nome}</h3>
+                    <h3>Disciplina: ${sessionScope.usuario.materia}</h3>
+                    <h3>Email: ${sessionScope.usuario.email}</h3>
                 </div>
             </div>
 
@@ -68,11 +71,29 @@
                 <img class="iconeEditar" src="${pageContext.request.contextPath}/assets/img/editar.svg" alt="ícone de editar">
             </button>
         </div>
-        
+
         <section class="notificacoes">
             <div class="nova mensagem">
                 <div class="barrinhaTema">
                     <h2>Mensagens recentes</h2>
+                </div>
+                <div class="listaRecentes">
+                    <c:choose>
+                        <c:when test="${not empty mensagensRecentes}">
+                            <c:forEach items="${mensagensRecentes}" var="m">
+                                <div class="itemRecente" onclick="window.location.href='${pageContext.request.contextPath}/mensagens?idRemetente=${sessionScope.usuario.id}&tipoRemetente=${sessionScope.usuarioTipo}&idDestinatario=${m.idDestinatario}&tipoDestinatario=${m.tipoDestinatario}'">
+                                    <strong>${m.nome}</strong>
+                                    <c:if test="${m.temNaoLidas}">
+                                        <span class="badgeNaoLida">🔴</span>
+                                    </c:if>
+                                    <p>${m.mensagem}</p>
+                                </div>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <p class="semMensagens">Nenhuma mensagem recente.</p>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </section>
@@ -80,15 +101,14 @@
 
     <dialog class="editarPerfil" id="editarPerfil">
         <button class="fecharPopUpEditar" onclick="editarPerfil.close()">X</button>
-        <form action="">
-            <label for="alterarTelefone">Telefone</label>
-            <input type="tel" name="alterarTelefone" id="alterarTelefone">
-            
+        <form action="${pageContext.request.contextPath}/professor-update" method="post">
+
             <label for="alterarEmail">E-mail</label>
-            <input type="email" name="alterarEmail" id="alterarEmail">
+            <input type="email" name="email" id="alterarEmail">
 
             <button class="salvarAlteracoes">Salvar</button>
         </form>
+        <p>${sessionScope.mensagem}</p>
     </dialog>
 </body>
 

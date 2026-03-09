@@ -39,5 +39,6 @@ build/
 .DS_Store
 
 ### Env ###
-src/main/resources/.env
-src\main\resources\.env
+.env
+*.env
+src/main/resources/.envnv

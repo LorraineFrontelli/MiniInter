@@ -55,6 +55,6 @@ public class DeletarAdmServlet extends HttpServlet {
         }
 
         request.getSession().setAttribute("mensagem", mensagem);
-        response.sendRedirect(request.getContextPath() + "/admins");
+        response.sendRedirect(request.getContextPath() + "/administradores");
     }
 }

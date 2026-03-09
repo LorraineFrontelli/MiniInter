@@ -190,6 +190,13 @@ input:focus, textarea:focus, button:focus {
     transition: 0.3s ease;
 }
 
+form:has(.abrirChat) {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
 .abrirTemas:hover, .abrirChat:hover {
     transform: scale(1.2);
 }

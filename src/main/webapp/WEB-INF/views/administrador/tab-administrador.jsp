@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -6,12 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Aplicando tema salvo -->
     <script>document.documentElement.style.setProperty("--tema", localStorage.getItem("corTema") || "#242021");</script>
- 
-    <!-- Preloads -->
 
-    <!-- Links -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/global.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/crud.css">
@@ -22,120 +19,164 @@
 </head>
 
 <body>
-    <div class="meuPlaceholder"></div>
+<div class="meuPlaceholder"></div>
 
-    <header class="headerLateral">
-        <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
-        <nav>
-            <ul>
-                <li><a href="tab-administrador.jsp" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Administrador</a></li>
-                <li><a href="tab-aluno.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Aluno</a></li>
-                <li><a href="tab-professor.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Professor</a></li>
-                <li><a href="tab-boletim.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Boletim</a></li>
-                <li><a href="tab-telefone.jsp" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Telefone</a></li>
-            </ul>
-        </nav>
-    </header>
+<header class="headerLateral">
+    <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
+    <nav>
+        <ul>
+            <li><a href="${pageContext.request.contextPath}/administradores" class="pagina ativo">
+                <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Administrador</a></li>
+            <li><a href="${pageContext.request.contextPath}/alunos" class="pagina">
+                <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Aluno</a></li>
+            <li><a href="${pageContext.request.contextPath}/professores" class="pagina">
+                <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Professor</a></li>
+            <li><a href="${pageContext.request.contextPath}/boletins" class="pagina">
+                <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Boletim</a></li>
+            <li><a href="${pageContext.request.contextPath}/telefones" class="pagina">
+                <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Telefone</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <main>
-        <div class="cabecalhoPaginas">
-            <a href="${pageContext.request.contextPath}/autenticacao/login.jsp">
-                <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
-            </a>
-            <div class="tituloPaginas">
-                <h1>Administrador</h1>
-            </div>
-            <img src="${pageContext.request.contextPath}/assets/img/themes-icon.svg" alt="" class="abrirTemas">
+<main>
+    <div class="cabecalhoPaginas">
+        <a href="${pageContext.request.contextPath}/login-adm">
+            <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
+        </a>
+        <div class="tituloPaginas">
+            <h1>Administrador</h1>
         </div>
-        
-        <div class="componentizacao">
-            <search>
-                <form action="" method="">
-                    <input type="search" id="buscarCrud" class="buscarCrud" name="buscarCrud" placeholder="Pesquisar">
-                </form>
-            </search>
+        <img src="${pageContext.request.contextPath}/assets/img/themes-icon.svg" alt="" class="abrirTemas">
+    </div>
 
-            <button class="botaoInsert" onclick="create.showModal()">
-                Fazer inserção
-                <img src="${pageContext.request.contextPath}/assets/img/plus-icon.svg" alt="">
-            </button>
-        </div>
+    <!-- Mensagem -->
+    <c:if test="${not empty mensagem}">
+        <p style="color: green; text-align:center;">${mensagem}</p>
+    </c:if>
 
-        <div class="tabelaContainer">
-            <table class="tabelaRead">
-                <thead>
-                    <tr>
-                        <th>Ações</th>
-                        <th>ID</th>
-                        <th>Login</th>
-                        <th>Senha</th>
-                        <th>CPF do Aluno</th>
-                    </tr>
-              </thead>
-              
-              <tbody>
-                    <tr>
-                        <td class="opcoes">
-                            <div>
-                                <img src="${pageContext.request.contextPath}/assets/img/update-icon.svg" alt="" class="botaoUpdate" onclick="update.showModal()">
-                                <img src="${pageContext.request.contextPath}/assets/img/delete-icon.svg" alt="" class="botaoDelete" onclick="deletes.showModal()">
-                            </div>
-                        </td>
-                        <td>1</td>
-                        <td>slaoq</td>
-                        <td>**************</td>
-                        <td>232.121.456-13</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
+    <div class="componentizacao">
+        <search>
+            <form action="${pageContext.request.contextPath}/administradores" method="get">
+                <input type="search" id="buscarCrud" class="buscarCrud"
+                       name="filtroLogin" placeholder="Pesquisar">
+            </form>
+        </search>
 
-    <!-- Create -->
-    <dialog class="create" id="create">
-        <button class="fecharPopUp" onclick="create.close()">X</button>
-        <form action="">
-            <label for="createLogin">Login</label>
-            <input type="text" name="createLogin" id="createLogin">
-            
-            <label for="createSenha">Senha</label>
-            <input type="password" name="createSenha" id="createSenha" min="8">
+        <button class="botaoInsert" onclick="create.showModal()">
+            Fazer inserção
+            <img src="${pageContext.request.contextPath}/assets/img/plus-icon.svg" alt="">
+        </button>
+    </div>
+
+    <div class="tabelaContainer">
+        <table class="tabelaRead">
+            <thead>
+            <tr>
+                <th>Ações</th>
+                <th>ID</th>
+                <th>Login</th>
+                <th>Senha</th>
+                <th>CPF do Aluno</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <c:forEach var="admin" items="${administradores}">
+                <tr>
+                    <td class="opcoes">
+                        <div>
+                            <!-- Update -->
+                            <button type="button"
+                                    onclick="abrirUpdate('${admin.id}','${admin.login}')">
+                                <img src="${pageContext.request.contextPath}/assets/img/update-icon.svg" alt="">
+                            </button>
+
+                            <!-- Delete -->
+                            <button type="button"
+                                    onclick="abrirDelete('${admin.id}')">
+                                <img src="${pageContext.request.contextPath}/assets/img/delete-icon.svg" alt="">
+                            </button>
+                        </div>
+                    </td>
+                    <td>${admin.id}</td>
+                    <td>${admin.login}</td>
+                    <td>********</td>
+                    <td>
+                        <c:forEach var="cpf" items="${admin.alunoCpf}">
+                            ${cpf}<br>
+                        </c:forEach>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+
+        </table>
+    </div>
+</main>
+
+<!-- Create -->
+<dialog class="create" id="create">
+    <button class="fecharPopUp" onclick="create.close()">X</button>
+    <form action="${pageContext.request.contextPath}/admin-create" method="post">
+        <label>Login</label>
+        <input type="text" name="login">
+
+        <label>Senha</label>
+        <input type="password" name="senha" min="8">
 
             <label for="createCpfAluno">CPF do Aluno (Arquivo Excel .xlsx)</label>
-            <input type="file" name="createCpf" id="createCpf" accept=".xlsx">
+            <input type="file" name="alunoCpf" id="createCpf" accept=".xlsx">
 
-            <button class="salvarInsercao">Inserir</button>
-        </form>
-    </dialog>
-    
-    <!-- Update -->
-    <dialog class="update" id="update">
-        <button class="fecharPopUp" onclick="update.close()">X</button>
-        <form action="">
-            <label for="updateLogin">Login</label>
-            <input type="text" name="updateLogin" id="updateLogin">
-            
-            <label for="updateSenha">Senha</label>
-            <input type="password" name="updateSenha" id="updateSenha" min="8">
+        <button class="salvarInsercao" type="submit">Inserir</button>
+    </form>
+</dialog>
+
+<!-- Update -->
+<dialog class="update" id="update">
+    <button class="fecharPopUp" onclick="update.close()">X</button>
+    <form action="${pageContext.request.contextPath}/admin-update" method="post">
+        <input type="hidden" name="id" id="updateId">
+
+        <label>Login</label>
+        <input type="text" name="login" id="updateLogin">
+
+        <label>Senha</label>
+        <input type="password" name="senha" min="8">
 
             <label for="updateCpfAluno">CPF do Aluno (Arquivo Excel .xlsx)</label>
-            <input type="file" name="updateCpf" id="updateCpf" accept=".xlsx">
+            <input type="file" name="alunoCpf" id="updateCpf" accept=".xlsx">
 
-            <button class="salvarAlteracoes">Atualizar</button>
-        </form>
-    </dialog>
-    
-    <!-- Delete -->
-    <dialog class="deletes" id="deletes">
-        <button class="fecharPopUp" onclick="deletes.close()">X</button>
-        <form action="">
-            <h2>Deseja realmente excluir?</h2>
+        <button class="salvarAlteracoes" type="submit">Atualizar</button>
+    </form>
+</dialog>
 
-            <div>
-                <button class="cancelarDeletar" type="button" onclick="deletes.close()">Cancelar</button>
-                <button class="deletar">Excluir</button>
-            </div>
-        </form>
-    </dialog>
+<!-- Delete -->
+<dialog class="deletes" id="deletes">
+    <button class="fecharPopUp" onclick="deletes.close()">X</button>
+    <form action="${pageContext.request.contextPath}/admin-delete" method="post">
+        <input type="hidden" name="id" id="deleteId">
+
+        <h2>Deseja realmente excluir?</h2>
+        <div>
+            <button class="cancelarDeletar" type="button" onclick="deletes.close()">Cancelar</button>
+            <button class="deletar" type="submit">Excluir</button>
+        </div>
+    </form>
+</dialog>
+
+<script>
+    function abrirUpdate(id, login) {
+        document.getElementById("updateId").value = id;
+        document.getElementById("updateLogin").value = login;
+        update.showModal();
+    }
+
+    function abrirDelete(id) {
+        document.getElementById("deleteId").value = id;
+        deletes.showModal();
+    }
+</script>
+
 </body>
 </html>

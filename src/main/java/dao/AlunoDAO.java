@@ -73,6 +73,41 @@ public class AlunoDAO {
         return aluno;
     }
 
+
+    // READ - buscar aluno pela matricula e professor
+    public Aluno buscarPorMatriculaEProfessor(int matricula, int idProfessor) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        Aluno aluno = null;
+        String sql = "SELECT a.* FROM Aluno a JOIN aluno_professor ap ON a.matricula = ap.id_aluno WHERE a.matricula = ? AND ap.id_professor= ?";
+
+        try {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, matricula);
+            pst.setInt(2, idProfessor);
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                aluno = new Aluno(
+                        rs.getInt("matricula"),
+                        rs.getString("nome"),
+                        rs.getString("cpf"),
+                        rs.getDate("dt_inicio"),
+                        rs.getString("email"),
+                        rs.getString("senha")
+                );
+            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        } finally {
+            conexao.desconectar(con);
+        }
+
+        return aluno;
+    }
+
     // READ - buscar aluno pelo nome
     public List<Aluno> buscarPorNome(String nome) {
         Conexao conexao = new Conexao();
@@ -83,6 +118,40 @@ public class AlunoDAO {
         try {
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, "%" + nome + "%");
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                alunos.add(new Aluno(
+                        rs.getInt("matricula"),
+                        rs.getString("nome"),
+                        rs.getString("cpf"),
+                        rs.getDate("dt_inicio"),
+                        rs.getString("email"),
+                        rs.getString("senha")
+                ));
+            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        } finally {
+            conexao.desconectar(con);
+        }
+
+        return alunos;
+    }
+
+
+    // READ - buscar aluno pelo professor
+    public List<Aluno> buscarPorProf(int id) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        List<Aluno> alunos = new ArrayList<>();
+        String sql = "SELECT a.* FROM Aluno a JOIN aluno_professor ap ON a.matricula = ap.id_aluno JOIN Professor p ON p.id = ap.id_professor WHERE p.id = ?";
+
+        try {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, id);
 
             ResultSet rs = pst.executeQuery();
 

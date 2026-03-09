@@ -1,6 +1,7 @@
-package servlet;
+package servlet.autentificacao;
 
 import dao.*;
+import jakarta.servlet.http.HttpSession;
 import model.Administrador;
 import model.Aluno;
 import model.Professor;
@@ -36,50 +37,77 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("login");
         String senha = request.getParameter("senha");
 
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            String emailAuto = (String) session.getAttribute("login");
+            String senhaAuto = (String) session.getAttribute("senha");
+
+            if (emailAuto != null && senhaAuto != null) {
+                email = emailAuto;
+                senha = senhaAuto;
+                session.removeAttribute("login");
+                session.removeAttribute("senha");
+            }
+        }
+
         AdministradorDAO admDAO = new AdministradorDAO();
         AlunoDAO alunoDAO = new AlunoDAO();
         ProfessorDAO professorDAO = new ProfessorDAO();
         AlunoProfessorDAO alunoProfessorDAO = new AlunoProfessorDAO();
-        TelefoneDAO  telefoneDAO = new TelefoneDAO();
+        TelefoneDAO telefoneDAO = new TelefoneDAO();
         BoletimDAO boletimDAO = new BoletimDAO();
         TarefasDAO tarefasDAO = new TarefasDAO();
 
         try {
 
-            List<Administrador> admins = admDAO.listar();
-
-            for (Administrador admin : admins) {
-                if (admin.getLogin().equals(email) &&
-                        BCrypt.checkpw(senha, admin.getSenha())) {
-
-                    request.getSession().setAttribute("usuario", admin);
-                    response.sendRedirect(request.getContextPath() + "/administradores");
-                    return;
-                }
-            }
-
+            // =========================
+            // LOGIN ALUNO
+            // =========================
             List<Aluno> alunos = alunoDAO.listar();
 
             for (Aluno aluno : alunos) {
                 if (aluno.getEmail().equals(email) &&
                         BCrypt.checkpw(senha, aluno.getSenha())) {
+
                     request.getSession().setAttribute("usuario", aluno);
-                    request.getSession().setAttribute("alunoProfessor", alunoProfessorDAO.buscarPorIdAluno(aluno.getMatricula()));
-                    request.getSession().setAttribute("telefoneAluno", telefoneDAO.listarIdAluno(aluno.getMatricula()));
-                    request.getSession().setAttribute("boletim", boletimDAO.buscarPorAluno(aluno.getMatricula()));
-                    request.getSession().setAttribute("tarefas", tarefasDAO.listarIdAluno(aluno.getMatricula()));
-                    response.sendRedirect(request.getContextPath() + "/alunos?page=perfil-aluno");
+
+                    request.getSession().setAttribute("alunoProfessor",
+                            alunoProfessorDAO.buscarPorIdAluno(aluno.getMatricula()));
+
+                    request.getSession().setAttribute("telefoneAluno",
+                            telefoneDAO.listarIdAluno(aluno.getMatricula()));
+
+                    request.getSession().setAttribute("boletim",
+                            boletimDAO.buscarPorAluno(aluno.getMatricula()));
+
+                    request.getSession().setAttribute("tarefas",
+                            tarefasDAO.listarIdAluno(aluno.getMatricula()));
+
+                    request.getSession().setAttribute("tipoUsuario",
+                            "ALUNO");
+
+                    response.sendRedirect(request.getContextPath()
+                            + "/alunos?page=perfil-aluno");
                     return;
                 }
             }
 
+            // =========================
+            // LOGIN PROFESSOR
+            // =========================
             List<Professor> professores = professorDAO.listar();
 
             for (Professor professor : professores) {
-                if (professor.getEmail().equals(email) &&
+                if (professor.getUsuario().equals(email) &&
                         BCrypt.checkpw(senha, professor.getSenha())) {
+
                     request.getSession().setAttribute("usuario", professor);
-                    response.sendRedirect(request.getContextPath() + "/professores?page=perfil-professor");
+                    request.getSession().setAttribute("tipoUsuario",
+                            "PROFESSOR");
+
+                    response.sendRedirect(request.getContextPath()
+                            + "/professores?page=perfil-professor");
                     return;
                 }
             }
@@ -89,7 +117,6 @@ public class LoginServlet extends HttpServlet {
                     .forward(request, response);
 
         } catch (Exception e) {
-
             e.printStackTrace();
 
             request.setAttribute("mensagem", "Erro ao realizar login.");
