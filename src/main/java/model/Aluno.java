@@ -60,6 +60,10 @@ public class Aluno {
         return senha;
     }
 
+    public int getId() {
+        return matricula;
+    }
+
     // SETTERS
     public void setMatricula(int matricula) {
         this.matricula = matricula;
@@ -83,6 +87,10 @@ public class Aluno {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public  void setId(int matricula) {
+        this.matricula = matricula;
     }
 
     // TO STRING

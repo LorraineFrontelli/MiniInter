@@ -97,7 +97,7 @@
                 <div class="barrinhaTema">
                     <h2>Nova atividade</h2>
                     <h3><c:forEach var="tar" items="${sessionScope.tarefas}" varStatus="status">
-                        ${tar.tarefas}<c:if test="${!status.last}"> / </c:if>
+                        ${tar.tarefa}<c:if test="${!status.last}"> / </c:if>
                     </c:forEach></h3>
                 </div>
             </div>

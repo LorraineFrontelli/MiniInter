@@ -85,7 +85,7 @@ public class LoginServlet extends HttpServlet {
                             tarefasDAO.listarIdAluno(aluno.getMatricula()));
 
                     request.getSession().setAttribute("tipoUsuario",
-                            "ALUNO");
+                            "aluno");
 
                     response.sendRedirect(request.getContextPath()
                             + "/alunos?page=perfil-aluno");
@@ -104,7 +104,7 @@ public class LoginServlet extends HttpServlet {
 
                     request.getSession().setAttribute("usuario", professor);
                     request.getSession().setAttribute("tipoUsuario",
-                            "PROFESSOR");
+                            "professor");
 
                     response.sendRedirect(request.getContextPath()
                             + "/professores?page=perfil-professor");
