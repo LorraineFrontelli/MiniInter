@@ -148,3 +148,36 @@ h2 {
 .fecharPopUpEditar:hover {
     filter: grayscale(0.6) saturate(1.8) contrast(0.9);
 }
+
+.itemRecente {
+    display: flex;
+    flex-direction: column;
+    padding: 1.2vh 1vw;
+    border-bottom: 1.5px dashed var(--vintage-gold);
+    cursor: pointer;
+    font-size: 1vw;
+    transition: 0.2s ease;
+    gap: 0.4vh;
+}
+
+.itemRecente:hover {
+    background-color: var(--vintage-cream);
+    border-radius: 0.5vw;
+}
+
+.itemRecente:last-child {
+    border-bottom: none;
+}
+
+.itemRecente strong {
+    font-size: 1.05vw;
+}
+
+.itemRecente p {
+    margin: 0;
+    font-size: 0.9vw;
+    color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

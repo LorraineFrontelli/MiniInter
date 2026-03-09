@@ -1,5 +1,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -51,7 +52,9 @@
             <div class="tituloPaginas">
                 <h1>Seja bem-vindo, ${fn:split(sessionScope.usuario.nome, ' ')[0]}!</h1>
             </div>
-            <a href="${pageContext.request.contextPath}/mensagens?page=conversas"><img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
+            <img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg"
+                 alt="" class="abrirChat"
+                 onclick="window.location.href='${pageContext.request.contextPath}/mensagens?idRemetente=${sessionScope.usuario.id}&tipoRemetente=${sessionScope.tipoUsuario}'">
         </div>
 
         <div class="perfil">
@@ -68,11 +71,29 @@
                 <img class="iconeEditar" src="${pageContext.request.contextPath}/assets/img/editar.svg" alt="ícone de editar">
             </button>
         </div>
-        
+
         <section class="notificacoes">
             <div class="nova mensagem">
                 <div class="barrinhaTema">
                     <h2>Mensagens recentes</h2>
+                </div>
+                <div class="listaRecentes">
+                    <c:choose>
+                        <c:when test="${not empty mensagensRecentes}">
+                            <c:forEach items="${mensagensRecentes}" var="m">
+                                <div class="itemRecente" onclick="window.location.href='${pageContext.request.contextPath}/mensagens?idRemetente=${sessionScope.usuario.id}&tipoRemetente=${sessionScope.usuarioTipo}&idDestinatario=${m.idDestinatario}&tipoDestinatario=${m.tipoDestinatario}'">
+                                    <strong>${m.nome}</strong>
+                                    <c:if test="${m.temNaoLidas}">
+                                        <span class="badgeNaoLida">🔴</span>
+                                    </c:if>
+                                    <p>${m.mensagem}</p>
+                                </div>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <p class="semMensagens">Nenhuma mensagem recente.</p>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </section>

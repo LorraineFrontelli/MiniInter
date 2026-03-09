@@ -52,7 +52,9 @@
             <div class="tituloPaginas">
                 <h1>Notas</h1>
             </div>
-            <a href="${pageContext.request.contextPath}/mensagens?page=conversas"><img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
+            <img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg"
+                 alt="" class="abrirChat"
+                 onclick="window.location.href='${pageContext.request.contextPath}/mensagens?idRemetente=${sessionScope.usuario.id}&tipoRemetente=${sessionScope.tipoUsuario}'">
         </div>
 
         <div class="tabelaContainer">

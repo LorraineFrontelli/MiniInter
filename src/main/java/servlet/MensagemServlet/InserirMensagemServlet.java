@@ -37,8 +37,6 @@ public class InserirMensagemServlet extends HttpServlet {
 
             Mensagem mensagem = new Mensagem();
 
-            mensagem.setIdProfessor(Integer.parseInt(request.getParameter("idProfessor")));
-            mensagem.setIdAluno(Integer.parseInt(request.getParameter("idAluno")));
             mensagem.setMensagem(texto);
             mensagem.setDataMensagem(new Timestamp(System.currentTimeMillis()));
 

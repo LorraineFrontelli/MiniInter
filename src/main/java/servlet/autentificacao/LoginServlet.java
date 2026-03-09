@@ -71,7 +71,6 @@ public class LoginServlet extends HttpServlet {
                         BCrypt.checkpw(senha, aluno.getSenha())) {
 
                     request.getSession().setAttribute("usuario", aluno);
-                    request.getSession().setAttribute("tipoUsuario", "aluno");
 
                     request.getSession().setAttribute("alunoProfessor",
                             alunoProfessorDAO.buscarPorIdAluno(aluno.getMatricula()));
@@ -84,6 +83,9 @@ public class LoginServlet extends HttpServlet {
 
                     request.getSession().setAttribute("tarefas",
                             tarefasDAO.listarIdAluno(aluno.getMatricula()));
+
+                    request.getSession().setAttribute("tipoUsuario",
+                            "ALUNO");
 
                     response.sendRedirect(request.getContextPath()
                             + "/alunos?page=perfil-aluno");
@@ -101,7 +103,8 @@ public class LoginServlet extends HttpServlet {
                         BCrypt.checkpw(senha, professor.getSenha())) {
 
                     request.getSession().setAttribute("usuario", professor);
-                    request.getSession().setAttribute("tipoUsuario", "professor");
+                    request.getSession().setAttribute("tipoUsuario",
+                            "PROFESSOR");
 
                     response.sendRedirect(request.getContextPath()
                             + "/professores?page=perfil-professor");

@@ -62,6 +62,6 @@ public class AtualizarBoletimServlet extends HttpServlet {
             request.getSession().setAttribute("mensagem", "Erro ao atualizar boletim.");
         }
 
-        response.sendRedirect(request.getContextPath() + "/boletins");
+        response.sendRedirect(request.getContextPath() + "/professores?page=notas&matricula="+Integer.parseInt(request.getParameter("idAluno")));
     }
 }

@@ -55,7 +55,9 @@
             </search>
             <img src="${pageContext.request.contextPath}/assets/img/search-icon.svg" alt="">
         </div>
-        <a href="${pageContext.request.contextPath}/mensagens?page=conversas"><img src="${pageContext.request.contextPath}assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
+        <img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg"
+             alt="" class="abrirChat"
+             onclick="window.location.href='${pageContext.request.contextPath}/mensagens?idRemetente=${sessionScope.usuario.id}&tipoRemetente=${sessionScope.tipoUsuario}'">
     </div>
 
 
@@ -71,7 +73,7 @@
                     <br>
                     <span><b>Matrícula:</b> ${aluno.matricula}</span>
                 </div>
-                <a href="${pageContext.request.contextPath}/professores?page=notas">
+                <a href="${pageContext.request.contextPath}/professores?page=notas&matricula=${aluno.matricula}">
                     <img src="${pageContext.request.contextPath}/assets/img/see-more-icon.svg" alt="Ver mais">
                 </a>
             </div>

@@ -1,8 +1,7 @@
 package servlet.ProfessorServlet;
 
-import dao.ProfessorDAO;
-import jakarta.servlet.RequestDispatcher;
-import model.Professor;
+import dao.*;
+import model.*;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,6 +23,7 @@ public class BuscarProfessorServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         String mensagem = (String) session.getAttribute("mensagem");
+        Professor usuario = (Professor) session.getAttribute("usuario");
 
         if (mensagem != null) {
             request.setAttribute("mensagem", mensagem);
@@ -76,10 +76,68 @@ public class BuscarProfessorServlet extends HttpServlet {
 
         String page = request.getParameter("page");
 
-        RequestDispatcher dispatcher =
-                request.getRequestDispatcher("/WEB-INF/views/Professor/crudProfessor.jsp");
+        if (page != null) {
+            AlunoDAO alunoDAO = new AlunoDAO();
+            switch (page) {
+                case "notas":
 
-        dispatcher.forward(request, response);
+                    String matriculaParam = request.getParameter("matricula");
+                    int matricula = Integer.parseInt(matriculaParam);
+
+                    Aluno aluno = alunoDAO.buscarPorMatriculaEProfessor(matricula, usuario.getId());
+                    BoletimDAO boletimDAO = new BoletimDAO();
+                    Boletim boletim = boletimDAO.buscarPorAlunoEProfessor(matricula, usuario.getId());
+                    TelefoneDAO telefoneDAO = new TelefoneDAO();
+                    List<Telefone> telefones = telefoneDAO.listarIdAluno(matricula);
+                    AlunoProfessorDAO alunoProfessorDAO = new AlunoProfessorDAO();
+                    AlunoProfessor alunoProfessor = alunoProfessorDAO.buscarPorIdAluno(matricula);
+
+                    request.setAttribute("aluno", aluno);
+                    request.setAttribute("boletim", boletim);
+                    request.setAttribute("telefones", telefones);
+                    request.setAttribute("alunoProfessor", alunoProfessor);
+
+                    request.getRequestDispatcher("/WEB-INF/views/professor/notas.jsp")
+                            .forward(request, response);
+                    break;
+                case "lembretes":
+                    request.getRequestDispatcher("/WEB-INF/views/professor/lembretes.jsp")
+                            .forward(request, response);
+                    break;
+                case "estatisticas":
+                    request.getRequestDispatcher("/WEB-INF/views/professor/estatisticas.jsp")
+                            .forward(request, response);
+                    break;
+                case "perfil-professor":
+                    MensagemDAO mensagemDAO = new MensagemDAO();
+                    List<Mensagem> mensagensRecentes = mensagemDAO.listarHistoricoRecente(
+                            usuario.getId(), "PROFESSOR", 5
+                    );
+                    request.setAttribute("mensagensRecentes", mensagensRecentes);
+                    request.getRequestDispatcher("/WEB-INF/views/professor/perfil-professor.jsp")
+                            .forward(request, response);
+                    break;
+                case "buscar":
+                        List<Aluno> alunos = alunoDAO.buscarPorProf(usuario.getId());
+
+                        request.setAttribute("alunos", alunos);
+
+                        if (alunos == null || alunos.isEmpty()) {
+                            request.setAttribute("mensagem", "Nenhum aluno encontrado.");
+                        } else {
+                            request.setAttribute("mensagem",
+                                    "Foram encontrados " + alunos.size() + " alunos.");
+                        }
+
+                    request.getRequestDispatcher("/WEB-INF/views/professor/buscar.jsp")
+                            .forward(request, response);
+                        break;
+                default:
+                    request.getRequestDispatcher("/WEB-INF/views/autenticacao/login")
+                            .forward(request, response);
+                    break;
+            }
+        }
 
     }
 
