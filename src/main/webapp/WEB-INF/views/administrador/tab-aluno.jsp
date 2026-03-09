@@ -27,9 +27,9 @@
         <ul>
             <li><a href="${pageContext.request.contextPath}/administradores" class="pagina">Administrador</a></li>
             <li><a href="${pageContext.request.contextPath}/alunos" class="pagina ativo">Aluno</a></li>
-            <li><a href="tab-professor.jsp" class="pagina">Professor</a></li>
-            <li><a href="tab-boletim.jsp" class="pagina">Boletim</a></li>
-            <li><a href="tab-telefone.jsp" class="pagina">Telefone</a></li>
+            <li><a href="${pageContext.request.contextPath}/professores" class="pagina">Professor</a></li>
+            <li><a href="${pageContext.request.contextPath}/boletins" class="pagina">Boletim</a></li>
+            <li><a href="${pageContext.request.contextPath}/telefones" class="pagina">Telefone</a></li>
         </ul>
     </nav>
 </header>

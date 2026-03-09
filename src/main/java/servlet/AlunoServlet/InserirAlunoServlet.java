@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,7 +36,6 @@ public class InserirAlunoServlet extends HttpServlet {
 
         String acao = request.getParameter("acao");
         HttpSession session = request.getSession();
-        Boolean validacao = (Boolean) session.getAttribute("validacao");
 
         if ("validarCpf".equals(acao)) {
 
@@ -54,9 +52,7 @@ public class InserirAlunoServlet extends HttpServlet {
                     return;
                 }
 
-
                 boolean existe = admDAO.cpfExiste(cpf);
-                session.setAttribute("validacao", existe);
 
                 if (!existe) {
 
@@ -69,7 +65,7 @@ public class InserirAlunoServlet extends HttpServlet {
                 request.setAttribute("cpf", cpf);
 
                 RequestDispatcher dispatcher =
-                        request.getRequestDispatcher("/WEB-INF/views/Aluno/cadastrarAluno.jsp");
+                        request.getRequestDispatcher("/WEB-INF/views/administrador/tab-alunos.jsp");
 
                 dispatcher.forward(request, response);
 
@@ -80,8 +76,10 @@ public class InserirAlunoServlet extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/views/Aluno/verificarCpf.jsp")
                         .forward(request, response);
             }
+        }
 
-        } else if ("cadastrar".equals(acao) && Boolean.TRUE.equals(validacao)) {
+        // ===== CADASTRAR ALUNO =====
+        else if ("cadastrar".equals(acao)) {
 
             String mensagem = null;
             AlunoDAO dao = new AlunoDAO();
@@ -100,12 +98,14 @@ public class InserirAlunoServlet extends HttpServlet {
                         senha == null || senha.isBlank()) {
 
                     mensagem = "Campos obrigatórios não preenchidos!";
+                }
 
-                } else if (!ValidacaoRegex.verificarEmail(email)) {
+                else if (!ValidacaoRegex.verificarEmail(email)) {
 
                     mensagem = "Email inválido!";
+                }
 
-                } else if (!ValidacaoRegex.verificarSenha(senha)) {
+                else if (!ValidacaoRegex.verificarSenha(senha)) {
 
                     mensagem = "Senha inválida!";
                 }
@@ -113,7 +113,8 @@ public class InserirAlunoServlet extends HttpServlet {
                 if (mensagem != null) {
 
                     request.setAttribute("mensagem", mensagem);
-                    request.getRequestDispatcher("/WEB-INF/views/Aluno/cadastrarAluno.jsp")
+
+                    request.getRequestDispatcher("/WEB-INF/views/administrador/tab-alunos.jsp")
                             .forward(request, response);
                     return;
                 }
@@ -133,22 +134,26 @@ public class InserirAlunoServlet extends HttpServlet {
 
                 if (retorno > 0) {
                     mensagem = "Aluno cadastrado com sucesso!";
-                    HttpSession loginSession = request.getSession();
-                    loginSession.setAttribute("login", email);
-                    loginSession.setAttribute("senha", senha);
                 } else {
                     mensagem = "Erro ao cadastrar aluno.";
                 }
 
-                request.getSession().setAttribute("mensagem", mensagem);
-                response.sendRedirect(request.getContextPath() + "login");
+                session.setAttribute("mensagem", mensagem);
+
+                response.sendRedirect(request.getContextPath() + "/alunos");
 
             } catch (Exception e) {
 
                 e.printStackTrace();
-                request.getSession().setAttribute("mensagem", "Erro ao cadastrar aluno!");
+                session.setAttribute("mensagem", "Erro ao cadastrar aluno!");
                 response.sendRedirect(request.getContextPath() + "/alunos");
             }
+        }
+
+        // ===== CASO NENHUMA ACAO SEJA ENVIADA =====
+        else {
+
+            response.sendRedirect(request.getContextPath() + "/alunos");
         }
     }
 }

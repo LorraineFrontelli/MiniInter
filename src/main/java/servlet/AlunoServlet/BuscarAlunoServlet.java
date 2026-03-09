@@ -5,6 +5,7 @@ import model.Aluno;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,7 +15,6 @@ import model.Professor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @WebServlet("/alunos")
 public class BuscarAlunoServlet extends HttpServlet {
@@ -24,6 +24,7 @@ public class BuscarAlunoServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
+
         String mensagem = (String) session.getAttribute("mensagem");
 
         if (mensagem != null) {
@@ -32,6 +33,7 @@ public class BuscarAlunoServlet extends HttpServlet {
         }
 
         Object usuario = session.getAttribute("usuario");
+
         String nome = request.getParameter("filtroNome");
         String matriculaParam = request.getParameter("filtroMatricula");
 
@@ -39,7 +41,9 @@ public class BuscarAlunoServlet extends HttpServlet {
         List<Aluno> alunos = new ArrayList<>();
 
         try {
+
             if (usuario instanceof Professor) {
+
                 if (matriculaParam != null && !matriculaParam.trim().isEmpty()) {
 
                     int matricula = Integer.parseInt(matriculaParam);
@@ -51,6 +55,7 @@ public class BuscarAlunoServlet extends HttpServlet {
                         alunos.add(aluno);
                         request.setAttribute("mensagem", "Aluno encontrado.");
                     }
+
                 } else {
 
                     alunos = dao.buscarPorProf(((Professor) usuario).getId());
@@ -58,10 +63,14 @@ public class BuscarAlunoServlet extends HttpServlet {
                     if (alunos == null || alunos.isEmpty()) {
                         request.setAttribute("mensagem", "Nenhum aluno cadastrado.");
                     } else {
-                        request.setAttribute("mensagem", "Foram encontrados " + alunos.size() + " alunos.");
+                        request.setAttribute("mensagem",
+                                "Foram encontrados " + alunos.size() + " alunos.");
                     }
+
                 }
+
             } else {
+
                 if (matriculaParam != null && !matriculaParam.trim().isEmpty()) {
 
                     int matricula = Integer.parseInt(matriculaParam);
@@ -81,7 +90,8 @@ public class BuscarAlunoServlet extends HttpServlet {
                     if (alunos == null || alunos.isEmpty()) {
                         request.setAttribute("mensagem", "Nenhum aluno encontrado.");
                     } else {
-                        request.setAttribute("mensagem", "Foram encontrados " + alunos.size() + " alunos.");
+                        request.setAttribute("mensagem",
+                                "Foram encontrados " + alunos.size() + " alunos.");
                     }
 
                 } else {
@@ -91,43 +101,76 @@ public class BuscarAlunoServlet extends HttpServlet {
                     if (alunos == null || alunos.isEmpty()) {
                         request.setAttribute("mensagem", "Nenhum aluno cadastrado.");
                     } else {
-                        request.setAttribute("mensagem", "Foram encontrados " + alunos.size() + " alunos.");
+                        request.setAttribute("mensagem",
+                                "Foram encontrados " + alunos.size() + " alunos.");
                     }
+
                 }
             }
+
         } catch (NumberFormatException e) {
+
             request.setAttribute("mensagem", "Matrícula inválida.");
+
         } catch (Exception e) {
+
             e.printStackTrace();
             request.setAttribute("mensagem", "Erro ao buscar alunos.");
+
         }
 
         request.setAttribute("alunos", alunos);
 
-        String page = request.getParameter("page");
+        String tipo = null;
 
-        if (page != null) {
-            switch (page) {
-                case "agenda":
-                    request.getRequestDispatcher("/WEB-INF/views/aluno/agenda.jsp")
-                            .forward(request, response);
-                    break;
-                case "boletim":
-                    request.getRequestDispatcher("/WEB-INF/views/aluno/boletim.jsp")
-                            .forward(request, response);
-                    break;
-                case "observacoes":
-                    request.getRequestDispatcher("/WEB-INF/views/aluno/observacoes.jsp")
-                            .forward(request, response);
-                    break;
-                case "perfil-aluno":
-                    request.getRequestDispatcher("/WEB-INF/views/aluno/perfil-aluno.jsp")
-                            .forward(request, response);
-                    break;
-                default:
-                    request.getRequestDispatcher("/WEB-INF/views/autenticacao/login")
-                            .forward(request, response);
-                    break;
+        if (session != null) {
+            tipo = (String) session.getAttribute("tipoUsuario");
+        }
+
+        if ("admin".equals(tipo)) {
+
+            request.getRequestDispatcher("/WEB-INF/views/administrador/tab-aluno.jsp")
+                    .forward(request, response);
+
+        } else {
+
+            String page = request.getParameter("page");
+
+            if (page != null) {
+
+                switch (page) {
+
+                    case "agenda":
+                        request.getRequestDispatcher("/WEB-INF/views/aluno/agenda.jsp")
+                                .forward(request, response);
+                        break;
+
+                    case "boletim":
+                        request.getRequestDispatcher("/WEB-INF/views/aluno/boletim.jsp")
+                                .forward(request, response);
+                        break;
+
+                    case "observacoes":
+                        request.getRequestDispatcher("/WEB-INF/views/aluno/observacoes.jsp")
+                                .forward(request, response);
+                        break;
+
+                    case "perfil-aluno":
+                        request.getRequestDispatcher("/WEB-INF/views/aluno/perfil-aluno.jsp")
+                                .forward(request, response);
+                        break;
+
+                    default:
+                        request.getRequestDispatcher("/WEB-INF/views/autenticacao/login.jsp")
+                                .forward(request, response);
+                        break;
+                }
+
+            } else {
+
+                request.getRequestDispatcher("/WEB-INF/views/aluno/agenda.jsp")
+                        .forward(request, response);
+
             }
         }
     }

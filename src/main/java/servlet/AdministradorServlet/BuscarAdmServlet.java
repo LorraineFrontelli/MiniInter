@@ -68,7 +68,7 @@ public class BuscarAdmServlet extends HttpServlet {
         request.setAttribute("administradores", administradores);
 
         RequestDispatcher dispatcher =
-                request.getRequestDispatcher("/WEB-INF/view/Administrador/crudAdministrador.jsp");
+                request.getRequestDispatcher("/WEB-INF/views/administrador/tab-administrador.jsp");
         dispatcher.forward(request, response);
     }
 

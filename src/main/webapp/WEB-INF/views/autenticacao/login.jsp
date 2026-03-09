@@ -21,14 +21,14 @@
 
 <body>
     <header class="headerAutenticacao">
-        <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" alt="Logo Monart" class="logoMonart" onclick="window.location.href='${pageContext.request.contextPath}/login-administrador.jsp'">
+        <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" alt="Logo Monart" class="logoMonart" onclick="window.location.href='${pageContext.request.contextPath}/login-adm'">
         <a href="${pageContext.request.contextPath}/autenticacao/login.jsp">
             <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
         </a>
     </header>
     
     <main>
-        <form action="${pageContext.request.contextPath}/login" method="post" class="formAutenticacao formLogin">
+        <form action="${pageContext.request.contextPath}/login-adm" method="post" class="formAutenticacao formLogin">
             <h1>Acessar conta</h1>
 
             <b class="msgErro" style="color: var(--medium-coral);">${mensagem}</b>

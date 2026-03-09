@@ -79,10 +79,22 @@ public class BuscarBoletimServlet extends HttpServlet {
 
         request.setAttribute("boletins", boletins);
 
-        RequestDispatcher dispatcher =
-                request.getRequestDispatcher("/WEB-INF/views/Boletim/crudBoletim.jsp");
+        String tipo = null;
 
-        dispatcher.forward(request, response);
+        if (session != null) {
+            tipo = (String) session.getAttribute("tipoUsuario");
+        }
+
+
+        if ("admin".equals(tipo)) {
+            request.getRequestDispatcher("/WEB-INF/views/administrador/tab-boletim.jsp")
+                    .forward(request, response);
+        } else {
+            RequestDispatcher dispatcher =
+                    request.getRequestDispatcher("/WEB-INF/views/Boletim/crudBoletim.jsp");
+
+            dispatcher.forward(request, response);
+        }
     }
 
     @Override

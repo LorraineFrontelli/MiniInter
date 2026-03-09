@@ -54,14 +54,14 @@ public class LoginAdmServlet extends HttpServlet {
             }
 
             request.setAttribute("mensagem", "Login ou senha inválidos.");
-            request.getRequestDispatcher("/WEB-INF/views/autenticacao/login-adm.jsp")
+            request.getRequestDispatcher("/WEB-INF/views/autenticacao/login-administrador.jsp")
                     .forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
 
             request.setAttribute("mensagem", "Erro ao realizar login.");
-            request.getRequestDispatcher("/WEB-INF/views/autenticacao/login-adm.jsp")
+            request.getRequestDispatcher("/WEB-INF/views/autenticacao/login-administrador.jsp")
                     .forward(request, response);
         }
     }

@@ -27,13 +27,13 @@
         <ul>
             <li><a href="${pageContext.request.contextPath}/administradores" class="pagina ativo">
                 <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Administrador</a></li>
-            <li><a href="tab-aluno.jsp" class="pagina">
+            <li><a href="${pageContext.request.contextPath}/alunos" class="pagina">
                 <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Aluno</a></li>
-            <li><a href="tab-professor.jsp" class="pagina">
+            <li><a href="${pageContext.request.contextPath}/professores" class="pagina">
                 <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Professor</a></li>
-            <li><a href="tab-boletim.jsp" class="pagina">
+            <li><a href="${pageContext.request.contextPath}/boletins" class="pagina">
                 <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Boletim</a></li>
-            <li><a href="tab-telefone.jsp" class="pagina">
+            <li><a href="${pageContext.request.contextPath}/telefones" class="pagina">
                 <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Telefone</a></li>
         </ul>
     </nav>
@@ -103,7 +103,7 @@
                     <td>${admin.login}</td>
                     <td>********</td>
                     <td>
-                        <c:forEach var="cpf" items="${admin.cpfs}">
+                        <c:forEach var="cpf" items="${admin.alunoCpf}">
                             ${cpf}<br>
                         </c:forEach>
                     </td>

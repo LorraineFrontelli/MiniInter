@@ -92,7 +92,7 @@ public class BuscarTelefoneServlet extends HttpServlet {
         request.setAttribute("telefones", telefones);
 
         RequestDispatcher dispatcher =
-                request.getRequestDispatcher("/WEB-INF/view/Telefone/crudTelefone.jsp");
+                request.getRequestDispatcher("/WEB-INF/views/administrador/tab-telefone.jsp");
         dispatcher.forward(request, response);
     }
 

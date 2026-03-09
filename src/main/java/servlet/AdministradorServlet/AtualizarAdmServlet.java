@@ -41,21 +41,21 @@ public class AtualizarAdmServlet extends HttpServlet {
                 if (login == null || login.isBlank() || senha == null || senha.isBlank()) {
 
                     request.getSession().setAttribute("mensagem", "Campos obrigatórios não preenchidos.");
-                    response.sendRedirect(request.getContextPath() + "/admins");
+                    response.sendRedirect(request.getContextPath() + "/administradores");
                     return;
                 }
 
                 if (ValidacaoRegex.verificarEmail(login)) {
 
                     request.getSession().setAttribute("mensagem", "Email inválido.");
-                    response.sendRedirect(request.getContextPath() + "/admins");
+                    response.sendRedirect(request.getContextPath() + "/administradores");
                     return;
                 }
 
                 if (ValidacaoRegex.verificarSenha(senha)) {
 
                     request.getSession().setAttribute("mensagem", "Senha inválida.");
-                    response.sendRedirect(request.getContextPath() + "/admins");
+                    response.sendRedirect(request.getContextPath() + "/administradores");
                     return;
                 }
 

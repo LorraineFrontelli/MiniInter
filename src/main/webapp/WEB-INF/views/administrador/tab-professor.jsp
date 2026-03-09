@@ -1,135 +1,284 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="java.util.List" %>
-<%@ page import="model.Professor" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<%
-    List<Professor> professores =
-            (List<Professor>) request.getAttribute("professores");
-%>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>CRUD - Professor</title>
 
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/assets/css/global.css">
+    <script>
+        document.documentElement.style.setProperty("--tema", localStorage.getItem("corTema") || "#242021");
+    </script>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/global.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/crud.css">
+
 </head>
 
 <body>
 
-<h2>Professor</h2>
+<div class="meuPlaceholder"></div>
 
-<!-- ======================= -->
-<!-- MENSAGEM -->
-<!-- ======================= -->
+<header class="headerLateral">
 
-<c:if test="${not empty sessionScope.mensagem}">
-    <p>${sessionScope.mensagem}</p>
-    <c:remove var="mensagem" scope="session"/>
-</c:if>
+    <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" class="logoMonart">
 
-<!-- ======================= -->
-<!-- BUSCA -->
-<!-- ======================= -->
+    <nav>
+        <ul>
 
-<form action="${pageContext.request.contextPath}/professores" method="get">
-    <input type="text" name="filtroNome" placeholder="Buscar por nome">
-    <input type="number" name="filtroId" placeholder="Buscar por ID">
-    <button type="submit">Pesquisar</button>
-</form>
+            <li>
+                <a href="${pageContext.request.contextPath}/administradores" class="pagina">
+                    <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
+                    Administrador
+                </a>
+            </li>
 
-<hr>
+            <li>
+                <a href="${pageContext.request.contextPath}/alunos" class="pagina">
+                    <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
+                    Aluno
+                </a>
+            </li>
 
-<!-- ======================= -->
-<!-- TABELA -->
-<!-- ======================= -->
+            <li>
+                <a href="${pageContext.request.contextPath}/professores" class="pagina ativo">
+                    <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
+                    Professor
+                </a>
+            </li>
 
-<table border="1">
-    <thead>
-    <tr>
-        <th>Ações</th>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Email</th>
-        <th>Matéria</th>
-        <th>Data Contratação</th>
-        <th>Usuário</th>
-    </tr>
-    </thead>
-    <tbody>
+            <li>
+                <a href="${pageContext.request.contextPath}/boletins" class="pagina">
+                    <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
+                    Boletim
+                </a>
+            </li>
 
-    <%
-        if (professores != null) {
-            for (Professor p : professores) {
-    %>
-    <tr>
-        <td>
+            <li>
+                <a href="${pageContext.request.contextPath}/telefones" class="pagina">
+                    <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
+                    Telefone
+                </a>
+            </li>
 
-            <!-- UPDATE -->
-            <form action="${pageContext.request.contextPath}/professor-update"
-                  method="get" style="display:inline;">
-                <input type="hidden" name="id" value="<%= p.getId() %>">
-                <button type="submit">Editar</button>
+        </ul>
+    </nav>
+
+</header>
+
+<main>
+
+    <div class="cabecalhoPaginas">
+
+        <div class="tituloPaginas">
+            <h1>Professor</h1>
+        </div>
+
+        <img src="${pageContext.request.contextPath}/assets/img/themes-icon.svg" class="abrirTemas">
+
+    </div>
+
+    <c:if test="${not empty mensagem}">
+        <p style="text-align:center;">${mensagem}</p>
+    </c:if>
+
+    <div class="componentizacao">
+
+        <search>
+            <form action="${pageContext.request.contextPath}/professores" method="get">
+
+                <input
+                        type="search"
+                        class="buscarCrud"
+                        name="filtroNome"
+                        placeholder="Pesquisar professor">
+
             </form>
+        </search>
 
-            <!-- DELETE -->
-            <form action="${pageContext.request.contextPath}/professor-delete"
-                  method="post" style="display:inline;">
-                <input type="hidden" name="id" value="<%= p.getId() %>">
-                <button type="submit">Excluir</button>
-            </form>
+        <button class="botaoInsert" onclick="create.showModal()">
+            Inserir
+            <img src="${pageContext.request.contextPath}/assets/img/plus-icon.svg">
+        </button>
 
-        </td>
+    </div>
 
-        <td><%= p.getId() %></td>
-        <td><%= p.getNome() %></td>
-        <td><%= p.getEmail() %></td>
-        <td><%= p.getMateria() %></td>
-        <td><%= p.getDataContratacao() %></td>
-        <td><%= p.getUsuario() %></td>
-    </tr>
-    <%
-            }
-        }
-    %>
+    <div class="tabelaContainer">
 
-    </tbody>
-</table>
+        <table class="tabelaRead">
 
-<hr>
+            <thead>
 
-<!-- ======================= -->
-<!-- CREATE -->
-<!-- ======================= -->
+            <tr>
 
-<h3>Cadastrar Professor</h3>
+                <th>Ações</th>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Matéria</th>
+                <th>Data Contratação</th>
+                <th>Usuário</th>
 
-<form action="${pageContext.request.contextPath}/professor-create"
-      method="post">
+            </tr>
 
-    Nome:
-    <input type="text" name="nome" required><br><br>
+            </thead>
 
-    Email:
-    <input type="email" name="email" required><br><br>
+            <tbody>
 
-    Senha:
-    <input type="password" name="senha" required><br><br>
+            <c:forEach var="p" items="${professores}">
 
-    Matéria:
-    <input type="text" name="materia"><br><br>
+                <tr>
 
-    Data Contratação:
-    <input type="date" name="data"><br><br>
+                    <td class="opcoes">
 
-    Usuário:
-    <input type="text" name="usuario"><br><br>
+                        <div>
 
-    <button type="submit">Inserir</button>
-</form>
+                            <!-- UPDATE -->
+
+                            <button type="button"
+                                    class="botaoUpdate"
+                                    onclick="abrirUpdate(
+                                            '${p.id}',
+                                            '${p.nome}',
+                                            '${p.email}',
+                                            '${p.senha}',
+                                            '${p.materia}',
+                                            '${p.usuario}',
+                                            '${p.dataContratacao}'
+                                            )">
+                                <img src="${pageContext.request.contextPath}/assets/img/update-icon.svg">
+                            </button>
+
+                            <!-- DELETE -->
+
+                            <form action="${pageContext.request.contextPath}/professor-delete" method="post">
+
+                                <input type="hidden" name="id" value="${p.id}">
+
+                                <button type="submit" style="background:none;border:none;">
+                                    <img src="${pageContext.request.contextPath}/assets/img/delete-icon.svg">
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </td>
+
+                    <td>${p.id}</td>
+                    <td>${p.nome}</td>
+                    <td>${p.email}</td>
+                    <td>${p.materia}</td>
+                    <td>${p.dataContratacao}</td>
+                    <td>${p.usuario}</td>
+
+                </tr>
+
+            </c:forEach>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- MODAL CREATE -->
+
+    <dialog id="create" class="create">
+
+        <button class="fecharPopUp" onclick="create.close()">X</button>
+
+        <form action="${pageContext.request.contextPath}/professor-create" method="post">
+
+            <label>Nome</label>
+            <input type="text" name="nome" required>
+
+            <label>Email</label>
+            <input type="email" name="email" required>
+
+            <label>Senha</label>
+            <input type="password" name="senha" required>
+
+            <label>Matéria</label>
+            <input type="text" name="materia">
+
+            <label>Data Contratação</label>
+            <input type="date" name="data">
+
+            <label>Usuário</label>
+            <input type="text" name="usuario">
+
+            <button class="salvarInsercao" type="submit">
+                Cadastrar
+            </button>
+
+        </form>
+
+    </dialog>
+
+
+    <!-- MODAL UPDATE -->
+
+    <dialog id="update" class="create">
+
+        <button class="fecharPopUp" onclick="update.close()">X</button>
+
+        <form action="${pageContext.request.contextPath}/professor-update" method="post">
+
+            <input type="hidden" name="id" id="u_id">
+
+            <label>Nome</label>
+            <input type="text" name="nome" id="u_nome" required>
+
+            <label>Email</label>
+            <input type="email" name="email" id="u_email" required>
+
+            <label>Senha</label>
+            <input type="password" name="senha" id="u_senha" required>
+
+            <label>Matéria</label>
+            <input type="text" name="materia" id="u_materia">
+
+            <label>Data Contratação</label>
+            <input type="date" name="data" id="u_data">
+
+            <label>Usuário</label>
+            <input type="text" name="usuario" id="u_usuario">
+
+            <button class="salvarInsercao" type="submit">
+                Atualizar
+            </button>
+
+        </form>
+
+    </dialog>
+
+</main>
+
+<script>
+
+    function abrirUpdate(id,nome,email,senha,materia,usuario,data){
+
+        document.getElementById("u_id").value = id
+        document.getElementById("u_nome").value = nome
+        document.getElementById("u_email").value = email
+        document.getElementById("u_senha").value = senha
+        document.getElementById("u_materia").value = materia
+        document.getElementById("u_usuario").value = usuario
+        document.getElementById("u_data").value = data
+
+        update.showModal()
+
+    }
+
+</script>
 
 </body>
 </html>

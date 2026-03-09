@@ -23,6 +23,7 @@ public class BuscarProfessorServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
+
         String mensagem = (String) session.getAttribute("mensagem");
 
         if (mensagem != null) {
@@ -65,21 +66,36 @@ public class BuscarProfessorServlet extends HttpServlet {
             }
 
         } catch (NumberFormatException e) {
+
             request.setAttribute("mensagem", "ID inválido.");
+
         } catch (Exception e) {
+
             e.printStackTrace();
             request.setAttribute("mensagem", "Erro ao buscar professores.");
             professores = new ArrayList<>();
+
         }
 
         request.setAttribute("professores", professores);
 
-        String page = request.getParameter("page");
+        String tipo = null;
 
-        RequestDispatcher dispatcher =
-                request.getRequestDispatcher("/WEB-INF/views/Professor/crudProfessor.jsp");
+        if (session != null) {
+            tipo = (String) session.getAttribute("tipoUsuario");
+        }
 
-        dispatcher.forward(request, response);
+        if ("admin".equals(tipo)) {
+
+            request.getRequestDispatcher("/WEB-INF/views/administrador/tab-professor.jsp")
+                    .forward(request, response);
+
+        } else {
+
+            request.getRequestDispatcher("/WEB-INF/views/professor/tab-professor.jsp")
+                    .forward(request, response);
+
+        }
 
     }
 
