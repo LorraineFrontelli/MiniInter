@@ -48,12 +48,6 @@ public class ChatWebSocket {
                           @PathParam("tipoUsuario") String tipoUsuario) {
 
         try {
-            // Espera receber JSON no formato:
-            // {
-            //   "idDestinatario": 2,
-            //   "tipoDestinatario": "PROFESSOR",
-            //   "mensagem": "Olá!"
-            // }
             JsonObject json = JsonParser.parseString(payload).getAsJsonObject();
 
             int    idRemetente      = Integer.parseInt(idUsuario);
@@ -62,7 +56,6 @@ public class ChatWebSocket {
             String tipoDestinatario = json.get("tipoDestinatario").getAsString();
             String texto            = json.get("mensagem").getAsString();
 
-            // ── Monta o objeto e salva no banco ──────────────────────────────────
             Mensagem mensagem = new Mensagem();
             mensagem.setIdRemetente(idRemetente);
             mensagem.setTipoRemetente(tipoRemetente);
@@ -80,8 +73,6 @@ public class ChatWebSocket {
                 return;
             }
 
-            // ── Monta o JSON de resposta ──────────────────────────────────────────
-            // O chat.jsp usa esses campos para renderizar a mensagem na tela
             JsonObject resposta = new JsonObject();
             resposta.addProperty("id",               idGerado);
             resposta.addProperty("idRemetente",      idRemetente);
@@ -94,15 +85,18 @@ public class ChatWebSocket {
 
             String respostaJson = resposta.toString();
 
-            // ── Entrega ao destinatário se estiver online ─────────────────────────
+            // Entrega ao destinatário se estiver online
             String  chaveDestinatario  = gerarChave(String.valueOf(idDestinatario), tipoDestinatario);
             Session sessaoDestinatario = sessoes.get(chaveDestinatario);
 
+            System.out.println("[WS] Sessões ativas: " + sessoes.keySet());
+
             if (sessaoDestinatario != null && sessaoDestinatario.isOpen()) {
                 sessaoDestinatario.getBasicRemote().sendText(respostaJson);
+                System.out.println("[WS] Entregue ao destinatário: " + chaveDestinatario);
             }
 
-            // ── Confirma ao remetente (para ele exibir na própria tela) ───────────
+            // Confirma ao remetente
             session.getBasicRemote().sendText(respostaJson);
 
             System.out.println("[WS MESSAGE] " + gerarChave(idUsuario, tipoUsuario)

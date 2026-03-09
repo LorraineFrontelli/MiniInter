@@ -94,6 +94,7 @@
 
     // dispara sempre que uma nova mensagem é recebida do servidor
     ws.onmessage = function (event) {
+        console.log('[WS] Mensagem recebida raw:', event.data);
 
         // onmessage do servidor envia um JSON e é transformado para um objeto
         const dados = JSON.parse(event.data);
