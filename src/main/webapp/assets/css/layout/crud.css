@@ -197,7 +197,6 @@ search form:focus-within {
     padding: 1vh 1vw;
     font-family: var(--urbanist);
     font-size: 1.1vw;
-    color: var(--tema);
     width: 40vw;
     transition: width 0.4s ease;
 }
@@ -225,9 +224,9 @@ search form::before {
 .tabelaContainer {
     background-color: var(--white);
     background-image: 
-      linear-gradient(var(--vintage-chantilly) 1px, transparent 1px),
-      linear-gradient(90deg, var(--vintage-chantilly) 1px, transparent 1px);
-    background-size: 2vw 2vw; 
+      linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+    background-size: 1.5vw 1.5vw;
 
     padding: 1vw;
     border-radius: 1vw;
@@ -397,6 +396,10 @@ dialog .salvarAlteracoes:hover, dialog .salvarInsercao:hover {
     background: var(--vintage-brown-hover);
 }
 
+dialog.deletes {
+    min-height: 15vh;
+}
+
 dialog.deletes div {
     display: flex;
     align-items: center;
@@ -516,6 +519,18 @@ input[type="checkbox"]:checked::after {
     left: 50%;
     transform: translate(-50%, -50%);
     font-weight: bold;
+}
+
+input[type="file"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.85vh;
+    font-size: 0.9vw;
+}
+
+input[type="file"]::file-selector-button {
+    cursor: pointer;
 }
 
 details summary {

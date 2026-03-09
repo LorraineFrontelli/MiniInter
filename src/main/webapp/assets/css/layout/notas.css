@@ -30,11 +30,15 @@ main {
     justify-content: center;
 }
 
+.titulos .tituloNota1, .titulos .tituloNota2 {
+    padding-right: 3vw;
+    transform: translate(1.4vw);
+}
+
 .situacaoAluno {
     display: flex;
     gap: 2vw;
     justify-content: center;
-
 }
 
 .notas {
@@ -52,7 +56,6 @@ input[type="number"]::-webkit-inner-spin-button  {
     -webkit-appearance: none;
     margin: 0;
 }
-
 
 .situacao {
     width: 8vw;
@@ -120,4 +123,40 @@ input[type="number"]::-webkit-inner-spin-button  {
 .menuAluno button:last-child {
     position: relative;
     right: 4.5vw;
+}
+
+button.abrirNota1, button.abrirNota2 {
+    position: absolute;
+    bottom: 0.3vw;
+    right: 0.5vw;
+    border: none !important;
+    background: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.abrirNota1 img, .abrirNota2 img {
+    width: 0.9vw;
+    object-fit: contain;
+    display: block;
+    border: none !important;
+}
+
+.caixaNota {
+    position: relative;
+    width: fit-content;
+}
+
+.caixaNota input {
+    padding-right: 3vw;
+}
+
+.caixaNota button {
+    position: absolute;
+    top: 1vh;
+    right: 0.5vw;
+}
+
+dialog.verTipoNota1, dialog.verTipoNota2 {
+    min-height: 6vh;
 }

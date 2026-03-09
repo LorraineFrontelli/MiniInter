@@ -63,22 +63,46 @@
 
         <section class="notasAluno">
             <div class="titulos">
-                <h3>Nota 1</h3>
-                <h3>Nota 2</h3>
-                <h3>Média</h3>
+                <label for="nota1" class="tituloNota1"><h3>Nota 1</h3></label>
+                <label for="nota2" class="tituloNota2"><h3>Nota 2</h3></label>
+                <label for="media" class="tituloMedia"><h3>Média</h3></label>
                 <h3 class="tituloSituacao">Situação</h3>
             </div>
 
             <form action="">
                 <div class="situacaoAluno">
-                    <input type="number" class="notas nota2" id="nota1" name="nota1" max="10">
-                    <input type="number" class="notas nota1" id="nota2" name="nota2" max="10">
-                    <input type="number" class="notas media" disabled>
-                    <input type="number" class="notas situacao" disabled>
+                    <div class="caixaNota">
+                        <input type="number" class="notas nota1" id="nota1" name="nota1" min="0" max="10">
+                        <button type="button" class="abrirNota1" onclick="verTipoNota1.showModal()"><img src="../../../assets/img/heavy-plus-icon.svg" alt=""></button>
+                    </div>
+
+                    <div class="caixaNota">
+                        <input type="number" class="notas nota2" id="nota2" name="nota2" min="0" max="10">
+                        <button type="button" class="abrirNota2" onclick="verTipoNota2.showModal()"><img src="../../../assets/img/heavy-plus-icon.svg" alt=""></button>
+                    </div>
+
+                    <!-- Modal Ver Tipo Nota 1 -->
+                    <dialog class="verTipoNota1" id="verTipoNota1">
+                        <button type="button" class="fecharPopUp" onclick="verTipoNota1.close()">X</button>
+                        
+                        <label for="descricaoNota1">Descrição Nota 1</label>
+                        <input type="text" name="descricaoNota1" id="descricaoNota1">
+                    </dialog>
+
+                    <!-- Modal Ver Tipo Nota 2 -->
+                    <dialog class="verTipoNota2" id="verTipoNota2">
+                        <button type="button" class="fecharPopUp" onclick="verTipoNota2.close()">X</button>
+                        
+                        <label for="descricaoNota2">Descrição Nota 2</label>
+                        <input type="text" name="descricaoNota2" id="descricaoNota2">
+                    </dialog>
+                
+                    <input type="number" class="notas media" id="media" name="media" readonly>
+                    <input type="number" class="notas situacao" readonly>
                 </div>
 
                 <div class="menuAluno">
-                    <button type="button" onclick="window.location.href='buscar.html'">Voltar</button>
+                    <button type="button" onclick="window.location.href='buscar.jsp'">Voltar</button>
 
                     <div class="observacoes">
                         <h3 class="tituloObservacoes">Observações</h3>

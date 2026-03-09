@@ -90,3 +90,24 @@ table {
 .tabelaNotas tbody tr:last-child .media, .tabelaNotas tbody tr:last-child .materia, .tabelaNotas tbody tr:last-child .situacao {
     border-bottom-right-radius: 1.25vw;
 }
+
+.notasCentro {
+    position: relative;
+}
+
+button.abrirNota1, button.abrirNota2 {
+    position: absolute;
+    bottom: 0.3vw;
+    right: 0.5vw;
+    border: none !important;
+    background: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.abrirNota1 img, .abrirNota2 img {
+    width: 0.9vw;
+    object-fit: contain;
+    display: block;
+    border: none !important;
+}

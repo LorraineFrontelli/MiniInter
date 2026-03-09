@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/crud.css">
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
-    <script src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
+    <script type="module" src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
 
     <title>CRUD - Monart</title>
 </head>
@@ -101,8 +101,8 @@
             <label for="createSenha">Senha</label>
             <input type="password" name="createSenha" id="createSenha" min="8">
 
-            <label for="createCpfAluno">CPF do Aluno</label>
-            <input type="text" name="createCpf" id="createCpf">
+            <label for="createCpfAluno">CPF do Aluno (Arquivo Excel .xlsx)</label>
+            <input type="file" name="createCpf" id="createCpf" accept=".xlsx">
 
             <button class="salvarInsercao">Inserir</button>
         </form>
@@ -118,8 +118,8 @@
             <label for="updateSenha">Senha</label>
             <input type="password" name="updateSenha" id="updateSenha" min="8">
 
-            <label for="updateCpfAluno">CPF do Aluno</label>
-            <input type="text" name="updateCpf" id="updateCpf">
+            <label for="updateCpfAluno">CPF do Aluno (Arquivo Excel .xlsx)</label>
+            <input type="file" name="updateCpf" id="updateCpf" accept=".xlsx">
 
             <button class="salvarAlteracoes">Atualizar</button>
         </form>
