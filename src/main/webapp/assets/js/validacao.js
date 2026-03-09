@@ -22,20 +22,22 @@ if (descricaoNota2 && descricaoNota2Hidden) {
 
 // Validação de Preenchimento de Modais de Descrição de Nota
 
-formPrincipal.addEventListener("submit", (event) => {
-    const valorDescricao1 = descricaoNota1Hidden.value.trim();
-    const valorDescricao2 = descricaoNota2Hidden.value.trim();
-    
-    if (valorDescricao1 === "" || valorDescricao2 === "") {
-        event.preventDefault();
-        
-        alert("Preencha a descrição das duas notas antes de salvar!");
-        
-        if (valorDescricao1 === "") {
-            document.getElementById("verTipoNota1").showModal();
-        } else if (valorDescricao2 === "") {
-            document.getElementById("verTipoNota2").showModal();
-        }
-    }
-});
+if (formPrincipal) {
 
+    formPrincipal.addEventListener("submit", (event) => {
+        const valorDescricao1 = descricaoNota1Hidden.value.trim();
+        const valorDescricao2 = descricaoNota2Hidden.value.trim();
+        
+        if (valorDescricao1 === "" || valorDescricao2 === "") {
+            event.preventDefault();
+            
+            alert("Preencha a descrição das duas notas antes de salvar!");
+            
+            if (valorDescricao1 === "") {
+                document.getElementById("verTipoNota1").showModal();
+            } else if (valorDescricao2 === "") {
+                document.getElementById("verTipoNota2").showModal();
+            }
+        }
+    });
+}    

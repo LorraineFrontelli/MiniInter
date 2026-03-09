@@ -26,15 +26,15 @@
     <nav>
         <ul>
             <li><a href="${pageContext.request.contextPath}/administradores" class="pagina ativo">
-                <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Administrador</a></li>
+                <img src="${pageContext.request.contextPath}/assets/img/admin-icon.svg" decoding="async" alt="">Administrador</a></li>
             <li><a href="${pageContext.request.contextPath}/alunos" class="pagina">
-                <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Aluno</a></li>
+                <img src="${pageContext.request.contextPath}/assets/img/student-icon.svg" decoding="async" alt="">Aluno</a></li>
             <li><a href="${pageContext.request.contextPath}/professores" class="pagina">
-                <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Professor</a></li>
+                <img src="${pageContext.request.contextPath}/assets/img/teacher-icon.svg" decoding="async" alt="">Professor</a></li>
             <li><a href="${pageContext.request.contextPath}/boletins" class="pagina">
-                <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Boletim</a></li>
+                <img src="${pageContext.request.contextPath}/assets/img/bulletin-icon.svg" decoding="async" alt="">Boletim</a></li>
             <li><a href="${pageContext.request.contextPath}/telefones" class="pagina">
-                <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Telefone</a></li>
+                <img src="${pageContext.request.contextPath}/assets/img/telephone-icon.svg" decoding="async" alt="">Telefone</a></li>
         </ul>
     </nav>
 </header>
