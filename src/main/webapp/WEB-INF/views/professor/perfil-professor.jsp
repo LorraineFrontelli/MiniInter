@@ -81,7 +81,7 @@
                     <c:choose>
                         <c:when test="${not empty mensagensRecentes}">
                             <c:forEach items="${mensagensRecentes}" var="m">
-                                <div class="itemRecente" onclick="window.location.href='${pageContext.request.contextPath}/mensagens?idRemetente=${sessionScope.usuario.id}&tipoRemetente=${sessionScope.usuarioTipo}&idDestinatario=${m.idDestinatario}&tipoDestinatario=${m.tipoDestinatario}'">
+                                <div class="itemRecente" onclick="window.location.href='${pageContext.request.contextPath}/mensagens?idRemetente=${sessionScope.usuario.id}&tipoRemetente=${sessionScope.tipoUsuario}&idDestinatario=${m.idDestinatario}&tipoDestinatario=${m.tipoDestinatario}'">
                                     <strong>${m.nome}</strong>
                                     <c:if test="${m.temNaoLidas}">
                                         <span class="badgeNaoLida">🔴</span>
