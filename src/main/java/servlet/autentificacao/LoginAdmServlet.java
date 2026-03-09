@@ -45,7 +45,8 @@ public class LoginAdmServlet extends HttpServlet {
                         BCrypt.checkpw(senha, admin.getSenha())) {
 
                     request.getSession().setAttribute("usuario", admin);
-                    request.getSession().setAttribute("tipoUsuario", "admin");
+                    request.getSession().setAttribute("tipoUsuario",
+                            "ADMIN");
 
                     response.sendRedirect(request.getContextPath()
                             + "/administradores");

@@ -82,6 +82,44 @@ public class BoletimDAO {
         return boletins;
     }
 
+    // READ - Buscar boletim por aluno e professor
+    public Boletim buscarPorAlunoEProfessor(int idAluno, int idProfessor) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        String sql = "SELECT * FROM boletim WHERE id_aluno = ? and id_professor = ?";
+        Boletim  boletim = null;
+        try {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, idAluno);
+            pst.setInt(2, idProfessor);
+
+            ResultSet rs = pst.executeQuery();
+
+            if(rs.next()) {
+        boletim = new Boletim(
+                        rs.getInt("id"),
+                        rs.getInt("id_professor"),
+                        rs.getInt("id_aluno"),
+                        rs.getDouble("nota_1"),
+                        rs.getString("descricao_1"),
+                        rs.getDouble("nota_2"),
+                        rs.getString("descricao_2"),
+                        rs.getBoolean("aprovado"),
+                        rs.getString("observacao"),
+                        rs.getDate("dt_criacao")
+                );
+        }
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        } finally {
+            conexao.desconectar(con);
+        }
+
+        return boletim;
+    }
+
+
+
     // READ - Buscar boletins pelo nome do aluno
     public List<Boletim> buscarPorNomeAluno(String nomeAluno) {
 
@@ -187,7 +225,7 @@ public class BoletimDAO {
         Connection con = conexao.conectar();
         int retorno;
 
-        String sql = "UPDATE boletim SET id_professor=?, id_aluno=?, nota_1=?, descricao_1=?, nota_2=?, descricao_2=?, aprovado=?, observacao=?, dt_lancamento=? WHERE id=?";
+        String sql = "UPDATE boletim SET id_professor=?, id_aluno=?, nota_1=?, descricao_1=?, nota_2=?, descricao_2=?, aprovado=?, observacao=?, dt_criacao=? WHERE id=?";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);

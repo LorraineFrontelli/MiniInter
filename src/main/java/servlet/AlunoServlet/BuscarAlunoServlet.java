@@ -2,15 +2,14 @@ package servlet.AlunoServlet;
 
 import dao.AlunoDAO;
 import model.Aluno;
+import model.Professor;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Professor;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,6 +23,7 @@ public class BuscarAlunoServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
+        Object usuario = session.getAttribute("usuario");
 
         String mensagem = (String) session.getAttribute("mensagem");
 
@@ -31,8 +31,6 @@ public class BuscarAlunoServlet extends HttpServlet {
             request.setAttribute("mensagem", mensagem);
             session.removeAttribute("mensagem");
         }
-
-        Object usuario = session.getAttribute("usuario");
 
         String nome = request.getParameter("filtroNome");
         String matriculaParam = request.getParameter("filtroMatricula");
@@ -44,10 +42,12 @@ public class BuscarAlunoServlet extends HttpServlet {
 
             if (usuario instanceof Professor) {
 
+                Professor professor = (Professor) usuario;
+
                 if (matriculaParam != null && !matriculaParam.trim().isEmpty()) {
 
                     int matricula = Integer.parseInt(matriculaParam);
-                    Aluno aluno = dao.buscarPorMatricula(matricula);
+                    Aluno aluno = dao.buscarPorMatriculaEProfessor(matricula, professor.getId());
 
                     if (aluno == null) {
                         request.setAttribute("mensagem", "Aluno não encontrado.");
@@ -58,7 +58,7 @@ public class BuscarAlunoServlet extends HttpServlet {
 
                 } else {
 
-                    alunos = dao.buscarPorProf(((Professor) usuario).getId());
+                    alunos = dao.buscarPorProf(professor.getId());
 
                     if (alunos == null || alunos.isEmpty()) {
                         request.setAttribute("mensagem", "Nenhum aluno cadastrado.");
@@ -66,7 +66,6 @@ public class BuscarAlunoServlet extends HttpServlet {
                         request.setAttribute("mensagem",
                                 "Foram encontrados " + alunos.size() + " alunos.");
                     }
-
                 }
 
             } else {
@@ -104,7 +103,6 @@ public class BuscarAlunoServlet extends HttpServlet {
                         request.setAttribute("mensagem",
                                 "Foram encontrados " + alunos.size() + " alunos.");
                     }
-
                 }
             }
 
@@ -116,16 +114,11 @@ public class BuscarAlunoServlet extends HttpServlet {
 
             e.printStackTrace();
             request.setAttribute("mensagem", "Erro ao buscar alunos.");
-
         }
 
         request.setAttribute("alunos", alunos);
 
-        String tipo = null;
-
-        if (session != null) {
-            tipo = (String) session.getAttribute("tipoUsuario");
-        }
+        String tipo = (String) session.getAttribute("tipoUsuario");
 
         if ("admin".equals(tipo)) {
 
@@ -170,7 +163,6 @@ public class BuscarAlunoServlet extends HttpServlet {
 
                 request.getRequestDispatcher("/WEB-INF/views/aluno/agenda.jsp")
                         .forward(request, response);
-
             }
         }
     }

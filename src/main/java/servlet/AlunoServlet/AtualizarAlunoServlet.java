@@ -13,7 +13,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
 @WebServlet("/aluno-update")
 public class AtualizarAlunoServlet extends HttpServlet {
@@ -61,50 +62,58 @@ public class AtualizarAlunoServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String matriculaParametro = request.getParameter("matricula");
-        String nome = request.getParameter("nome");
-        String cpf = request.getParameter("cpf");
-        String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
+        String nomeParametro = request.getParameter("nome");
+        String cpfParametro = request.getParameter("cpf");
+        String emailParametro = request.getParameter("email");
+        String senhaParametro = request.getParameter("senha");
         String dataParametro = request.getParameter("dataInicio");
 
         AlunoDAO dao = new AlunoDAO();
+        Aluno aluno = dao.buscarPorMatricula(Integer.parseInt(matriculaParametro));
+
+        int matricula = aluno.getMatricula();
+        String nome = aluno.getNome();
+        String cpf = aluno.getCpf();
+        String email = aluno.getEmail();
+        String senha = aluno.getSenha();
+        Date data = aluno.getDataInicio();
 
         try {
+            if(nomeParametro!=null && !nomeParametro.isEmpty()){
+                nome = nomeParametro;
+            }
+            if(cpfParametro!=null && !cpfParametro.isEmpty()){
+                cpf = cpfParametro;
+            }
+            if(emailParametro!=null && !emailParametro.isEmpty()){
+                if(ValidacaoRegex.verificarEmail(emailParametro)) {
+                    email = emailParametro;
+                } else{
+                    request.getSession().setAttribute("mensagem", "Senha inválida.");
+                }
+            }
+            if(senhaParametro!=null && !senhaParametro.isEmpty()){
+                if(ValidacaoRegex.verificarSenha(senhaParametro)) {
+                    senha = senhaParametro;
+                } else{
+                    request.getSession().setAttribute("mensagem", "Senha inválida.");
+                }
+            }
 
-            if (matriculaParametro == null || nome == null || cpf == null ||
-                    email == null || senha == null || dataParametro == null ||
-                    nome.isBlank() || cpf.isBlank() || email.isBlank() || senha.isBlank()) {
-
-                request.getSession().setAttribute("mensagem", "Campos obrigatórios não preenchidos.");
-
-            } else if (!ValidacaoRegex.verificarEmail(email)) {
-
-                request.getSession().setAttribute("mensagem", "Email inválido.");
-
-            } else if (!ValidacaoRegex.verificarSenha(senha)) {
-
-                request.getSession().setAttribute("mensagem", "Senha inválida.");
-
-            } else {
-
-                int matricula = Integer.parseInt(matriculaParametro);
-
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                java.util.Date data = sdf.parse(dataParametro);
-
-                Aluno aluno = new Aluno(matricula, nome, cpf, data, email, senha);
+            if(dataParametro!=null  && !dataParametro.isEmpty()){
+                LocalDate localDate = LocalDate.parse(dataParametro);
+                data = java.sql.Date.valueOf(localDate);
+            }
+                aluno = new Aluno(matricula, nome, cpf, data, email, senha);
 
                 if (dao.atualizar(aluno) > 0) {
                     request.getSession().setAttribute("mensagem", "Aluno atualizado com sucesso.");
                 } else {
                     request.getSession().setAttribute("mensagem", "Erro ao atualizar aluno.");
                 }
-            }
-
         } catch (Exception e) {
             request.getSession().setAttribute("mensagem", "Erro ao atualizar aluno.");
         }
-
         response.sendRedirect(request.getContextPath() + "/alunos");
     }
 }

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -47,18 +48,28 @@
         <div class="cabecalhoPaginas">
             <img src="${pageContext.request.contextPath}/assets/img/themes-icon.svg" alt="" class="abrirTemas">
             <div class="tituloPaginas">
-                <h1>Fulaninho de tal</h1>
+                <h1>${aluno.nome}</h1>
             </div>
-            <a href="${pageContext.request.contextPath}/mensagens?page=conversas"><img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
+            <img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg"
+                 alt="" class="abrirChat"
+                 onclick="window.location.href='${pageContext.request.contextPath}/mensagens?idRemetente=${sessionScope.usuario.id}&tipoRemetente=${sessionScope.tipoUsuario}'">
         </div>
 
         <div class="pessoa">
             <img src="${pageContext.request.contextPath}/assets/img/art.png" alt="arte impressionista" class="arte">
             <div class="informacoes">
-                <h3>Fulano da Silva</h3>
-                <h3>Turma: 1° série A</h3>
-                <h3>Telefone: (11)xxxxx-xxxx</h3>
-                <h3>Email: fulano.silva@monart.com</h3>   
+
+                <h3>${aluno.nome}</h3>
+
+                <h3>Turma: ${alunoProfessor.serie}° série ${alunoProfessor.turma}</h3>
+
+                <h3>Telefone:</h3>
+                <c:forEach var="tel" items="${telefones}" varStatus="status">
+                    ${tel.numero}<c:if test="${!status.last}"> / </c:if>
+                </c:forEach>
+
+                <h3>Email: ${aluno.email}</h3>
+
             </div>
         </div>
 
@@ -70,21 +81,28 @@
                 <h3 class="tituloSituacao">Situação</h3>
             </div>
 
-            <form action="">
+            <form action="${pageContext.request.contextPath}/boletim-update" method="post">
                 <div class="situacaoAluno">
-                    <input type="number" class="notas nota2" id="nota1" name="nota1" max="10">
-                    <input type="number" class="notas nota1" id="nota2" name="nota2" max="10">
+                    <input type="number" class="notas nota2" id="nota1" name="nota1" max="10" value="${boletim.nota1}">
+                    <input type="number" class="notas nota1" id="nota2" name="nota2" max="10" value="${boletim.nota2}">
                     <input type="number" class="notas media" disabled>
-                    <input type="number" class="notas situacao" disabled>
+                    <input type="text" class="notas situacao" disabled>
+                    <input type="hidden" name="id" value="${boletim.id}">
+                    <input type="hidden" name="idProfessor" value="${boletim.idProfessor}">
+                    <input type="hidden" name="idAluno" value="${aluno.matricula}">
+                    <input type="hidden" name="data" value="${boletim.dataCriacao}">
+                    <input type="hidden" name="descricao1" value="${boletim.descricao1}">
+                    <input type="hidden" name="descricao2" value="${boletim.descricao2}">
                 </div>
 
                 <div class="menuAluno">
-                    <button type="button" onclick="window.location.href='buscar.jsp'">Voltar</button>
+                    <button type="button" onclick="window.location.href='${pageContext.request.contextPath}/professores?page=buscar'">Voltar</button>
 
                     <div class="observacoes">
                         <h3 class="tituloObservacoes">Observações</h3>
-                        <textarea type="text" class="quadroObservacao" id="observacao" name="observacao"></textarea>
+                        <textarea type="text" class="quadroObservacao" id="observacao" name="observacao">${boletim.observacao}</textarea>
                     </div>
+
 
                     <button type="submit" onclick class="salvarNotas">Salvar</button>
                 </div>
@@ -92,4 +110,34 @@
         </section>
     </main>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const nota1 = document.getElementById("nota1");
+        const nota2 = document.getElementById("nota2");
+        const mediaInput = document.querySelector(".media");
+        const situacaoInput = document.querySelector(".situacao");
+
+        function calcularMedia() {
+            let n1 = parseFloat(nota1.value) || 0;
+            let n2 = parseFloat(nota2.value) || 0;
+
+            let media = (n1 + n2) / 2;
+
+            mediaInput.value = media.toFixed(2);
+
+            if (media >= 6) {
+                situacaoInput.value = "Aprovado";
+            } else {
+                situacaoInput.value = "Reprovado";
+            }
+        }
+
+        nota1.addEventListener("input", calcularMedia);
+        nota2.addEventListener("input", calcularMedia);
+
+        // calcula ao carregar a página também
+        calcularMedia();
+    });
+</script>
 </html>

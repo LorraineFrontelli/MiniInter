@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -52,7 +53,9 @@
             <div class="tituloPaginas">
                 <h1>Semana</h1>
             </div>
-            <a href="${pageContext.request.contextPath}/mensagens?page=conversas"><img src="../../../assets/img/chat-palette-icon.svg" alt="" class="abrirChat"></a>
+            <img src="${pageContext.request.contextPath}/assets/img/chat-palette-icon.svg"
+                 alt="" class="abrirChat"
+                 onclick="window.location.href='${pageContext.request.contextPath}/mensagens?idRemetente=${sessionScope.usuario.id}&tipoRemetente=${sessionScope.tipoUsuario}'">
         </div>
         
         <section class="sectionSemana">
