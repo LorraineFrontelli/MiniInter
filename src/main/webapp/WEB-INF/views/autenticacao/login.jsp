@@ -28,7 +28,7 @@
     </header>
     
     <main>
-        <form action="${pageContext.request.contextPath}/login-adm" method="post" class="formAutenticacao formLogin">
+        <form action="${pageContext.request.contextPath}/login" method="post" class="formAutenticacao formLogin">
             <h1>Acessar conta</h1>
 
             <b class="msgErro" style="color: var(--medium-coral);">${mensagem}</b>
