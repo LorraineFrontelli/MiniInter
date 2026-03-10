@@ -40,9 +40,7 @@ public class InserirAlunoServlet extends HttpServlet {
         try {
 
             if (cpf == null || cpf.isBlank()) {
-
                 request.setAttribute("mensagem", "Digite um CPF.");
-
                 request.getRequestDispatcher("/WEB-INF/views/autenticacao/cadastro.jsp")
                         .forward(request, response);
                 return;
@@ -53,27 +51,21 @@ public class InserirAlunoServlet extends HttpServlet {
             boolean autorizado = admDAO.cpfExiste(cpf);
 
             if (!autorizado) {
-
                 request.setAttribute("mensagem", "CPF não autorizado para matrícula.");
-
                 request.getRequestDispatcher("/WEB-INF/views/autenticacao/cadastro.jsp")
                         .forward(request, response);
                 return;
             }
 
             if (!ValidacaoRegex.verificarEmail(email)) {
-
                 request.setAttribute("mensagem", "Email inválido.");
-
                 request.getRequestDispatcher("/WEB-INF/views/autenticacao/cadastro.jsp")
                         .forward(request, response);
                 return;
             }
 
             if (!ValidacaoRegex.verificarSenha(senha)) {
-
                 request.setAttribute("mensagem", "Senha inválida.");
-
                 request.getRequestDispatcher("/WEB-INF/views/autenticacao/cadastro.jsp")
                         .forward(request, response);
                 return;
@@ -83,6 +75,9 @@ public class InserirAlunoServlet extends HttpServlet {
 
             Aluno aluno = new Aluno();
 
+            int matricula = alunoDAO.gerarMatricula();
+
+            aluno.setMatricula(matricula);
             aluno.setCpf(cpf);
             aluno.setEmail(email);
             aluno.setSenha(senhaHash);

@@ -11,6 +11,32 @@ import model.Aluno;
 
 public class AlunoDAO {
 
+    public int gerarMatricula() {
+
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+
+        int matricula = 1;
+
+        String sql = "SELECT MAX(matricula) FROM Aluno";
+
+        try {
+
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                matricula = rs.getInt(1) + 1;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            conexao.desconectar(con);
+        }
+
+        return matricula;
+    }
     public int inserir(Aluno aluno) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
