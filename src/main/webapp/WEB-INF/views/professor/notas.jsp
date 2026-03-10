@@ -102,7 +102,7 @@
                     <input type="hidden" name="id" value="${boletim.id}">
                     <input type="hidden" name="idProfessor" value="${boletim.idProfessor}">
                     <input type="hidden" name="idAluno" value="${aluno.matricula}">
-                    <input type="hidden" name="data" value="${boletim.dataCriacao}"
+                    <input type="hidden" name="data" value="${boletim.dataCriacao}">
                 </div>
 
                 <div class="menuAluno">

@@ -84,7 +84,7 @@
                                 <div class="itemRecente" onclick="window.location.href='${pageContext.request.contextPath}/mensagens?idRemetente=${sessionScope.usuario.id}&tipoRemetente=${sessionScope.tipoUsuario}&idDestinatario=${m.idDestinatario}&tipoDestinatario=${m.tipoDestinatario}'">
                                     <strong>${m.nome}</strong>
                                     <c:if test="${m.temNaoLidas}">
-                                        <span class="badgeNaoLida">🔴</span>
+                                        <span class="badgeNaoLida"><img src="${pageContext.request.contextPath}/assets/img/unread-icon" alt=""></span>
                                     </c:if>
                                     <p>${m.mensagem}</p>
                                 </div>

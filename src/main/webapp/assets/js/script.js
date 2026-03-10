@@ -5,6 +5,10 @@ import "./validacao.js"
 document.querySelectorAll('.pagina').forEach(identificadorPagina => {
     identificadorPagina.addEventListener('click', () => {
         identificadorPagina.classList.add('hoverizado');
+
+        setTimeout(() => {
+            identificadorPagina.classList.remove('hoverizado');
+        }, 1000);
     });
 });
 

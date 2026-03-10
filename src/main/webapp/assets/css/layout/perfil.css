@@ -54,6 +54,12 @@ main {
     border-radius: 1.5vw;
 }
 
+.listaRecentes {
+    max-height: 23.5vh;
+    overflow-y: auto;
+    padding-bottom: 1vh;
+}
+
 .barrinhaTema {
     width: 100%;
     height: 9vh;
@@ -176,8 +182,13 @@ h2 {
 .itemRecente p {
     margin: 0;
     font-size: 0.9vw;
-    color: #555;
+    color: var(--gray);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.semMensagens {
+    padding-left: 1vw;
+    font-size: 1.2vw;
 }
