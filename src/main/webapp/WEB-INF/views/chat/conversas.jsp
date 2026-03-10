@@ -34,6 +34,8 @@
         <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg"
              alt="Ícone de voltar" onclick="history.back()" class="pincelVoltar">
 
+
+
         <div class="buscarAlunos">
             <search>
                 <form action="${pageContext.request.contextPath}/mensagens" method="get">
@@ -45,6 +47,10 @@
             </search>
             <img src="${pageContext.request.contextPath}/assets/img/search-icon.svg" alt="">
         </div>
+        <img src="${pageContext.request.contextPath}/assets/img/arrow-icon.svg"
+             alt="Nova conversa"
+             onclick="window.location.href='${pageContext.request.contextPath}/mensagem-create'"
+             class="novaConversa">
     </div>
 
     <c:if test="${not empty mensagem}">

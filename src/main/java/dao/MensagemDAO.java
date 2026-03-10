@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import conexao.Conexao;
 import model.Mensagem;
@@ -55,11 +57,11 @@ public class MensagemDAO {
                 "CASE WHEN m.id_remetente = ? AND m.tipo_remetente = ? THEN " +
                 "  CASE WHEN m.tipo_destinatario = 'PROFESSOR' THEN p2.nome " +
                 "       WHEN m.tipo_destinatario = 'ALUNO' THEN a2.nome " +
-                "       WHEN m.tipo_destinatario = 'ADMIN' THEN adm2.login END " +
+                "       WHEN m.tipo_destinatario = 'ADMIN' THEN 'ADMIN_' || adm2.id::text END " +
                 "ELSE " +
                 "  CASE WHEN m.tipo_remetente = 'PROFESSOR' THEN p.nome " +
                 "       WHEN m.tipo_remetente = 'ALUNO' THEN a.nome " +
-                "       WHEN m.tipo_remetente = 'ADMIN' THEN adm.login END " +
+                "       WHEN m.tipo_remetente = 'ADMIN' THEN 'ADMIN_' || adm.id::text END " +
                 "END AS nome_contato, " +
                 "BOOL_OR(m.lida = false AND m.id_destinatario = ? AND m.tipo_destinatario = ?) AS tem_nao_lidas, " +
                 "MAX(m.dt_mensagem) AS ultima_mensagem " +
@@ -123,11 +125,11 @@ public class MensagemDAO {
                 "CASE WHEN m.id_remetente = ? AND m.tipo_remetente = ? THEN " +
                 "  CASE WHEN m.tipo_destinatario = 'PROFESSOR' THEN p2.nome " +
                 "       WHEN m.tipo_destinatario = 'ALUNO' THEN a2.nome " +
-                "       WHEN m.tipo_destinatario = 'ADMIN' THEN adm2.login END " +
+                "       WHEN m.tipo_destinatario = 'ADMIN' THEN 'ADMIN_' || adm2.id::text END " +
                 "ELSE " +
                 "  CASE WHEN m.tipo_remetente = 'PROFESSOR' THEN p.nome " +
                 "       WHEN m.tipo_remetente = 'ALUNO' THEN a.nome " +
-                "       WHEN m.tipo_remetente = 'ADMIN' THEN adm.login END " +
+                "        WHEN m.tipo_remetente = 'ADMIN' THEN 'ADMIN_' || adm.id::text END " +
                 "END AS nome_contato, " +
                 "BOOL_OR(m.lida = false AND m.id_destinatario = ? AND m.tipo_destinatario = ?) AS tem_nao_lidas, " +
                 "MAX(m.dt_mensagem) AS ultima_mensagem " +
@@ -205,11 +207,11 @@ public class MensagemDAO {
                 "CASE WHEN m.id_remetente = ? AND m.tipo_remetente = ? THEN " +
                 "  CASE WHEN m.tipo_destinatario = 'PROFESSOR' THEN p2.nome " +
                 "       WHEN m.tipo_destinatario = 'ALUNO' THEN a2.nome " +
-                "       WHEN m.tipo_destinatario = 'ADMIN' THEN adm2.login END " +
+                "       WHEN m.tipo_destinatario = 'ADMIN' THEN 'ADMIN_' || adm2.id::text END " +
                 "ELSE " +
                 "  CASE WHEN m.tipo_remetente = 'PROFESSOR' THEN p.nome " +
                 "       WHEN m.tipo_remetente = 'ALUNO' THEN a.nome " +
-                "       WHEN m.tipo_remetente = 'ADMIN' THEN adm.login END " +
+                "       WHEN m.tipo_remetente = 'ADMIN' THEN 'ADMIN_' || adm.id::text END " +
                 "END AS nome_contato, " +
                 "BOOL_OR(m.lida = false AND m.id_destinatario = ? AND m.tipo_destinatario = ?) AS tem_nao_lidas, " +
                 "MAX(m.dt_mensagem) AS ultima_mensagem " +
@@ -285,8 +287,8 @@ public class MensagemDAO {
                 "CASE " +
                 "  WHEN m.tipo_remetente = 'PROFESSOR' THEN p.nome " +
                 "  WHEN m.tipo_remetente = 'ALUNO' THEN a.nome " +
-                "  WHEN m.tipo_remetente = 'ADMIN' THEN adm.login " +
-                "END AS nome_remetente " +
+                "  WHEN m.tipo_remetente = 'ADMIN' THEN 'ADMIN_' || adm.id::text END " +
+                "  AS nome_remetente " +
                 "FROM chat m " +
                 "LEFT JOIN professor p ON m.tipo_remetente = 'PROFESSOR' AND m.id_remetente = p.id " +
                 "LEFT JOIN aluno a ON m.tipo_remetente = 'ALUNO' AND m.id_remetente = a.matricula " +
@@ -362,6 +364,36 @@ public class MensagemDAO {
         return mensagens;
     }
 
+    public List<Map<String, Object>> listarTodosUsuarios(int idAtual, String tipoAtual) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        List<Map<String, Object>> usuarios = new ArrayList<>();
+
+        String sql = " SELECT * FROM ( SELECT matricula AS id, nome, 'ALUNO' AS tipo FROM aluno UNION ALL SELECT id, nome, 'PROFESSOR' AS tipo FROM professor UNION ALL SELECT id, 'ADMIN_' || id AS nome, 'ADMIN' AS tipo FROM admin) AS todos ORDER BY 2 ";
+
+        try {
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                // ignora o próprio usuário logado
+                if (rs.getInt("id") == idAtual && rs.getString("tipo").equals(tipoAtual)) continue;
+
+                Map<String, Object> u = new HashMap<>();
+                u.put("id",   rs.getInt("id"));
+                u.put("nome", rs.getString("nome"));
+                u.put("tipo", rs.getString("tipo"));
+                usuarios.add(u);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            conexao.desconectar(con);
+        }
+
+        return usuarios;
+    }
+
     // UPDATE - ATUALIZAR MENSAGEM
     public int atualizar(Mensagem mensagem) {
         Conexao conexao = new Conexao();
@@ -385,6 +417,31 @@ public class MensagemDAO {
         }
 
         return retorno; // retorna número de linhas alteradas ou -1 em caso de erro
+    }
+
+    // UPDATE - MARCAR MENSAGENS COMO LIDAS
+    public int atualizarLidas(int idRemetente, String tipoRemetente, int idDestinatario, String tipoDestinatario) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        int retorno;
+        String sql = "UPDATE chat SET lida = true WHERE id_remetente = ? AND tipo_remetente = ? AND id_destinatario = ? AND tipo_destinatario = ? AND lida = false";
+
+        try {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, idRemetente);
+            pst.setString(2, tipoRemetente);
+            pst.setInt(3, idDestinatario);
+            pst.setString(4, tipoDestinatario);
+
+            retorno = pst.executeUpdate();
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+            retorno = -1;
+        } finally {
+            conexao.desconectar(con);
+        }
+
+        return retorno;
     }
 
     // DELETE - DELETAR MENSAGEM

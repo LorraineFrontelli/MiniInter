@@ -50,6 +50,17 @@ public class BuscarMensagemServlet extends HttpServlet {
 
                 mensagens = mensagemDAO.listarConversa(idRemetente, tipoRemetente, idDestinatario, tipoDestinatario);
 
+                mensagemDAO.atualizarLidas(idDestinatario, tipoDestinatario, idRemetente, tipoRemetente);
+
+                String nomeContato = "ADMIN".equals(tipoDestinatario) ? "ADMIN_" + idDestinatario : "Conversa";
+                for (Mensagem m : mensagens) {
+                    if (m.getIdRemetente() != idRemetente || !m.getTipoRemetente().equals(tipoRemetente)) {
+                        nomeContato = m.getNome();
+                        break;
+                    }
+                }
+                request.setAttribute("nomeContato", nomeContato);
+
                 if (!mensagens.isEmpty()) {
                     request.setAttribute("mensagem", "Conversa encontrada com sucesso!");
                 } else{

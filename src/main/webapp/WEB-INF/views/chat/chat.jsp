@@ -26,12 +26,6 @@
         <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg"
              alt="Ícone de voltar" onclick="history.back()" class="pincelVoltar">
         <div class="tituloPaginas">
-            <c:set var="nomeContato" value="Conversa"/>
-            <c:forEach items="${mensagens}" var="m">
-                <c:if test="${m.idRemetente != sessionScope.usuario.id || m.tipoRemetente != sessionScope.tipoUsuario}">
-                    <c:set var="nomeContato" value="${m.nome}"/>
-                </c:if>
-            </c:forEach>
             <h1>${nomeContato}</h1>
         </div>
         <img src="${pageContext.request.contextPath}/assets/img/themes-icon.svg" alt="" class="abrirTemas">

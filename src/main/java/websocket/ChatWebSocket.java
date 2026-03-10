@@ -19,14 +19,11 @@ import java.util.concurrent.ConcurrentHashMap;
 @ServerEndpoint("/chat/{idUsuario}/{tipoUsuario}")
 public class ChatWebSocket {
 
-    // ─── Mapa estático: compartilhado entre TODAS as instâncias da classe ────────
-    // Chave  → "idUsuario_tipoUsuario"   ex: "1_ALUNO" | "3_PROFESSOR"
-    // Valor  → Session aberta do WebSocket
+
+    // map que registra todos os usuarios logados(instancia de classe)
     private static final Map<String, Session> sessoes = new ConcurrentHashMap<>();
 
-    // =========================================================
-    // CONEXÃO ABERTA — registra o usuário no mapa de sessões
-    // =========================================================
+    // abre conexão e registra o usuario no map
     @OnOpen
     public void onOpen(Session session,
                        @PathParam("idUsuario") String idUsuario,
@@ -38,9 +35,6 @@ public class ChatWebSocket {
         System.out.println("[WS OPEN] " + chave + " conectado. Total online: " + sessoes.size());
     }
 
-    // =========================================================
-    // MENSAGEM RECEBIDA — salva no banco e entrega ao destinatário
-    // =========================================================
     @OnMessage
     public void onMessage(String payload,
                           Session session,
@@ -48,14 +42,17 @@ public class ChatWebSocket {
                           @PathParam("tipoUsuario") String tipoUsuario) {
 
         try {
+            // transforma a String em JSON
             JsonObject json = JsonParser.parseString(payload).getAsJsonObject();
 
+            // Pega as variaveis da URL e do JSON
             int    idRemetente      = Integer.parseInt(idUsuario);
             String tipoRemetente    = tipoUsuario;
             int    idDestinatario   = json.get("idDestinatario").getAsInt();
             String tipoDestinatario = json.get("tipoDestinatario").getAsString();
             String texto            = json.get("mensagem").getAsString();
 
+            //Cria um objeto Mensagem com os dados acima
             Mensagem mensagem = new Mensagem();
             mensagem.setIdRemetente(idRemetente);
             mensagem.setTipoRemetente(tipoRemetente);
@@ -65,6 +62,7 @@ public class ChatWebSocket {
             mensagem.setDataMensagem(Timestamp.from(Instant.now()));
             mensagem.setLida(false);
 
+            // Insere a mensagem no BD
             MensagemDAO dao = new MensagemDAO();
             int idGerado = dao.inserir(mensagem);
 
@@ -73,6 +71,7 @@ public class ChatWebSocket {
                 return;
             }
 
+            // Prepara um JSON que é a resposta a quem enviou para a mensagem aparecer na tela
             JsonObject resposta = new JsonObject();
             resposta.addProperty("id",               idGerado);
             resposta.addProperty("idRemetente",      idRemetente);
@@ -91,9 +90,11 @@ public class ChatWebSocket {
 
             System.out.println("[WS] Sessões ativas: " + sessoes.keySet());
 
+            // marca com lida se o destinatario estiver online
             if (sessaoDestinatario != null && sessaoDestinatario.isOpen()) {
                 sessaoDestinatario.getBasicRemote().sendText(respostaJson);
                 System.out.println("[WS] Entregue ao destinatário: " + chaveDestinatario);
+                dao.atualizarLidas(idRemetente, tipoRemetente, idDestinatario, tipoDestinatario);
             }
 
             // Confirma ao remetente
@@ -108,9 +109,7 @@ public class ChatWebSocket {
         }
     }
 
-    // =========================================================
-    // CONEXÃO FECHADA — remove do mapa de sessões
-    // =========================================================
+    // remove usuario do map e fecha conexão
     @OnClose
     public void onClose(Session session,
                         @PathParam("idUsuario") String idUsuario,
@@ -122,9 +121,7 @@ public class ChatWebSocket {
         System.out.println("[WS CLOSE] " + chave + " desconectado. Total online: " + sessoes.size());
     }
 
-    // =========================================================
-    // ERRO NA CONEXÃO — loga e remove do mapa
-    // =========================================================
+    // caso aconteça erro na conexão, acisa ao usuario e remove ele da sessão
     @OnError
     public void onError(Session session,
                         Throwable throwable,
@@ -136,16 +133,13 @@ public class ChatWebSocket {
         sessoes.remove(chave);
     }
 
-    // =========================================================
-    // HELPERS
-    // =========================================================
 
-    // Gera a chave do mapa: "1_ALUNO", "3_PROFESSOR", etc.
+    // gera a chave do map (1_ALUNO/34_PROFESSOR)
     private String gerarChave(String idUsuario, String tipoUsuario) {
         return idUsuario + "_" + tipoUsuario;
     }
 
-    // Envia um JSON de erro para a sessão que causou o problema
+    // Envia um JSON de erro para a sessão
     private void enviarErro(Session session, String motivo) {
         try {
             JsonObject erro = new JsonObject();
