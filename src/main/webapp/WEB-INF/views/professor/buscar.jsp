@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/buscar.css">
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
-    <script src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
+    <script type="module" src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
 
     <title>Buscar alunos - Monart</title>
 </head>
@@ -33,10 +33,10 @@
     <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
     <nav>
         <ul>
-            <li><a href="${pageContext.request.contextPath}/professores?page=perfil-professor" class="pagina"><img src="${pageContext.request.contextPath}assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
-            <li><a href="${pageContext.request.contextPath}/professores?page=buscar" class="pagina ativo"><img src="${pageContext.request.contextPath}assets/img/search-icon.svg" decoding="async" alt="">Buscar</a></li>
-            <li><a href="${pageContext.request.contextPath}/professores?page=lembretes" class="pagina"><img src="${pageContext.request.contextPath}assets/img/reminder-icon.svg" decoding="async" alt="">Lembretes</a></li></li>
-            <li><a href="${pageContext.request.contextPath}/professores?page=estatisticas" class="pagina"><img src="${pageContext.request.contextPath}assets/img/statistics-icon.svg" decoding="async" alt="">Estatísticas</a></li>
+            <li><a href="${pageContext.request.contextPath}/professores?page=perfil-professor" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>
+            <li><a href="${pageContext.request.contextPath}/professores?page=buscar" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/search-icon.svg" decoding="async" alt="">Buscar</a></li>
+            <li><a href="${pageContext.request.contextPath}/professores?page=lembretes" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/reminder-icon.svg" decoding="async" alt="">Lembretes</a></li></li>
+            <li><a href="${pageContext.request.contextPath}/professores?page=estatisticas" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/statistics-icon.svg" decoding="async" alt="">Estatísticas</a></li>
         </ul>
     </nav>
     <a href="${pageContext.request.contextPath}/index.html">
