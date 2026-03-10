@@ -46,7 +46,7 @@ public class LoginAdmServlet extends HttpServlet {
 
                     request.getSession().setAttribute("usuario", admin);
                     request.getSession().setAttribute("tipoUsuario",
-                            "ADMIN");
+                            "admin");
 
                     response.sendRedirect(request.getContextPath()
                             + "/administradores");

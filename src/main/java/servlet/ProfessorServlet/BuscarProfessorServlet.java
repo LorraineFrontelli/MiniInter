@@ -24,7 +24,7 @@ public class BuscarProfessorServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         String mensagem = (String) session.getAttribute("mensagem");
-        Professor usuario = (Professor) session.getAttribute("usuario");
+        Object usuario = session.getAttribute("usuario");
 
         if (mensagem != null) {
             request.setAttribute("mensagem", mensagem);
@@ -82,13 +82,19 @@ public class BuscarProfessorServlet extends HttpServlet {
 
         String tipo = (String) session.getAttribute("tipoUsuario");
 
-        if ("admin".equals(tipo)) {
+        // ADMIN
+        if ("ADMIN".equalsIgnoreCase(tipo)) {
 
             request.getRequestDispatcher("/WEB-INF/views/administrador/tab-professor.jsp")
                     .forward(request, response);
             return;
 
-        } else {
+        }
+
+        // PROFESSOR
+        if (usuario instanceof Professor) {
+
+            Professor professorLogado = (Professor) usuario;
 
             if (page != null) {
 
@@ -101,10 +107,10 @@ public class BuscarProfessorServlet extends HttpServlet {
                         String matriculaParam = request.getParameter("matricula");
                         int matricula = Integer.parseInt(matriculaParam);
 
-                        Aluno aluno = alunoDAO.buscarPorMatriculaEProfessor(matricula, usuario.getId());
+                        Aluno aluno = alunoDAO.buscarPorMatriculaEProfessor(matricula, professorLogado.getId());
 
                         BoletimDAO boletimDAO = new BoletimDAO();
-                        Boletim boletim = boletimDAO.buscarPorAlunoEProfessor(matricula, usuario.getId());
+                        Boletim boletim = boletimDAO.buscarPorAlunoEProfessor(matricula, professorLogado.getId());
 
                         TelefoneDAO telefoneDAO = new TelefoneDAO();
                         List<Telefone> telefones = telefoneDAO.listarIdAluno(matricula);
@@ -136,9 +142,10 @@ public class BuscarProfessorServlet extends HttpServlet {
                     case "perfil-professor":
 
                         MensagemDAO mensagemDAO = new MensagemDAO();
-                        List<Mensagem> mensagensRecentes = mensagemDAO.listarHistoricoRecente(
-                                usuario.getId(), "PROFESSOR", 5
-                        );
+                        List<Mensagem> mensagensRecentes =
+                                mensagemDAO.listarHistoricoRecente(
+                                        professorLogado.getId(), "PROFESSOR", 5
+                                );
 
                         request.setAttribute("mensagensRecentes", mensagensRecentes);
 
@@ -148,7 +155,7 @@ public class BuscarProfessorServlet extends HttpServlet {
 
                     case "buscar":
 
-                        List<Aluno> alunos = alunoDAO.buscarPorProf(usuario.getId());
+                        List<Aluno> alunos = alunoDAO.buscarPorProf(professorLogado.getId());
 
                         request.setAttribute("alunos", alunos);
 
@@ -175,6 +182,11 @@ public class BuscarProfessorServlet extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/views/professor/tab-professor.jsp")
                         .forward(request, response);
             }
+
+        } else {
+
+            request.getRequestDispatcher("/WEB-INF/views/autenticacao/login.jsp")
+                    .forward(request, response);
         }
     }
 
