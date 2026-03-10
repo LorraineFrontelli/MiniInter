@@ -3,14 +3,12 @@ package servlet.AlunoServlet;
 import dao.AlunoDAO;
 import model.Aluno;
 import utils.ValidacaoRegex;
+import utils.HashSenha;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -52,6 +50,7 @@ public class AtualizarAlunoServlet extends HttpServlet {
             dispatcher.forward(request, response);
 
         } catch (Exception e) {
+
             request.getSession().setAttribute("mensagem", "Erro ao carregar aluno.");
             response.sendRedirect(request.getContextPath() + "/alunos");
         }
@@ -79,41 +78,55 @@ public class AtualizarAlunoServlet extends HttpServlet {
         Date data = aluno.getDataInicio();
 
         try {
-            if(nomeParametro!=null && !nomeParametro.isEmpty()){
+
+            if (nomeParametro != null && !nomeParametro.isEmpty()) {
                 nome = nomeParametro;
             }
-            if(cpfParametro!=null && !cpfParametro.isEmpty()){
+
+            if (cpfParametro != null && !cpfParametro.isEmpty()) {
                 cpf = cpfParametro;
             }
-            if(emailParametro!=null && !emailParametro.isEmpty()){
-                if(ValidacaoRegex.verificarEmail(emailParametro)) {
+
+            if (emailParametro != null && !emailParametro.isEmpty()) {
+
+                if (ValidacaoRegex.verificarEmail(emailParametro)) {
                     email = emailParametro;
-                } else{
-                    request.getSession().setAttribute("mensagem", "Senha inválida.");
+                } else {
+                    request.getSession().setAttribute("mensagem", "Email inválido.");
                 }
             }
-            if(senhaParametro!=null && !senhaParametro.isEmpty()){
-                if(ValidacaoRegex.verificarSenha(senhaParametro)) {
-                    senha = senhaParametro;
-                } else{
+
+            if (senhaParametro != null && !senhaParametro.isEmpty()) {
+
+                if (ValidacaoRegex.verificarSenha(senhaParametro)) {
+                    senha = HashSenha.gerarHash(senhaParametro);
+                } else {
                     request.getSession().setAttribute("mensagem", "Senha inválida.");
                 }
             }
 
-            if(dataParametro!=null  && !dataParametro.isEmpty()){
+            if (dataParametro != null && !dataParametro.isEmpty()) {
+
                 LocalDate localDate = LocalDate.parse(dataParametro);
                 data = java.sql.Date.valueOf(localDate);
             }
-                aluno = new Aluno(matricula, nome, cpf, data, email, senha);
 
-                if (dao.atualizar(aluno) > 0) {
-                    request.getSession().setAttribute("mensagem", "Aluno atualizado com sucesso.");
-                } else {
-                    request.getSession().setAttribute("mensagem", "Erro ao atualizar aluno.");
-                }
+            aluno = new Aluno(matricula, nome, cpf, data, email, senha);
+
+            if (dao.atualizar(aluno) > 0) {
+
+                request.getSession().setAttribute("mensagem", "Aluno atualizado com sucesso.");
+
+            } else {
+
+                request.getSession().setAttribute("mensagem", "Erro ao atualizar aluno.");
+            }
+
         } catch (Exception e) {
+
             request.getSession().setAttribute("mensagem", "Erro ao atualizar aluno.");
         }
+
         response.sendRedirect(request.getContextPath() + "/alunos");
     }
 }

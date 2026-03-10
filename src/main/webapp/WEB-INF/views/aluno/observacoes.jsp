@@ -41,7 +41,7 @@
                 <li><a href="${pageContext.request.contextPath}/alunos?page=observacoes" class="pagina ativo"><img src="${pageContext.request.contextPath}/assets/img/observations-icon.svg" decoding="async" alt="">Observações</a></li>
             </ul>
         </nav>
-        <a href="${pageContext.request.contextPath}/autenticacao/login.html">
+        <a href="${pageContext.request.contextPath}/index.html">
             <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
         </a>
     </header>

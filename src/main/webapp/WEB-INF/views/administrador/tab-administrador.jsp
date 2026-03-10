@@ -1,13 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script>document.documentElement.style.setProperty("--tema", localStorage.getItem("corTema") || "#242021");</script>
+    <script>
+        document.documentElement.style.setProperty("--tema", localStorage.getItem("corTema") || "#242021");
+    </script>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/global.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
@@ -16,166 +21,340 @@
     <script type="module" src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
 
     <title>CRUD - Monart</title>
+
+    <style>
+
+        .popupCpf{
+            width:350px;
+            max-width:90vw;
+            padding:20px;
+            border:none;
+            border-radius:8px;
+        }
+
+        .listaCpf{
+            margin-top:15px;
+            max-height:300px;
+            overflow-y:auto;
+            border:1px solid #ccc;
+            padding:10px;
+            background:white;
+        }
+
+        .botaoCpf{
+            padding:6px 10px;
+            border-radius:6px;
+            border:none;
+            cursor:pointer;
+            background:#242021;
+            color:white;
+            font-size:13px;
+        }
+
+    </style>
+
 </head>
 
 <body>
+
 <div class="meuPlaceholder"></div>
 
 <header class="headerLateral">
-    <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
+
+    <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" class="logoMonart">
+
     <nav>
         <ul>
-            <li><a href="${pageContext.request.contextPath}/administradores" class="pagina ativo">
-                <img src="${pageContext.request.contextPath}/assets/img/admin-icon.svg" decoding="async" alt="">Administrador</a></li>
-            <li><a href="${pageContext.request.contextPath}/alunos" class="pagina">
-                <img src="${pageContext.request.contextPath}/assets/img/student-icon.svg" decoding="async" alt="">Aluno</a></li>
-            <li><a href="${pageContext.request.contextPath}/professores" class="pagina">
-                <img src="${pageContext.request.contextPath}/assets/img/teacher-icon.svg" decoding="async" alt="">Professor</a></li>
-            <li><a href="${pageContext.request.contextPath}/boletins" class="pagina">
-                <img src="${pageContext.request.contextPath}/assets/img/bulletin-icon.svg" decoding="async" alt="">Boletim</a></li>
-            <li><a href="${pageContext.request.contextPath}/telefones" class="pagina">
-                <img src="${pageContext.request.contextPath}/assets/img/telephone-icon.svg" decoding="async" alt="">Telefone</a></li>
+
+            <li>
+                <a href="${pageContext.request.contextPath}/administradores" class="pagina ativo">
+                    <img src="${pageContext.request.contextPath}/assets/img/admin-icon.svg">
+                    Administrador
+                </a>
+            </li>
+
+            <li>
+                <a href="${pageContext.request.contextPath}/alunos" class="pagina">
+                    <img src="${pageContext.request.contextPath}/assets/img/student-icon.svg">
+                    Aluno
+                </a>
+            </li>
+
+            <li>
+                <a href="${pageContext.request.contextPath}/professores" class="pagina">
+                    <img src="${pageContext.request.contextPath}/assets/img/teacher-icon.svg">
+                    Professor
+                </a>
+            </li>
+
+            <li>
+                <a href="${pageContext.request.contextPath}/boletins" class="pagina">
+                    <img src="${pageContext.request.contextPath}/assets/img/bulletin-icon.svg">
+                    Boletim
+                </a>
+            </li>
+
+            <li>
+                <a href="${pageContext.request.contextPath}/telefones" class="pagina">
+                    <img src="${pageContext.request.contextPath}/assets/img/telephone-icon.svg">
+                    Telefone
+                </a>
+            </li>
+
         </ul>
     </nav>
+
 </header>
 
 <main>
+
     <div class="cabecalhoPaginas">
+
         <a href="${pageContext.request.contextPath}/login-adm">
-            <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
+            <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" class="pincelVoltar">
         </a>
+
         <div class="tituloPaginas">
             <h1>Administrador</h1>
         </div>
-        <img src="${pageContext.request.contextPath}/assets/img/themes-icon.svg" alt="" class="abrirTemas">
+
+        <img src="${pageContext.request.contextPath}/assets/img/themes-icon.svg" class="abrirTemas">
+
     </div>
 
-    <!-- Mensagem -->
-    <c:if test="${not empty mensagem}">
-        <p style="color: green; text-align:center;">${mensagem}</p>
+    <c:if test="${not empty sessionScope.mensagem}">
+
+        <p style="color:green; text-align:center;">
+                ${sessionScope.mensagem}
+        </p>
+        <c:remove var="mensagem" scope="session"/>
     </c:if>
 
     <div class="componentizacao">
-        <search>
+
+        <div>
             <form action="${pageContext.request.contextPath}/administradores" method="get">
-                <input type="search" id="buscarCrud" class="buscarCrud"
-                       name="filtroLogin" placeholder="Pesquisar">
+
+                <input type="search"
+                       class="buscarCrud"
+                       name="filtroLogin"
+                       placeholder="Pesquisar">
+
             </form>
-        </search>
+        </div>
 
         <button class="botaoInsert" onclick="create.showModal()">
-            Fazer inserção
-            <img src="${pageContext.request.contextPath}/assets/img/plus-icon.svg" alt="">
+
+            Fazer inserção <img src="${pageContext.request.contextPath}/assets/img/plus-icon.svg">
+
         </button>
+
     </div>
 
     <div class="tabelaContainer">
+
         <table class="tabelaRead">
+
             <thead>
+
             <tr>
                 <th>Ações</th>
                 <th>ID</th>
                 <th>Login</th>
                 <th>Senha</th>
-                <th>CPF do Aluno</th>
+                <th>CPFs</th>
             </tr>
+
             </thead>
 
             <tbody>
+
             <c:forEach var="admin" items="${administradores}">
+
                 <tr>
+
                     <td class="opcoes">
+
                         <div>
-                            <!-- Update -->
+
                             <button type="button"
                                     onclick="abrirUpdate('${admin.id}','${admin.login}')">
-                                <img src="${pageContext.request.contextPath}/assets/img/update-icon.svg" alt="">
+
+                                <img src="${pageContext.request.contextPath}/assets/img/update-icon.svg">
+
                             </button>
 
-                            <!-- Delete -->
                             <button type="button"
                                     onclick="abrirDelete('${admin.id}')">
-                                <img src="${pageContext.request.contextPath}/assets/img/delete-icon.svg" alt="">
+
+                                <img src="${pageContext.request.contextPath}/assets/img/delete-icon.svg">
+
                             </button>
+
                         </div>
+
                     </td>
+
                     <td>${admin.id}</td>
                     <td>${admin.login}</td>
                     <td>********</td>
+
                     <td>
-                        <c:forEach var="cpf" items="${admin.alunoCpf}">
-                            ${cpf}<br>
-                        </c:forEach>
+
+                        <button class="botaoCpf"
+                                onclick="abrirCpfs('${admin.id}')">
+
+                            Visualizar CPFs
+
+                        </button>
+
+                        <div id="cpf-${admin.id}" style="display:none;">
+
+                            <c:forEach var="cpf" items="${admin.alunoCpf}">
+                                ${cpf}<br>
+                            </c:forEach>
+
+                        </div>
+
                     </td>
+
                 </tr>
+
             </c:forEach>
+
             </tbody>
 
         </table>
+
     </div>
+
 </main>
 
-<!-- Create -->
-<dialog class="create" id="create">
-    <button class="fecharPopUp" onclick="create.close()">X</button>
-    <form action="${pageContext.request.contextPath}/admin-create" method="post">
-        <label>Login</label>
-        <input type="text" name="login">
+<!-- POPUP CPFS -->
 
-        <label>Senha</label>
-        <input type="password" name="senha" min="8">
+<dialog id="popupCpf" class="popupCpf">
 
-            <label for="createCpfAluno">CPF do Aluno (Arquivo Excel .xlsx)</label>
-            <input type="file" name="alunoCpf" id="createCpf" accept=".xlsx">
+    <button class="fecharPopUp" onclick="popupCpf.close()">X</button>
 
-        <button class="salvarInsercao" type="submit">Inserir</button>
-    </form>
+    <h2>CPFs autorizados</h2>
+
+    <div id="listaCpf" class="listaCpf"></div>
+
 </dialog>
 
-<!-- Update -->
+<!-- CREATE -->
+
+<dialog class="create" id="create">
+
+    <button class="fecharPopUp" onclick="create.close()">X</button>
+
+    <form action="${pageContext.request.contextPath}/admin-create"
+          method="post"
+          enctype="multipart/form-data">
+
+        <label>Login</label> <input type="text" name="login" required>
+
+        <label>Senha</label> <input type="password" name="senha" minlength="8" required>
+
+        <label>CPF do Aluno (Excel .xlsx)</label> <input type="file" name="alunoCpf" accept=".xlsx" required>
+
+        <button class="salvarInsercao" type="submit">
+            Inserir
+        </button>
+
+    </form>
+
+</dialog>
+
+<!-- UPDATE -->
+
 <dialog class="update" id="update">
+
     <button class="fecharPopUp" onclick="update.close()">X</button>
-    <form action="${pageContext.request.contextPath}/admin-update" method="post">
+
+    <form action="${pageContext.request.contextPath}/admin-update"
+          method="post"
+          enctype="multipart/form-data">
+
         <input type="hidden" name="id" id="updateId">
 
-        <label>Login</label>
-        <input type="text" name="login" id="updateLogin">
+        <label>Login</label> <input type="text" name="login" id="updateLogin" required>
 
-        <label>Senha</label>
-        <input type="password" name="senha" min="8">
+        <label>Senha</label> <input type="password" name="senha" minlength="8" required>
 
-            <label for="updateCpfAluno">CPF do Aluno (Arquivo Excel .xlsx)</label>
-            <input type="file" name="alunoCpf" id="updateCpf" accept=".xlsx">
+        <label>CPF do Aluno (Excel .xlsx)</label> <input type="file" name="alunoCpf" accept=".xlsx">
 
-        <button class="salvarAlteracoes" type="submit">Atualizar</button>
+        <button class="salvarAlteracoes" type="submit">
+            Atualizar
+        </button>
+
     </form>
+
 </dialog>
 
-<!-- Delete -->
+<!-- DELETE -->
+
 <dialog class="deletes" id="deletes">
+
     <button class="fecharPopUp" onclick="deletes.close()">X</button>
+
     <form action="${pageContext.request.contextPath}/admin-delete" method="post">
+
         <input type="hidden" name="id" id="deleteId">
 
         <h2>Deseja realmente excluir?</h2>
+
         <div>
-            <button class="cancelarDeletar" type="button" onclick="deletes.close()">Cancelar</button>
-            <button class="deletar" type="submit">Excluir</button>
+
+            <button class="cancelarDeletar"
+                    type="button"
+                    onclick="deletes.close()">
+
+                Cancelar
+
+            </button>
+
+            <button class="deletar" type="submit">
+
+                Excluir
+
+            </button>
+
         </div>
+
     </form>
+
 </dialog>
 
 <script>
-    function abrirUpdate(id, login) {
+
+    function abrirUpdate(id, login){
+
         document.getElementById("updateId").value = id;
         document.getElementById("updateLogin").value = login;
+
         update.showModal();
+
     }
 
-    function abrirDelete(id) {
+    function abrirDelete(id){
+
         document.getElementById("deleteId").value = id;
+
         deletes.showModal();
+
     }
+
+    function abrirCpfs(id){
+
+        let lista = document.getElementById("cpf-" + id).innerHTML;
+
+        document.getElementById("listaCpf").innerHTML = lista;
+
+        popupCpf.showModal();
+
+    }
+
 </script>
 
 </body>

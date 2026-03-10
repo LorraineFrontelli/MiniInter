@@ -557,3 +557,17 @@ details .turmaItem {
     font-size: 1.2vw;
     cursor: pointer;
 }
+
+.popupCpf{
+    width: 350px;
+    max-width: 90vw;
+    padding: 20px;
+}
+
+.listaCpf{
+    margin-top: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+}

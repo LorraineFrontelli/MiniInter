@@ -2,20 +2,16 @@ package servlet.AlunoServlet;
 
 import dao.AdministradorDAO;
 import dao.AlunoDAO;
-import jakarta.servlet.http.HttpSession;
 import model.Aluno;
 import utils.ValidacaoRegex;
+import utils.HashSenha;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @WebServlet("/aluno-create")
 public class InserirAlunoServlet extends HttpServlet {
@@ -34,126 +30,88 @@ public class InserirAlunoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String acao = request.getParameter("acao");
-        HttpSession session = request.getSession();
+        String cpf = request.getParameter("cpf");
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
 
-        if ("validarCpf".equals(acao)) {
+        AdministradorDAO admDAO = new AdministradorDAO();
+        AlunoDAO alunoDAO = new AlunoDAO();
 
-            String cpf = request.getParameter("cpf");
-            AdministradorDAO admDAO = new AdministradorDAO();
+        try {
 
-            try {
+            if (cpf == null || cpf.isBlank()) {
 
-                if (cpf == null || cpf.isBlank()) {
+                request.setAttribute("mensagem", "Digite um CPF.");
 
-                    request.setAttribute("mensagem", "Digite um CPF.");
-                    request.getRequestDispatcher("/WEB-INF/views/Aluno/verificarCpf.jsp")
-                            .forward(request, response);
-                    return;
-                }
+                request.getRequestDispatcher("/WEB-INF/views/autenticacao/cadastro.jsp")
+                        .forward(request, response);
+                return;
+            }
 
-                boolean existe = admDAO.cpfExiste(cpf);
+            cpf = cpf.replaceAll("\\D", "");
 
-                if (!existe) {
+            boolean autorizado = admDAO.cpfExiste(cpf);
 
-                    request.setAttribute("mensagem", "CPF não autorizado.");
-                    request.getRequestDispatcher("/WEB-INF/views/Aluno/verificarCpf.jsp")
-                            .forward(request, response);
-                    return;
-                }
+            if (!autorizado) {
 
-                request.setAttribute("cpf", cpf);
+                request.setAttribute("mensagem", "CPF não autorizado para matrícula.");
+
+                request.getRequestDispatcher("/WEB-INF/views/autenticacao/cadastro.jsp")
+                        .forward(request, response);
+                return;
+            }
+
+            if (!ValidacaoRegex.verificarEmail(email)) {
+
+                request.setAttribute("mensagem", "Email inválido.");
+
+                request.getRequestDispatcher("/WEB-INF/views/autenticacao/cadastro.jsp")
+                        .forward(request, response);
+                return;
+            }
+
+            if (!ValidacaoRegex.verificarSenha(senha)) {
+
+                request.setAttribute("mensagem", "Senha inválida.");
+
+                request.getRequestDispatcher("/WEB-INF/views/autenticacao/cadastro.jsp")
+                        .forward(request, response);
+                return;
+            }
+
+            String senhaHash = HashSenha.gerarHash(senha);
+
+            Aluno aluno = new Aluno();
+
+            aluno.setCpf(cpf);
+            aluno.setEmail(email);
+            aluno.setSenha(senhaHash);
+
+            int retorno = alunoDAO.inserir(aluno);
+
+            if (retorno > 0) {
 
                 RequestDispatcher dispatcher =
-                        request.getRequestDispatcher("/WEB-INF/views/administrador/tab-alunos.jsp");
+                        request.getRequestDispatcher("/WEB-INF/views/aluno/agenda.jsp");
 
                 dispatcher.forward(request, response);
 
-            } catch (Exception e) {
+            } else {
 
-                e.printStackTrace();
-                request.setAttribute("mensagem", "Erro ao verificar CPF.");
-                request.getRequestDispatcher("/WEB-INF/views/Aluno/verificarCpf.jsp")
+                request.setAttribute("mensagem", "Erro ao cadastrar aluno.");
+
+                request.getRequestDispatcher("/WEB-INF/views/autenticacao/cadastro.jsp")
                         .forward(request, response);
             }
-        }
 
-        // ===== CADASTRAR ALUNO =====
-        else if ("cadastrar".equals(acao)) {
+        } catch (Exception e) {
 
-            String mensagem = null;
-            AlunoDAO dao = new AlunoDAO();
+            e.printStackTrace();
 
-            try {
+            request.setAttribute("mensagem", "Erro interno do servidor.");
 
-                String matriculaStr = request.getParameter("matricula");
-                String nome = request.getParameter("nome");
-                String cpf = request.getParameter("cpf");
-                String data = request.getParameter("dataInicio");
-                String email = request.getParameter("email");
-                String senha = request.getParameter("senha");
-
-                if (nome == null || nome.isBlank() ||
-                        email == null || email.isBlank() ||
-                        senha == null || senha.isBlank()) {
-
-                    mensagem = "Campos obrigatórios não preenchidos!";
-                }
-
-                else if (!ValidacaoRegex.verificarEmail(email)) {
-
-                    mensagem = "Email inválido!";
-                }
-
-                else if (!ValidacaoRegex.verificarSenha(senha)) {
-
-                    mensagem = "Senha inválida!";
-                }
-
-                if (mensagem != null) {
-
-                    request.setAttribute("mensagem", mensagem);
-
-                    request.getRequestDispatcher("/WEB-INF/views/administrador/tab-alunos.jsp")
-                            .forward(request, response);
-                    return;
-                }
-
-                int matricula = Integer.parseInt(matriculaStr);
-                Date dataInicio = new SimpleDateFormat("yyyy-MM-dd").parse(data);
-
-                Aluno aluno = new Aluno();
-                aluno.setMatricula(matricula);
-                aluno.setNome(nome);
-                aluno.setCpf(cpf);
-                aluno.setDataInicio(dataInicio);
-                aluno.setEmail(email);
-                aluno.setSenha(senha);
-
-                int retorno = dao.inserir(aluno);
-
-                if (retorno > 0) {
-                    mensagem = "Aluno cadastrado com sucesso!";
-                } else {
-                    mensagem = "Erro ao cadastrar aluno.";
-                }
-
-                session.setAttribute("mensagem", mensagem);
-
-                response.sendRedirect(request.getContextPath() + "/alunos");
-
-            } catch (Exception e) {
-
-                e.printStackTrace();
-                session.setAttribute("mensagem", "Erro ao cadastrar aluno!");
-                response.sendRedirect(request.getContextPath() + "/alunos");
-            }
-        }
-
-        // ===== CASO NENHUMA ACAO SEJA ENVIADA =====
-        else {
-
-            response.sendRedirect(request.getContextPath() + "/alunos");
+            request.getRequestDispatcher("/WEB-INF/views/autenticacao/cadastro.jsp")
+                    .forward(request, response);
         }
     }
 }

@@ -8,6 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import model.Professor;
+import utils.HashSenha;
 
 @WebServlet("/professor-update")
 public class AtualizarProfessorServlet extends HttpServlet {
@@ -34,8 +35,10 @@ public class AtualizarProfessorServlet extends HttpServlet {
                 data = LocalDate.parse(dataStr);
             }
 
+            String senhaHash = HashSenha.gerarHash(senha);
+
             Professor professor =
-                    new Professor(id, nome, data, email, senha, materia, usuario);
+                    new Professor(id, nome, data, email, senhaHash, materia, usuario);
 
             ProfessorDAO dao = new ProfessorDAO();
 
@@ -52,11 +55,8 @@ public class AtualizarProfessorServlet extends HttpServlet {
 
             e.printStackTrace();
             session.setAttribute("mensagem", "Erro ao atualizar professor.");
-
         }
 
         response.sendRedirect(request.getContextPath() + "/professores");
-
     }
-
 }

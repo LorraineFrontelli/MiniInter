@@ -1,6 +1,5 @@
 package dao;
 
-// imports da classe
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +11,6 @@ import model.Aluno;
 
 public class AlunoDAO {
 
-    // CREATE - inserir aluno
     public int inserir(Aluno aluno) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
@@ -21,10 +19,17 @@ public class AlunoDAO {
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
+
             pst.setInt(1, aluno.getMatricula());
             pst.setString(2, aluno.getNome());
             pst.setString(3, aluno.getCpf());
-            pst.setDate(4, new java.sql.Date(aluno.getDataInicio().getTime()));
+
+            if (aluno.getDataInicio() != null) {
+                pst.setDate(4, new java.sql.Date(aluno.getDataInicio().getTime()));
+            } else {
+                pst.setDate(4, new java.sql.Date(System.currentTimeMillis()));
+            }
+
             pst.setString(5, aluno.getEmail());
             pst.setString(6, aluno.getSenha());
 
@@ -40,7 +45,6 @@ public class AlunoDAO {
         return retorno;
     }
 
-    // READ - buscar aluno pela matricula
     public Aluno buscarPorMatricula(int matricula) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
@@ -73,8 +77,6 @@ public class AlunoDAO {
         return aluno;
     }
 
-
-    // READ - buscar aluno pela matricula e professor
     public Aluno buscarPorMatriculaEProfessor(int matricula, int idProfessor) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
@@ -108,7 +110,6 @@ public class AlunoDAO {
         return aluno;
     }
 
-    // READ - buscar aluno pelo nome
     public List<Aluno> buscarPorNome(String nome) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
@@ -141,8 +142,6 @@ public class AlunoDAO {
         return alunos;
     }
 
-
-    // READ - buscar aluno pelo professor
     public List<Aluno> buscarPorProf(int id) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
@@ -175,7 +174,6 @@ public class AlunoDAO {
         return alunos;
     }
 
-    // READ - listar todos os alunos
     public List<Aluno> listar() {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
@@ -206,7 +204,6 @@ public class AlunoDAO {
         return alunos;
     }
 
-    // UPDATE - atualizar aluno
     public int atualizar(Aluno aluno) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
@@ -215,9 +212,16 @@ public class AlunoDAO {
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
+
             pst.setString(1, aluno.getNome());
             pst.setString(2, aluno.getCpf());
-            pst.setDate(3, new java.sql.Date(aluno.getDataInicio().getTime()));
+
+            if (aluno.getDataInicio() != null) {
+                pst.setDate(3, new java.sql.Date(aluno.getDataInicio().getTime()));
+            } else {
+                pst.setDate(3, new java.sql.Date(System.currentTimeMillis()));
+            }
+
             pst.setString(4, aluno.getEmail());
             pst.setString(5, aluno.getSenha());
             pst.setInt(6, aluno.getMatricula());
@@ -234,7 +238,6 @@ public class AlunoDAO {
         return retorno;
     }
 
-    // DELETE - deletar aluno
     public int deletar(int matricula) {
         Conexao conexao = new Conexao();
         Connection con = conexao.conectar();
