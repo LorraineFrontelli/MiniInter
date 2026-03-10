@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/crud.css">
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
-    <script src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
+    <script type="module" src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
 
     <title>CRUD - Monart</title>
 </head>
@@ -26,15 +26,15 @@
     <nav>
         <ul>
             <li><a href="${pageContext.request.contextPath}/administradores" class="pagina ativo">
-                <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Administrador</a></li>
+                <img src="${pageContext.request.contextPath}/assets/img/admin-icon.svg" decoding="async" alt="">Administrador</a></li>
             <li><a href="${pageContext.request.contextPath}/alunos" class="pagina">
-                <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Aluno</a></li>
+                <img src="${pageContext.request.contextPath}/assets/img/student-icon.svg" decoding="async" alt="">Aluno</a></li>
             <li><a href="${pageContext.request.contextPath}/professores" class="pagina">
-                <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Professor</a></li>
+                <img src="${pageContext.request.contextPath}/assets/img/teacher-icon.svg" decoding="async" alt="">Professor</a></li>
             <li><a href="${pageContext.request.contextPath}/boletins" class="pagina">
-                <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Boletim</a></li>
+                <img src="${pageContext.request.contextPath}/assets/img/bulletin-icon.svg" decoding="async" alt="">Boletim</a></li>
             <li><a href="${pageContext.request.contextPath}/telefones" class="pagina">
-                <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg" decoding="async" alt="">Telefone</a></li>
+                <img src="${pageContext.request.contextPath}/assets/img/telephone-icon.svg" decoding="async" alt="">Telefone</a></li>
         </ul>
     </nav>
 </header>
@@ -125,8 +125,8 @@
         <label>Senha</label>
         <input type="password" name="senha" min="8">
 
-        <label>CPF do Aluno</label>
-        <input type="text" name="alunoCpf">
+            <label for="createCpfAluno">CPF do Aluno (Arquivo Excel .xlsx)</label>
+            <input type="file" name="alunoCpf" id="createCpf" accept=".xlsx">
 
         <button class="salvarInsercao" type="submit">Inserir</button>
     </form>
@@ -144,8 +144,8 @@
         <label>Senha</label>
         <input type="password" name="senha" min="8">
 
-        <label>CPF do Aluno</label>
-        <input type="text" name="alunoCpf">
+            <label for="updateCpfAluno">CPF do Aluno (Arquivo Excel .xlsx)</label>
+            <input type="file" name="alunoCpf" id="updateCpf" accept=".xlsx">
 
         <button class="salvarAlteracoes" type="submit">Atualizar</button>
     </form>

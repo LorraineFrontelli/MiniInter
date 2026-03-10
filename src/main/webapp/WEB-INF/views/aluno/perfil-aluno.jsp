@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/perfil.css">
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
-    <script src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
+    <script type="module" src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
 
     <title>Perfil - Monart</title>
 </head>

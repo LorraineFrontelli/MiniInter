@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/boletim.css">
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
-    <script src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
+    <script type="module" src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
 
     <title>Suas notas - Monart</title>
 </head>
@@ -93,10 +93,12 @@
 
                         <td class="notasCentro nota1">
                             <fmt:formatNumber value="${b.nota1}" minFractionDigits="2" />
+                            <button class="abrirNota1" onclick="verTipoNota1.showModal()"><img src="${pageContext.request.contextPath}/assets/img/heavy-plus-icon.svg" alt=""></button>
                         </td>
-
+                        
                         <td class="notasCentro nota2">
                             <fmt:formatNumber value="${b.nota2}" minFractionDigits="2" />
+                            <button class="abrirNota2" onclick="verTipoNota2.showModal()"><img src="${pageContext.request.contextPath}/assets/img/heavy-plus-icon.svg" alt=""></button>
                         </td>
 
                         <td class="notasCentro media">
@@ -124,6 +126,22 @@
             </table>
         </div>
     </main>
+
+    <!-- Modal Ver Tipo Nota 1 -->
+    <dialog class="verTipoNota1" id="verTipoNota1">
+        <button class="fecharPopUp" onclick="verTipoNota1.close()">X</button>
+        
+        <label for="descricaoNota1">Descrição Nota 1</label>
+        <input type="text" name="descricaoNota1" id="descricaoNota1" disabled>
+    </dialog>
+
+    <!-- Modal Ver Tipo Nota 2 -->
+    <dialog class="verTipoNota2" id="verTipoNota2">
+        <button class="fecharPopUp" onclick="verTipoNota2.close()">X</button>
+        
+        <label for="descricaoNota2">Descrição Nota 2</label>
+        <input type="text" name="descricaoNota2" id="descricaoNota2" disabled>
+    </dialog>
 </body>
 
 </html>

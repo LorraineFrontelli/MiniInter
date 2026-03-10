@@ -359,3 +359,68 @@ dialog::backdrop {
     transition: 0.285s ease;
 }
 
+/* Estilização Padrão de Pop-Ups */
+
+dialog {
+    font-size: 1.2vw;
+    padding-bottom: 2vw;
+    position: relative;
+    overflow: visible;
+    min-height: 25vh;
+    min-width: 20vw;
+    background-color: var(--vintage-chantilly);
+    border: 1.75px dashed var(--black);
+}
+
+dialog form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5vh;
+}
+
+dialog form input {
+    font-size: 1.2vw;
+    padding: 1vh;
+    height: 1vh;
+    width: 20vw;
+    background-color: var(--white);
+    border-radius: 0.8vw;
+    border: 2px solid var(--black);
+    padding: 0.75vw;
+}
+
+dialog form textarea {
+    font-size: 1.2vw;
+    padding: 1vh;
+    min-height: 19vh;
+    min-width: 20vw;
+    background-color: var(--white);
+    border-radius: 0.8vw;
+    border: 2px solid var(--black);
+    padding: 0.75vw;
+}
+
+.fecharPopUp {
+    position: absolute;
+    font-family: var(--urbanist);
+    font-size: 1.2vw;
+    cursor: pointer;
+    background: var(--medium-coral);
+    color: var(--black);
+    border: 1.5px solid var(--black);
+    border-radius: 0.7vw;
+    height: 4vh;
+    width: 2vw;
+    transition: 0.3s ease;
+    top: -2.5vh;
+    right: -1vw;
+    z-index: 999;
+}
+
+.fecharPopUp:hover {
+    transform: scale(1.1);
+}
+
+.fecharPopUp:hover {
+    filter: grayscale(0.6) saturate(1.8) contrast(0.9);
+}

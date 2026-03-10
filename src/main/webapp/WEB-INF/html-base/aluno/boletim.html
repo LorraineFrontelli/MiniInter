@@ -100,8 +100,12 @@
                     <tr>
                         <td class="materia">Teoria das Cores</td>
                         <td class="espaco"></td>
-                        <td class="notasCentro nota1">9.45</td>
-                        <td class="notasCentro nota2">7.50</td>
+                        <td class="notasCentro nota1">9.45
+                            <button class="abrirNota1" onclick="verTipoNota1.showModal()"><img src="../../../assets/img/heavy-plus-icon.svg" alt=""></button>
+                        </td>
+                        <td class="notasCentro nota2">7.50
+                            <button class="abrirNota2" onclick="verTipoNota2.showModal()"><img src="../../../assets/img/heavy-plus-icon.svg" alt=""></button>
+                        </td>
                         <td class="notasCentro media">8.48</td>
                         <td class="espaco"></td>
                         <td class="situacao">Reprovado pelo conselho</td>
@@ -110,6 +114,22 @@
             </table>
         </div>
     </main>
+
+    <!-- Modal Ver Tipo Nota 1 -->
+    <dialog class="verTipoNota1" id="verTipoNota1">
+        <button class="fecharPopUp" onclick="verTipoNota1.close()">X</button>
+
+
+
+    </dialog>
+
+    <!-- Modal Ver Tipo Nota 2 -->
+    <dialog class="verTipoNota2" id="verTipoNota2">
+        <button class="fecharPopUp" onclick="verTipoNota2.close()">X</button>
+
+
+
+    </dialog>
 </body>
 
 </html>

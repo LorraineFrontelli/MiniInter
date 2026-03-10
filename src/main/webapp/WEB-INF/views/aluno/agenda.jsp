@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/agenda.css">
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
-    <script src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
+    <script type="module" src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
 
     <title>Agenda - Monart</title>
 </head>
@@ -33,7 +33,7 @@
     <div class="meuPlaceholder"></div>
 
     <header class="headerLateral">
-        <img src="../../../assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
+        <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" decoding="async" alt="" class="logoMonart">
         <nav>
             <ul>
                 <li><a href="${pageContext.request.contextPath}/alunos?page=perfil-aluno" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/profile-icon.svg" decoding="async" alt="">Perfil</a></li>

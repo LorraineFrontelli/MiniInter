@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/global.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/crud.css">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
+    <script type="module" src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
 
 </head>
 
@@ -30,42 +32,16 @@
 
     <nav>
         <ul>
-
-            <li>
-                <a href="${pageContext.request.contextPath}/administradores" class="pagina">
-                    <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
-                    Administrador
-                </a>
-            </li>
-
-            <li>
-                <a href="${pageContext.request.contextPath}/alunos" class="pagina">
-                    <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
-                    Aluno
-                </a>
-            </li>
-
-            <li>
-                <a href="${pageContext.request.contextPath}/professores" class="pagina">
-                    <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
-                    Professor
-                </a>
-            </li>
-
-            <li>
-                <a href="${pageContext.request.contextPath}/boletins" class="pagina ativo">
-                    <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
-                    Boletim
-                </a>
-            </li>
-
-            <li>
-                <a href="${pageContext.request.contextPath}/telefones" class="pagina">
-                    <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
-                    Telefone
-                </a>
-            </li>
-
+            <li><a href="${pageContext.request.contextPath}/administradores" class="pagina ativo">
+                <img src="${pageContext.request.contextPath}/assets/img/admin-icon.svg" decoding="async" alt="">Administrador</a></li>
+            <li><a href="${pageContext.request.contextPath}/alunos" class="pagina">
+                <img src="${pageContext.request.contextPath}/assets/img/student-icon.svg" decoding="async" alt="">Aluno</a></li>
+            <li><a href="${pageContext.request.contextPath}/professores" class="pagina">
+                <img src="${pageContext.request.contextPath}/assets/img/teacher-icon.svg" decoding="async" alt="">Professor</a></li>
+            <li><a href="${pageContext.request.contextPath}/boletins" class="pagina">
+                <img src="${pageContext.request.contextPath}/assets/img/bulletin-icon.svg" decoding="async" alt="">Boletim</a></li>
+            <li><a href="${pageContext.request.contextPath}/telefones" class="pagina">
+                <img src="${pageContext.request.contextPath}/assets/img/telephone-icon.svg" decoding="async" alt="">Telefone</a></li>
         </ul>
     </nav>
 
@@ -74,7 +50,9 @@
 <main>
 
     <div class="cabecalhoPaginas">
-
+        <a href="${pageContext.request.contextPath}/login-adm">
+            <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
+        </a>
         <div class="tituloPaginas">
             <h1>Boletim</h1>
         </div>
@@ -154,6 +132,7 @@
 
                             <form action="${pageContext.request.contextPath}/boletim-update" method="post">
 
+                                
                                 <input type="hidden" name="id" value="${b.id}">
                                 <input type="hidden" name="idProfessor" value="${b.idProfessor}">
                                 <input type="hidden" name="idAluno" value="${b.idAluno}">

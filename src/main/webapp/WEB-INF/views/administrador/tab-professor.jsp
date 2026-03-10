@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/global.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/crud.css">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
+    <script type="module" src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
 
 </head>
 
@@ -31,42 +33,16 @@
 
     <nav>
         <ul>
-
-            <li>
-                <a href="${pageContext.request.contextPath}/administradores" class="pagina">
-                    <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
-                    Administrador
-                </a>
-            </li>
-
-            <li>
-                <a href="${pageContext.request.contextPath}/alunos" class="pagina">
-                    <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
-                    Aluno
-                </a>
-            </li>
-
-            <li>
-                <a href="${pageContext.request.contextPath}/professores" class="pagina ativo">
-                    <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
-                    Professor
-                </a>
-            </li>
-
-            <li>
-                <a href="${pageContext.request.contextPath}/boletins" class="pagina">
-                    <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
-                    Boletim
-                </a>
-            </li>
-
-            <li>
-                <a href="${pageContext.request.contextPath}/telefones" class="pagina">
-                    <img src="${pageContext.request.contextPath}/assets/img/schedule-icon.svg">
-                    Telefone
-                </a>
-            </li>
-
+            <li><a href="${pageContext.request.contextPath}/administradores" class="pagina ativo">
+                <img src="${pageContext.request.contextPath}/assets/img/admin-icon.svg" decoding="async" alt="">Administrador</a></li>
+            <li><a href="${pageContext.request.contextPath}/alunos" class="pagina">
+                <img src="${pageContext.request.contextPath}/assets/img/student-icon.svg" decoding="async" alt="">Aluno</a></li>
+            <li><a href="${pageContext.request.contextPath}/professores" class="pagina">
+                <img src="${pageContext.request.contextPath}/assets/img/teacher-icon.svg" decoding="async" alt="">Professor</a></li>
+            <li><a href="${pageContext.request.contextPath}/boletins" class="pagina">
+                <img src="${pageContext.request.contextPath}/assets/img/bulletin-icon.svg" decoding="async" alt="">Boletim</a></li>
+            <li><a href="${pageContext.request.contextPath}/telefones" class="pagina">
+                <img src="${pageContext.request.contextPath}/assets/img/telephone-icon.svg" decoding="async" alt="">Telefone</a></li>
         </ul>
     </nav>
 
@@ -75,7 +51,9 @@
 <main>
 
     <div class="cabecalhoPaginas">
-
+        <a href="${pageContext.request.contextPath}/login-adm">
+            <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
+        </a>
         <div class="tituloPaginas">
             <h1>Professor</h1>
         </div>
@@ -115,17 +93,17 @@
 
             <thead>
 
-            <tr>
+                <tr>
 
-                <th>Ações</th>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Matéria</th>
-                <th>Data Contratação</th>
-                <th>Usuário</th>
+                    <th>Ações</th>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Matéria</th>
+                    <th>Data Contratação</th>
+                    <th>Usuário</th>
 
-            </tr>
+                </tr>
 
             </thead>
 
@@ -171,6 +149,12 @@
 
                     </td>
 
+                    <td class="opcoes">
+                        <div>
+                            <img src="${pageContext.request.contextPath}/assets/img/update-icon.svg" alt="" class="botaoUpdate" onclick="update.showModal()">
+                            <img src="${pageContext.request.contextPath}/assets/img/delete-icon.svg" alt="" class="botaoDelete" onclick="deletes.showModal()">
+                        </div>
+                    </td>
                     <td>${p.id}</td>
                     <td>${p.nome}</td>
                     <td>${p.email}</td>
@@ -197,23 +181,25 @@
 
         <form action="${pageContext.request.contextPath}/professor-create" method="post">
 
-            <label>Nome</label>
-            <input type="text" name="nome" required>
-
-            <label>Email</label>
-            <input type="email" name="email" required>
-
-            <label>Senha</label>
-            <input type="password" name="senha" required>
-
-            <label>Matéria</label>
-            <input type="text" name="materia">
-
-            <label>Data Contratação</label>
-            <input type="date" name="data">
-
-            <label>Usuário</label>
-            <input type="text" name="usuario">
+            <div class="colunas">
+                <div class="coluna">
+                    <label>Nome</label>
+                    <input type="text" name="nome" required>
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                    <label>Senha</label>
+                    <input type="password" name="senha" required>
+                    <label>Matéria</label>
+                    <input type="text" name="materia">
+                </div>
+                
+                <div class="coluna">
+                    <label>Data Contratação</label>
+                    <input type="date" name="data">
+                    <label>Usuário</label>
+                    <input type="text" name="usuario">
+                </div>
+            </div>
 
             <button class="salvarInsercao" type="submit">
                 Cadastrar
@@ -234,23 +220,24 @@
 
             <input type="hidden" name="id" id="u_id">
 
-            <label>Nome</label>
-            <input type="text" name="nome" id="u_nome" required>
-
-            <label>Email</label>
-            <input type="email" name="email" id="u_email" required>
-
-            <label>Senha</label>
-            <input type="password" name="senha" id="u_senha" required>
-
-            <label>Matéria</label>
-            <input type="text" name="materia" id="u_materia">
-
-            <label>Data Contratação</label>
-            <input type="date" name="data" id="u_data">
-
-            <label>Usuário</label>
-            <input type="text" name="usuario" id="u_usuario">
+            <div class="colunas">
+                <div class="coluna">
+                    <label>Nome</label>
+                    <input type="text" name="nome" id="u_nome" required>
+                    <label>Email</label>
+                    <input type="email" name="email" id="u_email" required>
+                    <label>Senha</label>
+                    <input type="password" name="senha" id="u_senha" required>
+                    <label>Matéria</label>
+                    <input type="text" name="materia" id="u_materia">
+                </div>
+                <div class="coluna">
+                    <label>Data Contratação</label>
+                    <input type="date" name="data" id="u_data">
+                    <label>Usuário</label>
+                    <input type="text" name="usuario" id="u_usuario">
+                </div>
+            </div>
 
             <button class="salvarInsercao" type="submit">
                 Atualizar
