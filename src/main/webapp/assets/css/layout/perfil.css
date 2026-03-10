@@ -54,6 +54,15 @@ main {
     border-radius: 1.5vw;
 }
 
+.observacao p, .observacao h3 {
+    padding-left: 1.9vw;
+    transform: scale(1.1);
+}
+
+.atividade h3 {
+    padding-left: 1.2vw;
+}
+
 .listaRecentes {
     max-height: 23.5vh;
     overflow-y: auto;

@@ -15,38 +15,42 @@
 
 <body>
 
-<header class="headerAutenticacao">
-    <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" class="logoMonart">
-</header>
+    <header class="headerAutenticacao">
+        <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" class="logoMonart">
 
-<main>
+        <a href="${pageContext.request.contextPath}/login" class="iconeVoltar">
+            <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
+        </a>
+    </header>
 
-    <form action="${pageContext.request.contextPath}/aluno-create" method="post" class="formAutenticacao formMatricula">
+    <main>
 
-        <h1>Fazer matrícula</h1>
+        <form action="${pageContext.request.contextPath}/aluno-create" method="post" class="formAutenticacao formMatricula">
 
-        <!-- mensagem de erro -->
-        <c:if test="${not empty mensagem}">
-            <p style="color:red">${mensagem}</p>
-        </c:if>
+            <h1 class="tituloMatricula">Fazer matrícula</h1>
 
-        <label>CPF
-            <input type="text" name="cpf" class="inputAutenticacao" placeholder="Insira seu CPF">
-        </label>
+            <!-- mensagem de erro -->
+            <c:if test="${not empty mensagem}">
+                <p style="color:red">${mensagem}</p>
+            </c:if>
 
-        <label>E-mail
-            <input type="email" name="email" class="inputAutenticacao" placeholder="Insira seu e-mail">
-        </label>
+            <label for="cpf" class="cpf">CPF
+                <input type="text" name="cpf" class="inputAutenticacao" placeholder="Insira seu CPF">
+            </label>
 
-        <label>Senha
-            <input type="password" name="senha" class="inputAutenticacao" placeholder="Insira sua senha">
-        </label>
+            <label for="email" class="email">E-mail
+                <input type="email" name="email" class="inputAutenticacao" placeholder="Insira seu e-mail">
+            </label>
 
-        <button type="submit">Enviar</button>
+            <label for="senha" class="senha">Senha
+                <input type="password" name="senha" class="inputAutenticacao" placeholder="Insira sua senha">
+            </label>
 
-    </form>
+            <button type="submit">Enviar</button>
 
-</main>
+        </form>
+
+    </main>
 
 </body>
 </html>

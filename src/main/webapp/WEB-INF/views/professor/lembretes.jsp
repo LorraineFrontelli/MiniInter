@@ -69,7 +69,7 @@
             <button class="fecharPopUpLembrete" onclick="criarLembrete.close()">X</button>
             <form action="">
                 <label for="novoLembrete">Escrever lembrete</label>
-                <textarea type="text" name="novoLembrete" id="novoLembrete" class="novoLembrete"></textarea>
+                <textarea type="text" name="novoLembrete" id="novoLembrete" class="novoLembrete" maxlength="60"></textarea>
 
                 <button type="submit" class="salvarLembrete">Salvar</button>
             </form>
