@@ -68,7 +68,7 @@
                             <strong>${m.nome}</strong>
 
                             <c:if test="${m.temNaoLidas}">
-                                <span class="badgeNaoLida">🔴</span>
+                                <span class="badgeNaoLida"><img src="${pageContext.request.contextPath}/assets/img/unread-icon" alt=""></span>
                             </c:if>
 
                             <br>
@@ -84,7 +84,7 @@
                 </c:forEach>
             </c:when>
             <c:otherwise>
-                <p>Nenhuma conversa encontrada.</p>
+                <p class="nenhumaConversaEncontrada">Nenhuma conversa encontrada.</p>
             </c:otherwise>
         </c:choose>
     </div>

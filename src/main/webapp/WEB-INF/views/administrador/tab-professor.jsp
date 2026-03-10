@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
@@ -19,7 +20,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/crud.css">
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
-    <script type="module" src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
 
 </head>
 
@@ -49,9 +49,11 @@
 <main>
 
     <div class="cabecalhoPaginas">
+
         <a href="${pageContext.request.contextPath}/login-adm">
-            <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
+            <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" class="pincelVoltar">
         </a>
+
         <div class="tituloPaginas">
             <h1>Professor</h1>
         </div>
@@ -61,12 +63,14 @@
     </div>
 
     <c:if test="${not empty mensagem}">
+
         <p style="text-align:center;">${mensagem}</p>
     </c:if>
 
     <div class="componentizacao">
 
         <search>
+
             <form action="${pageContext.request.contextPath}/professores" method="get">
 
                 <input
@@ -76,6 +80,7 @@
                         placeholder="Pesquisar professor">
 
             </form>
+
         </search>
 
         <button class="botaoInsert" onclick="create.showModal()">
@@ -91,17 +96,17 @@
 
             <thead>
 
-                <tr>
+            <tr>
 
-                    <th>Ações</th>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Matéria</th>
-                    <th>Data Contratação</th>
-                    <th>Usuário</th>
+                <th>Ações</th>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Matéria</th>
+                <th>Data Contratação</th>
+                <th>Usuário</th>
 
-                </tr>
+            </tr>
 
             </thead>
 
@@ -115,8 +120,6 @@
 
                         <div>
 
-                            <!-- UPDATE -->
-
                             <button type="button"
                                     class="botaoUpdate"
                                     onclick="abrirUpdate(
@@ -127,11 +130,7 @@
                                             '${p.materia}',
                                             '${p.usuario}',
                                             '${p.dataContratacao}'
-                                            )">
-                                <img src="${pageContext.request.contextPath}/assets/img/update-icon.svg">
-                            </button>
-
-                            <!-- DELETE -->
+                                            )"> <img src="${pageContext.request.contextPath}/assets/img/update-icon.svg"> </button>
 
                             <form action="${pageContext.request.contextPath}/professor-delete" method="post">
 
@@ -147,12 +146,6 @@
 
                     </td>
 
-                    <td class="opcoes">
-                        <div>
-                            <img src="${pageContext.request.contextPath}/assets/img/update-icon.svg" alt="" class="botaoUpdate" onclick="update.showModal()">
-                            <img src="${pageContext.request.contextPath}/assets/img/delete-icon.svg" alt="" class="botaoDelete" onclick="deletes.showModal()">
-                        </div>
-                    </td>
                     <td>${p.id}</td>
                     <td>${p.nome}</td>
                     <td>${p.email}</td>
@@ -170,7 +163,6 @@
 
     </div>
 
-
     <!-- MODAL CREATE -->
 
     <dialog id="create" class="create">
@@ -180,23 +172,27 @@
         <form action="${pageContext.request.contextPath}/professor-create" method="post">
 
             <div class="colunas">
+
                 <div class="coluna">
-                    <label>Nome</label>
-                    <input type="text" name="nome" required>
-                    <label>Email</label>
-                    <input type="email" name="email" required>
-                    <label>Senha</label>
-                    <input type="password" name="senha" required>
-                    <label>Matéria</label>
-                    <input type="text" name="materia">
+
+                    <label>Nome</label> <input type="text" name="nome" required>
+
+                    <label>Email</label> <input type="email" name="email" required>
+
+                    <label>Senha</label> <input type="password" name="senha" required>
+
+                    <label>Matéria</label> <input type="text" name="materia">
+
                 </div>
-                
+
                 <div class="coluna">
-                    <label>Data Contratação</label>
-                    <input type="date" name="data">
-                    <label>Usuário</label>
-                    <input type="text" name="usuario">
+
+                    <label>Data Contratação</label> <input type="date" name="data">
+
+                    <label>Usuário</label> <input type="text" name="usuario">
+
                 </div>
+
             </div>
 
             <button class="salvarInsercao" type="submit">
@@ -206,7 +202,6 @@
         </form>
 
     </dialog>
-
 
     <!-- MODAL UPDATE -->
 
@@ -219,22 +214,27 @@
             <input type="hidden" name="id" id="u_id">
 
             <div class="colunas">
+
                 <div class="coluna">
-                    <label>Nome</label>
-                    <input type="text" name="nome" id="u_nome" required>
-                    <label>Email</label>
-                    <input type="email" name="email" id="u_email" required>
-                    <label>Senha</label>
-                    <input type="password" name="senha" id="u_senha" required>
-                    <label>Matéria</label>
-                    <input type="text" name="materia" id="u_materia">
+
+                    <label>Nome</label> <input type="text" name="nome" id="u_nome" required>
+
+                    <label>Email</label> <input type="email" name="email" id="u_email" required>
+
+                    <label>Senha</label> <input type="password" name="senha" id="u_senha" required>
+
+                    <label>Matéria</label> <input type="text" name="materia" id="u_materia">
+
                 </div>
+
                 <div class="coluna">
-                    <label>Data Contratação</label>
-                    <input type="date" name="data" id="u_data">
-                    <label>Usuário</label>
-                    <input type="text" name="usuario" id="u_usuario">
+
+                    <label>Data Contratação</label> <input type="date" name="data" id="u_data">
+
+                    <label>Usuário</label> <input type="text" name="usuario" id="u_usuario">
+
                 </div>
+
             </div>
 
             <button class="salvarInsercao" type="submit">

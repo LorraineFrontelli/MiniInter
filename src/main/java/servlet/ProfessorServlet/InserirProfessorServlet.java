@@ -2,13 +2,12 @@ package servlet.ProfessorServlet;
 
 import dao.ProfessorDAO;
 import model.Professor;
+import utils.HashSenha;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -49,12 +48,14 @@ public class InserirProfessorServlet extends HttpServlet {
                 return;
             }
 
+            String senhaHash = HashSenha.gerarHash(senha);
+
             Professor professor = new Professor();
 
             professor.setNome(nome);
             professor.setDataContratacao(LocalDate.parse(request.getParameter("data")));
             professor.setEmail(request.getParameter("email"));
-            professor.setSenha(senha);
+            professor.setSenha(senhaHash);
             professor.setMateria(request.getParameter("materia"));
             professor.setUsuario(request.getParameter("usuario"));
 

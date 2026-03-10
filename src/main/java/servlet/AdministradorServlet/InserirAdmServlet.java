@@ -3,17 +3,22 @@ package servlet.AdministradorServlet;
 import dao.AdministradorDAO;
 import model.Administrador;
 import utils.ValidacaoRegex;
+import utils.HashSenha;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
+
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 @WebServlet("/admin-create")
+@MultipartConfig
 public class InserirAdmServlet extends HttpServlet {
 
     @Override
@@ -37,7 +42,6 @@ public class InserirAdmServlet extends HttpServlet {
 
             String login = request.getParameter("login");
             String senha = request.getParameter("senha");
-            String cpfs = request.getParameter("alunoCpf");
 
             if (login == null || senha == null || login.isBlank() || senha.isBlank()) {
                 mensagem = "Campos obrigatórios não preenchidos!";
@@ -60,17 +64,44 @@ public class InserirAdmServlet extends HttpServlet {
                 return;
             }
 
+            String senhaHash = HashSenha.gerarHash(senha);
+
             Administrador admin = new Administrador();
             admin.setLogin(login);
-            admin.setSenha(senha);
+            admin.setSenha(senhaHash);
 
-            if (cpfs != null && !cpfs.isBlank()) {
+            Part arquivo = request.getPart("alunoCpf");
 
-                String[] lista = cpfs.split(",");
+            if (arquivo != null && arquivo.getSize() > 0) {
 
-                for (String cpf : lista) {
-                    admin.adicionarCpf(cpf.trim());
+                InputStream input = arquivo.getInputStream();
+
+                Workbook workbook = new XSSFWorkbook(input);
+                Sheet sheet = workbook.getSheetAt(0);
+
+                for (Row row : sheet) {
+
+                    Cell cell = row.getCell(0);
+
+                    if (cell == null) continue;
+
+                    String cpf = "";
+
+                    if (cell.getCellType() == CellType.STRING) {
+                        cpf = cell.getStringCellValue();
+                    } else if (cell.getCellType() == CellType.NUMERIC) {
+                        cpf = String.valueOf((long) cell.getNumericCellValue());
+                    }
+
+                    cpf = cpf.trim();
+                    cpf = cpf.replaceAll("[^0-9]", "");
+
+                    if (!cpf.isEmpty()) {
+                        admin.adicionarCpf(cpf);
+                    }
                 }
+
+                workbook.close();
             }
 
             int retorno = dao.inserir(admin);
@@ -82,12 +113,15 @@ public class InserirAdmServlet extends HttpServlet {
             }
 
             request.getSession().setAttribute("mensagem", mensagem);
+
             response.sendRedirect(request.getContextPath() + "/administradores");
 
         } catch (Exception e) {
 
             e.printStackTrace();
+
             request.getSession().setAttribute("mensagem", "Erro ao inserir registro!");
+
             response.sendRedirect(request.getContextPath() + "/administradores");
         }
     }
