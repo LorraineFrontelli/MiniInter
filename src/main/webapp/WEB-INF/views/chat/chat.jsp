@@ -144,6 +144,11 @@
                 return;
             }
 
+            // ADICIONAR: desabilita botão enquanto envia
+            const btn = document.getElementById('btnEnviar');
+            btn.disabled = true;
+            btn.classList.add('enviando');
+
             // Monta o objeto JS e converte para string JSON para ser enviado ao servidor
             const payload = JSON.stringify({
                 idDestinatario:   idDestinatario,
@@ -154,6 +159,12 @@
             // Envia o JSON ao servidor
             ws.send(payload);
             input.value = '';
+
+            // ADICIONAR: restaura botão após envio
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.classList.remove('enviando');
+            }, 500);
         }
         function adicionarMensagem(texto, dtMensagem, ehPropriaMsg) {
             // pega <ul> de mensagens
@@ -192,6 +203,13 @@
             div.appendChild(document.createTextNode(texto));
             return div.innerHTML;
         }
+
+        inputMensagem.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                enviar();
+            }
+        });
     </script>
 
 </body>

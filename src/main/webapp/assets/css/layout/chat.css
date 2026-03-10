@@ -115,3 +115,9 @@ main {
 .enviar img {
     width: 2vw;
 }
+
+.enviar.enviando {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transition: opacity 0.2s;
+}
