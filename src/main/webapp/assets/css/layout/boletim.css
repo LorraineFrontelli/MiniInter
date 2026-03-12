@@ -111,3 +111,23 @@ button.abrirNota1, button.abrirNota2 {
     display: block;
     border: none !important;
 }
+
+.caixaNota {
+    position: relative;
+    width: fit-content;
+}
+
+.caixaNota input {
+    padding-right: 3vw;
+    cursor: default;
+}
+
+.caixaNota button {
+    position: absolute;
+    top: 1vh;
+    right: 0.5vw;
+}
+
+dialog.verTipoNota1, dialog.verTipoNota2 {
+    min-height: 6vh;
+}

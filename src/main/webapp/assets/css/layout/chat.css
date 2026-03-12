@@ -6,29 +6,43 @@ body {
 main {
     position: relative;
     flex: 1;
-    background: linear-gradient(to right, var(--vintage-gold) 20%, var(--vintage-cream) 100%);
+    background: linear-gradient(135deg, var(--vintage-gold) 20%, var(--vintage-cream) 100%);
     background-attachment: fixed;
     padding-top: 3vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .cabecalhoPaginas .pincelVoltar {
     position: absolute;
-    left: 2vw;
+    top: 3vh;
+    left: 4vw;
+    transition: transform 0.2s ease;
+}
+
+.cabecalhoPaginas .pincelVoltar:hover {
+    transform: scale(1.1);
 }
 
 .cabecalhoPaginas .abrirTemas {
     position: absolute;
-    right: 2vw;
+    top: 3vh;
+    right: 4vw;
+    transition: transform 0.2s ease;
+}
+
+.cabecalhoPaginas .abrirTemas:hover {
+    transform: scale(1.1);
 }
 
 /* ── Container principal ─────────────────────────────────────────────────── */
 .fundoChat {
-    position: relative;       /* âncora para a barra absoluta */
+    position: relative;
     background-color: var(--vintage-chantilly);
-    width: 90vw;
-    height: 70vh;
-    margin: 6vh auto 0;
-    border-radius: 2vw;
+    width: 92vw;
+    height: 75vh;
+    margin: 6vh auto 2vh;
+    border-radius: 4vw;
     overflow: hidden;
 }
 
@@ -37,81 +51,198 @@ main {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.5vw;
-    padding: 1.5vw 1.5vw 10vh 1.5vw; /* padding-bottom reserva espaço da barra */
+    gap: 2vw;
+    padding: 4vw 4vw 25vh 4vw;
     margin: 0;
     height: 100%;
     overflow-y: auto;
     box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+.conversa::-webkit-scrollbar {
+    width: 1.5vw;
+}
+
+.conversa::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 1vw;
 }
 
 /* ── Mensagens ───────────────────────────────────────────────────────────── */
 .mensagem {
     width: fit-content;
-    max-width: 50%;
-    padding: 0.6vh 1vw;
-    border-radius: 1.5vw;
+    max-width: 80%;
+    padding: 1.5vh 3vw;
+    border-radius: 3vw;
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.05);
 }
 
 .mensagem p {
     margin: 0;
-    font-size: 1.15vw;
+    font-size: 3.5vw;
     word-break: break-word;
+    line-height: 1.4;
 }
 
 .mensagem time {
     display: block;
-    font-size: 0.75vw;
+    font-size: 2.2vw;
     text-align: right;
-    opacity: 0.6;
-    margin-top: 2px;
+    opacity: 0.7;
+    margin-top: 0.5vh;
 }
 
 .enviada {
     background-color: var(--tema);
     color: var(--cor-contraste);
     align-self: flex-end;
-    border-bottom-right-radius: 0.3vw;
-    transition: background-color 0.3s ease;
+    border-bottom-right-radius: 0.5vw;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.enviada:hover {
+    transform: translateY(-0.2vh);
 }
 
 .recebida {
     background-color: var(--medium-cyan);
     align-self: flex-start;
-    border-bottom-left-radius: 0.3vw;
+    border-bottom-left-radius: 0.5vw;
+    transition: transform 0.2s ease;
+}
+
+.recebida:hover {
+    transform: translateY(-0.2vh);
 }
 
 /* ── Barra fixa no fundo do .fundoChat ───────────────────────────────────── */
 .barraMensagem {
-    position: absolute;  /* sai do fluxo e gruda no fundo */
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 8vh;
+    height: 9vh;
     background-color: var(--vintage-gold);
-    border-radius: 0 0 2vw 2vw;
-    padding-left: 1vw;
+    border-radius: 0 0 4vw 4vw;
+    padding: 0 2vw;
     display: flex;
     align-items: center;
     box-sizing: border-box;
 }
 
 .escreverMensagem {
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.4);
     border: none;
     outline: none;
     flex: 1;
     height: 6vh;
-    font-size: 1.15vw;
+    border-radius: 3vw;
+    padding: 0 3vw;
+    font-size: 3.5vw;
+    transition: background-color 0.3s ease;
+}
+
+.escreverMensagem:focus {
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 .enviar {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    padding-right: 1vw;
+    padding-left: 2vw;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.enviar:hover {
+    transform: scale(1.15);
 }
 
 .enviar img {
-    width: 2vw;
+    width: 6vw;
+}
+
+/* Media queries */
+@media (min-width: 768px) {
+    .fundoChat { 
+        width: 70vw; border-radius: 3vw; 
+    }
+
+    .conversa { 
+        gap: 1vw; padding: 2.5vw 2.5vw 12vh 2.5vw; 
+    }
+
+    .conversa::-webkit-scrollbar { 
+        width: 0.8vw; 
+    }
+
+    .mensagem { 
+        padding: 1.2vh 2vw; border-radius: 2vw; max-width: 65%; 
+    }
+
+    .mensagem p { 
+        font-size: 2.2vw; 
+    }
+
+    .mensagem time { 
+        font-size: 1.2vw; 
+    }
+
+    .barraMensagem { 
+        height: 8vh; border-radius: 0 0 3vw 3vw; 
+    }
+
+    .escreverMensagem { 
+        font-size: 2vw; border-radius: 2vw; padding: 0 2vw; 
+    }
+
+    .enviar img { 
+        width: 3.5vw; 
+    }
+}
+
+@media (min-width: 1024px) {
+    .fundoChat { 
+        width: 50vw; border-radius: 2vw; 
+    }
+    
+    .conversa { 
+        gap: 0.5vw; padding: 1.5vw 1.5vw 10vh 1.5vw; 
+    }
+    
+    .conversa::-webkit-scrollbar { 
+        width: 0.4vw; 
+    }
+    
+    .conversa::-webkit-scrollbar-thumb { 
+        border-radius: 0.4vw; 
+    }
+    
+    .mensagem { 
+        padding: 0.75vh 1.1vw; border-radius: 1.5vw; max-width: 50%; 
+    }
+    
+    .mensagem p { 
+        font-size: 1.15vw; 
+    }
+    
+    .mensagem time { 
+        font-size: 0.75vw; 
+    }
+    
+    .barraMensagem { 
+        height: 8vh; border-radius: 0 0 2vw 2vw; padding: 0 1vw; 
+    }
+    
+    .escreverMensagem { 
+        font-size: 1.15vw; border-radius: 1vw; padding: 0 1vw; height: 5vh; 
+    }
+    
+    .enviar img { 
+        width: 2vw; 
+    }
 }

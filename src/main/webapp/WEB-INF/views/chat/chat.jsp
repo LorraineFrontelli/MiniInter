@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/chat.css">
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
+    <script type="module" src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 
-    <script src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
     <title>Chat - Monart</title>
 </head>
 

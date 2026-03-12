@@ -32,13 +32,13 @@
 
     <nav>
         <ul>
-            <li><a href="${pageContext.request.contextPath}/administradores" class="pagina ativo">
+            <li><a href="${pageContext.request.contextPath}/administradores" class="pagina">
                 <img src="${pageContext.request.contextPath}/assets/img/admin-icon.svg" decoding="async" alt="">Administrador</a></li>
             <li><a href="${pageContext.request.contextPath}/alunos" class="pagina">
                 <img src="${pageContext.request.contextPath}/assets/img/student-icon.svg" decoding="async" alt="">Aluno</a></li>
             <li><a href="${pageContext.request.contextPath}/professores" class="pagina">
                 <img src="${pageContext.request.contextPath}/assets/img/teacher-icon.svg" decoding="async" alt="">Professor</a></li>
-            <li><a href="${pageContext.request.contextPath}/boletins" class="pagina">
+            <li><a href="${pageContext.request.contextPath}/boletins" class="pagina ativo">
                 <img src="${pageContext.request.contextPath}/assets/img/bulletin-icon.svg" decoding="async" alt="">Boletim</a></li>
             <li><a href="${pageContext.request.contextPath}/telefones" class="pagina">
                 <img src="${pageContext.request.contextPath}/assets/img/telephone-icon.svg" decoding="async" alt="">Telefone</a></li>
@@ -72,26 +72,16 @@
     <!-- BUSCA + BOTÃO -->
 
     <div class="componentizacao">
+            <search>
+                <form action="${pageContext.request.contextPath}/boletins" method="get">
+                    <input type="search" class="buscarCrud" name="filtroNome" placeholder="Pesquisar por nome">
+                </form>
+            </search>
 
-        <search>
-            <form action="${pageContext.request.contextPath}/boletins" method="get">
-
-                <input
-                        type="search"
-                        class="buscarCrud"
-                        name="filtroAluno"
-                        placeholder="Pesquisar aluno"
-                >
-
-            </form>
-        </search>
-
-        <button class="botaoInsert" onclick="create.showModal()">
-            Inserir
-            <img src="${pageContext.request.contextPath}/assets/img/plus-icon.svg">
-        </button>
-
-    </div>
+            <button class="botaoInsert" onclick="create.showModal()">
+                Fazer inserção <img src="${pageContext.request.contextPath}/assets/img/plus-icon.svg">
+            </button>
+        </div>
 
 
     <!-- TABELA -->

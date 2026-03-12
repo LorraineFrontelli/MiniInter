@@ -29,6 +29,11 @@
         <form action="${pageContext.request.contextPath}/login-adm" method="POST" class="formAutenticacao formMatricula">
             <h1>Entrar como administrador</h1>
 
+            <!-- mensagem de erro -->
+            <c:if test="${not empty mensagem}">
+                <strong style="color:red" class="msgErro">${mensagem}</strong>
+            </c:if>
+
             <label for="login" class="login">Login
                 <input type="text" name="login" id="login" class="inputAutenticacao" placeholder="Insira seu e-mail">
             </label>

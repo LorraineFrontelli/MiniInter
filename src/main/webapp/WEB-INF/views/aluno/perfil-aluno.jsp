@@ -84,10 +84,10 @@
 
                 <c:forEach items="${sessionScope.boletim}" var="bol" varStatus="status">
                     <c:if test="${status.last}">
-                        <p>${bol.observacao}</p>
                         <h3>
                             Prof: ${bol.professor}
                         </h3>
+                        <p>${bol.observacao}</p>
                     </c:if>
                 </c:forEach>
 

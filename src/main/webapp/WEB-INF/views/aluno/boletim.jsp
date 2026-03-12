@@ -129,18 +129,22 @@
 
     <!-- Modal Ver Tipo Nota 1 -->
     <dialog class="verTipoNota1" id="verTipoNota1">
-        <button class="fecharPopUp" onclick="verTipoNota1.close()">X</button>
-        
-        <label for="descricaoNota1">Descrição Nota 1</label>
-        <input type="text" name="descricaoNota1" id="descricaoNota1" disabled>
+        <form method="dialog"> 
+            <button formmethod="dialog" class="fecharPopUp">X</button>
+            
+            <label for="descricaoNota1">Descrição Nota 1</label>
+            <input type="text" name="descricaoNota1" id="descricaoNota1" readonly>
+        </form>
     </dialog>
 
     <!-- Modal Ver Tipo Nota 2 -->
     <dialog class="verTipoNota2" id="verTipoNota2">
-        <button class="fecharPopUp" onclick="verTipoNota2.close()">X</button>
-        
-        <label for="descricaoNota2">Descrição Nota 2</label>
-        <input type="text" name="descricaoNota2" id="descricaoNota2" disabled>
+        <form method="dialog"> 
+            <button formmethod="dialog" class="fecharPopUp">X</button>
+            
+            <label for="descricaoNota2">Descrição Nota 2</label>
+            <input type="text" name="descricaoNota2" id="descricaoNota2" readonly>
+        </form>
     </dialog>
 </body>
 

@@ -35,7 +35,7 @@
 
     <nav>
         <ul>
-            <li><a href="${pageContext.request.contextPath}/administradores" class="pagina ativo">
+            <li><a href="${pageContext.request.contextPath}/administradores" class="pagina">
                 <img src="${pageContext.request.contextPath}/assets/img/admin-icon.svg" decoding="async" alt="">Administrador</a></li>
             <li><a href="${pageContext.request.contextPath}/alunos" class="pagina">
                 <img src="${pageContext.request.contextPath}/assets/img/student-icon.svg" decoding="async" alt="">Aluno</a></li>
@@ -43,7 +43,7 @@
                 <img src="${pageContext.request.contextPath}/assets/img/teacher-icon.svg" decoding="async" alt="">Professor</a></li>
             <li><a href="${pageContext.request.contextPath}/boletins" class="pagina">
                 <img src="${pageContext.request.contextPath}/assets/img/bulletin-icon.svg" decoding="async" alt="">Boletim</a></li>
-            <li><a href="${pageContext.request.contextPath}/telefones" class="pagina">
+            <li><a href="${pageContext.request.contextPath}/telefones" class="pagina ativo">
                 <img src="${pageContext.request.contextPath}/assets/img/telephone-icon.svg" decoding="async" alt="">Telefone</a></li>
         </ul>
     </nav>
@@ -80,26 +80,15 @@
     <!-- BUSCA -->
 
     <div class="componentizacao">
-
         <search>
-
             <form action="${pageContext.request.contextPath}/telefones" method="get">
-
-                <input
-                        type="search"
-                        class="buscarCrud"
-                        name="filtroNumero"
-                        placeholder="Pesquisar telefone">
-
+                <input type="search" class="buscarCrud" name="filtroNome" placeholder="Pesquisar por nome">
             </form>
-
         </search>
 
         <button class="botaoInsert" onclick="create.showModal()">
-            Inserir
-            <img src="${pageContext.request.contextPath}/assets/img/plus-icon.svg">
+            Fazer inserção <img src="${pageContext.request.contextPath}/assets/img/plus-icon.svg">
         </button>
-
     </div>
 
     <!-- TABELA -->

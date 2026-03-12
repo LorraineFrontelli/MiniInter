@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/global.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/autenticacao.css">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
+    <script src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
 
     <title>Cadastro - Monart</title>
 </head>
@@ -31,7 +33,7 @@
 
             <!-- mensagem de erro -->
             <c:if test="${not empty mensagem}">
-                <p style="color:red">${mensagem}</p>
+                <strong style="color:red" class="msgErro">${mensagem}</strong>
             </c:if>
 
             <label for="cpf" class="cpf">CPF
