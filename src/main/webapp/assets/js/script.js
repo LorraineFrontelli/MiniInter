@@ -8,7 +8,7 @@ document.querySelectorAll('.pagina').forEach(identificadorPagina => {
 
         setTimeout(() => {
             identificadorPagina.classList.remove('hoverizado');
-        }, 1000);
+        }, 1750);
     });
 });
 

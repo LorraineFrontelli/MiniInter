@@ -72,10 +72,6 @@ input:focus, textarea:focus, button:focus {
     transition: 0.3s ease;
 }
 
-.headerAutenticacao .logoMonart:hover {
-    transform: scale(1.05);
-}
-
 .pincelVoltar {
     cursor: pointer;
     height: 4.3vh;
@@ -440,4 +436,9 @@ dialog form textarea {
 
 .fecharPopUp:hover {
     filter: grayscale(0.6) saturate(1.8) contrast(0.9);
+}
+
+.badgeNaoLida {
+    object-fit: contain;
+    height: 3.3vh;
 }
