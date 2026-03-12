@@ -1,6 +1,8 @@
 package servlet.BoletimServlet;
 
+import dao.AlunoDAO;
 import dao.BoletimDAO;
+import model.Aluno;
 import model.Boletim;
 
 import jakarta.servlet.RequestDispatcher;
@@ -32,44 +34,32 @@ public class BuscarBoletimServlet extends HttpServlet {
             }
         }
 
-        String filtro = request.getParameter("filtroAluno");
+        String idAlunoParam = request.getParameter("idAluno");
+
+        if (idAlunoParam == null || idAlunoParam.trim().isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/alunos");
+            return;
+        }
 
         BoletimDAO dao = new BoletimDAO();
         List<Boletim> boletins = new ArrayList<>();
 
         try {
+            int idAluno = Integer.parseInt(idAlunoParam);
+            boletins = dao.buscarPorAluno(idAluno);
+            AlunoDAO alunoDAO = new AlunoDAO();
+            Aluno aluno = alunoDAO.buscarPorMatricula(idAluno);
+            if (aluno != null) {
+                request.setAttribute("nomeAluno", aluno.getNome());
+            }
 
-            if (filtro != null && !filtro.trim().isEmpty()) {
+            request.setAttribute("idAluno", idAluno);
 
-                filtro = filtro.trim();
-
-                try {
-                    // Se for número → busca por ID
-                    int idAluno = Integer.parseInt(filtro);
-                    boletins = dao.buscarPorAluno(idAluno);
-
-                } catch (NumberFormatException e) {
-                    // Se não for número → busca por nome
-                    boletins = dao.buscarPorNomeAluno(filtro);
-                }
-
-                if (boletins == null || boletins.isEmpty()) {
-                    request.setAttribute("mensagem", "Nenhum boletim encontrado.");
-                } else {
-                    request.setAttribute("mensagem",
-                            "Foram encontrados " + boletins.size() + " boletins.");
-                }
-
+            if (boletins == null || boletins.isEmpty()) {
+                request.setAttribute("mensagem", "Nenhum boletim encontrado.");
             } else {
-                // Se não houver filtro → listar todos
-                boletins = dao.listar();
-
-                if (boletins == null || boletins.isEmpty()) {
-                    request.setAttribute("mensagem", "Nenhum boletim cadastrado.");
-                } else {
-                    request.setAttribute("mensagem",
-                            "Foram encontrados " + boletins.size() + " boletins.");
-                }
+                request.setAttribute("mensagem",
+                        "Foram encontrados " + boletins.size() + " boletins.");
             }
 
         } catch (Exception e) {
@@ -84,7 +74,6 @@ public class BuscarBoletimServlet extends HttpServlet {
         if (session != null) {
             tipo = (String) session.getAttribute("tipoUsuario");
         }
-
 
         if ("admin".equals(tipo)) {
             request.getRequestDispatcher("/WEB-INF/views/administrador/tab-boletim.jsp")

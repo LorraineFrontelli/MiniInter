@@ -39,7 +39,7 @@
                 <li><a href="${pageContext.request.contextPath}/professores?page=estatisticas" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/statistics-icon.svg" decoding="async" alt="">Estatísticas</a></li>
             </ul>
         </nav>
-        <a href="${pageContext.request.contextPath}/autenticacao/login.jsp">
+        <a href="${pageContext.request.contextPath}/logout">
             <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
         </a>
     </header>
@@ -89,7 +89,7 @@
                     </div>
 
                     <div class="caixaNota">
-                        <input type="number" class="notas nota2" id="nota2" name="nota2" min="0" max="10" step="0.01" size="2" required value="${boletim.nota1}">
+                        <input type="number" class="notas nota2" id="nota2" name="nota2" min="0" max="10" step="0.01" size="2" required value="${boletim.nota2}">
                         <button type="button" class="abrirNota2" onclick="verTipoNota2.showModal()"><img src="${pageContext.request.contextPath}/assets/img/heavy-plus-icon.svg" alt=""></button>
                     </div>
 
@@ -97,7 +97,7 @@
                     <input type="hidden" name="descricaoNota2" id="descricaoNota2Hidden" required value="${boletim.descricao2}">
                 
                     <input type="number" class="notas media" id="media" name="media" readonly>
-                    <input type="number" class="notas situacao" readonly>
+                    <input type="text" class="notas situacao" readonly>
 
                     <input type="hidden" name="id" value="${boletim.id}">
                     <input type="hidden" name="idProfessor" value="${boletim.idProfessor}">
@@ -125,7 +125,7 @@
             <button formmethod="dialog" class="fecharPopUp">X</button>
             
             <label for="descricaoNota1">Descrição Nota 1</label>
-            <input type="text" name="descricaoNota1" id="descricaoNota1" required>
+            <input type="text" name="descricaoNota1" id="descricaoNota1">
         </form>
     </dialog>
 
@@ -135,7 +135,7 @@
             <button formmethod="dialog" class="fecharPopUp">X</button>
             
             <label for="descricaoNota2">Descrição Nota 2</label>
-            <input type="text" name="descricaoNota2" id="descricaoNota2" required>
+            <input type="text" name="descricaoNota2" id="descricaoNota2">
         </form>
     </dialog>
 </body>
@@ -155,10 +155,16 @@
 
             mediaInput.value = media.toFixed(2);
 
-            if (media >= 6) {
-                situacaoInput.value = "Aprovado";
+            if (n1 !== null && n2 !== null) {
+                let media = (n1 + n2) / 2;
+
+                if (media >= 6) {
+                    situacaoInput.value = "Aprovado";
+                } else {
+                    situacaoInput.value = "Reprovado";
+                }
             } else {
-                situacaoInput.value = "Reprovado";
+                situacaoInput.value = "Pendente";
             }
         }
 

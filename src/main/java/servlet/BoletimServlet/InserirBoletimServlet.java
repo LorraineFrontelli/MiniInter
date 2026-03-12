@@ -53,12 +53,22 @@ public class InserirBoletimServlet extends HttpServlet {
             boletim.setObservacao(request.getParameter("observacao"));
             boletim.setDataCriacao(data);
 
-            int retorno = dao.inserir(boletim);
+            if (nota1!=0 && nota2!=0) {
+                int retorno = dao.inserir(boletim);
 
-            if (retorno > 0) {
-                mensagem = "Boletim cadastrado!";
+                if (retorno > 0) {
+                    mensagem = "Boletim cadastrado!";
+                } else {
+                    mensagem = "Erro ao cadastrar boletim.";
+                }
             } else {
-                mensagem = "Erro ao cadastrar boletim.";
+                int retorno = dao.inserirSemSituacao(boletim);
+
+                if (retorno > 0) {
+                    mensagem = "Boletim cadastrado!";
+                } else {
+                    mensagem = "Erro ao cadastrar boletim.";
+                }
             }
 
             request.getSession().setAttribute("mensagem", mensagem);

@@ -31,8 +31,6 @@
                     <img src="${pageContext.request.contextPath}/assets/img/student-icon.svg" decoding="async" alt="">Aluno</a></li>
                 <li><a href="${pageContext.request.contextPath}/professores" class="pagina">
                     <img src="${pageContext.request.contextPath}/assets/img/teacher-icon.svg" decoding="async" alt="">Professor</a></li>
-                <li><a href="${pageContext.request.contextPath}/boletins" class="pagina">
-                    <img src="${pageContext.request.contextPath}/assets/img/bulletin-icon.svg" decoding="async" alt="">Boletim</a></li>
                 <li><a href="${pageContext.request.contextPath}/telefones" class="pagina">
                     <img src="${pageContext.request.contextPath}/assets/img/telephone-icon.svg" decoding="async" alt="">Telefone</a></li>
             </ul>
@@ -74,13 +72,13 @@
             <table class="tabelaRead">
                 <thead>
                 <tr>
-                    <th>Ações</th>
+                    <th>Opções</th>
                     <th>Matrícula</th>
                     <th>Nome</th>
                     <th>E-mail</th>
                     <th>Senha</th>
                     <th>CPF</th>
-                    <th>Data de início</th>
+                    <th>Data de Início</th>
                 </tr>
                 </thead>
 
@@ -100,6 +98,13 @@
                                 <button type="button"
                                         onclick="abrirDelete('${aluno.matricula}')">
                                     <img src="${pageContext.request.contextPath}/assets/img/delete-icon.svg">
+                                </button>
+
+                                <!-- BOLETINS -->
+                                <button type="button"
+                                        onclick="window.location.href='${pageContext.request.contextPath}/boletins?idAluno=${aluno.matricula}'">
+                                    <img src="${pageContext.request.contextPath}/assets/img/bulletin-icon.svg" alt="Ver boletins"
+                                         style="filter: invert(27%) sepia(100%) saturate(700%) hue-rotate(330deg) brightness(90%);">
                                 </button>
 
                             </div>

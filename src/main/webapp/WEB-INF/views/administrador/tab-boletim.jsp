@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/global.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/tokens.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/crud.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/crud-boletim.css">
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
     <script type="module" src="${pageContext.request.contextPath}/assets/js/script.js" defer></script>
 
@@ -26,35 +26,15 @@
 
 <div class="meuPlaceholder"></div>
 
-<header class="headerLateral">
-
-    <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" class="logoMonart">
-
-    <nav>
-        <ul>
-            <li><a href="${pageContext.request.contextPath}/administradores" class="pagina">
-                <img src="${pageContext.request.contextPath}/assets/img/admin-icon.svg" decoding="async" alt="">Administrador</a></li>
-            <li><a href="${pageContext.request.contextPath}/alunos" class="pagina">
-                <img src="${pageContext.request.contextPath}/assets/img/student-icon.svg" decoding="async" alt="">Aluno</a></li>
-            <li><a href="${pageContext.request.contextPath}/professores" class="pagina">
-                <img src="${pageContext.request.contextPath}/assets/img/teacher-icon.svg" decoding="async" alt="">Professor</a></li>
-            <li><a href="${pageContext.request.contextPath}/boletins" class="pagina ativo">
-                <img src="${pageContext.request.contextPath}/assets/img/bulletin-icon.svg" decoding="async" alt="">Boletim</a></li>
-            <li><a href="${pageContext.request.contextPath}/telefones" class="pagina">
-                <img src="${pageContext.request.contextPath}/assets/img/telephone-icon.svg" decoding="async" alt="">Telefone</a></li>
-        </ul>
-    </nav>
-
-</header>
-
 <main>
 
     <div class="cabecalhoPaginas">
         <a href="${pageContext.request.contextPath}/login-adm">
-            <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
+            <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg"
+                 alt="Ícone de voltar" onclick="history.back()" class="pincelVoltar">
         </a>
         <div class="tituloPaginas">
-            <h1>Boletim</h1>
+            <h1>Boletim - ${nomeAluno}</h1>
         </div>
 
         <img src="${pageContext.request.contextPath}/assets/img/themes-icon.svg" class="abrirTemas">
@@ -69,19 +49,15 @@
     </c:if>
 
 
-    <!-- BUSCA + BOTÃO -->
+    <!-- INSERIR -->
 
     <div class="componentizacao">
-            <search>
-                <form action="${pageContext.request.contextPath}/boletins" method="get">
-                    <input type="search" class="buscarCrud" name="filtroNome" placeholder="Pesquisar por nome">
-                </form>
-            </search>
+        <button class="botaoInsert" onclick="create.showModal()">
+            Inserir
+            <img src="${pageContext.request.contextPath}/assets/img/plus-icon.svg">
+        </button>
 
-            <button class="botaoInsert" onclick="create.showModal()">
-                Fazer inserção <img src="${pageContext.request.contextPath}/assets/img/plus-icon.svg">
-            </button>
-        </div>
+    </div>
 
 
     <!-- TABELA -->
@@ -97,7 +73,7 @@
                 <th>Ações</th>
                 <th>ID</th>
                 <th>ID Professor</th>
-                <th>ID Aluno</th>
+                <th>Matéria</th>
                 <th>Nota 1</th>
                 <th>Nota 2</th>
                 <th>Situação</th>
@@ -158,7 +134,7 @@
 
                     <td>${b.id}</td>
                     <td>${b.idProfessor}</td>
-                    <td>${b.idAluno}</td>
+                    <td>${b.materia}</td>
                     <td>${b.nota1}</td>
                     <td>${b.nota2}</td>
                     <td>${b.aprovado ? "Aprovado" : "Reprovado"}</td>
@@ -187,8 +163,7 @@
             <label>ID Professor</label>
             <input type="number" name="idProfessor" required>
 
-            <label>ID Aluno</label>
-            <input type="number" name="idAluno" required>
+            <input type="hidden" name="idAluno" value="${idAluno}">
 
             <label>Nota 1</label>
             <input type="number" step="0.01" name="nota1" required>
