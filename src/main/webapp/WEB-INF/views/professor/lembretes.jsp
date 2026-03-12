@@ -39,7 +39,7 @@
                 <li><a href="${pageContext.request.contextPath}/professores?page=estatisticas" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/statistics-icon.svg" decoding="async" alt="">Estatísticas</a></li>
             </ul>
         </nav>
-        <a href="${pageContext.request.contextPath}/autenticacao/login.jsp">
+        <a href="${pageContext.request.contextPath}/logout">
             <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
         </a>
     </header>
