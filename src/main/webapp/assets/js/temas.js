@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const iconeLembrete = document.querySelector(".botaoLembrete img")
     const botoesMenu = document.querySelectorAll(".menuAluno button")
     const mensagensEnviadas = document.querySelectorAll(".enviada")
-    const mensagemEnviadaTexto = document.querySelectorAll(".enviada p")
+    const mensagemEnviadaTexto = document.querySelectorAll(".enviada *")
     const botaoInsert = document.querySelector(".botaoInsert")
     const iconeInsert = document.querySelector(".botaoInsert img")
 
