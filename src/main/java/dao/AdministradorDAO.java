@@ -57,6 +57,59 @@ public class AdministradorDAO {
         return retorno;
     }
 
+    // READ - Buscar por ID
+    public Administrador buscarPorId(int id) {
+
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+
+        Administrador admin = null;
+
+        String sql = "SELECT * FROM admin WHERE id = ?";
+
+        try {
+
+            PreparedStatement pst = con.prepareStatement(sql);
+
+            pst.setInt(1, id);
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+
+                admin = new Administrador(
+                        rs.getInt("id"),
+                        rs.getString("login"),
+                        rs.getString("senha")
+                );
+
+                String cpfs = rs.getString("aluno_cpf");
+
+                if (cpfs != null && !cpfs.isEmpty()) {
+
+                    String[] lista = cpfs.split(",");
+
+                    for (String cpf : lista) {
+
+                        cpf = cpf.replaceAll("\\D", "");
+
+                        admin.adicionarCpf(cpf);
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            conexao.desconectar(con);
+
+        }
+
+        return admin;
+    }
 
     // READ - Buscar por login
     public Administrador buscarPorLogin(String login) {
