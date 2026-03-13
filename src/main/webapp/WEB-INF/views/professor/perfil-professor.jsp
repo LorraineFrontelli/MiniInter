@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Aplicando tema salvo -->
-    <script>document.documentElement.style.setProperty("--tema",localStorage.getItem("corTema")||"#FF7E7E");</script>
+    <script>document.documentElement.style.setProperty("--tema",localStorage.getItem("corTema")||"#FF7E7E"); onpageshow = e => e.persisted && location.reload();</script>
 
     <!-- Preloads -->
     <link rel="preload" as="image" href="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg">
@@ -82,10 +82,12 @@
                         <c:when test="${not empty mensagensRecentes}">
                             <c:forEach items="${mensagensRecentes}" var="m">
                                 <div class="itemRecente" onclick="window.location.href='${pageContext.request.contextPath}/mensagens?idRemetente=${sessionScope.usuario.id}&tipoRemetente=${sessionScope.tipoUsuario}&idDestinatario=${m.idDestinatario}&tipoDestinatario=${m.tipoDestinatario}'">
-                                    <strong>${m.nome}</strong>
-                                    <c:if test="${m.temNaoLidas}">
-                                        <span class="badgeNaoLida"><img src="${pageContext.request.contextPath}/assets/img/unread-icon" alt=""></span>
-                                    </c:if>
+                                    <div class="cabecalhoMensagem">
+                                        <strong>${m.nome}</strong>
+                                        <c:if test="${m.temNaoLidas}">
+                                            <span class="badgeNaoLida"><img src="${pageContext.request.contextPath}/assets/img/unread-icon.svg" alt=""></span>
+                                        </c:if>
+                                    </div>
                                     <p>${m.mensagem}</p>
                                 </div>
                             </c:forEach>

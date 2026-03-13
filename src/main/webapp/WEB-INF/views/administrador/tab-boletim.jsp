@@ -29,10 +29,8 @@
 <main>
 
     <div class="cabecalhoPaginas">
-        <a href="${pageContext.request.contextPath}/login-adm">
-            <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg"
-                 alt="Ícone de voltar" onclick="history.back()" class="pincelVoltar">
-        </a>
+        <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" onclick="location.href=document.referrer" class="pincelVoltar">
+        
         <div class="tituloPaginas">
             <h1>Boletim - ${nomeAluno}</h1>
         </div>
@@ -53,7 +51,7 @@
 
     <div class="componentizacao">
         <button class="botaoInsert" onclick="create.showModal()">
-            Inserir
+            Fazer inserção
             <img src="${pageContext.request.contextPath}/assets/img/plus-icon.svg">
         </button>
 
@@ -122,9 +120,11 @@
 
                                 <input type="hidden" name="id" value="${b.id}">
 
-                                <button type="submit" style="background:none;border:none;">
-                                    <img src="${pageContext.request.contextPath}/assets/img/delete-icon.svg">
-                                </button>
+                                <h2>Deseja realmente excluir?</h2>
+                                <div>
+                                    <button type="button" onclick="deletes.close()">Cancelar</button>
+                                    <button type="submit">Excluir</button>
+                                </div>
 
                             </form>
 
@@ -160,28 +160,26 @@
 
         <form action="${pageContext.request.contextPath}/boletim-create" method="post">
 
-            <label>ID Professor</label>
-            <input type="number" name="idProfessor" required>
+            <div class="colunas">
+                <div class="coluna">
+                    <label>ID Professor</label>
+                    <input type="number" name="idProfessor" required>
+                    <input type="hidden" name="idAluno" value="${idAluno}">
+                    <label>Nota 1</label>
+                    <input type="number" step="0.01" name="nota1" required>
+                    <label>Descrição 1</label>
+                    <input type="text" name="descricao1">
+                </div>
 
-            <input type="hidden" name="idAluno" value="${idAluno}">
-
-            <label>Nota 1</label>
-            <input type="number" step="0.01" name="nota1" required>
-
-            <label>Descrição 1</label>
-            <input type="text" name="descricao1">
-
-            <label>Nota 2</label>
-            <input type="number" step="0.01" name="nota2" required>
-
-            <label>Descrição 2</label>
-            <input type="text" name="descricao2">
-
-            <label>Observação</label>
-            <textarea name="observacao"></textarea>
-
-            <label>Data</label>
-            <input type="date" name="data" required>
+                <div class="coluna">
+                    <label>Nota 2</label>
+                    <input type="number" step="0.01" name="nota2" required>
+                    <label>Descrição 2</label>
+                    <input type="text" name="descricao2">
+                    <label>Data</label>
+                    <input type="date" name="data" required>
+                </div>
+            </div>
 
             <button class="salvarInsercao" type="submit">
                 Cadastrar

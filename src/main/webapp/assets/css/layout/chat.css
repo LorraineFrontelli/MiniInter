@@ -40,8 +40,8 @@ main {
     position: relative;
     background-color: var(--vintage-chantilly);
     width: 92vw;
-    height: 75vh;
-    margin: 6vh auto 2vh;
+    height: 80vh;
+    margin: 4vh auto 2vh;
     border-radius: 4vw;
     overflow: hidden;
 }
@@ -52,7 +52,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 2vw;
-    padding: 4vw 4vw 25vh 4vw;
+    padding: 4vw 4vw 12.5vh 4vw;
     margin: 0;
     height: 100%;
     overflow-y: auto;
@@ -79,7 +79,7 @@ main {
 
 .mensagem p {
     margin: 0;
-    font-size: 3.5vw;
+    font-size: 2.7vw;
     word-break: break-word;
     line-height: 1.4;
 }
@@ -168,13 +168,13 @@ main {
 /* Media queries */
 @media (min-width: 768px) {
     .fundoChat { 
-        width: 70vw; 
+        width: 75vw; 
         border-radius: 3vw; 
     }
 
     .conversa { 
         gap: 1vw; 
-        padding: 2.5vw 2.5vw 12vh 2.5vw; 
+        padding: 2.5vw 2.5vw 12.5vh 2.5vw; 
     }
 
     .conversa::-webkit-scrollbar { 
@@ -213,13 +213,13 @@ main {
 
 @media (min-width: 1024px) {
     .fundoChat { 
-        width: 50vw; 
+        width: 80vw; 
         border-radius: 2vw; 
     }
     
     .conversa { 
         gap: 0.5vw; 
-        padding: 1.5vw 1.5vw 10vh 1.5vw; 
+        padding: 1.5vw 1.5vw 11.5vh 1.5vw; 
     }
     
     .conversa::-webkit-scrollbar { 
@@ -231,13 +231,13 @@ main {
     }
     
     .mensagem { 
-        padding: 0.75vh 1.1vw; 
+        padding: 0.9vh 1.1vw; 
         border-radius: 1.5vw; 
         max-width: 50%; 
     }
     
     .mensagem p { 
-        font-size: 1.15vw; 
+        font-size: 1.3vw; 
     }
     
     .mensagem time { 
