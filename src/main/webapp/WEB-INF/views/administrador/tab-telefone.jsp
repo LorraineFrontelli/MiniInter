@@ -78,11 +78,6 @@
     <!-- BUSCA -->
 
     <div class="componentizacao">
-        <search>
-            <form action="${pageContext.request.contextPath}/telefones" method="get">
-                <input type="search" class="buscarCrud" name="filtroNome" placeholder="Pesquisar por nome">
-            </form>
-        </search>
 
         <button class="botaoInsert" onclick="create.showModal()">
             Fazer inserção <img src="${pageContext.request.contextPath}/assets/img/plus-icon.svg">

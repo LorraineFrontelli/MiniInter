@@ -25,7 +25,7 @@
     <main>
         <div class="cabecalhoPaginas">
             <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg"
-                 alt="Ícone de voltar" onclick="history.back()" class="pincelVoltar">
+                 alt="Ícone de voltar" onclick="location.href=document.referrer" class="pincelVoltar">
     
             <div class="tituloPaginas">
                 <c:set var="nomeContato" value="Conversa"/>

@@ -28,9 +28,11 @@ if (dashboardProfessor && carregandoDashboard) {
 const inputMensagem = document.getElementById('inputMensagem');
 const botaoEnviar = document.getElementById('btnEnviar');
 
-inputMensagem.addEventListener('keypress', function(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault();
-        botaoEnviar.click();
-    }
-});
+if (inputMensagem && botaoEnviar) {
+    inputMensagem.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            botaoEnviar.click();
+        }
+    });
+}

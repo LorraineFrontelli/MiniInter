@@ -32,7 +32,7 @@
 <main>
     <div class="cabecalhoPaginas">
         <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg"
-             alt="Ícone de voltar" onclick="history.back()" class="pincelVoltar">
+             alt="Ícone de voltar" onclick="location.href=document.referrer" class="pincelVoltar">
 
 
 
@@ -68,7 +68,7 @@
                             <strong>${m.nome}</strong>
 
                             <c:if test="${m.temNaoLidas}">
-                                <span class="badgeNaoLida"><img src="${pageContext.request.contextPath}/assets/img/unread-icon" alt=""></span>
+                                <span class="badgeNaoLida"><img src="${pageContext.request.contextPath}/assets/img/unread-icon.svg" alt=""></span>
                             </c:if>
 
                             <br>

@@ -203,3 +203,16 @@ h2 {
     padding-left: 1vw;
     font-size: 1.2vw;
 }
+
+.cabecalhoMensagem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.badgeNaoLida img {
+    object-fit: contain;
+    width: 1.5vw;
+    height: auto;
+}
