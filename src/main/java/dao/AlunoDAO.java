@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import conexao.Conexao;
 import model.Aluno;
+import model.Professor;
 
 public class AlunoDAO {
 
@@ -259,6 +260,38 @@ public class AlunoDAO {
             retorno = -1;
         } finally {
             conexao.desconectar(con);
+        }
+
+        return retorno;
+    }
+
+
+    // UPDATE - ATUALIZAR O EMAIL DO ALUNO
+    public int atualizarEmail(Aluno aluno) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        int retorno;
+
+        String sql = "UPDATE Aluno SET email =? WHERE id = ?";
+
+        try {
+
+            PreparedStatement pst = con.prepareStatement(sql);
+
+            pst.setString(1, aluno.getEmail());
+            pst.setInt(2, aluno.getId());
+
+            retorno = pst.executeUpdate();
+
+        } catch (SQLException sqle) {
+
+            sqle.printStackTrace();
+            retorno = -1;
+
+        } finally {
+
+            conexao.desconectar(con);
+
         }
 
         return retorno;

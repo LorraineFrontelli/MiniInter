@@ -187,6 +187,28 @@ public class TelefoneDAO {
         return retorno; // retorna número de linhas alteradas ou -1 em caso de erro
     }
 
+    // UPDATE - ATUALIZAR TELEFONE POR ID DO ALUNO
+    public int atualizarPorIdAluno(int idAluno, String numero) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        int retorno;
+        String sql = "UPDATE telefone SET numero = ? WHERE id_aluno = ?";
+
+        try {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, numero);
+            pst.setInt(2, idAluno);
+            retorno = pst.executeUpdate();
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+            retorno = -1;
+        } finally {
+            conexao.desconectar(con);
+        }
+
+        return retorno;
+    }
+
     // DELETE - DELETAR TELEFONE
     public int deletar(int id) {
         Conexao conexao = new Conexao();

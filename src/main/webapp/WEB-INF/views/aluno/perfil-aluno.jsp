@@ -106,15 +106,19 @@
 
     <dialog class="editarPerfil" id="editarPerfil">
         <button class="fecharPopUpEditar" onclick="editarPerfil.close()">X</button>
-        <form action="">
+        <form action="${pageContext.request.contextPath}/aluno-update" method="post">
+
+            <input type="hidden" name="matricula" value="${sessionScope.usuario.matricula}">
+
             <label for="alterarTelefone">Telefone</label>
-            <input type="tel" name="alterarTelefone" id="alterarTelefone">
-            
+            <input type="tel" name="telefone" id="alterarTelefone">
+
             <label for="alterarEmail">E-mail</label>
-            <input type="email" name="alterarEmail" id="alterarEmail">
+            <input type="email" name="email" id="alterarEmail">
 
             <button class="salvarAlteracoes">Salvar</button>
         </form>
+        <p>${sessionScope.mensagem}</p>
     </dialog>
 </body>
 

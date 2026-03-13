@@ -42,13 +42,29 @@ public class AtualizarProfessorServlet extends HttpServlet {
 
             ProfessorDAO dao = new ProfessorDAO();
 
-            if (dao.atualizar(professor) > 0) {
+            if(request.getSession().getAttribute("tipoUsuario").equals("PROFESSOR")) {
 
-                session.setAttribute("mensagem", "Professor atualizado com sucesso!");
+                if (dao.atualizarEmail(professor) > 0) {
 
+                    session.setAttribute("mensagem", "Email atualizado com sucesso!");
+                    Professor professorLogado = (Professor) session.getAttribute("usuario");
+                    professorLogado.setEmail(email);
+                    session.setAttribute("usuario", professorLogado);
+
+                } else {
+
+                    session.setAttribute("mensagem", "Erro ao atualizar email.");
+                }
             } else {
 
-                session.setAttribute("mensagem", "Erro ao atualizar professor.");
+                if (dao.atualizar(professor) > 0) {
+
+                    session.setAttribute("mensagem", "Professor atualizado com sucesso!");
+
+                } else {
+
+                    session.setAttribute("mensagem", "Erro ao atualizar professor.");
+                }
             }
 
         } catch (Exception e) {
@@ -57,6 +73,6 @@ public class AtualizarProfessorServlet extends HttpServlet {
             session.setAttribute("mensagem", "Erro ao atualizar professor.");
         }
 
-        response.sendRedirect(request.getContextPath() + "/professores");
+        response.sendRedirect(request.getContextPath() + "/professores?page=perfil-professor");
     }
 }
