@@ -25,7 +25,7 @@
     <main>
         <div class="cabecalhoPaginas">
             <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg"
-                 alt="Ícone de voltar" onclick="location.href=document.referrer" class="pincelVoltar">
+                 alt="Ícone de voltar" onclick="history.back()" class="pincelVoltar">
     
             <div class="tituloPaginas">
                 <c:set var="nomeContato" value="Conversa"/>
@@ -47,7 +47,7 @@
                     <c:choose>
                         <c:when test="${m.idRemetente == sessionScope.usuario.id && m.tipoRemetente == sessionScope.tipoUsuario}">
                             <li class="mensagem enviada">
-                                <p>${m.mensagem}</p>
+                                <p><c:out value="${m.mensagem}"/></p>
                                 <time datetime="<fmt:formatDate value='${m.dataMensagem}' pattern='yyyy-MM-dd HH:mm'/>">
                                     <fmt:formatDate value="${m.dataMensagem}" pattern="HH:mm"/>
                                 </time>
@@ -55,7 +55,7 @@
                         </c:when>
                         <c:otherwise>
                             <li class="mensagem recebida">
-                                <p>${m.mensagem}</p>
+                                <p><c:out value="${m.mensagem}"/></p>
                                 <time datetime="<fmt:formatDate value='${m.dataMensagem}' pattern='yyyy-MM-dd HH:mm'/>">
                                     <fmt:formatDate value="${m.dataMensagem}" pattern="HH:mm"/>
                                 </time>
