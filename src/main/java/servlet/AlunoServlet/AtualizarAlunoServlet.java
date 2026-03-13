@@ -2,6 +2,10 @@ package servlet.AlunoServlet;
 
 import dao.AlunoDAO;
 import model.Aluno;
+import dao.TelefoneDAO;
+import model.Professor;
+import model.Telefone;
+import org.apache.poi.ss.formula.functions.T;
 import utils.ValidacaoRegex;
 import utils.HashSenha;
 
@@ -13,6 +17,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @WebServlet("/aluno-update")
 public class AtualizarAlunoServlet extends HttpServlet {
@@ -60,17 +65,72 @@ public class AtualizarAlunoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        HttpSession session = request.getSession();
+
         String matriculaParametro = request.getParameter("matricula");
+        String tipo = (String) request.getSession().getAttribute("tipoUsuario");
+
+        AlunoDAO dao = new AlunoDAO();
+        Aluno aluno = dao.buscarPorMatricula(Integer.parseInt(matriculaParametro));
+        int matricula = aluno.getMatricula();
+
+        // ALUNO - atualiza só email e telefone
+        if ("ALUNO".equalsIgnoreCase(tipo)) {
+
+            String emailParametro = request.getParameter("email");
+            String telefoneParametro = request.getParameter("telefone");
+
+            try {
+
+                if (emailParametro != null && !emailParametro.isBlank()) {
+
+                    if (ValidacaoRegex.verificarEmail(emailParametro)) {
+
+                        Aluno alunoAtualizar = new Aluno();
+                        alunoAtualizar.setMatricula(matricula);
+                        alunoAtualizar.setEmail(emailParametro);
+                        dao.atualizarEmail(alunoAtualizar);
+
+                        Aluno alunoLogado = (Aluno) request.getSession().getAttribute("usuario");
+                        alunoLogado.setEmail(emailParametro);
+                        request.getSession().setAttribute("usuario", alunoLogado);
+
+                    } else {
+
+                        request.getSession().setAttribute("mensagem", "Email inválido.");
+                    }
+                }
+
+                if (telefoneParametro != null && !telefoneParametro.isBlank()) {
+
+                    TelefoneDAO telefoneDAO = new TelefoneDAO();
+                    telefoneDAO.atualizarPorIdAluno(matricula, telefoneParametro);
+                }
+
+                request.getSession().setAttribute("mensagem", "Dados atualizados com sucesso.");
+                List<Telefone> telefonesAluno = (List<Telefone>) session.getAttribute("telefoneAluno");
+                if (telefonesAluno != null && !telefonesAluno.isEmpty()) {
+                    telefonesAluno.get(0).setNumero(telefoneParametro);
+                    session.setAttribute("telefoneAluno", telefonesAluno);
+                }
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+                request.getSession().setAttribute("mensagem", "Erro ao atualizar dados.");
+            }
+
+            response.sendRedirect(request.getContextPath() + "/alunos?page=perfil-aluno");
+            return;
+        }
+
+        // ADMIN - atualiza tudo
         String nomeParametro = request.getParameter("nome");
         String cpfParametro = request.getParameter("cpf");
         String emailParametro = request.getParameter("email");
         String senhaParametro = request.getParameter("senha");
         String dataParametro = request.getParameter("dataInicio");
 
-        AlunoDAO dao = new AlunoDAO();
-        Aluno aluno = dao.buscarPorMatricula(Integer.parseInt(matriculaParametro));
-
-        int matricula = aluno.getMatricula();
         String nome = aluno.getNome();
         String cpf = aluno.getCpf();
         String email = aluno.getEmail();
@@ -124,6 +184,7 @@ public class AtualizarAlunoServlet extends HttpServlet {
 
         } catch (Exception e) {
 
+            e.printStackTrace();
             request.getSession().setAttribute("mensagem", "Erro ao atualizar aluno.");
         }
 

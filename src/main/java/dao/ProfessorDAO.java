@@ -206,6 +206,37 @@ public class ProfessorDAO {
         return retorno;
     }
 
+    // UPDATE - ATUALIZAR O EMAIL DO PROFESSOR
+    public int atualizarEmail(Professor professor) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        int retorno;
+
+        String sql = "UPDATE Professor SET email =? WHERE id = ?";
+
+        try {
+
+            PreparedStatement pst = con.prepareStatement(sql);
+
+            pst.setString(1, professor.getEmail());
+            pst.setInt(2, professor.getId());
+
+            retorno = pst.executeUpdate();
+
+        } catch (SQLException sqle) {
+
+            sqle.printStackTrace();
+            retorno = -1;
+
+        } finally {
+
+            conexao.desconectar(con);
+
+        }
+
+        return retorno;
+    }
+
     // DELETE - DELETAR PROFESSOR
     public int deletar(int id) {
         Conexao conexao = new Conexao();

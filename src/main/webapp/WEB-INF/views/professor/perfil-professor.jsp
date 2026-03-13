@@ -102,7 +102,7 @@
     <dialog class="editarPerfil" id="editarPerfil">
         <button class="fecharPopUpEditar" onclick="editarPerfil.close()">X</button>
         <form action="${pageContext.request.contextPath}/professor-update" method="post">
-
+            <input type="hidden" name="id" value="${sessionScope.usuario.id}">
             <label for="alterarEmail">E-mail</label>
             <input type="email" name="email" id="alterarEmail">
 
