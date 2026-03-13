@@ -41,7 +41,7 @@
                 <li><a href="${pageContext.request.contextPath}/alunos?page=observacoes" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/observations-icon.svg" decoding="async" alt="">Observações</a></li>
             </ul>
         </nav>
-        <a href="${pageContext.request.contextPath}/index.html">
+        <a href="${pageContext.request.contextPath}/logout">
             <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
         </a>
     </header>
@@ -130,7 +130,7 @@
     <!-- Modal Ver Tipo Nota 1 -->
     <dialog class="verTipoNota1" id="verTipoNota1">
         <button class="fecharPopUp" onclick="verTipoNota1.close()">X</button>
-        
+
         <label for="descricaoNota1">Descrição Nota 1</label>
         <input type="text" name="descricaoNota1" id="descricaoNota1" disabled>
     </dialog>
@@ -138,7 +138,7 @@
     <!-- Modal Ver Tipo Nota 2 -->
     <dialog class="verTipoNota2" id="verTipoNota2">
         <button class="fecharPopUp" onclick="verTipoNota2.close()">X</button>
-        
+
         <label for="descricaoNota2">Descrição Nota 2</label>
         <input type="text" name="descricaoNota2" id="descricaoNota2" disabled>
     </dialog>

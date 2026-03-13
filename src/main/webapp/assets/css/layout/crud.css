@@ -11,6 +11,11 @@ main {
     padding-top: 3vh;
 }
 
+button {
+    background: none;
+    border: none;
+}
+
 .meuPlaceholder {
     width: 20%;
     height: 100vh;
@@ -554,4 +559,31 @@ details .turmaItem {
     overflow-y: auto;
     border: 1px solid #ccc;
     padding: 10px;
+}
+
+.popupCpf{
+    width:350px;
+    max-width:90vw;
+    padding:20px;
+    border:none;
+    border-radius:8px;
+}
+
+.listaCpf{
+    margin-top:15px;
+    max-height:300px;
+    overflow-y:auto;
+    border:1px solid #ccc;
+    padding:10px;
+    background:white;
+}
+
+.botaoCpf{
+    padding:6px 10px;
+    border-radius:6px;
+    border:none;
+    cursor:pointer;
+    background:#242021;
+    color:white;
+    font-size:13px;
 }

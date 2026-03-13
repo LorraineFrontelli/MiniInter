@@ -43,6 +43,36 @@ public class BoletimDAO {
         return retorno;
     }
 
+    // CREATE - método sem situação, em caso de alguma nota não ser inserida
+    public int inserirSemSituacao(Boletim boletim) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.conectar();
+        String sql = "INSERT INTO boletim (id_professor, id_aluno, nota_1, descricao_1, nota_2, descricao_2, observacao, dt_criacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        int retorno;
+
+        try {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, boletim.getIdProfessor());
+            pst.setInt(2, boletim.getIdAluno());
+            pst.setDouble(3, boletim.getNota1());
+            pst.setString(4, boletim.getDescricao1());
+            pst.setDouble(5, boletim.getNota2());
+            pst.setString(6, boletim.getDescricao2());
+            pst.setString(7, boletim.getObservacao());
+            pst.setDate(8, new java.sql.Date(boletim.getDataCriacao().getTime()));
+
+            retorno = pst.executeUpdate();
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+            retorno = -1;
+        } finally {
+            conexao.desconectar(con);
+        }
+
+        return retorno;
+    }
+
     // READ - Buscar boletins por aluno
     public List<Boletim> buscarPorAluno(int idAluno) {
         Conexao conexao = new Conexao();

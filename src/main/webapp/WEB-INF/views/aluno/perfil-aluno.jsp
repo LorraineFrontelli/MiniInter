@@ -41,7 +41,7 @@
                 <li><a href="${pageContext.request.contextPath}/alunos?page=observacoes" class="pagina"><img src="${pageContext.request.contextPath}/assets/img/observations-icon.svg" decoding="async" alt="">Observações</a></li>
             </ul>
         </nav>
-        <a href="${pageContext.request.contextPath}/index.html">
+        <a href="${pageContext.request.contextPath}/logout">
             <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
         </a>
     </header>
@@ -84,10 +84,10 @@
 
                 <c:forEach items="${sessionScope.boletim}" var="bol" varStatus="status">
                     <c:if test="${status.last}">
-                        <p>${bol.observacao}</p>
                         <h3>
                             Prof: ${bol.professor}
                         </h3>
+                        <p>${bol.observacao}</p>
                     </c:if>
                 </c:forEach>
 

@@ -49,10 +49,9 @@
     </c:if>
 
 
-    <!-- BUSCA + BOTÃO -->
+    <!-- INSERIR -->
 
     <div class="componentizacao">
-
         <button class="botaoInsert" onclick="create.showModal()">
             Inserir
             <img src="${pageContext.request.contextPath}/assets/img/plus-icon.svg">
