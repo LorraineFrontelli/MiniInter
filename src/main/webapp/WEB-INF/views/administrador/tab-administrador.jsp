@@ -94,12 +94,10 @@
 
     </div>
 
-    <c:if test="${not empty sessionScope.mensagem}">
-
+    <c:if test="${not empty requestScope.mensagem}">
         <p style="color:green; text-align:center;">
-                ${sessionScope.mensagem}
+                ${requestScope.mensagem}
         </p>
-        <c:remove var="mensagem" scope="session"/>
     </c:if>
 
     <div class="componentizacao">

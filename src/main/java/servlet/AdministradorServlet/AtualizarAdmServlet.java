@@ -62,44 +62,44 @@ public class AtualizarAdmServlet extends HttpServlet {
                 return;
             }
 
+            Administrador admin = dao.buscarPorId(id);
+
+            if (admin == null) {
+                request.getSession().setAttribute("mensagem", "Administrador não encontrado.");
+                response.sendRedirect(request.getContextPath() + "/administradores");
+                return;
+            }
+
             String senhaHash = HashSenha.gerarHash(senha);
 
-            Administrador admin = new Administrador();
-            admin.setId(id);
             admin.setLogin(login);
             admin.setSenha(senhaHash);
 
             Part arquivo = request.getPart("alunoCpf");
 
             if (arquivo != null && arquivo.getSize() > 0) {
-
+                admin.getAlunoCpf().clear();
                 InputStream input = arquivo.getInputStream();
 
                 Workbook workbook = new XSSFWorkbook(input);
                 Sheet sheet = workbook.getSheetAt(0);
 
                 for (Row row : sheet) {
-
                     Cell cell = row.getCell(0);
-
                     if (cell == null) continue;
 
                     String cpf = "";
 
-                    if (cell.getCellType() == CellType.STRING) {
+                    if (cell.getCellType() == CellType.STRING)
                         cpf = cell.getStringCellValue();
-                    } else if (cell.getCellType() == CellType.NUMERIC) {
+                    else if (cell.getCellType() == CellType.NUMERIC)
                         cpf = String.valueOf((long) cell.getNumericCellValue());
-                    }
 
-                    cpf = cpf.trim();
-                    cpf = cpf.replaceAll("[^0-9]", "");
+                    cpf = cpf.trim().replaceAll("[^0-9]", "");
 
-                    if (!cpf.isEmpty()) {
+                    if (!cpf.isEmpty())
                         admin.adicionarCpf(cpf);
-                    }
                 }
-
                 workbook.close();
             }
 

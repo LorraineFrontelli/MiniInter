@@ -9,7 +9,6 @@
     <groupId>org.example</groupId>
     <artifactId>MiniInter</artifactId>
     <version>1.0-SNAPSHOT</version>
-
     <packaging>war</packaging>
 
     <properties>
@@ -20,8 +19,6 @@
 
     <dependencies>
 
-
-        <!-- Servlet API (Tomcat 11 usa Jakarta EE 10) -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
@@ -29,7 +26,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- JSP e JSTL para Jakarta EE 10 -->
         <dependency>
             <groupId>jakarta.servlet.jsp</groupId>
             <artifactId>jakarta.servlet.jsp-api</artifactId>
@@ -37,7 +33,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- JSTL Core e Format -->
         <dependency>
             <groupId>jakarta.servlet.jsp.jstl</groupId>
             <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
@@ -50,20 +45,52 @@
             <version>3.0.1</version>
         </dependency>
 
-
         <dependency>
             <groupId>io.github.cdimascio</groupId>
             <artifactId>java-dotenv</artifactId>
             <version>5.2.2</version>
         </dependency>
 
+        <!-- POI sem log4j transitivo -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>5.2.3</version>
+            <version>5.2.5</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
-        <!-- Criptografia de senhas -->
+        <!-- log4j-api 2.23.1 explícito (sem log4j-core) -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.23.1</version>
+        </dependency>
+
+        <!-- Redireciona log4j para slf4j (não precisa de log4j-core) -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-to-slf4j</artifactId>
+            <version>2.23.1</version>
+        </dependency>
+
+        <!-- slf4j + implementação simples -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.13</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.13</version>
+        </dependency>
+
         <dependency>
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
@@ -83,30 +110,16 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Gson — para parsear o JSON recebido no @OnMessage -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>5.2.5</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mindrot</groupId>
-            <artifactId>jbcrypt</artifactId>
-            <version>0.4</version>
-        </dependency>
     </dependencies>
 
     <build>
         <finalName>MiniInter</finalName>
-
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -119,6 +132,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
