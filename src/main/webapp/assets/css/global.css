@@ -38,6 +38,7 @@ input:focus, textarea:focus, button:focus {
 }
 
 /* Estilização de Scroll */
+
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;

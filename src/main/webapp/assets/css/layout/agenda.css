@@ -37,6 +37,11 @@ h2 {
     margin-right: 2vw;
     border-radius: 1vw;
     text-align: center;
+    overflow-y: auto;
+}
+
+.tarefa {
+    padding: 0vw 0.25vw;
 }
 
 .dias {

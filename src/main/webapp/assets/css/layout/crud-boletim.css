@@ -1,9 +1,3 @@
-/* =============================================
-   boletim.css — layout exclusivo do tab-boletim
-   ============================================= */
-
-/* ---------- RESET DE LAYOUT ---------- */
-
 .meuPlaceholder {
     display: none;
 }
@@ -25,26 +19,6 @@ main {
     padding-top: 3vh;
     box-sizing: border-box;
 }
-
-
-/* ---------- SCROLLBAR ---------- */
-
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--white);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    border: 2px solid var(--white);
-    background: var(--tema);
-}
-
 
 /* ---------- CABEÇALHO ---------- */
 
@@ -256,6 +230,11 @@ dialog form .colunas .coluna {
 dialog form .colunas .coluna label {
     margin-bottom: 1vh;
     margin-top: 1.75vh;
+}
+
+dialog form .colunas .colunaNotas input {
+    margin-top: 3vh;
+    width: 4.2vw;
 }
 
 dialog form input {

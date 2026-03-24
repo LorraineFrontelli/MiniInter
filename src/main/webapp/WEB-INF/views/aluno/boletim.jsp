@@ -93,12 +93,16 @@
 
                         <td class="notasCentro nota1">
                             <fmt:formatNumber value="${b.nota1}" minFractionDigits="2" />
-                            <button class="abrirNota1" onclick="verTipoNota1.showModal()"><img src="${pageContext.request.contextPath}/assets/img/heavy-plus-icon.svg" alt=""></button>
+                            <button class="abrirNota1" data-descricao="${b.descricao1}" onclick="abrirModalNota1(this)">
+                                <img src="${pageContext.request.contextPath}/assets/img/heavy-plus-icon.svg" alt="">
+                            </button>
                         </td>
                         
                         <td class="notasCentro nota2">
                             <fmt:formatNumber value="${b.nota2}" minFractionDigits="2" />
-                            <button class="abrirNota2" onclick="verTipoNota2.showModal()"><img src="${pageContext.request.contextPath}/assets/img/heavy-plus-icon.svg" alt=""></button>
+                            <button class="abrirNota2" data-descricao="${b.descricao2}" onclick="abrirModalNota2(this)">
+                                <img src="${pageContext.request.contextPath}/assets/img/heavy-plus-icon.svg" alt="">
+                            </button>
                         </td>
 
                         <td class="notasCentro media">
@@ -129,19 +133,37 @@
 
     <!-- Modal Ver Tipo Nota 1 -->
     <dialog class="verTipoNota1" id="verTipoNota1">
-        <button class="fecharPopUp" onclick="verTipoNota1.close()">X</button>
-
-        <label for="descricaoNota1">Descrição Nota 1</label>
-        <input type="text" name="descricaoNota1" id="descricaoNota1" disabled>
+        <form method="dialog">
+            <button formmethod="dialog" class="fecharPopUp">X</button>
+            
+            <label for="descricaoNota1">Descrição Nota 1</label>
+            <input type="text" name="descricaoNota1" id="descricaoNota1" disabled>
+        </form>
     </dialog>
 
     <!-- Modal Ver Tipo Nota 2 -->
     <dialog class="verTipoNota2" id="verTipoNota2">
-        <button class="fecharPopUp" onclick="verTipoNota2.close()">X</button>
-
-        <label for="descricaoNota2">Descrição Nota 2</label>
-        <input type="text" name="descricaoNota2" id="descricaoNota2" disabled>
+        <form method="dialog">
+            <button formmethod="dialog" class="fecharPopUp">X</button>
+            
+            <label for="descricaoNota2">Descrição Nota 2</label>
+            <input type="text" name="descricaoNota2" id="descricaoNota2" disabled>
+        </form>
     </dialog>
+
+    <script>
+        function abrirModalNota1(botao) {
+            const descricao = botao.getAttribute("data-descricao");            
+            document.getElementById("descricaoNota1").value = descricao ? descricao : "Sem descrição";
+            document.getElementById("verTipoNota1").showModal();
+        }
+
+        function abrirModalNota2(botao) {
+            const descricao = botao.getAttribute("data-descricao");
+            document.getElementById("descricaoNota2").value = descricao ? descricao : "Sem descrição";
+            document.getElementById("verTipoNota2").showModal();
+        }
+    </script>
 </body>
 
 </html>

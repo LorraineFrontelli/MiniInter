@@ -48,9 +48,9 @@
             <img src="${pageContext.request.contextPath}/assets/img/themes-icon.svg" class="abrirTemas">
         </div>
 
-        <c:if test="${not empty sessionScope.mensagem}">
-            <p style="color:green; text-align:center;">${sessionScope.mensagem}</p>
-            <c:remove var="mensagem" scope="session"/>
+        <!-- Mensagem -->
+        <c:if test="${not empty mensagem}">
+            <p style="text-align:center; color:green;">${mensagem}</p>
         </c:if>
 
         <c:if test="${not empty requestScope.mensagem}">

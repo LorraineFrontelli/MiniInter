@@ -20,7 +20,7 @@
     <header class="headerAutenticacao">
         <img src="${pageContext.request.contextPath}/assets/img/monart-logo.svg" class="logoMonart">
 
-        <a href="${pageContext.request.contextPath}/login" class="iconeVoltar">
+        <a href="${pageContext.request.contextPath}/index.html" class="iconeVoltar">
             <img src="${pageContext.request.contextPath}/assets/img/painting-back-icon.svg" alt="Ícone de voltar" class="pincelVoltar">
         </a>
     </header>
@@ -48,7 +48,7 @@
                 <input type="password" name="senha" class="inputAutenticacao" placeholder="Insira sua senha">
             </label>
 
-            <button type="submit">Enviar</button>
+            <button type="submit">Cadastrar</button>
 
         </form>
 

@@ -42,7 +42,7 @@
                 <input type="password" name="senha" id="senha" class="inputAutenticacao" placeholder="Insira sua senha">
             </label>
             
-            <button type="submit">Enviar</button>
+            <button type="submit">Entrar</button>
         </form>
     </main>
 </body>
